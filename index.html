@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WHYNOT — redesign trials</title>
+<meta name="description" content="Independent redesign concepts for whynotindia.in. Each trial is a complete, self-contained build in a different visual direction.">
+<meta name="theme-color" content="#0c0c0e">
+<link rel="icon" href="trial-01-minimal/assets/img/logo-mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="trial-01-minimal/assets/css/style.css">
+<style>
+  /* The index borrows the trial's design language, then inverts it: ink page. */
+  .lab {
+    background: var(--ink);
+    color: var(--paper);
+    min-height: 100vh;
+  }
+  .lab__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding-block: 22px;
+    border-bottom: 1px solid color-mix(in srgb, var(--paper) 14%, transparent);
+    flex-wrap: wrap;
+  }
+  .lab .brand__name { color: var(--paper); }
+  .lab .brand__tag { color: color-mix(in srgb, var(--paper) 55%, transparent); }
+  .lab__eyebrow { font-size: var(--step--2); letter-spacing: .16em; text-transform: uppercase; color: color-mix(in srgb, var(--paper) 50%, transparent); }
+  .lab__hero { padding-block: clamp(48px, 9vw, 120px) clamp(40px, 6vw, 72px); display: grid; gap: 22px; max-width: 22ch; }
+  .lab__hero h1 { font-family: var(--font-display); font-size: var(--step-5); line-height: .96; letter-spacing: -.02em; }
+  .lab__hero p { max-width: 52ch; color: color-mix(in srgb, var(--paper) 65%, transparent); }
+  .lab__note { font-size: var(--step--1); color: color-mix(in srgb, var(--paper) 50%, transparent); max-width: 62ch; }
+
+  .trials { display: grid; gap: 0; border-top: 1px solid color-mix(in srgb, var(--paper) 14%, transparent); }
+  .trial {
+    display: grid;
+    gap: 22px;
+    padding-block: clamp(28px, 4vw, 44px);
+    border-bottom: 1px solid color-mix(in srgb, var(--paper) 14%, transparent);
+    align-content: start;
+  }
+  @media (min-width: 860px) {
+    .trial { grid-template-columns: 84px minmax(0, 1fr) minmax(0, 26ch) auto; gap: 40px; align-items: start; }
+  }
+  .trial__no { font-family: var(--font-display); font-size: var(--step-3); color: color-mix(in srgb, var(--paper) 40%, transparent); line-height: 1; }
+  .trial__body { display: grid; gap: 12px; }
+  .trial__title { font-family: var(--font-display); font-size: var(--step-3); line-height: 1.02; letter-spacing: -.02em; }
+  .trial__body p { color: color-mix(in srgb, var(--paper) 65%, transparent); font-size: var(--step--1); max-width: 62ch; }
+  .trial__tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+  .trial__tags span {
+    font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+    border: 1px solid color-mix(in srgb, var(--paper) 22%, transparent);
+    color: color-mix(in srgb, var(--paper) 62%, transparent);
+    border-radius: 999px; padding: 4px 10px;
+  }
+  .trial__thumb { border: 1px solid color-mix(in srgb, var(--paper) 14%, transparent); border-radius: 4px; overflow: hidden; }
+  .trial__thumb img { width: 100%; aspect-ratio: 4/3; object-fit: cover; opacity: .92; }
+  .trial__meta { display: grid; gap: 10px; font-size: var(--step--2); color: color-mix(in srgb, var(--paper) 50%, transparent); }
+  .lab .btn { --btn-bg: var(--paper); --btn-fg: var(--ink); }
+  .lab .btn--ghost { --btn-bg: transparent; --btn-fg: var(--paper); border-color: color-mix(in srgb, var(--paper) 30%, transparent); }
+  .lab .btn[aria-disabled="true"] { opacity: .45; pointer-events: none; }
+  .lab__foot { padding-block: clamp(40px, 6vw, 72px); display: grid; gap: 14px; font-size: var(--step--1); color: color-mix(in srgb, var(--paper) 55%, transparent); }
+  .lab__foot a { text-decoration: underline; text-underline-offset: 3px; }
+  .lab__foot a:hover { color: var(--paper); }
+</style>
+</head>
+<body class="lab">
+<div class="wrap">
+  <div class="lab__top">
+    <span class="brand">
+      <img class="brand__mark" src="trial-01-minimal/assets/img/logo-mark.svg" alt="" width="30" height="30">
+      <span class="brand__text">
+        <span class="brand__name">Whynot</span>
+        <span class="brand__tag">We drive the change</span>
+      </span>
+    </span>
+    <p class="lab__eyebrow">Redesign lab · whynotindia.in</p>
+  </div>
+
+  <section class="lab__hero">
+    <p class="lab__eyebrow">Independent concept work</p>
+    <h1>Three ways to fix a 32-year-old business's website.</h1>
+    <p class="lab__note">Each trial is a complete, self-contained build of the same content — different visual direction, same job: make a customer trust WHYNOT in five seconds, then get them to the nearest of 25 showrooms or to a phone that works.</p>
+    <p><a class="btn btn--ghost" href="docs/AUDIT.md">Read the audit of the current site <svg class="i-inline" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M17 7H8M17 7v9"/></svg></a></p>
+  </section>
+
+  <section class="trials">
+    <article class="trial">
+      <p class="trial__no num">01</p>
+      <div class="trial__body">
+        <h2 class="trial__title">Paper &amp; Ink — the quiet one</h2>
+        <p>Editorial minimalism: warm paper, real typography, hairline rules instead of boxes. Almost no chrome. The design gets out of the way and lets the addresses, the phone number and the facts do the selling. Built to load on a 4G phone in a village and to look composed on a 6-inch screen and a 27-inch monitor alike.</p>
+        <div class="trial__tags">
+          <span>Minimal / editorial</span>
+          <span>Paper &amp; ink</span>
+          <span>System-weight CSS</span>
+          <span>Dark mode</span>
+          <span>Accessible baseline</span>
+        </div>
+        <div class="trial__tags" style="margin-top:14px">
+          <a class="btn" href="trial-01-minimal/index.html">Open Trial 01</a>
+          <a class="btn btn--ghost" href="trial-01-minimal/stores.html">Showroom directory</a>
+          <a class="btn btn--ghost" href="trial-01-minimal/contact.html">Contact</a>
+        </div>
+      </div>
+      <div class="trial__thumb">
+        <img src="trial-01-minimal/assets/img/showroom-hero.jpg" alt="Preview of Trial 01: a quiet showroom aisle in warm light." width="1000" height="750" loading="lazy">
+      </div>
+      <div class="trial__meta">
+        <p>5 pages</p>
+        <p>No dependencies</p>
+        <p>&lt; 250 KB first view</p>
+      </div>
+    </article>
+
+    <article class="trial">
+      <p class="trial__no num">02</p>
+      <div class="trial__body">
+        <h2 class="trial__title">— direction to be chosen</h2>
+        <p>Reserved. Trial 02 gets its own brief and its own visual language; the audit's fix-list stays the same, so the comparison is honest.</p>
+      </div>
+      <div class="trial__thumb" aria-hidden="true" style="background:linear-gradient(135deg,color-mix(in srgb, var(--paper) 8%, transparent),transparent)"></div>
+      <div class="trial__meta">
+        <p>Not started</p>
+      </div>
+    </article>
+
+    <article class="trial">
+      <p class="trial__no num">03</p>
+      <div class="trial__body">
+        <h2 class="trial__title">— reserved</h2>
+        <p>Third direction, if the first two aren't it.</p>
+      </div>
+      <div class="trial__thumb" aria-hidden="true" style="background:linear-gradient(135deg,color-mix(in srgb, var(--paper) 8%, transparent),transparent)"></div>
+      <div class="trial__meta">
+        <p>Not started</p>
+      </div>
+    </article>
+  </section>
+
+  <footer class="lab__foot">
+    <p><strong style="color:var(--paper)">Concept work only.</strong> Nothing here is affiliated with, endorsed by, or deployed to WHYNOT Electronics Pvt Ltd. All company facts, addresses, phone number and brand names are theirs, taken from their public website on 12 October 2026 and used to show what a rebuild could look like.</p>
+    <p>Images are AI-generated stand-ins for photography that would be shot at the real showrooms. Brand names are text only, with no third-party logos used.</p>
+    <p><a href="https://www.whynotindia.in/" target="_blank" rel="noopener noreferrer">The current live site <svg class="i-inline" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M17 7H8M17 7v9"/></svg></a></p>
+  </footer>
+</div>
+</body>
+</html>
