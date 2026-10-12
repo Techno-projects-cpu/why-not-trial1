@@ -25,10 +25,28 @@ REPO = os.path.dirname(HERE)
 CSS = os.path.join(REPO, "trial-07-slate", "assets", "css", "style.css")
 
 
+def block(css, selector):
+    """The declarations of one selector, found by its opening brace and closed by
+    the matching one — the stylesheet around it can be rewritten without this
+    tool having to be told about it."""
+    start = css.index(selector)
+    i = css.index("{", start)
+    depth, j = 0, i
+    while j < len(css):
+        if css[j] == "{":
+            depth += 1
+        elif css[j] == "}":
+            depth -= 1
+            if depth == 0:
+                return css[i + 1:j]
+        j += 1
+    raise ValueError("unclosed block for %r" % selector)
+
+
 def tokens():
     css = io.open(CSS, encoding="utf-8").read()
-    light_src = css[css.index(":root {"):css.index("html[data-mode=\"dark\"]")]
-    dark_src = css[css.index("html[data-mode=\"dark\"]"):css.index("* , *::before")]
+    light_src = block(css, ":root {")
+    dark_src = block(css, 'html[data-mode="dark"] {')
 
     def read(src):
         out = {}
@@ -75,7 +93,10 @@ PAIRS = [
     ("--brand", "--brand-soft", 4.5, "badge and the current rail item"),
     ("--good", "--good-soft", 4.5, "the 'in my list' button"),
     ("--surface", "--ink", 4.5, "the pressed chip and the toast"),
-    ("--warn", "--surface", 3.0, "warning marks (non-text)"),
+    ("--ink", "--surface-2", 4.5, "text on the wash behind a notice or a strip cell"),
+    ("--warm", "--warm-soft", 4.5, "the amber note (a notice in the warm tone)"),
+    ("--map-label", "--map-land", 4.5, "town labels on the drawn map"),
+    ("--map-wlabel", "--map-sea", 4.5, "the sea and river names on the map"),
     ("--brand", "--bg", 3.0, "focus ring against the page"),
     ("--brand", "--surface", 3.0, "focus ring against a panel"),
     ("--line-strong", "--surface", 1.2, "field borders (decoration only)"),

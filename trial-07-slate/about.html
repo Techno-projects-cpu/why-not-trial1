@@ -5,19 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>About — WHYNOT redesign concept (Trial 07)</title>
 <meta name="description" content="WHYNOT Electronics: founded in 1994, 25 showrooms, 23 towns, 300 people.">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0b0d12" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff">
 <link rel="stylesheet" href="assets/css/style.css">
 <script>
-  /* Set the mode before first paint: the reader's system setting wins, unless
-     they have chosen one before. Doing it here avoids a flash of the wrong
-     palette, which is the usual bug with a light/dark switch. */
+  /* White first. The page opens light whatever the machine's system setting
+     says — the mode switch is there for the reader who wants dark, and the
+     choice is remembered. Applying it here, before first paint, is what stops
+     the flash of the wrong palette a mode switch usually causes. */
   (function () {
     try {
-      var saved = localStorage.getItem("whynot-mode");
-      var dark = saved ? saved === "dark"
-        : window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-      document.documentElement.setAttribute("data-mode", dark ? "dark" : "light");
+      if (localStorage.getItem("whynot-mode") === "dark") {
+        document.documentElement.setAttribute("data-mode", "dark");
+      }
     } catch (e) {}
   })();
 </script>
@@ -158,7 +157,7 @@
     <span><span class="brand__name">WHYNOT</span>
       <span data-i18n="Electronics · 1994" class="brand__sub">Electronics · 1994</span></span>
   </a>
-  <nav class="rail__nav"><a data-i18n="Home" href="index.html">Home</a><a data-i18n="Catalogue" href="products.html">Catalogue</a><a data-i18n="Showrooms" href="stores.html">Showrooms</a><a data-i18n="About" href="about.html" aria-current="page">About</a><a data-i18n="Contact" href="contact.html">Contact</a></nav>
+  <nav class="rail__nav"><a href="index.html"><svg class="icon" aria-hidden="true"><use href="#i-slate"></use></svg><span data-i18n="Home">Home</span></a><a href="products.html"><svg class="icon" aria-hidden="true"><use href="#i-tag"></use></svg><span data-i18n="Catalogue">Catalogue</span></a><a href="stores.html"><svg class="icon" aria-hidden="true"><use href="#i-pin"></use></svg><span data-i18n="Showrooms">Showrooms</span></a><a href="about.html" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#i-people"></use></svg><span data-i18n="About">About</span></a><a href="contact.html"><svg class="icon" aria-hidden="true"><use href="#i-call"></use></svg><span data-i18n="Contact">Contact</span></a></nav>
   <div class="rail__pick">
     <span><span data-i18n="My list" class="label">My list</span><br><strong data-list-count hidden>0</strong>
       <span data-i18n="0 items" class="note" data-list-label>0 items</span></span>
@@ -205,6 +204,12 @@
          two-wheelers in Tanuku and became one of the largest appliance retailers
          in the Godavari districts.</p>
 
+      <figure class="band"><picture>
+<source srcset="assets/img/detail-counter.avif" type="image/avif">
+<source srcset="assets/img/detail-counter.webp" type="image/webp">
+<img src="assets/img/detail-counter.jpg" width="1126" height="776" loading="lazy" decoding="async" alt="The bill, the keys, the handover">
+</picture><figcaption><span data-i18n="AI stand-in art" class="shot__tag">AI stand-in art</span><span data-i18n="The bill, the keys, the handover">The bill, the keys, the handover</span></figcaption></figure>
+
       <section class="two-up" aria-labelledby="facts">
         <div class="panel">
           <div class="panel__head"><h2 data-i18n="The facts" class="display display--m" id="facts">The facts</h2></div>
@@ -215,7 +220,7 @@
             <div class="panel__head"><h2 data-i18n="How it got here" class="display display--m">How it got here</h2></div>
             <div class="panel__body"><div class="log"><div class="log__row"><span class="log__y">1994</span><p data-i18n="An LML showroom opens in Tanuku. Two-wheeler finance was the whole business." class="log__t">An LML showroom opens in Tanuku. Two-wheeler finance was the whole business.</p></div><div class="log__row"><span class="log__y">1996</span><p data-i18n="Bajaj added. The family starts keeping stock of what people actually ask for." class="log__t">Bajaj added. The family starts keeping stock of what people actually ask for.</p></div><div class="log__row"><span class="log__y">2006</span><p data-i18n="Electronics, and with it the appliance counters that carry the shop today." class="log__t">Electronics, and with it the appliance counters that carry the shop today.</p></div><div class="log__row"><span data-i18n="Today" class="log__y">Today</span><p data-i18n="25 showrooms, 23 towns, 300 people, and a helpline that a person answers." class="log__t">25 showrooms, 23 towns, 300 people, and a helpline that a person answers.</p></div></div></div>
           </div>
-          <div class="panel" style="margin-top:18px">
+          <div class="panel" style="margin-top:20px">
             <div class="panel__head"><h2 data-i18n="Who runs it" class="display display--m">Who runs it</h2></div>
             <div><p class="tile"><span data-i18n="Managing Director" class="tile__t">Managing Director</span><span class="tile__d">Mr. Jujjavarapu Venkata Rayudu</span></p><p class="tile"><span data-i18n="Director" class="tile__t">Director</span><span class="tile__d">Mrs. Jujjavarapu Sridevi</span></p><p class="tile"><span data-i18n="Director" class="tile__t">Director</span><span class="tile__d">Mrs. Jujjavarapu Mounika</span></p><p class="tile"><span data-i18n="Director" class="tile__t">Director</span><span class="tile__d">Mr. Muttavarapu Siddharth Venkatram</span></p></div>
           </div>
@@ -238,16 +243,17 @@
       <p><strong>WHYNOT Electronics Pvt Ltd</strong><br>RS No 24/1, Ground &amp; Cellar<br>Sri Sowdha Towers, Undrajavaram Road<br>Tanuku 534211, Andhra Pradesh</p>
       <p>Helpline <a href="tel:+918886222448">88862 22448</a><br>
          <a href="mailto:whynot.rayudu@gmail.com">whynot.rayudu@gmail.com</a> · open 10 am to 9 pm</p>
-      <p data-i18n="A redesign concept for whynotindia.in, built as portfolio work. Not affiliated with the company and not deployed anywhere. Artwork is AI-generated stand-in art, and the enquiry form has no server behind it." class="note">A redesign concept for whynotindia.in, built as portfolio work.
-         Not affiliated with the company and not deployed anywhere. Artwork is
-         AI-generated stand-in art, and the enquiry form has no server behind it.</p>
+      <p data-i18n="A redesign concept for whynotindia.in, built as portfolio work. Not affiliated with the company and not deployed anywhere. Photographs on this page are AI-generated stand-in art and the enquiry form has no server behind it." class="note">A redesign concept for whynotindia.in, built as portfolio work.
+         Not affiliated with the company and not deployed anywhere. Photographs on
+         this page are AI-generated stand-in art and the enquiry form has no server
+         behind it.</p>
       <p class="note">© <span data-year>2026</span> concept build.</p>
     </div>
   </footer>
 </div>
 
 <nav class="tabs" aria-label="Pages">
-<a data-i18n="Home" href="index.html">Home</a><a data-i18n="Catalogue" href="products.html">Catalogue</a><a data-i18n="Showrooms" href="stores.html">Showrooms</a><a data-i18n="About" href="about.html" aria-current="page">About</a><a data-i18n="Contact" href="contact.html">Contact</a></nav>
+<a href="index.html"><svg class="icon" aria-hidden="true"><use href="#i-slate"></use></svg><span data-i18n="Home">Home</span></a><a href="products.html"><svg class="icon" aria-hidden="true"><use href="#i-tag"></use></svg><span data-i18n="Catalogue">Catalogue</span></a><a href="stores.html"><svg class="icon" aria-hidden="true"><use href="#i-pin"></use></svg><span data-i18n="Showrooms">Showrooms</span></a><a href="about.html" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#i-people"></use></svg><span data-i18n="About">About</span></a><a href="contact.html"><svg class="icon" aria-hidden="true"><use href="#i-call"></use></svg><span data-i18n="Contact">Contact</span></a></nav>
 <div class="toast" data-toast role="status" aria-live="polite"></div>
 </body>
 </html>

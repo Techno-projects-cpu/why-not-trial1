@@ -5,19 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>WHYNOT Electronics — a redesign concept (Trial 07)</title>
 <meta name="description" content="A clean, professional redesign concept for WHYNOT Electronics: 25 showrooms, 23 towns, appliances priced by the branch you walk into.">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0b0d12" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff">
 <link rel="stylesheet" href="assets/css/style.css">
 <script>
-  /* Set the mode before first paint: the reader's system setting wins, unless
-     they have chosen one before. Doing it here avoids a flash of the wrong
-     palette, which is the usual bug with a light/dark switch. */
+  /* White first. The page opens light whatever the machine's system setting
+     says — the mode switch is there for the reader who wants dark, and the
+     choice is remembered. Applying it here, before first paint, is what stops
+     the flash of the wrong palette a mode switch usually causes. */
   (function () {
     try {
-      var saved = localStorage.getItem("whynot-mode");
-      var dark = saved ? saved === "dark"
-        : window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-      document.documentElement.setAttribute("data-mode", dark ? "dark" : "light");
+      if (localStorage.getItem("whynot-mode") === "dark") {
+        document.documentElement.setAttribute("data-mode", "dark");
+      }
     } catch (e) {}
   })();
 </script>
@@ -159,7 +158,7 @@
     <span><span class="brand__name">WHYNOT</span>
       <span data-i18n="Electronics · 1994" class="brand__sub">Electronics · 1994</span></span>
   </a>
-  <nav class="rail__nav"><a data-i18n="Home" href="index.html" aria-current="page">Home</a><a data-i18n="Catalogue" href="products.html">Catalogue</a><a data-i18n="Showrooms" href="stores.html">Showrooms</a><a data-i18n="About" href="about.html">About</a><a data-i18n="Contact" href="contact.html">Contact</a></nav>
+  <nav class="rail__nav"><a href="index.html" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#i-slate"></use></svg><span data-i18n="Home">Home</span></a><a href="products.html"><svg class="icon" aria-hidden="true"><use href="#i-tag"></use></svg><span data-i18n="Catalogue">Catalogue</span></a><a href="stores.html"><svg class="icon" aria-hidden="true"><use href="#i-pin"></use></svg><span data-i18n="Showrooms">Showrooms</span></a><a href="about.html"><svg class="icon" aria-hidden="true"><use href="#i-people"></use></svg><span data-i18n="About">About</span></a><a href="contact.html"><svg class="icon" aria-hidden="true"><use href="#i-call"></use></svg><span data-i18n="Contact">Contact</span></a></nav>
   <div class="rail__pick">
     <span><span data-i18n="My list" class="label">My list</span><br><strong data-list-count hidden>0</strong>
       <span data-i18n="0 items" class="note" data-list-label>0 items</span></span>
@@ -199,20 +198,34 @@
   </header>
   <main class="wrap" id="main">
 
-      <p data-i18n="WHYNOT Electronics · Tanuku" class="label">WHYNOT Electronics · Tanuku</p>
-      <h1 data-i18n="The shop, not the app." class="display display--xl">The shop, not the app.</h1>
-      <p data-i18n="Twenty-five showrooms across the Godavari districts and Visakhapatnam. Pick what you want, send the list, and someone from your nearest branch comes back with today's price and stock." class="lede">Twenty-five showrooms across the Godavari districts and
-         Visakhapatnam. Pick what you want, send the list, and someone from your
-         nearest branch comes back with today's price and stock.</p>
-      <div class="hero-actions">
-        <a class="btn btn--primary" href="products.html">Browse the catalogue</a>
-        <a data-i18n="Find your showroom" class="btn" href="stores.html">Find your showroom</a>
-      </div>
+      <section class="hero">
+        <div class="hero__text">
+          <p data-i18n="WHYNOT Electronics · Tanuku" class="label">WHYNOT Electronics · Tanuku</p>
+          <h1 class="display display--xl">The shop,<br>not the app.</h1>
+          <p data-i18n="Twenty-five showrooms across the Godavari districts and Visakhapatnam. Pick what you want, send the list, and someone from your nearest branch comes back with today's price and stock." class="lede">Twenty-five showrooms across the Godavari districts and
+             Visakhapatnam. Pick what you want, send the list, and someone from your
+             nearest branch comes back with today's price and stock.</p>
+          <div class="hero-actions">
+            <a data-i18n="Browse the catalogue" class="btn btn--primary" href="products.html">Browse the catalogue</a>
+            <a data-i18n="Find your showroom" class="btn" href="stores.html">Find your showroom</a>
+          </div>
+          <div class="hero__proof">
+            <span><svg class="icon" aria-hidden="true"><use href="#i-store"></use></svg>25 showrooms</span>
+            <span><svg class="icon" aria-hidden="true"><use href="#i-clock"></use></svg>Open 10 am to 9 pm</span>
+            <span><svg class="icon" aria-hidden="true"><use href="#i-call"></use></svg>One helpline, a person answers</span>
+          </div>
+        </div>
+        <figure class="shot"><picture>
+<source srcset="assets/img/hero-floor.avif" type="image/avif">
+<source srcset="assets/img/hero-floor.webp" type="image/webp">
+<img src="assets/img/hero-floor.jpg" width="1376" height="768" fetchpriority="high" decoding="async" alt="The floor at Tanuku, as this concept build imagines it">
+</picture><figcaption><span data-i18n="AI stand-in art" class="shot__tag">AI stand-in art</span><span data-i18n="The floor at Tanuku, as this concept build imagines it">The floor at Tanuku, as this concept build imagines it</span></figcaption></figure>
+      </section>
 
       <div class="strip"><div class="strip__cell"><p class="strip__v">25</p><p data-i18n="Showrooms" class="strip__k">Showrooms</p></div><div class="strip__cell"><p class="strip__v">23</p><p data-i18n="Towns served" class="strip__k">Towns served</p></div><div class="strip__cell"><p class="strip__v">1994</p><p data-i18n="Trading since" class="strip__k">Trading since</p></div><div class="strip__cell"><p class="strip__v">300</p><p data-i18n="People on the floor" class="strip__k">People on the floor</p></div></div>
-      <div class="marquee"><div class="marquee__track"><span>25 showrooms</span><span>23 towns</span>
+      <div class="marquee"><div class="marquee__track"><span data-i18n="25 showrooms">25 showrooms</span><span data-i18n="23 towns">23 towns</span>
         <span data-i18n="20 brands">20 brands</span><span data-i18n="open 10 to 9">open 10 to 9</span><span data-i18n="delivery and installation">delivery and installation</span>
-        <span>25 showrooms</span><span>23 towns</span><span data-i18n="20 brands">20 brands</span><span data-i18n="open 10 to 9">open 10 to 9</span>
+        <span data-i18n="25 showrooms">25 showrooms</span><span data-i18n="23 towns">23 towns</span><span data-i18n="20 brands">20 brands</span><span data-i18n="open 10 to 9">open 10 to 9</span>
         <span data-i18n="delivery and installation">delivery and installation</span></div></div>
 
       <section class="split" aria-labelledby="cats">
@@ -222,16 +235,65 @@
           <div class="pick"><a href="products.html?cat=tv" data-goto-cat="tv"><span class="pick__art"><svg class="icon" aria-hidden="true"><use href="#i-tv"></use></svg></span><span><strong data-i18n="Televisions">Televisions</strong><br><span data-i18n="QLED · 4K · smart" class="note">QLED · 4K · smart</span></span><span data-i18n="see list" class="pick__n">see list</span></a><a href="products.html?cat=fridge" data-goto-cat="fridge"><span class="pick__art"><svg class="icon" aria-hidden="true"><use href="#i-fridge"></use></svg></span><span><strong data-i18n="Refrigerators">Refrigerators</strong><br><span data-i18n="Single & double door" class="note">Single &amp; double door</span></span><span data-i18n="see list" class="pick__n">see list</span></a><a href="products.html?cat=ac" data-goto-cat="ac"><span class="pick__art"><svg class="icon" aria-hidden="true"><use href="#i-ac"></use></svg></span><span><strong data-i18n="Air conditioners">Air conditioners</strong><br><span data-i18n="Split · inverter" class="note">Split · inverter</span></span><span data-i18n="see list" class="pick__n">see list</span></a><a href="products.html?cat=washer" data-goto-cat="washer"><span class="pick__art"><svg class="icon" aria-hidden="true"><use href="#i-washer"></use></svg></span><span><strong data-i18n="Washing machines">Washing machines</strong><br><span data-i18n="Semi & automatic" class="note">Semi &amp; automatic</span></span><span data-i18n="see list" class="pick__n">see list</span></a><a href="products.html?cat=kitchen" data-goto-cat="kitchen"><span class="pick__art"><svg class="icon" aria-hidden="true"><use href="#i-mixer"></use></svg></span><span><strong data-i18n="Kitchen">Kitchen</strong><br><span data-i18n="Mixers · grinders" class="note">Mixers · grinders</span></span><span data-i18n="see list" class="pick__n">see list</span></a><a href="products.html?cat=water" data-goto-cat="water"><span class="pick__art"><svg class="icon" aria-hidden="true"><use href="#i-droplet"></use></svg></span><span><strong data-i18n="Water & geysers">Water &amp; geysers</strong><br><span data-i18n="Purifiers · heaters" class="note">Purifiers · heaters</span></span><span data-i18n="see list" class="pick__n">see list</span></a><a href="products.html?cat=lighting" data-goto-cat="lighting"><span class="pick__art"><svg class="icon" aria-hidden="true"><use href="#i-bulb"></use></svg></span><span><strong data-i18n="Lighting">Lighting</strong><br><span data-i18n="LED · strips" class="note">LED · strips</span></span><span data-i18n="see list" class="pick__n">see list</span></a><a href="products.html?cat=audio" data-goto-cat="audio"><span class="pick__art"><svg class="icon" aria-hidden="true"><use href="#i-speaker"></use></svg></span><span><strong data-i18n="Audio">Audio</strong><br><span data-i18n="Speakers · bars" class="note">Speakers · bars</span></span><span data-i18n="see list" class="pick__n">see list</span></a><a href="products.html?cat=mobile" data-goto-cat="mobile"><span class="pick__art"><svg class="icon" aria-hidden="true"><use href="#i-phone"></use></svg></span><span><strong data-i18n="Mobiles">Mobiles</strong><br><span data-i18n="5G · budget to flagship" class="note">5G · budget to flagship</span></span><span data-i18n="see list" class="pick__n">see list</span></a><a href="products.html?cat=cleaning" data-goto-cat="cleaning"><span class="pick__art"><svg class="icon" aria-hidden="true"><use href="#i-vacuum"></use></svg></span><span><strong data-i18n="Cleaning">Cleaning</strong><br><span data-i18n="Vacuum · mops" class="note">Vacuum · mops</span></span><span data-i18n="see list" class="pick__n">see list</span></a></div>
         </div>
         <div>
-          <div class="panel">
+          <div class="panel panel--raised">
             <div class="panel__head"><h2 data-i18n="How buying works here" class="display display--m">How buying works here</h2></div>
-            <div class="panel__body"><ol class="steps"><li><div><strong data-i18n="Add what you like">Add what you like</strong><p data-i18n="Build a list while you browse. Nothing is charged and no account is needed.">Build a list while you browse. Nothing is charged and no account is needed.</p></div></li><li><div><strong data-i18n="Send it to us">Send it to us</strong><p data-i18n="One tap opens WhatsApp with your whole list written out, or dials the helpline.">One tap opens WhatsApp with your whole list written out, or dials the helpline.</p></div></li><li><div><strong data-i18n="We call with the price">We call with the price</strong><p data-i18n="Today's price, which branch has it, EMI if you want it, and a delivery date.">Today's price, which branch has it, EMI if you want it, and a delivery date.</p></div></li></ol></div>
+            <div class="panel__body"><div class="diagram"><div class="diagram__node"><span><svg class="icon" aria-hidden="true"><use href="#i-tag"></use></svg>Step 1</span><strong data-i18n="Add what you like">Add what you like</strong><p data-i18n="Build a list while you browse. Nothing is charged and no account is needed.">Build a list while you browse. Nothing is charged and no account is needed.</p></div><div class="diagram__node"><span><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"></use></svg>Step 2</span><strong data-i18n="Send it to us">Send it to us</strong><p data-i18n="One tap opens WhatsApp with your whole list written out, or dials the helpline.">One tap opens WhatsApp with your whole list written out, or dials the helpline.</p></div><div class="diagram__node"><span><svg class="icon" aria-hidden="true"><use href="#i-call"></use></svg>Step 3</span><strong data-i18n="We call with the price">We call with the price</strong><p data-i18n="Today's price, which branch has it, EMI if you want it, and a delivery date.">Today's price, which branch has it, EMI if you want it, and a delivery date.</p></div><div class="diagram__node"><span><svg class="icon" aria-hidden="true"><use href="#i-store"></use></svg>Step 4</span><strong data-i18n="Collect at your branch">Collect at your branch</strong><p data-i18n="Fixed at the counter: delivery, installation and who to call afterwards.">Fixed at the counter: delivery, installation and who to call afterwards.</p></div></div></div>
           </div>
-          <div class="panel" style="margin-top:18px">
+          <div class="panel" style="margin-top:20px">
             <div class="panel__head"><h2 data-i18n="Popular this week" class="display display--m">Popular this week</h2>
               <a data-i18n="See the list" class="note" href="products.html">See the list</a></div>
             <div data-featured></div>
           </div>
         </div>
+      </section>
+
+      <section class="stage" aria-labelledby="where">
+        <div class="stage__head"><h2 data-i18n="Where the 25 doors are" class="display display--l" id="where">Where the 25 doors are</h2>
+          <a data-i18n="All 25 showrooms" class="note" href="stores.html">All 25 showrooms</a></div>
+        <svg viewBox="0 0 900 700" role="img" aria-labelledby="map-t map-d" class="map__svg">
+        <title id="map-t">Map of the Godavari districts and Visakhapatnam</title>
+        <desc id="map-d">A drawn map: 25 doors in 23 towns, from Chintalapudi and Jangareddygudem in the west to Kakinada and Anakapalle on the coast. A sketch, not a survey.</desc>
+        <rect class="map__land" x="0" y="0" width="900" height="700"/>
+        <path class="map__sea" d="M927 -167 L825 106 L730 156 L655 215 L570 282 L519 358 L478 429 L492 509 L485 593 L451 677 L390 761 L332 845 L900 700 L900 0 Z"/>
+        <path class="map__river" d="M64 257 L172 308 L254 358 L315 400 L383 425 L444 459 L485 492"/>
+        <path class="map__river" d="M400 484 L431 560 L458 627" style="stroke-width:1.4"/>
+        <path class="map__river" d="M458 467 L485 543 L485 593" style="stroke-width:1.4"/>
+        <path class="map__line map__line--soft" d="M220 249 L254 333 L288 392 L342 459 L370 534 L376 644"/>
+        <path class="map__line map__line--soft" d="M397 64 L458 165 L499 257 L485 358"/>
+        <text data-i18n="Bay of Bengal" class="map__name map__name--sea" x="620" y="600">Bay of Bengal</text>
+        <text data-i18n="Godavari" class="map__name map__name--sea" x="176" y="296">Godavari</text>
+        <g class="map__compass" aria-hidden="true">
+          <path d="M852 74 L860 46 L868 74 L860 66 Z"/>
+          <text class="map__name" x="860" y="90" text-anchor="middle">N</text>
+        </g>
+        <rect class="map__dot map__dot--brand" x="271" y="514" width="7" height="7" rx="1.5"/><rect class="map__dot map__dot--brand" x="280" y="514" width="7" height="7" rx="1.5"/>
+          <circle class="map__halt" cx="274" cy="505" r="10"/><circle class="map__dot map__dot--big" cx="274" cy="505" r="4.4"/><text class="map__name map__name--strong" x="285" y="502" text-anchor="start">Tanuku</text>
+          <circle class="map__dot" cx="213" cy="471" r="4.4"/><text class="map__name" x="202" y="454" text-anchor="end">Tadepalligudem</text>
+          <circle class="map__dot" cx="138" cy="480" r="4.4"/><text class="map__name" x="127" y="475" text-anchor="end">Bhimadolu</text>
+          <circle class="map__dot" cx="274" cy="442" r="4.4"/><text class="map__name" x="263" y="438" text-anchor="end">Nidadavolu</text>
+          <circle class="map__dot" cx="281" cy="635" r="4.4"/><text class="map__name" x="275" y="651" text-anchor="end">Narasapuram</text>
+          <circle class="map__dot" cx="291" cy="602" r="4.4"/><text class="map__name" x="302" y="604" text-anchor="start">Palakollu</text>
+          <circle class="map__dot" cx="138" cy="350" r="4.4"/><text class="map__name" x="149" y="352" text-anchor="start">Jangareddygudem</text>
+          <circle class="map__dot" cx="152" cy="421" r="4.4"/><text class="map__name" x="141" y="423" text-anchor="end">Devarapalli</text>
+          <circle class="map__dot" cx="77" cy="522" r="4.4"/><text class="map__name map__name--strong" x="88" y="524" text-anchor="start">Eluru</text>
+          <circle class="map__dot" cx="53" cy="371" r="4.4"/><text class="map__name" x="64" y="373" text-anchor="start">Chintalapudi</text>
+          <circle class="map__dot" cx="186" cy="455" r="4.4"/><text class="map__name" x="173" y="478" text-anchor="end">Nallajarla</text>
+          <circle class="map__dot" cx="247" cy="518" r="4.4"/><text class="map__name" x="236" y="515" text-anchor="end">Attili</text>
+          <circle class="map__dot" cx="220" cy="593" r="4.4"/><text class="map__name" x="209" y="595" text-anchor="end">Bhimavaram</text>
+          <circle class="map__dot map__dot--east" cx="315" cy="400" r="4.4"/><text class="map__name map__name--strong" x="326" y="397" text-anchor="start">Rajahmundry</text>
+          <circle class="map__dot map__dot--east" cx="291" cy="396" r="4.4"/><text class="map__name" x="280" y="392" text-anchor="end">Kovvur</text>
+          <circle class="map__dot map__dot--east" cx="383" cy="576" r="4.4"/><text class="map__name" x="394" y="579" text-anchor="start">Amalapuram</text>
+          <circle class="map__dot map__dot--east" cx="390" cy="610" r="4.4"/><text class="map__name" x="399" y="626" text-anchor="start">Tatipaka</text>
+          <circle class="map__dot map__dot--east" cx="325" cy="505" r="4.4"/><text class="map__name" x="336" y="518" text-anchor="start">Ravulapalem</text>
+          <circle class="map__dot map__dot--east" cx="359" cy="459" r="4.4"/><text class="map__name" x="370" y="456" text-anchor="start">Mandapeta</text>
+          <circle class="map__dot map__dot--east" cx="421" cy="282" r="4.4"/><text class="map__name" x="432" y="279" text-anchor="start">Yeleswaram</text>
+          <circle class="map__dot map__dot--east" cx="468" cy="354" r="4.4"/><text class="map__name" x="479" y="351" text-anchor="start">Pithapuram</text>
+          <circle class="map__dot map__dot--east" cx="465" cy="417" r="4.4"/><text class="map__name map__name--strong" x="476" y="420" text-anchor="start">Kakinada</text>
+          <circle class="map__dot map__dot--vizag" cx="720" cy="110" r="4.4"/><text data-i18n="Anakapalle" class="map__name map__name--strong" x="709" y="113" text-anchor="end">Anakapalle</text>
+        
+      </svg>
+        <p data-i18n="A drawn sketch of the region, not a survey: the dots sit in the right town, the distances are not to scale." class="note" style="margin-top:10px">A drawn sketch of the region, not a
+           survey: the dots sit in the right town, the distances are not to scale.</p>
       </section>
 
       <section class="stage" aria-labelledby="promises">
@@ -240,22 +302,29 @@
           <div class="panel"><div class="panel__body">
             <p class="tile"><span data-i18n="Warranty & service" class="tile__t">Warranty &amp; service</span><span data-i18n="Brand warranty runs through each manufacturer's authorised service network, and WHYNOT coordinates it for you." class="tile__d">Brand warranty runs through each manufacturer's authorised service network, and WHYNOT coordinates it for you.</span></p><p class="tile"><span data-i18n="EMI & exchange" class="tile__t">EMI &amp; exchange</span><span data-i18n="Card and Bajaj-style EMI is available at the counter on most large appliances. Old product exchange value is quoted before you buy." class="tile__d">Card and Bajaj-style EMI is available at the counter on most large appliances. Old product exchange value is quoted before you buy.</span></p><p class="tile"><span data-i18n="Delivery & installation" class="tile__t">Delivery &amp; installation</span><span data-i18n="Fixed at the counter: what it costs, when it arrives, who installs it. No surprises on the bill." class="tile__d">Fixed at the counter: what it costs, when it arrives, who installs it. No surprises on the bill.</span></p><p class="tile"><span data-i18n="Ask a human" class="tile__t">Ask a human</span><span data-i18n="Unsure between two models? Call the helpline and describe the room. We do this all day." class="tile__d">Unsure between two models? Call the helpline and describe the room. We do this all day.</span></p>
           </div></div>
-          <div class="panel"><div class="panel__body">
-            <p data-i18n="Service, honestly" class="label">Service, honestly</p>
-            <p data-i18n="Brand warranty runs through each manufacturer's authorised network and we coordinate it for you. Installation and delivery are fixed at the counter — the price you agree is the price on the bill." class="lede">Brand warranty runs through each manufacturer's authorised
-               network and we coordinate it for you. Installation and delivery are
-               fixed at the counter — the price you agree is the price on the bill.</p>
-            <p data-i18n="Prices are not invented on this page. Ask for today's and you get the number we can actually sell at." class="note">Prices are not invented on this page. Ask for today's and
-               you get the number we can actually sell at.</p>
-          </div></div>
+          <div>
+            <figure class="shot"><picture>
+<source srcset="assets/img/detail-counter.avif" type="image/avif">
+<source srcset="assets/img/detail-counter.webp" type="image/webp">
+<img src="assets/img/detail-counter.jpg" width="1126" height="776" loading="lazy" decoding="async" alt="The bill, the keys, the handover">
+</picture><figcaption><span data-i18n="AI stand-in art" class="shot__tag">AI stand-in art</span><span data-i18n="The bill, the keys, the handover">The bill, the keys, the handover</span></figcaption></figure>
+            <div class="panel" style="margin-top:20px"><div class="panel__body">
+              <p data-i18n="Service, honestly" class="label">Service, honestly</p>
+              <p data-i18n="Brand warranty runs through each manufacturer's authorised network and we coordinate it for you. Installation and delivery are fixed at the counter — the price you agree is the price on the bill." class="lede">Brand warranty runs through each manufacturer's authorised
+                 network and we coordinate it for you. Installation and delivery are
+                 fixed at the counter — the price you agree is the price on the bill.</p>
+              <p data-i18n="Prices are not invented on this page. Ask for today's and you get the number we can actually sell at." class="note">Prices are not invented on this page. Ask for today's and
+                 you get the number we can actually sell at.</p>
+            </div></div>
+          </div>
         </div>
       </section>
 
-      <p class="notice" style="margin-top:22px"><strong data-i18n="About this build:">About this build:</strong>
+      <p class="notice" style="margin-top:26px"><strong data-i18n="About this build:">About this build:</strong>
          a design concept for whynotindia.in, made as portfolio work. It is not
          affiliated with WHYNOT Electronics and is not deployed anywhere. The
-         artwork is AI-generated stand-in art, and the enquiry form does not send
-         anything — there is no server behind it.</p>
+         photographs are AI-generated stand-in art, and the enquiry form does not
+         send anything — there is no server behind it.</p>
 
   </main>
   <footer class="wrap foot">
@@ -263,16 +332,17 @@
       <p><strong>WHYNOT Electronics Pvt Ltd</strong><br>RS No 24/1, Ground &amp; Cellar<br>Sri Sowdha Towers, Undrajavaram Road<br>Tanuku 534211, Andhra Pradesh</p>
       <p>Helpline <a href="tel:+918886222448">88862 22448</a><br>
          <a href="mailto:whynot.rayudu@gmail.com">whynot.rayudu@gmail.com</a> · open 10 am to 9 pm</p>
-      <p data-i18n="A redesign concept for whynotindia.in, built as portfolio work. Not affiliated with the company and not deployed anywhere. Artwork is AI-generated stand-in art, and the enquiry form has no server behind it." class="note">A redesign concept for whynotindia.in, built as portfolio work.
-         Not affiliated with the company and not deployed anywhere. Artwork is
-         AI-generated stand-in art, and the enquiry form has no server behind it.</p>
+      <p data-i18n="A redesign concept for whynotindia.in, built as portfolio work. Not affiliated with the company and not deployed anywhere. Photographs on this page are AI-generated stand-in art and the enquiry form has no server behind it." class="note">A redesign concept for whynotindia.in, built as portfolio work.
+         Not affiliated with the company and not deployed anywhere. Photographs on
+         this page are AI-generated stand-in art and the enquiry form has no server
+         behind it.</p>
       <p class="note">© <span data-year>2026</span> concept build.</p>
     </div>
   </footer>
 </div>
 
 <nav class="tabs" aria-label="Pages">
-<a data-i18n="Home" href="index.html" aria-current="page">Home</a><a data-i18n="Catalogue" href="products.html">Catalogue</a><a data-i18n="Showrooms" href="stores.html">Showrooms</a><a data-i18n="About" href="about.html">About</a><a data-i18n="Contact" href="contact.html">Contact</a></nav>
+<a href="index.html" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#i-slate"></use></svg><span data-i18n="Home">Home</span></a><a href="products.html"><svg class="icon" aria-hidden="true"><use href="#i-tag"></use></svg><span data-i18n="Catalogue">Catalogue</span></a><a href="stores.html"><svg class="icon" aria-hidden="true"><use href="#i-pin"></use></svg><span data-i18n="Showrooms">Showrooms</span></a><a href="about.html"><svg class="icon" aria-hidden="true"><use href="#i-people"></use></svg><span data-i18n="About">About</span></a><a href="contact.html"><svg class="icon" aria-hidden="true"><use href="#i-call"></use></svg><span data-i18n="Contact">Contact</span></a></nav>
 <div class="toast" data-toast role="status" aria-live="polite"></div>
 </body>
 </html>

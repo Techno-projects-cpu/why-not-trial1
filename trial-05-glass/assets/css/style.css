@@ -420,7 +420,9 @@ a { color: inherit; text-decoration: none; }
 .band__title { font-family: var(--font-display); font-weight: 600; font-size: var(--t-xl); }
 .band__cap p { color: var(--text-soft); font-size: var(--t-sm); }
 .band__link { display: inline-block; margin-top: 6px; color: var(--cyan); font-weight: 700; font-size: var(--t-sm); }
-.band__link::after { content: " →"; }
+.band__link::after { content: ""; display: inline-block; width: .46em; height: .46em;
+  margin-left: .5em; border-top: 2px solid currentColor; border-right: 2px solid currentColor;
+  transform: translateY(-1px) rotate(45deg); }
 .band img { border-radius: var(--r); width: 100%; }
 
 .brands { display: flex; flex-wrap: wrap; gap: 8px; }

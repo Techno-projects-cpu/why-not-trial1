@@ -5,19 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Catalogue — WHYNOT redesign concept (Trial 07)</title>
 <meta name="description" content="17 appliances across 10 categories, with a shortlist that ends in a WhatsApp, call or email enquiry.">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0b0d12" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff">
 <link rel="stylesheet" href="assets/css/style.css">
 <script>
-  /* Set the mode before first paint: the reader's system setting wins, unless
-     they have chosen one before. Doing it here avoids a flash of the wrong
-     palette, which is the usual bug with a light/dark switch. */
+  /* White first. The page opens light whatever the machine's system setting
+     says — the mode switch is there for the reader who wants dark, and the
+     choice is remembered. Applying it here, before first paint, is what stops
+     the flash of the wrong palette a mode switch usually causes. */
   (function () {
     try {
-      var saved = localStorage.getItem("whynot-mode");
-      var dark = saved ? saved === "dark"
-        : window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-      document.documentElement.setAttribute("data-mode", dark ? "dark" : "light");
+      if (localStorage.getItem("whynot-mode") === "dark") {
+        document.documentElement.setAttribute("data-mode", "dark");
+      }
     } catch (e) {}
   })();
 </script>
@@ -159,7 +158,7 @@
     <span><span class="brand__name">WHYNOT</span>
       <span data-i18n="Electronics · 1994" class="brand__sub">Electronics · 1994</span></span>
   </a>
-  <nav class="rail__nav"><a data-i18n="Home" href="index.html">Home</a><a data-i18n="Catalogue" href="products.html" aria-current="page">Catalogue</a><a data-i18n="Showrooms" href="stores.html">Showrooms</a><a data-i18n="About" href="about.html">About</a><a data-i18n="Contact" href="contact.html">Contact</a></nav>
+  <nav class="rail__nav"><a href="index.html"><svg class="icon" aria-hidden="true"><use href="#i-slate"></use></svg><span data-i18n="Home">Home</span></a><a href="products.html" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#i-tag"></use></svg><span data-i18n="Catalogue">Catalogue</span></a><a href="stores.html"><svg class="icon" aria-hidden="true"><use href="#i-pin"></use></svg><span data-i18n="Showrooms">Showrooms</span></a><a href="about.html"><svg class="icon" aria-hidden="true"><use href="#i-people"></use></svg><span data-i18n="About">About</span></a><a href="contact.html"><svg class="icon" aria-hidden="true"><use href="#i-call"></use></svg><span data-i18n="Contact">Contact</span></a></nav>
   <div class="rail__pick">
     <span><span data-i18n="My list" class="label">My list</span><br><strong data-list-count hidden>0</strong>
       <span data-i18n="0 items" class="note" data-list-label>0 items</span></span>
@@ -206,7 +205,13 @@
          in one tap, and a person from your nearest branch replies with today's
          price and stock. No card details, no account, nothing charged.</p>
 
-      <div class="panel" style="margin-top:18px">
+      <figure class="band"><picture>
+<source srcset="assets/img/shelf-detail.avif" type="image/avif">
+<source srcset="assets/img/shelf-detail.webp" type="image/webp">
+<img src="assets/img/shelf-detail.jpg" width="1376" height="768" loading="lazy" decoding="async" alt="A display wall: appliances in a line, boxes behind">
+</picture><figcaption><span data-i18n="AI stand-in art" class="shot__tag">AI stand-in art</span><span data-i18n="A display wall: appliances in a line, boxes behind">A display wall: appliances in a line, boxes behind</span></figcaption></figure>
+
+      <div class="panel">
         <div class="panel__body">
           <div class="filters">
             <div class="filters__row">
@@ -223,7 +228,7 @@
         </div>
       </div>
 
-      <div class="work" style="margin-top:18px">
+      <div class="work" style="margin-top:20px">
         <section class="panel panel--flush" aria-labelledby="list-heading">
           <div class="panel__head"><h2 data-i18n="Line list" class="display display--m" id="list-heading">Line list</h2>
             <span data-i18n="price on request" class="note">price on request</span></div>
@@ -244,7 +249,7 @@
         </aside>
       </div>
 
-      <p data-i18n="This is a concept build with no server attached. Sending the list opens WhatsApp or your mail app with the items written out — nothing is submitted from this page." class="notice" style="margin-top:22px">This is a concept build with no server
+      <p data-i18n="This is a concept build with no server attached. Sending the list opens WhatsApp or your mail app with the items written out — nothing is submitted from this page." class="notice" style="margin-top:24px">This is a concept build with no server
          attached. Sending the list opens WhatsApp or your mail app with the items
          written out — nothing is submitted from this page.</p>
 
@@ -254,16 +259,17 @@
       <p><strong>WHYNOT Electronics Pvt Ltd</strong><br>RS No 24/1, Ground &amp; Cellar<br>Sri Sowdha Towers, Undrajavaram Road<br>Tanuku 534211, Andhra Pradesh</p>
       <p>Helpline <a href="tel:+918886222448">88862 22448</a><br>
          <a href="mailto:whynot.rayudu@gmail.com">whynot.rayudu@gmail.com</a> · open 10 am to 9 pm</p>
-      <p data-i18n="A redesign concept for whynotindia.in, built as portfolio work. Not affiliated with the company and not deployed anywhere. Artwork is AI-generated stand-in art, and the enquiry form has no server behind it." class="note">A redesign concept for whynotindia.in, built as portfolio work.
-         Not affiliated with the company and not deployed anywhere. Artwork is
-         AI-generated stand-in art, and the enquiry form has no server behind it.</p>
+      <p data-i18n="A redesign concept for whynotindia.in, built as portfolio work. Not affiliated with the company and not deployed anywhere. Photographs on this page are AI-generated stand-in art and the enquiry form has no server behind it." class="note">A redesign concept for whynotindia.in, built as portfolio work.
+         Not affiliated with the company and not deployed anywhere. Photographs on
+         this page are AI-generated stand-in art and the enquiry form has no server
+         behind it.</p>
       <p class="note">© <span data-year>2026</span> concept build.</p>
     </div>
   </footer>
 </div>
 
 <nav class="tabs" aria-label="Pages">
-<a data-i18n="Home" href="index.html">Home</a><a data-i18n="Catalogue" href="products.html" aria-current="page">Catalogue</a><a data-i18n="Showrooms" href="stores.html">Showrooms</a><a data-i18n="About" href="about.html">About</a><a data-i18n="Contact" href="contact.html">Contact</a></nav>
+<a href="index.html"><svg class="icon" aria-hidden="true"><use href="#i-slate"></use></svg><span data-i18n="Home">Home</span></a><a href="products.html" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#i-tag"></use></svg><span data-i18n="Catalogue">Catalogue</span></a><a href="stores.html"><svg class="icon" aria-hidden="true"><use href="#i-pin"></use></svg><span data-i18n="Showrooms">Showrooms</span></a><a href="about.html"><svg class="icon" aria-hidden="true"><use href="#i-people"></use></svg><span data-i18n="About">About</span></a><a href="contact.html"><svg class="icon" aria-hidden="true"><use href="#i-call"></use></svg><span data-i18n="Contact">Contact</span></a></nav>
 <div class="toast" data-toast role="status" aria-live="polite"></div>
 </body>
 </html>

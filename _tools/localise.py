@@ -454,7 +454,15 @@ def verify_placement(html, name=""):
                         break
                     want = i18n.LOCALISABLE[key]["en"]
                     got = frame[3] or frame[2]
-                    if normalise(got) != normalise(unescape(want)) and normalise(got) != normalise(want):
+                    # a <br> in the phrase is a line break in the element, and an
+                    # entity in one is the character in the other: compare the
+                    # same sentence written each way rather than only verbatim
+                    want_forms = set()
+                    for form in (want, unescape(want)):
+                        want_forms.add(normalise(form))
+                        want_forms.add(normalise(re.sub(r"<br\s*/?>", "\n", form)))
+                        want_forms.add(normalise(re.sub(r"<[^>]+>", "", form)))
+                    if normalise(got) not in want_forms:
                         problems.append("<%s> key %r says %r, element says %r"
                                         % (tag, key, want[:40], got.strip()[:40]))
                     break
