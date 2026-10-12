@@ -15,6 +15,9 @@ This repository is a **lab**: each trial is a complete, self-contained rebuild o
 | **Trial 01 · "Paper & Ink"** — minimal, editorial | [`trial-01-minimal/`](trial-01-minimal/) |
 | **Trial 02 · "Crayon & Paper"** — hand-drawn, vibrant | [`trial-02-illustrated/`](trial-02-illustrated/) |
 | **Trial 03 · "Panel & Ink"** — anime / manga panels | [`trial-03-anime/`](trial-03-anime/) |
+| **Trial 04 · "Slab & Stencil"** — neo-brutalism | [`trial-04-brutalist/`](trial-04-brutalist/) |
+| **Trial 05 · "Glass & Glow"** — glassmorphism | [`trial-05-glass/`](trial-05-glass/) |
+| **Trial 06 · "Brush & Bloom"** — pastel, painterly | [`trial-06-painting/`](trial-06-painting/) |
 
 ### Running it
 
@@ -47,6 +50,24 @@ Both trials cover the same six pages, the same 25 verified showroom addresses, t
 
 The third direction is the interesting one to compare against the first two: same grid discipline as Trial 01, same energy budget as Trial 02, and the art budget blown on exactly two images instead of three photographs.
 
+### Trials 04–06
+
+These three share a builder (`_tools/sections.py`) and therefore share structure, copy and behaviour exactly. They differ only in design — which is the point: it makes them directly comparable, and it means a content change happens once.
+
+| | **04 · Slab & Stencil** | **05 · Glass & Glow** | **06 · Brush & Bloom** |
+|---|---|---|---|
+| Direction | Neo-brutalism | Glassmorphism | Pastel, painterly, plein-air |
+| Type | Archivo Black + Space Grotesk + Space Mono | Sora + Manrope | Fraunces + Karla |
+| Surfaces | 5px black rules, hard offset shadows, zero radius | Frosted translucent sheets, 22px backdrop blur | Thin washes on cream paper, 22–30px radii, soft warm shadows |
+| Colour | Electric blue, acid yellow, lime, hot pink | Violet/cyan/magenta gradient mesh on near-black | Blush, sage, sky, butter, terracotta |
+| Imagery | None — block-art hero, block bands | One light study, used as a fixed backdrop | Three pastel landscape paintings |
+| Icon cut | Heavy, square-capped | Hairline, rounded | Soft, with a translucent underlay |
+| Signature move | The marquee strip, and a poster of stacked blocks | The measured contrast pass | Brush-stroke ribbon dividers, feathered canvas edges |
+| First view | ≈159 KB | ≈168 KB | ≈321 KB (the hero painting is 148 KB of it) |
+| Whole directory | 278 KB | 397 KB | 1.6 MB (three paintings × three formats) |
+
+**Why the icon sets are shared geometry with three different pens:** 60+ hand-written SVG paths per trial is a lot of output for something that reads as a 24px silhouette. Trials 04–06 take the canonical geometry and restyle it — stroke weight, cap, join, and a translucent halo underlay for the painted cut. The *ornaments* (marquee marks, glass prisms, brush strokes) are drawn individually, because that is where the personality actually lives. All three keep the same symbol ids, so one set of JavaScript drives all of them.
+
 ---
 
 ## What both trials actually fix
@@ -58,6 +79,25 @@ The third direction is the interesting one to compare against the first two: sam
 5. **A page that loads in a village.** No framework, no CDN, no analytics, no tag manager, no popup, no embedded map. Readable before the fonts land, and every action works with the keyboard.
 6. **Accessibility as a baseline.** Skip links, one `h1` per page, real landmarks, visible focus rings, 44 px tap targets, labelled controls, errors tied to fields with `aria-describedby` and `role="alert"`, `prefers-reduced-motion` honoured.
 7. **About the money honestly.** No prices are invented for a real company's real products: cards say "Ask today's price", which is also how most Indian electronics retail actually works. Wiring a live price feed or a real cart with payment is a phase-two decision, and the shortlist already maps onto a cart item for item.
+
+### Trial 06 specifics
+
+- **Paintings in frames, feathered into the paper.** Each canvas is a painting inside a soft mat, with an inset cream vignette (`box-shadow: inset`) so the image edge dissolves into the page instead of stopping at a hard line. One is tilted half a degree so it reads as pinned up.
+- **Canvas grain with no texture file.** A `feTurbulence` filter inlined as an SVG data URI, multiplied over the page at low opacity. Same trick gives the glass trial its grain.
+- **Brush-stroke dividers**: two overlapping tapered strokes per divider, rotating through three pastel inks.
+- **Caveat, stated on the page:** the three paintings are AI-generated stand-ins. Pastel landscape is the craft where a commissioned illustrator raises the ceiling most, so this is the direction where that cost belongs on the quote as its own line. Every design element around them — frames, washes, grain, dividers — is plain CSS and SVG.
+
+### Trial 05 specifics
+
+- **Depth from light, not borders.** A fixed backdrop (light study → colour mesh → blurred orbs → grain → dark wash) with `backdrop-filter: blur(22px) saturate(165%)` on every surface.
+- **A measured contrast pass, not a vibe.** `python3 _tools/contrast.py` reads the actual alpha values out of the stylesheet, composites the real layer stack and prints WCAG ratios against the worst-case backdrop. It failed on the first run — 3 of 10 combinations — and the fixes are in the CSS: higher text alphas, a dark tint floor under every text-bearing surface, and the systemic one, that *any* translucent white chip puts white text on a near-white surface and so must carry the tint instead of just frost. **24/24 pass**, worst case included.
+- **`@supports` fallback**: where `backdrop-filter` is unavailable the frost is swapped for a solid tinted sheet, so the design degrades to something readable rather than to mush.
+
+### Trial 04 specifics
+
+- **No photography by design.** The hero is a poster of stacked blocks; the town band is a wall of coloured slabs; the catalogue's product art is flat colour blocks with heavy icons. It is the smallest trial in the repo at 278 KB, and the loudest.
+- **One marquee**, scrolling a single strip of true facts (25 showrooms, 23 towns, since 1994), disabled under `prefers-reduced-motion`.
+- **Zero border radius**, everywhere, enforced in the reset — the one place a stray rounded corner would break the whole language.
 
 ### Trial 03 specifics
 
@@ -97,6 +137,8 @@ trial-02-illustrated/
 ├── contact.html            enquiry form, WhatsApp, dealer enquiries
 ├── 404.html
 └── assets/                 style.css (~30 KB) · 4 scripts · doodle sprite · 5 font faces
+trial-04-brutalist/                          trial-05-glass/                     trial-06-painting/
+├── six pages each, built from _tools/sections.py — identical content, three designs
 trial-03-anime/
 ├── index.html              dark hero panel + key art, stats strip, categories, popular, art band, reviews, CTA
 ├── products.html           catalogue, filters, my list, how buying works
@@ -110,7 +152,18 @@ _tools/
 ├── panels.py               Trial 03's 40 crisp icons, speed lines, bursts and the impact badge
 ├── build-trial02.py        regenerates Trial 02's six pages
 ├── build-trial03.py        regenerates Trial 03's six pages
-└── test-trials.mjs         66 behavioural tests across all three trials (jsdom)
+│
+│   ── and the shared builder the last three trials use ──
+├── content.py              all the words for trials 04–06, in one place
+├── sections.py             the page bodies + BaseSkin (header, drawer, footer, phone bar, panels)
+├── shell.py                the document shell
+├── icons.py                canonical icon geometry, three cuts; <picture> helper for AVIF/WebP/JPEG
+├── build-trial04.py        Skin04 — neo-brutalism
+├── build-trial05.py        Skin05 — glassmorphism
+├── build-trial06.py        Skin06 — pastel painting
+├── port-js.py              ports the JavaScript to a new trial, renaming classes and reporting leftovers
+├── contrast.py             the glassmorphism WCAG audit (parses the stylesheet, composites the layers)
+└── test-trials.mjs         96 behavioural tests across all six trials (jsdom)
 ```
 
 ### Editing the parts you'll want to edit
@@ -121,6 +174,9 @@ _tools/
 | **Trial 02's icons** | `_tools/doodles.py` — then rebuild. |
 | **Trial 03's pages** | `_tools/build-trial03.py` — same deal, then `python3 _tools/build-trial03.py`. |
 | **Trial 03's icons and panel ornaments** | `_tools/panels.py` — crisp, geometric, with `preserveAspectRatio="none"` on the two stretchy backgrounds. |
+| **Any copy in trials 04–06** | `_tools/content.py` — one file, then rebuild all three: `python3 _tools/build-trial04.py` (and 05, 06). |
+| **A page's structure in trials 04–06** | `_tools/sections.py` if it is shared, the trial's own `build-trial06.py`-style skin if it is not. |
+| **Trial 04–06 icons** | `_tools/icons.py` — one geometry, three cuts (`brutal`, `glass`, `paint`). |
 | Add or remove a showroom | `assets/js/stores.js` in either trial — one object in the `STORES` array |
 | Add or edit a product | `assets/js/products.js` in any trial — one object in `PRODUCTS` (keep the three files' data blocks identical; the test suite asserts that they are) |
 | Phone number, email, address, opening hours | `assets/js/main.js` (`OPEN_HOUR` / `CLOSE_HOUR`) plus the literal number in each page's header and footer |
@@ -135,7 +191,7 @@ _tools/
 cd _tools && npm install jsdom && node test-trials.mjs
 ```
 
-66 checks that run the real scripts against the real pages in a real DOM: 17 products render in all three skins, filters and search narrow correctly, the shortlist updates every badge and the WhatsApp and email links carry the list, all 25 map links in all three trials resolve to `google.com/maps/search`, district filters combine with search, the form rejects a bad mobile number and its success state stays honest about there being no server, Trial 03 ships AVIF with WebP behind it and declares its image dimensions, each trial uses only its own localStorage key, and the product data is byte-identical across all three.
+96 checks that run the real scripts against the real pages in a real DOM: 17 products render in all three skins, filters and search narrow correctly, the shortlist updates every badge and the WhatsApp and email links carry the list, all 25 map links in all three trials resolve to `google.com/maps/search`, district filters combine with search, the form rejects a bad mobile number and its success state stays honest about there being no server, Trial 03 ships AVIF with WebP behind it and declares its image dimensions, each trial uses only its own localStorage key, and the product data is byte-identical across all three. Trials 04–06 get a shared-contract block with two checks that catch design-port bugs specifically: **every class the rendered page uses must exist in that trial's stylesheet**, and every icon reference must resolve. Both found real bugs the moment they were written (a missing `[data-cat-chips]` container left the catalogue with no category filter at all, and several unstyled classes).
 
 ---
 
@@ -174,7 +230,29 @@ cd _tools && npm install jsdom && node test-trials.mjs
 | Hero illustration, AVIF (WebP 91 KB, JPEG 161 KB behind it) | 72 KB | — |
 | **First view** | **≈250 KB** | **≈105 KB** |
 
-All three trials: no analytics, no tag manager, no cookie banner (nothing to consent to), no third-party requests of any kind, and no embedded Google Maps iframe — the map only opens when the visitor chooses to ask for directions.
+Trial 05 · Glass & Glow
+
+| Asset | Raw | Gzipped |
+|---|---|---|
+| HTML, largest page | 30 KB | 7.3 KB |
+| CSS, entire site | 35 KB | 7.6 KB |
+| JS, all four files | 37 KB | 12 KB |
+| Fonts, 3 faces | 42 KB | — |
+| The light study, AVIF (WebP 24 KB, JPEG 85 KB behind it) | 23 KB | — |
+| **First view** | **≈168 KB** | **≈75 KB** |
+
+Trial 06 · Brush & Bloom
+
+| Asset | Raw | Gzipped |
+|---|---|---|
+| HTML, largest page | 41 KB | 7.9 KB |
+| CSS, entire site | 34 KB | 7.5 KB |
+| JS, all four files | 37 KB | 12 KB |
+| Fonts, 4 faces | 61 KB | — |
+| Hero painting, AVIF (WebP 153 KB, JPEG 268 KB behind it) | 148 KB | — |
+| **First view** | **≈321 KB** | **≈130 KB** |
+
+Six trials, no analytics, no tag manager, no cookie banner (nothing to consent to), no third-party requests of any kind, and no embedded Google Maps iframe — the map only opens when the visitor chooses to ask for directions.
 
 ---
 
@@ -185,6 +263,9 @@ All three trials: no analytics, no tag manager, no cookie banner (nothing to con
 - **District wording is deliberately unchanged.** Several listed towns sit in districts created by Andhra Pradesh's 2022 reorganisation and the live site still says "East/West Godavari" everywhere. Rather than silently rewriting the company's own addresses, both trials keep their wording — see audit item 5.2.
 - **Neither trial has a backend.** The contact forms validate properly, then say on screen that nothing was sent. Wiring them to a CRM, WhatsApp Business API or an email relay is an afternoon's work.
 - **Reviews are reproduced as written** on the current site, unattributed, with a note on the page that named and dated reviews would be better. Inventing testimonials was not an option.
+- **The paintings in Trial 06 and the key art in Trial 03 are AI-generated** stand-ins, and those are the two directions where bought-in artwork would change the most: pastel landscape and anime are both craft styles. Trial 01's photography is a third. Each of those is a line item worth quoting separately rather than hiding inside a build price.
+- **The glassmorphism trial's contrast numbers are measured, not asserted** (`_tools/contrast.py`), because that is the one visual direction in the set where taste and readability pull against each other.
+
 - **Photography in Trial 01 and the key art in Trial 03 are AI-generated** stand-ins. Trial 01's would be replaced by photographs of the real showrooms; Trial 03's by commissioned illustration, which is a genuine cost worth quoting separately — anime art is a craft style and the difference between generated stand-in art and a real illustrator's work is visible. Trial 02 uses no photography or raster art at all.
 - **No third-party logos or trademarks** are reproduced. Brand names appear as text only.
 - **Two glyphs are deliberately avoided.** The latin subsets of these fonts contain neither `₹` (U+20B9) nor `↗` (U+2197), so prices are written "Rs" and external arrows are inline SVG. Falling back to a system font for one character is exactly the kind of detail that makes an otherwise composed page look assembled.
@@ -194,6 +275,8 @@ All three trials: no analytics, no tag manager, no cookie banner (nothing to con
 
 - **01 — Paper & Ink** ✅ built (6 pages, catalogue)
 - **02 — Crayon & Paper** ✅ built (6 pages, catalogue)
-- **03 — Panel & Ink** ✅ built (6 pages, catalogue)
-- **04 — glassmorphism** ⏳ queued
-- **05 — reserved** ⏳ commerce-first or map-first / hyper-local
+- **03 — Panel & Ink** ✅ anime / manga panels (6 pages, catalogue)
+- **04 — Slab & Stencil** ✅ neo-brutalism (6 pages, catalogue)
+- **05 — Glass & Glow** ✅ glassmorphism (6 pages, catalogue, measured contrast pass)
+- **06 — Brush & Bloom** ✅ pastel, painterly (6 pages, catalogue, three paintings)
+- **Next, if anyone wants more** ⏳ commerce-first with a real cart and payment gateway (every trial's shortlist already maps onto a cart item for item), or a map-first build where the district map is the homepage and each of the 23 towns gets its own page for local search

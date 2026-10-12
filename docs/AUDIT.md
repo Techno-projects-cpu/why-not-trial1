@@ -80,9 +80,12 @@ Two complete builds, same fix-list, deliberately opposite personalities — beca
 
 - **Trial 01 · "Paper & Ink"** — editorial minimalism. Warm paper, hairline rules, real typography, the brand blue `#0000FF` doing all the shouting.
 - **Trial 02 · "Crayon & Paper"** — hand-drawn and vibrant. Marker-pen doodles, sticker buttons, wobbling pen borders, a maths-book dot grid, and 37 icons written as SVG paths by hand.
+- **Trial 04 · "Slab & Stencil"** — neo-brutalism. Thick black rules, flat electric colour, hard offset shadows, zero radius, no photography at all: the smallest and loudest build in the set.
+- **Trial 05 · "Glass & Glow"** — glassmorphism. Frosted sheets over a lit backdrop, depth from blur and light, and a reproducible WCAG audit (`_tools/contrast.py`) that composites the real layer stack and passes 24/24 combinations against a worst-case white bloom.
+- **Trial 06 · "Brush & Bloom"** — pastel and painterly. Cream ground with canvas grain, thin colour washes, three pastel landscape paintings in feathered frames, brush-stroke dividers. The calmest direction, and the one where commissioned artwork matters most.
 - **Trial 03 · "Panel & Ink"** — anime / manga panels. Ruled frames with hard ink borders, CSS halftone screentones, speed lines, impact bursts, cel-shaded key art served as AVIF with WebP and JPEG behind it. The energy is budgeted: four places per page, everything else stays flat so the catalogue survives a 360 px screen.
 
-All three cover six pages, all three carry the full showroom directory and a browsable catalogue with a shortlist that travels to the counter by WhatsApp, phone or email, and all three are built with no framework, no build step and no third-party requests. What follows uses Trial 01 as the reference for the shared engineering.
+All six cover six pages, all six carry the full showroom directory and a browsable catalogue with a shortlist that travels to the counter by WhatsApp, phone or email, and all three are built with no framework, no build step and no third-party requests. What follows uses Trial 01 as the reference for the shared engineering.
 
 - **Whole site in one screen of CSS + two small scripts.** No framework, no build step, no jQuery, no CDN.
 - **Typography done properly.** Two self-hosted families, five faces total: Instrument Serif (regular + italic) for the big statements, Inter (400/500/600) for interface text. Total font payload ≈ 113 KB, latin subset only, `font-display: swap`, so text paints immediately.
@@ -95,7 +98,7 @@ All three cover six pages, all three carry the full showroom directory and a bro
 
 ### One more thing the redesigns add: the shop
 
-The current site has a shopping cart in the navigation and nothing to put in it. All three trials replace that with the thing a 25-branch retailer can actually run: a catalogue of the categories they already sell, live search with a real keyword index, a filter for "what is stocked in my town", and a shortlist that sends itself to the counter — the whole list written out, in one tap, to WhatsApp, email or the helpline. Prices are deliberately not invented; cards say "ask today's price", which is also how most Indian electronics retail works. A real cart with a payment gateway is a phase-two decision, and the shortlist maps onto one item for item.
+The current site has a shopping cart in the navigation and nothing to put in it. Every trial replaces that with the thing a 25-branch retailer can actually run: a catalogue of the categories they already sell, live search with a real keyword index, a filter for "what is stocked in my town", and a shortlist that sends itself to the counter — the whole list written out, in one tap, to WhatsApp, email or the helpline. Prices are deliberately not invented; cards say "ask today's price", which is also how most Indian electronics retail works. A real cart with a payment gateway is a phase-two decision, and the shortlist maps onto one item for item.
 
 ### Performance budget (Trial 01, measured)
 
