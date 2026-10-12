@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>WHYNOT redesign lab — trials 01 &amp; 02</title>
-<meta name="description" content="Independent redesign concepts for whynotindia.in: two complete builds in different visual directions, each shown live in a desktop and phone preview.">
+<title>WHYNOT redesign lab — trials 01–03</title>
+<meta name="description" content="Independent redesign concepts for whynotindia.in: three complete builds in different visual directions, each shown live in a desktop and phone preview.">
 <meta name="theme-color" content="#0c0c0e">
 <link rel="icon" href="trial-01-minimal/assets/img/logo-mark.svg" type="image/svg+xml">
 <style>
@@ -108,6 +108,8 @@
   }
   .trial--01 .trial__no { color: #9a9a9a; }
   .trial--02 .trial__no { color: var(--yellow); }
+  .trial--03 .trial__no { color: var(--coral); }
+  .trial--03 .trial__tags span { border-color: #3a3a44; }
 
   .trial__actions { display: flex; flex-wrap: wrap; gap: 10px; }
   .trial__specs { display: flex; flex-wrap: wrap; gap: 8px 26px; font-size: .8125rem; color: var(--muted); font-family: var(--mono); }
@@ -205,9 +207,9 @@
   </div>
 
   <section class="hero">
-    <p class="kicker">Two directions, one fix-list</p>
-    <h1>Two ways to fix a 32-year-old business&rsquo;s website.</h1>
-    <p>WHYNOT Electronics runs 25 showrooms across the Godavari districts and has been trading since 1994. Their current site buries the phone number, breaks every map link and shows a shopping cart with nothing in it. These are two complete redesigns of the same content &mdash; different visual language, identical job: make a customer trust them in five seconds, then get them to the nearest showroom or a catalog they can order from.</p>
+    <p class="kicker">Three directions, one fix-list</p>
+    <h1>Three ways to fix a 32-year-old business&rsquo;s website.</h1>
+    <p>WHYNOT Electronics runs 25 showrooms across the Godavari districts and has been trading since 1994. Their current site buries the phone number, breaks every map link and shows a shopping cart with nothing in it. These are three complete redesigns of the same content &mdash; different visual language, identical job: make a customer trust them in five seconds, then get them to the nearest showroom or a catalog they can order from.</p>
     <div class="hero__actions">
       <a class="btn btn--primary" href="docs/AUDIT.md">Read the audit of the current site</a>
       <a class="btn" href="#trials">Jump to the trials</a>
@@ -218,14 +220,14 @@
   <section class="brief">
     <div>
       <p class="kicker">The brief</p>
-      <h2>Same five problems in both builds</h2>
-      <p style="color:#8f8f99;font-size:.875rem;margin-top:10px">Both trials carry the full fix-list. The difference is entirely in how they look and feel &mdash; which is the point of building two.</p>
+      <h2>Same five problems in all three builds</h2>
+      <p style="color:#8f8f99;font-size:.875rem;margin-top:10px">Every trial carries the full fix-list. The difference is entirely in how they look and feel &mdash; which is the point of building more than one.</p>
     </div>
     <ol>
-      <li><span><strong>One true set of facts.</strong> The current site claims 23, 25 and 40 branches on three different pages. Both trials say 25 showrooms in 23 towns, and say it once.</span></li>
+      <li><span><strong>One true set of facts.</strong> The current site claims 23, 25 and 40 branches on three different pages. All three trials say 25 showrooms in 23 towns, and say it once.</span></li>
       <li><span><strong>A showroom directory that works.</strong> Search by town, district or pincode, with real Google Maps links. Every map link on the live site is broken.</span></li>
       <li><span><strong>A phone number one tap away</strong>, on every page, with an honest open/closed state &mdash; the live contact page has no number at all.</span></li>
-      <li><span><strong>Products worth browsing.</strong> Both trials ship a real catalogue with categories, search, town filters and a shortlist that travels to the counter by WhatsApp, phone or email.</span></li>
+      <li><span><strong>Products worth browsing.</strong> All three trials ship a real catalogue with categories, search, town filters and a shortlist that travels to the counter by WhatsApp, phone or email.</span></li>
       <li><span><strong>A page that loads in a village.</strong> No framework, no CDN, no analytics, no popup. Under 250 KB for the first view, readable before the fonts land.</span></li>
     </ol>
   </section>
@@ -328,19 +330,73 @@
       </div>
     </article>
 
+
+    <!-- ================================================ TRIAL 03 ======== -->
+    <article class="trial trial--03">
+      <div class="trial__head">
+        <p class="trial__no">Trial 03</p>
+        <h3>Panel &amp; Ink — the anime one</h3>
+        <p class="trial__sub">Built like a manga page: ruled panels, hard ink borders, halftone screentones, speed lines and impact bursts, with cel-shaded key art. The discipline that keeps it from turning into a sticker album is that the page is a grid — energy is spent in exactly four places (hero, section titles, price tags, CTA) and everything else stays flat and readable. This is the direction for a brand that wants the energy of a festival-hoarding poster with the structure of a catalogue.</p>
+        <div class="trial__tags">
+          <span>Anime / manga panels</span><span>Screentone + halftone</span><span>Cel-shaded key art</span>
+          <span>AVIF + WebP</span><span>Mobile first</span><span>WhatsApp-first buying</span>
+        </div>
+        <div class="trial__specs">
+          <span>6 pages</span><span>40 crisp vector icons</span><span>50 KB of type, four faces</span>
+          <span>sticky phone action bar</span><span>catalogue + shortlist</span>
+        </div>
+        <div class="trial__actions">
+          <a class="btn btn--primary" href="trial-03-anime/index.html">Open Trial 03</a>
+          <a class="btn" href="trial-03-anime/products.html">Catalogue</a>
+          <a class="btn" href="trial-03-anime/stores.html">Showrooms</a>
+          <a class="btn" href="trial-03-anime/about.html">The story</a>
+        </div>
+      </div>
+
+      <div class="previews">
+        <figure class="preview preview--desktop">
+          <div class="frame">
+            <div class="frame__bar">
+              <span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span>
+              <span class="frame__url">whynotindia.in — Panel &amp; Ink (desktop)</span>
+            </div>
+            <div class="frame__view" data-preview data-src="trial-03-anime/index.html" data-w="1280" data-h="900" style="aspect-ratio:1280/900">
+              <iframe src="trial-03-anime/index.html" title="Trial 03, live desktop preview" loading="lazy" tabindex="-1" scrolling="no"></iframe>
+              <span class="frame__hint">Live page, scaled down &mdash; open it to scroll</span>
+            </div>
+          </div>
+          <figcaption class="preview__label"><span>Desktop · 1280px</span><span>live iframe</span></figcaption>
+        </figure>
+
+        <figure class="preview preview--phone">
+          <div class="frame">
+            <div class="frame__view" data-preview data-src="trial-03-anime/index.html" data-w="390" data-h="780" style="aspect-ratio:390/780">
+              <iframe src="trial-03-anime/index.html" title="Trial 03, live phone preview" loading="lazy" tabindex="-1" scrolling="no"></iframe>
+            </div>
+          </div>
+          <figcaption class="preview__label"><span>Phone · 390px</span><span>live iframe</span></figcaption>
+        </figure>
+      </div>
+
+      <div class="soon" style="opacity:1">
+        <strong>The honest caveat on this one:</strong>
+        <p>The two key visuals here are AI-generated stand-in art. Anime is a style where the craft shows — a commissioned illustrator would give this direction a real face, consistent character design and a house palette, which is exactly what a 25-showroom brand would want on hoardings. This trial proves the layout, the panel system and the catalogue work; the art is the part to buy in.</p>
+      </div>
+    </article>
+
     <!-- ================================================ RESERVED ======== -->
     <article class="trial trial--soon">
       <div class="trial__head">
-        <p class="trial__no">Trial 03 &amp; 04</p>
+        <p class="trial__no">Trial 04 &amp; 05</p>
         <h3>Reserved</h3>
         <p class="trial__sub">Two more slots, for two more directions. Each gets its own preview box here as soon as it is built, so the whole lab stays one page.</p>
         <div class="trial__tags">
-          <span>Commerce-first catalogue</span><span>Map-first / hyper-local</span><span>Dark &amp; cinematic</span>
+          <span>Glassmorphism</span><span>Commerce-first catalogue</span><span>Map-first / hyper-local</span>
         </div>
       </div>
       <div class="soon">
         <strong>Ideas on the shelf:</strong>
-        <p>A commerce-first build, where the catalogue leads and a real cart plus payment gateway sits behind it (the shortlist in trials 01 and 02 already maps onto a cart item for item). A map-first build, where the district map is the homepage and every one of the 23 towns gets its own page for local search. Or a dark, cinematic product-led build for the brand store side of the business.</p>
+        <p><strong>Trial 04 is queued as glassmorphism</strong> — frosted translucent panels over a photographic backdrop, depth through blur and light rather than borders. The two styles after that are still open: a commerce-first build where the catalogue leads and a real cart plus payment gateway sits behind it (the shortlist in every trial already maps onto a cart item for item), or a map-first build where the district map is the homepage and each of the 23 towns gets its own page for local search.</p>
       </div>
     </article>
 
@@ -349,7 +405,7 @@
   <footer class="foot">
     <p><strong>Concept work only.</strong> Not affiliated with, endorsed by or deployed to WHYNOT Electronics Pvt Ltd. Company facts, addresses, phone number and brand names are theirs, taken from their public website on 12 October 2026, and used here to show what a rebuild could look like.</p>
     <p>Photography in Trial 01 is AI-generated stand-in imagery for photography that would be shot in the real showrooms. Every illustration in Trial 02 is a hand-written SVG path in this repository. No third-party logos or trademarks are reproduced &mdash; brand names appear as text only.</p>
-    <p>Previews on this page are the actual built pages, loaded in scaled iframes. Two trials, six pages each, no build step, no dependencies, no external requests. <a href="docs/AUDIT.md">Audit</a> · <a href="README.md">README</a></p>
+    <p>Previews on this page are the actual built pages, loaded in scaled iframes. Three trials, six pages each, 66 behavioural tests, no build step, no dependencies, no external requests. <a href="docs/AUDIT.md">Audit</a> · <a href="README.md">README</a></p>
   </footer>
 </div>
 

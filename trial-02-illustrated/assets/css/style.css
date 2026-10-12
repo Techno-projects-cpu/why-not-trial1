@@ -445,6 +445,7 @@ h1, h2, h3, h4 {
 @media (min-width: 900px) { .mobile-bar { display: none; } }
 .mobile-bar a,
 .mobile-bar button {
+  position: relative;                    /* the count badge anchors to its button */
   display: grid; justify-items: center; gap: 3px;
   padding: 9px 4px 7px;
   font-family: var(--font-display); font-weight: 700; font-size: var(--t-xs);

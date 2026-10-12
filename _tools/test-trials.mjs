@@ -193,6 +193,86 @@ console.log("\n— localStorage isolation between trials ———————�
   dom.window.close();
 }
 
+
+console.log("\n— TRIAL 03 catalogue ————————————————————————————");
+{
+  const dom = await load("trial-03-anime/products.html",
+    ["trial-03-anime/assets/js/main.js", "trial-03-anime/assets/js/products.js"]);
+  const d = dom.window.document;
+  check(d.querySelectorAll("[data-products] .card").length === 17, "renders 17 cards in the manga-panel skin");
+  check(d.querySelectorAll("[data-cat-chips] .chip").length === 11, "chips built");
+  check(d.querySelectorAll(".panel").length > 3, "the panel primitive is in use");
+  d.querySelector('[data-add="ac-15"]').click();
+  d.querySelector('[data-add="wm-7"]').click();
+  check([...d.querySelectorAll("[data-list-count]")].every((n) => n.textContent === "2"), "both list badges read 2");
+  check(d.querySelectorAll("[data-list-panel] .list-item").length === 2, "two rows in the list panel");
+  const wa = d.querySelector('[data-list-panel] a[href^="https://wa.me/"]');
+  check(!!wa && decodeURIComponent(wa.href).includes("1.5-ton"), "WhatsApp link carries the list");
+  const input = d.querySelector("[data-product-search]");
+  input.value = "microwave";
+  input.dispatchEvent(new dom.window.Event("input"));
+  check(d.querySelectorAll("[data-products] .card").length === 1, "'microwave' finds exactly one product");
+  input.value = "";
+  input.dispatchEvent(new dom.window.Event("input"));
+  d.querySelector('[data-cat="tv"]').click();
+  const tvs = d.querySelectorAll("[data-products] .card").length;
+  check(tvs === 2, "tv filter returns both televisions (got " + tvs + ")");
+  dom.window.close();
+}
+
+console.log("\n— TRIAL 03 home + showrooms + form ————————————————");
+{
+  const dom = await load("trial-03-anime/index.html",
+    ["trial-03-anime/assets/js/main.js", "trial-03-anime/assets/js/products.js"]);
+  const d = dom.window.document;
+  check(d.querySelectorAll("[data-featured] .card").length === 4, "featured strip renders 4 cards");
+  check(d.querySelector("picture source[type='image/avif']") !== null, "hero ships an AVIF source");
+  check(d.querySelector("picture source[type='image/webp']") !== null, "and a WebP fallback");
+  check(d.querySelector(".hero__frame img").getAttribute("width") === "760", "hero image declares its size (no layout shift)");
+  dom.window.close();
+
+  const dom2 = await load("trial-03-anime/stores.html",
+    ["trial-03-anime/assets/js/main.js", "trial-03-anime/assets/js/stores.js"]);
+  const d2 = dom2.window.document;
+  check(d2.querySelectorAll("[data-store-list] .store").length === 25, "25 showrooms rendered");
+  check([...d2.querySelectorAll('[data-store-list] a[href*="maps"]')].every((a) => a.href.startsWith("https://www.google.com/maps/search/")), "real Maps links in this design too");
+  dom2.window.close();
+
+  const dom3 = await load("trial-03-anime/contact.html",
+    ["trial-03-anime/assets/js/main.js", "trial-03-anime/assets/js/contact.js"]);
+  const d3 = dom3.window.document;
+  const form = d3.querySelector("[data-contact-form]");
+  form.dispatchEvent(new dom3.window.Event("submit"));
+  check(d3.querySelector("#name").getAttribute("aria-invalid") === "true", "empty submit is caught");
+  d3.querySelector("#name").value = "Sridevi";
+  d3.querySelector("#mobile").value = "918886222448";
+  d3.querySelector("#message").value = "Need a washing machine and an AC for a new flat.";
+  form.dispatchEvent(new dom3.window.Event("submit"));
+  await new Promise((r) => setTimeout(r, 700));
+  const st = d3.querySelector("[data-form-status]").textContent;
+  check(st.includes("Sridevi"), "success state names the customer");
+  check(/nothing has actually been sent/i.test(st), "and stays honest about the missing server");
+  dom3.window.close();
+}
+
+console.log("\n— three trials, three separate lists ————————————————");
+{
+  for (const [trial, key] of [["trial-01-minimal", "whynot-list-t1"], ["trial-02-illustrated", "whynot-list"], ["trial-03-anime", "whynot-list-t3"]]) {
+    const dom = await load(`${trial}/products.html`, [`${trial}/assets/js/products.js`]);
+    dom.window.document.querySelector('[data-add="tv-43"]').click();
+    const keys = Object.keys(dom.window.localStorage);
+    check(keys.length === 1 && keys[0] === key, `${trial} uses only its own key (${key})`);
+    dom.window.close();
+  }
+}
+
+const productData = ["trial-01-minimal", "trial-02-illustrated", "trial-03-anime"].map((t) => {
+  const src = fs.readFileSync(`${ROOT}/${t}/assets/js/products.js`, "utf8");
+  const start = src.indexOf("var PRODUCTS = [");
+  return src.slice(start, src.indexOf("];", start) + 2);
+});
+check(new Set(productData).size === 1, "the product data is byte-identical across all three trials");
+
 console.log("\n" + "=".repeat(52));
 console.log(`  ${pass} passed, ${fail} failed`);
 console.log("=".repeat(52) + "\n");
