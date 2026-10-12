@@ -134,7 +134,7 @@ class Skin04(sections.BaseSkin):
                             "2.5M served", "We drive the change"],
                            "Thirty-two years of WHYNOT, in eight blocks")
 
-    def page_hero(self, kicker, title, lead, ctas=None):
+    def page_hero(self, kicker, title, lead, ctas=None, art=None):
         buttons = ""
         for label, href, variant, icon in (ctas or []):
             buttons += self.btn(label, href, variant, icon)

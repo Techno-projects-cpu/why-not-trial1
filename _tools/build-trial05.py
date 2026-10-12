@@ -122,7 +122,7 @@ class Skin05(sections.BaseSkin):
         return self._pills(["1994", "1996", "2006", "2025", "25 showrooms", "300 people",
                             "2.5M served", "We drive the change"])
 
-    def page_hero(self, kicker, title, lead, ctas=None):
+    def page_hero(self, kicker, title, lead, ctas=None, art=None):
         buttons = "".join(self.btn(label, href, variant, icon) for label, href, variant, icon in (ctas or []))
         return """
 <section class="stage stage--pagehero">

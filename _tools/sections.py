@@ -184,7 +184,7 @@ class BaseSkin:
     def band_picture_two(self):
         return picture("storefront", "A WHYNOT-style showroom at dusk.", 1200, 675)
 
-    def page_hero(self, kicker, title, lead, ctas=None):
+    def page_hero(self, kicker, title, lead, ctas=None, art=None):
         return stage("%s<h1 class=\"display display--xl\">%s</h1>%s" % (
             self.kicker(kicker), title, self.sub(lead)), "stage--pagehero")
 
@@ -468,7 +468,8 @@ def about_page(skin):
     return (skin.page_hero("About us",
                            "One shop.<br>One question.",
                            "On 27 February 1994 Mr. Jujjavarapu Venkata Rayudu opened an LML showroom in Tanuku and called it "
-                           "<strong>Whynot</strong>. Thirty-two years later it is 25 showrooms and 300 people — still run by the same family.")
+                           "<strong>Whynot</strong>. Thirty-two years later it is 25 showrooms and 300 people — still run by the same family.",
+                           art="portrait")
             + timeline(skin)
             + band(skin, skin.band_picture_two(),
                    "“Nothing is impossible”",
