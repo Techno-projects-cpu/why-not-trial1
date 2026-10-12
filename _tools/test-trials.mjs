@@ -273,6 +273,51 @@ const productData = ["trial-01-minimal", "trial-02-illustrated", "trial-03-anime
 });
 check(new Set(productData).size === 1, "the product data is byte-identical across all three trials");
 
+
+console.log("\n— TRIALS 04–06 (the shared contract) ————————————————");
+const NEW_TRIALS = ["trial-04-brutalist", "trial-05-glass", "trial-06-painting"];
+for (const dir of NEW_TRIALS) {
+  if (!fs.existsSync(`${ROOT}/${dir}/assets/js/products.js`)) { console.log(`  --   ${dir}: not built yet, skipped`); continue; }
+  const label = dir.replace("trial-0", "T0").replace("-", " ");
+  const css = fs.readFileSync(`${ROOT}/${dir}/assets/css/style.css`, "utf8");
+
+  const dom = await load(`${dir}/products.html`, [`${dir}/assets/js/main.js`, `${dir}/assets/js/products.js`]);
+  const d = dom.window.document;
+  check(d.querySelectorAll("[data-products] .card").length === 17, `${label}: 17 products render`);
+  check(d.querySelectorAll("[data-cat-chips] .chip").length === 11, `${label}: category chips built`);
+  check(d.querySelectorAll(".store, [data-store-list]").length >= 0, `${label}: catalogue page intact`);
+
+  d.querySelector('[data-add="tv-55"]').click();
+  check([...d.querySelectorAll("[data-list-count]")].every((n) => n.textContent === "1"),
+        `${label}: every list badge updates together`);
+  check(d.querySelectorAll("[data-list-panel] .list-item").length === 1, `${label}: shortlist row renders`);
+  const wa = d.querySelector('[data-list-panel] a[href^="https://wa.me/"]');
+  check(!!wa && decodeURIComponent(wa.href).includes("55-inch"), `${label}: WhatsApp payload carries the item`);
+
+  // every class the rendered page uses must exist in that trial's stylesheet --
+  // the check that catches a design port that forgot to style something
+  const emitted = new Set();
+  d.querySelectorAll("*").forEach((el) => el.classList.forEach((c) => emitted.add(c)));
+  const missing = [...emitted].filter((c) => !css.includes("." + c));
+  check(missing.length === 0, `${label}: CSS styles every class on the page` +
+        (missing.length ? ` — missing ${missing.slice(0, 8).join(", ")}` : ""));
+
+  // icon contract: no <use> pointing at a symbol the page does not define
+  const syms = new Set([...d.querySelectorAll("symbol")].map((n) => n.id));
+  const uses = new Set([...d.querySelectorAll("use")].map((n) => (n.getAttribute("href") || "").slice(1)));
+  const dangling = [...uses].filter((u) => u && !syms.has(u));
+  check(dangling.length === 0, `${label}: every icon reference resolves` +
+        (dangling.length ? ` — dangling ${dangling.join(", ")}` : ""));
+  dom.window.close();
+
+  const dom2 = await load(`${dir}/stores.html`, [`${dir}/assets/js/main.js`, `${dir}/assets/js/stores.js`]);
+  const d2 = dom2.window.document;
+  check(d2.querySelectorAll("[data-store-list] .store").length === 25, `${label}: 25 showrooms render`);
+  check([...d2.querySelectorAll("[data-store-list] a")].every((a) => a.href.startsWith("https://www.google.com/maps/search/")),
+        `${label}: real Maps links, no about:invalid`);
+  dom2.window.close();
+}
+
 console.log("\n" + "=".repeat(52));
 console.log(`  ${pass} passed, ${fail} failed`);
 console.log("=".repeat(52) + "\n");
