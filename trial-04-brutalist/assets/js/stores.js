@@ -1,3 +1,4 @@
+function fallbackT(key, english) { return english === undefined ? key : english; }
 /* WHYNOT — Trial 04 · Slab & Stencil · showroom directory.
    ---------------------------------------------------------------------------
    The same 25 addresses as Trial 01 (taken from whynotindia.in/stores,
@@ -5,6 +6,8 @@
    --------------------------------------------------------------------------- */
 (function () {
   "use strict";
+
+  var T = window.WHYNOT_T || fallbackT;
 
   var STORES = [
     {
@@ -222,4 +225,8 @@
   });
 
   apply();
+
+  /* redraw the generated markup when the language changes */
+  window.WHYNOT_RERENDER = function () { apply(); };
+
 })();

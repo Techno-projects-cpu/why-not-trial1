@@ -178,8 +178,13 @@
         <span class="brand__tag">We drive the change</span>
       </span>
     </a>
-    <nav class="nav" aria-label="Primary"><a href="index.html" aria-current="page">Home</a><a href="products.html">Catalogue</a><a href="stores.html">Showrooms</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+    <nav class="nav" aria-label="Primary"><a data-i18n="Home" href="index.html" aria-current="page">Home</a><a data-i18n="Catalogue" href="products.html">Catalogue</a><a data-i18n="Showrooms" href="stores.html">Showrooms</a><a data-i18n="About" href="about.html">About</a><a data-i18n="Contact" href="contact.html">Contact</a></nav>
     <div class="header-actions">
+      <div class="langswitch" role="group" aria-label="Language / భాష">
+        <button type="button" class="langswitch__btn" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" class="langswitch__btn" data-lang="te" aria-pressed="false">తె</button>
+        <button type="button" class="langswitch__btn" data-lang="hi" aria-pressed="false">हि</button>
+      </div>
       <a class="icon-btn list-btn" href="products.html#my-list" aria-label="My list">
         <svg class="doodle" aria-hidden="true"><use href="#i-cart"></use></svg><span class="list-btn__count" data-list-count hidden>0</span>
       </a>
@@ -199,11 +204,11 @@
     <button class="icon-btn" type="button" data-drawer-close aria-label="Close menu"><svg class="doodle" aria-hidden="true"><use href="#i-close"></use></svg></button>
   </div>
   <nav class="drawer__nav" aria-label="Mobile">
-        <a href="index.html" aria-current="page">Home</a>
-    <a href="products.html">Catalogue</a>
-    <a href="stores.html">Showrooms</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
+        <a data-i18n="Home" href="index.html" aria-current="page">Home</a>
+    <a data-i18n="Catalogue" href="products.html">Catalogue</a>
+    <a data-i18n="Showrooms" href="stores.html">Showrooms</a>
+    <a data-i18n="About" href="about.html">About</a>
+    <a data-i18n="Contact" href="contact.html">Contact</a>
 
   </nav>
   <div class="drawer__foot">
@@ -217,9 +222,9 @@
 <section class="hero">
   <div class="wrap hero__inner">
     <div class="panel hero__copy">
-      <p class="kicker">Godavari districts · since 1994</p>
-      <h1 class="display display--xl">Big brands.<br>Small towns.<br>Why not?</h1>
-      <p class="hero__lead">Twenty-five WHYNOT showrooms in 23 towns, every major brand, and a phone number that still works five years after you buy.</p>
+      <p data-i18n="Godavari districts · since 1994" class="kicker">Godavari districts · since 1994</p>
+      <h1 data-i18n-html="Big brands.<br>Small towns.<br>Why not?" class="display display--xl">Big brands.<br>Small towns.<br>Why not?</h1>
+      <p data-i18n="Twenty-five WHYNOT showrooms in 23 towns, every major brand, and a phone number that still works five years after you buy." class="hero__lead">Twenty-five WHYNOT showrooms in 23 towns, every major brand, and a phone number that still works five years after you buy.</p>
       <div class="hero__cta">
         <a href="products.html" class="btn btn--brand"><svg class="doodle" aria-hidden="true"><use href="#i-cart"></use></svg> See what we sell</a>
         <a href="products.html" class="btn btn--ghost"><svg class="doodle" aria-hidden="true"><use href="#i-pin"></use></svg> Find my showroom</a>
@@ -234,45 +239,45 @@
       <img src="assets/img/glass-light.avif" width="1600" height="900" fetchpriority="high" decoding="async"
            alt="Light passing through frosted glass in indigo, teal and amber.">
       <p class="hero__badge">A person answers, 10 am to 9 pm
-        <span>One helpline for 25 showrooms — 88862 22448</span></p>
+        <span data-i18n="One helpline for 25 showrooms — 88862 22448">One helpline for 25 showrooms — 88862 22448</span></p>
     </div>
   </div>
 </section>
 <section class="stage stage--stats">
 <div class="wrap">
-<div class="stats"><div class="stat"><span class="stat__v"><span data-count="2.5">2.5M</span></span><span class="stat__l">Customers served</span></div><div class="stat"><span class="stat__v"><span data-count="1">1M</span></span><span class="stat__l">Products sold</span></div><div class="stat"><span class="stat__v"><span data-count="25">25</span></span><span class="stat__l">Showrooms, 23 towns</span></div><div class="stat"><span class="stat__v"><span data-count="32">32</span></span><span class="stat__l">Years since 1994</span></div></div>
+<div class="stats"><div class="stat"><span class="stat__v"><span data-count="2.5">2.5M</span></span><span data-i18n="Customers served" class="stat__l">Customers served</span></div><div class="stat"><span class="stat__v"><span data-count="1">1M</span></span><span data-i18n="Products sold" class="stat__l">Products sold</span></div><div class="stat"><span class="stat__v"><span data-count="25">25</span></span><span data-i18n="Showrooms, 23 towns" class="stat__l">Showrooms, 23 towns</span></div><div class="stat"><span class="stat__v"><span data-count="32">32</span></span><span data-i18n="Years since 1994" class="stat__l">Years since 1994</span></div></div>
 </div>
 </section>
 <div class="swash" aria-hidden="true"><span></span></div>
 <section class="stage stage--cats">
 <div class="wrap">
-<div class="head"><p class="kicker">Shop by category</p><h2 class="display">Ten aisles.<br>One roof.</h2><p class="lede">Prices move with the season, so every card asks for today's price — and we answer with the real number, not a range.</p></div><div class="tiles"><a class="tile" href="products.html?cat=tv"><span class="tile__art tile__art--1"><svg class="doodle" aria-hidden="true"><use href="#i-tv"></use></svg></span><span class="tile__name">Televisions</span><span class="tile__meta">QLED · 4K · smart</span></a><a class="tile" href="products.html?cat=fridge"><span class="tile__art tile__art--2"><svg class="doodle" aria-hidden="true"><use href="#i-fridge"></use></svg></span><span class="tile__name">Refrigerators</span><span class="tile__meta">Single &amp; double door</span></a><a class="tile" href="products.html?cat=ac"><span class="tile__art tile__art--3"><svg class="doodle" aria-hidden="true"><use href="#i-ac"></use></svg></span><span class="tile__name">Air conditioners</span><span class="tile__meta">Split · inverter</span></a><a class="tile" href="products.html?cat=washer"><span class="tile__art tile__art--4"><svg class="doodle" aria-hidden="true"><use href="#i-washer"></use></svg></span><span class="tile__name">Washing machines</span><span class="tile__meta">Semi &amp; automatic</span></a><a class="tile" href="products.html?cat=kitchen"><span class="tile__art tile__art--1"><svg class="doodle" aria-hidden="true"><use href="#i-mixer"></use></svg></span><span class="tile__name">Kitchen</span><span class="tile__meta">Mixers · grinders</span></a><a class="tile" href="products.html?cat=water"><span class="tile__art tile__art--2"><svg class="doodle" aria-hidden="true"><use href="#i-droplet"></use></svg></span><span class="tile__name">Water &amp; geysers</span><span class="tile__meta">Purifiers · heaters</span></a><a class="tile" href="products.html?cat=lighting"><span class="tile__art tile__art--3"><svg class="doodle" aria-hidden="true"><use href="#i-bulb"></use></svg></span><span class="tile__name">Lighting</span><span class="tile__meta">LED · strips</span></a><a class="tile" href="products.html?cat=audio"><span class="tile__art tile__art--4"><svg class="doodle" aria-hidden="true"><use href="#i-speaker"></use></svg></span><span class="tile__name">Audio</span><span class="tile__meta">Speakers · bars</span></a><a class="tile" href="products.html?cat=mobile"><span class="tile__art tile__art--1"><svg class="doodle" aria-hidden="true"><use href="#i-phone"></use></svg></span><span class="tile__name">Mobiles</span><span class="tile__meta">5G · budget to flagship</span></a><a class="tile" href="products.html?cat=cleaning"><span class="tile__art tile__art--2"><svg class="doodle" aria-hidden="true"><use href="#i-vacuum"></use></svg></span><span class="tile__name">Cleaning</span><span class="tile__meta">Vacuum · mops</span></a></div>
+<div class="head"><p data-i18n="Shop by category" class="kicker">Shop by category</p><h2 data-i18n-html="Ten aisles.<br>One roof." class="display">Ten aisles.<br>One roof.</h2><p data-i18n="Prices move with the season, so every card asks for today's price — and we answer with the real number, not a range." class="lede">Prices move with the season, so every card asks for today's price — and we answer with the real number, not a range.</p></div><div class="tiles"><a class="tile" href="products.html?cat=tv"><span class="tile__art tile__art--1"><svg class="doodle" aria-hidden="true"><use href="#i-tv"></use></svg></span><span class="tile__name">Televisions</span><span class="tile__meta">QLED · 4K · smart</span></a><a class="tile" href="products.html?cat=fridge"><span class="tile__art tile__art--2"><svg class="doodle" aria-hidden="true"><use href="#i-fridge"></use></svg></span><span class="tile__name">Refrigerators</span><span class="tile__meta">Single &amp; double door</span></a><a class="tile" href="products.html?cat=ac"><span class="tile__art tile__art--3"><svg class="doodle" aria-hidden="true"><use href="#i-ac"></use></svg></span><span class="tile__name">Air conditioners</span><span class="tile__meta">Split · inverter</span></a><a class="tile" href="products.html?cat=washer"><span class="tile__art tile__art--4"><svg class="doodle" aria-hidden="true"><use href="#i-washer"></use></svg></span><span class="tile__name">Washing machines</span><span class="tile__meta">Semi &amp; automatic</span></a><a class="tile" href="products.html?cat=kitchen"><span class="tile__art tile__art--1"><svg class="doodle" aria-hidden="true"><use href="#i-mixer"></use></svg></span><span class="tile__name">Kitchen</span><span class="tile__meta">Mixers · grinders</span></a><a class="tile" href="products.html?cat=water"><span class="tile__art tile__art--2"><svg class="doodle" aria-hidden="true"><use href="#i-droplet"></use></svg></span><span class="tile__name">Water &amp; geysers</span><span class="tile__meta">Purifiers · heaters</span></a><a class="tile" href="products.html?cat=lighting"><span class="tile__art tile__art--3"><svg class="doodle" aria-hidden="true"><use href="#i-bulb"></use></svg></span><span class="tile__name">Lighting</span><span class="tile__meta">LED · strips</span></a><a class="tile" href="products.html?cat=audio"><span class="tile__art tile__art--4"><svg class="doodle" aria-hidden="true"><use href="#i-speaker"></use></svg></span><span class="tile__name">Audio</span><span class="tile__meta">Speakers · bars</span></a><a class="tile" href="products.html?cat=mobile"><span class="tile__art tile__art--1"><svg class="doodle" aria-hidden="true"><use href="#i-phone"></use></svg></span><span class="tile__name">Mobiles</span><span class="tile__meta">5G · budget to flagship</span></a><a class="tile" href="products.html?cat=cleaning"><span class="tile__art tile__art--2"><svg class="doodle" aria-hidden="true"><use href="#i-vacuum"></use></svg></span><span class="tile__name">Cleaning</span><span class="tile__meta">Vacuum · mops</span></a></div>
 </div>
 </section>
 <section class="stage stage--featured">
 <div class="wrap">
-<div class="head"><p class="kicker">Popular right now</p><h2 class="display">What people<br>actually ask for</h2><p class="lede">The four a month of “what's good in this budget?” conversations usually end on. Sample catalogue — today's price comes from your branch.</p></div><div class="products products--featured" data-featured></div><p class="stage__more"><a href="products.html" class="btn btn--ink">Open the full catalogue</a></p>
+<div class="head"><p data-i18n="Popular right now" class="kicker">Popular right now</p><h2 data-i18n-html="What people<br>actually ask for" class="display">What people<br>actually ask for</h2><p data-i18n="The four a month of “what's good in this budget?” conversations usually end on. Sample catalogue — today's price comes from your branch." class="lede">The four a month of “what's good in this budget?” conversations usually end on. Sample catalogue — today's price comes from your branch.</p></div><div class="products products--featured" data-featured></div><p class="stage__more"><a data-i18n="Open the full catalogue" href="products.html" class="btn btn--ink">Open the full catalogue</a></p>
 </div>
 </section>
 <section class="stage stage--band">
 <div class="wrap">
-<figure class="band" data-reveal><ul class="band-pills"><li>Tanuku</li><li>Tadepalligudem</li><li>Rajahmundry</li><li>Bhimavaram</li><li>Eluru</li><li>Kakinada</li><li>Palakollu</li><li>Narasapuram</li><li>Amalapuram</li><li>Mandapeta</li><li>Anakapalle</li><li>+ 12 more</li></ul><div class="band__cap"><p class="band__title">Every town deserves the good stuff</p><p>Tanuku · Tadepalligudem · Rajahmundry · Bhimavaram · Eluru · Kakinada · Palakollu · Narasapuram · Amalapuram · Mandapeta · Anakapalle · and 12 more</p><p><a class="band__link" href="stores.html">All 25 showrooms</a></p></div></figure>
+<figure class="band" data-reveal><ul class="band-pills"><li>Tanuku</li><li>Tadepalligudem</li><li>Rajahmundry</li><li>Bhimavaram</li><li>Eluru</li><li>Kakinada</li><li>Palakollu</li><li>Narasapuram</li><li>Amalapuram</li><li>Mandapeta</li><li>Anakapalle</li><li>+ 12 more</li></ul><div class="band__cap"><p data-i18n="Every town deserves the good stuff" class="band__title">Every town deserves the good stuff</p><p>Tanuku · Tadepalligudem · Rajahmundry · Bhimavaram · Eluru · Kakinada · Palakollu · Narasapuram · Amalapuram · Mandapeta · Anakapalle · and 12 more</p><p><a class="band__link" href="stores.html">All 25 showrooms</a></p></div></figure>
 </div>
 </section>
 <div class="swash" aria-hidden="true"><span></span></div>
 <section class="stage stage--why">
 <div class="wrap">
-<div class="head"><p class="kicker">The name is the question</p><h2 class="display">Why not…</h2><p class="lede">Four questions WHYNOT has answered the same way since an LML showroom in Tanuku in 1994.</p></div><div class="qs"><div class="panel panel--tone1 q"><span class="q__no">01</span><p class="q__q">…put it in your town?</p><p class="q__a">Twenty-five showrooms in 23 towns, because “drive two hours to the city” is not service. Most opened before anyone else thought the town was big enough.</p></div><div class="panel panel--tone2 q"><span class="q__no">02</span><p class="q__q">…pick up the phone after the sale?</p><p class="q__a">Installation, service and follow-up come from the branch you bought at — not from a call centre that has never seen your street.</p></div><div class="panel panel--tone3 q"><span class="q__no">03</span><p class="q__q">…give the honest price first time?</p><p class="q__a">Ask for today's price and you get the number we can actually sell at. EMI and exchange details upfront, no theatre.</p></div><div class="panel panel--tone4 q"><span class="q__no">04</span><p class="q__q">…still be here in ten years?</p><p class="q__a">Thirty-two years, two generations of the same family, 300 people from the towns they serve. Your neighbour is the shop.</p></div></div>
+<div class="head"><p data-i18n="The name is the question" class="kicker">The name is the question</p><h2 data-i18n="Why not…" class="display">Why not…</h2><p data-i18n="Four questions WHYNOT has answered the same way since an LML showroom in Tanuku in 1994." class="lede">Four questions WHYNOT has answered the same way since an LML showroom in Tanuku in 1994.</p></div><div class="qs"><div class="panel panel--tone1 q"><span class="q__no">01</span><p class="q__q">…put it in your town?</p><p class="q__a">Twenty-five showrooms in 23 towns, because “drive two hours to the city” is not service. Most opened before anyone else thought the town was big enough.</p></div><div class="panel panel--tone2 q"><span class="q__no">02</span><p class="q__q">…pick up the phone after the sale?</p><p class="q__a">Installation, service and follow-up come from the branch you bought at — not from a call centre that has never seen your street.</p></div><div class="panel panel--tone3 q"><span class="q__no">03</span><p class="q__q">…give the honest price first time?</p><p class="q__a">Ask for today's price and you get the number we can actually sell at. EMI and exchange details upfront, no theatre.</p></div><div class="panel panel--tone4 q"><span class="q__no">04</span><p class="q__q">…still be here in ten years?</p><p class="q__a">Thirty-two years, two generations of the same family, 300 people from the towns they serve. Your neighbour is the shop.</p></div></div>
 </div>
 </section>
 <section class="stage stage--reviews">
 <div class="wrap">
-<div class="head"><p class="kicker">In their words</p><h2 class="display">People who<br>came back</h2><p class="lede">Reviews shown as they were written on the current site. Named, dated reviews with permission would do more work — see the notes in the repo.</p></div><div class="reviews"><div class="panel panel--tone1 review"><p class="quote">“I've been a customer for five years. Their pricing and convenience work for me — that's just one of the reasons I use them.”</p><p class="quote__by">WHYNOT customer, current site</p></div><div class="panel panel--tone2 review"><p class="quote">“The best place for electronics and home appliances in both Godavari districts.”</p><p class="quote__by">WHYNOT customer, current site</p></div><div class="panel panel--tone3 review"><p class="quote">“It is a store with everything I need.”</p><p class="quote__by">WHYNOT customer, current site</p></div></div>
+<div class="head"><p data-i18n="In their words" class="kicker">In their words</p><h2 data-i18n-html="People who<br>came back" class="display">People who<br>came back</h2><p data-i18n="Reviews shown as they were written on the current site. Named, dated reviews with permission would do more work — see the notes in the repo." class="lede">Reviews shown as they were written on the current site. Named, dated reviews with permission would do more work — see the notes in the repo.</p></div><div class="reviews"><div class="panel panel--tone1 review"><p class="quote">“I've been a customer for five years. Their pricing and convenience work for me — that's just one of the reasons I use them.”</p><p class="quote__by">WHYNOT customer, current site</p></div><div class="panel panel--tone2 review"><p class="quote">“The best place for electronics and home appliances in both Godavari districts.”</p><p class="quote__by">WHYNOT customer, current site</p></div><div class="panel panel--tone3 review"><p class="quote">“It is a store with everything I need.”</p><p class="quote__by">WHYNOT customer, current site</p></div></div>
 </div>
 </section>
 <section class="stage stage--brands">
 <div class="wrap">
-<div class="head"><p class="kicker">Brands</p><h2 class="display">Everything<br>you'd expect</h2></div><ul class="brands"><li>LG</li><li>Samsung</li><li>Sony</li><li>Whirlpool</li><li>Bosch</li><li>Daikin</li><li>IFB</li><li>Haier</li><li>Lloyd</li><li>Blue Star</li><li>Mitsubishi</li><li>Panasonic</li><li>Hitachi</li><li>Vivo</li><li>Oppo</li><li>Voltas</li><li>Amaron</li><li>V-Guard</li><li>Luminous</li><li>AO Smith</li><li>Livpure</li><li>Preethi</li><li>Butterfly</li><li>Crompton</li><li>TTK Prestige</li></ul><p class="note">Names only — no third-party logos were lifted for this concept.</p>
+<div class="head"><p data-i18n="Brands" class="kicker">Brands</p><h2 data-i18n-html="Everything<br>you'd expect" class="display">Everything<br>you'd expect</h2></div><ul class="brands"><li>LG</li><li>Samsung</li><li>Sony</li><li>Whirlpool</li><li>Bosch</li><li>Daikin</li><li>IFB</li><li>Haier</li><li>Lloyd</li><li>Blue Star</li><li>Mitsubishi</li><li>Panasonic</li><li>Hitachi</li><li>Vivo</li><li>Oppo</li><li>Voltas</li><li>Amaron</li><li>V-Guard</li><li>Luminous</li><li>AO Smith</li><li>Livpure</li><li>Preethi</li><li>Butterfly</li><li>Crompton</li><li>TTK Prestige</li></ul><p data-i18n="Names only — no third-party logos were lifted for this concept." class="note">Names only — no third-party logos were lifted for this concept.</p>
 </div>
 </section>
 <section class="stage stage--cta">
@@ -280,8 +285,8 @@
 <div class="panel panel--cta cta">
     <div class="cta__copy">
       <p class="kicker"><svg class="doodle" aria-hidden="true"><use href="#i-clock"></use></svg> Open 10 am – 9 pm · <span data-shop-state>Open now</span></p>
-      <h2 class="display display--md">Come and see it in person</h2>
-      <p>Pick what you like in the catalogue, send the list, and a person from your nearest branch calls with today's price.</p>
+      <h2 data-i18n="Come and see it in person" class="display display--md">Come and see it in person</h2>
+      <p data-i18n="Pick what you like in the catalogue, send the list, and a person from your nearest branch calls with today's price.">Pick what you like in the catalogue, send the list, and a person from your nearest branch calls with today's price.</p>
       <p class="cta__phone"><a href="tel:+918886222448">88862 22448</a></p>
     </div>
     <div class="actions">
@@ -307,7 +312,7 @@
         <p><a href="https://play.google.com/store/apps/details?id=in.absolin.whynotcust" target="_blank" rel="noopener noreferrer">Get the WHYNOT app</a></p>
       </div>
       <div class="footer__col">
-        <h2>Shop</h2>
+        <h2 data-i18n="Shop">Shop</h2>
         <ul>
           <li><a href="products.html?cat=tv">Televisions</a></li>
           <li><a href="products.html?cat=fridge">Refrigerators</a></li>
@@ -318,16 +323,16 @@
         </ul>
       </div>
       <div class="footer__col">
-        <h2>Company</h2>
+        <h2 data-i18n="Company">Company</h2>
         <ul>
           <li><a href="about.html">About WHYNOT</a></li>
           <li><a href="stores.html">All 25 showrooms</a></li>
           <li><a href="contact.html">Contact &amp; service</a></li>
-          <li><a href="products.html#my-list">My list</a></li>
+          <li><a data-i18n="My list" href="products.html#my-list">My list</a></li>
         </ul>
       </div>
       <div class="footer__col">
-        <h2>Come over</h2>
+        <h2 data-i18n="Come over">Come over</h2>
         <ul>
           <li>RS No 24/1, Ground &amp; Cellar, Sri Sowdha Towers, Undrajavaram Road, Tanuku 534211, Andhra Pradesh</li>
           <li><a href="tel:+918886222448">88862 22448</a></li>
@@ -349,6 +354,7 @@
 </nav>
 
 <div class="toast" data-toast role="status" aria-live="polite" data-open="false"></div>
+<script src="assets/js/i18n.js" defer></script>
 <script src="assets/js/main.js" defer></script>
 <script src="assets/js/products.js" defer></script>
 </body>

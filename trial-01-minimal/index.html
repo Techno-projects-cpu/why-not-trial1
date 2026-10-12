@@ -53,14 +53,19 @@
     </a>
 
     <nav class="nav" aria-label="Primary">
-      <a href="index.html" aria-current="page">Home</a>
-      <a href="products.html">Catalogue</a>
-      <a href="about.html">About us</a>
-      <a href="stores.html">Showrooms</a>
-      <a href="contact.html">Contact</a>
+      <a data-i18n="Home" href="index.html" aria-current="page">Home</a>
+      <a data-i18n="Catalogue" href="products.html">Catalogue</a>
+      <a data-i18n="About us" href="about.html">About us</a>
+      <a data-i18n="Showrooms" href="stores.html">Showrooms</a>
+      <a data-i18n="Contact" href="contact.html">Contact</a>
     </nav>
 
     <div class="header-actions">
+      <div class="langswitch" role="group" aria-label="Language / భాష">
+        <button type="button" class="langswitch__btn" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" class="langswitch__btn" data-lang="te" aria-pressed="false">తె</button>
+        <button type="button" class="langswitch__btn" data-lang="hi" aria-pressed="false">हि</button>
+      </div>
       <a class="call-link" href="tel:+918886222448">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.6 3.5 10 8l-1.6 2.3a12.4 12.4 0 0 0 5.3 5.3L16 14l4.5 2.4v3.1a1.3 1.3 0 0 1-1.5 1.3C10.4 19.9 4.1 13.6 3.2 5a1.3 1.3 0 0 1 1.3-1.5h3.1Z"/></svg>
         88862 22448
@@ -99,11 +104,11 @@
       </button>
     </div>
     <nav class="drawer__nav" aria-label="Mobile">
-      <a href="index.html" aria-current="page">Home</a>
-      <a href="products.html">Catalogue</a>
-      <a href="about.html">About us</a>
-      <a href="stores.html">Showrooms</a>
-      <a href="contact.html">Contact</a>
+      <a data-i18n="Home" href="index.html" aria-current="page">Home</a>
+      <a data-i18n="Catalogue" href="products.html">Catalogue</a>
+      <a data-i18n="About us" href="about.html">About us</a>
+      <a data-i18n="Showrooms" href="stores.html">Showrooms</a>
+      <a data-i18n="Contact" href="contact.html">Contact</a>
     </nav>
     <div class="drawer__foot">
       <a class="btn btn--brand btn--block" href="tel:+918886222448">Call 88862 22448</a>
@@ -179,7 +184,7 @@
   <section class="section" id="categories">
     <div class="wrap">
       <div class="section-head" data-reveal>
-        <p class="eyebrow">Shop by category</p>
+        <p data-i18n="Shop by category" class="eyebrow">Shop by category</p>
         <h2 class="h2">Fourteen categories. One roof.</h2>
         <p>Start here, or walk into any showroom and ask. The live catalogue for each category still opens on whynotindia.in in a new tab.</p>
       </div>
@@ -221,7 +226,7 @@
           <a class="cat" href="https://www.whynotindia.in/c/4/LED" target="_blank" rel="noopener noreferrer">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.6a6 6 0 0 0-3.4 10.9V17h6.8v-2.5A6 6 0 0 0 12 3.6Z"/><path d="M10.2 20.4h3.6"/></svg>
             <span class="cat__name">LED lighting</span>
-            <span class="cat__meta">Home</span>
+            <span data-i18n="Home" class="cat__meta">Home</span>
             <span class="cat__go" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M17 7H8M17 7v9"/></svg></span>
           </a>
         </li>
@@ -305,7 +310,7 @@
   <section class="section" id="popular">
     <div class="wrap">
       <div class="section-head" data-reveal>
-        <p class="eyebrow">Popular right now</p>
+        <p data-i18n="Popular right now" class="eyebrow">Popular right now</p>
         <h2 class="h2">What people actually ask for.</h2>
         <p>Four products that a month of &ldquo;what&rsquo;s good in this budget?&rdquo; conversations usually end on. Sample catalogue &mdash; today&rsquo;s price always comes from your branch.</p>
       </div>
@@ -324,7 +329,7 @@
   <section class="section" id="why-not">
     <div class="wrap">
       <div class="section-head" data-reveal>
-        <p class="eyebrow">The name is the question</p>
+        <p data-i18n="The name is the question" class="eyebrow">The name is the question</p>
         <h2 class="h2">Why not better, closer, and for longer?</h2>
         <p>Four questions WHYNOT has been answering the same way since 1994 — through an LML showroom, a Bajaj dealership, and 32 years of electronics.</p>
       </div>
@@ -475,7 +480,7 @@
   <section class="section" id="reviews">
     <div class="wrap">
       <div class="section-head" data-reveal>
-        <p class="eyebrow">In their words</p>
+        <p data-i18n="In their words" class="eyebrow">In their words</p>
         <h2 class="h2">Five years, two districts, one store.</h2>
         <p>Reviews collected from customers and reproduced as written.</p>
       </div>
@@ -535,7 +540,7 @@
       </div>
 
       <div class="footer__col">
-        <h2>Shop</h2>
+        <h2 data-i18n="Shop">Shop</h2>
         <ul>
           <li><a href="https://www.whynotindia.in/c/16/QLED" target="_blank" rel="noopener noreferrer">Televisions</a></li>
           <li><a href="https://www.whynotindia.in/c/5/REFRIGERATOR" target="_blank" rel="noopener noreferrer">Refrigerators</a></li>
@@ -547,7 +552,7 @@
       </div>
 
       <div class="footer__col">
-        <h2>Company</h2>
+        <h2 data-i18n="Company">Company</h2>
         <ul>
           <li><a href="products.html">The catalogue</a></li>
           <li><a href="about.html">About WHYNOT</a></li>
@@ -577,6 +582,7 @@
 
 <div class="toast" data-toast role="status" aria-live="polite" data-open="false"></div>
 
+<script src="assets/js/i18n.js" defer></script>
 <script src="assets/js/main.js" defer></script>
 <script src="assets/js/products.js" defer></script>
 </body>

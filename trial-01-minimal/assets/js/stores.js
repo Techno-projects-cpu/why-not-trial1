@@ -1,3 +1,4 @@
+function fallbackT(key, english) { return english === undefined ? key : english; }
 /* WHYNOT — store directory.
    ---------------------------------------------------------------------------
    ONE SOURCE OF TRUTH. The old site had these 25 addresses copy-pasted into
@@ -11,6 +12,8 @@
    client's confirmation).                                               */
 (function () {
   "use strict";
+
+  var T = window.WHYNOT_T || fallbackT;
 
   var STORES = [
     {
@@ -181,7 +184,7 @@
         '<p class="store__addr">' + escapeHtml(full) + "</p>" +
         '<div class="store__actions">' +
           '<a class="btn btn--ghost btn--sm" href="' + mapsUrl(store) + '" target="_blank" rel="noopener noreferrer">' +
-            "Directions" +
+            T("directions", "Directions") +
             '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M17 7H8M17 7v9"/></svg>' +
           "</a>" +
           '<button class="btn btn--sm" type="button" data-copy="' + escapeHtml(full) + '">Copy address</button>' +
@@ -248,4 +251,8 @@
     });
 
   render();
+
+  /* redraw the generated markup when the language changes */
+  window.WHYNOT_RERENDER = function () { apply(); };
+
 })();

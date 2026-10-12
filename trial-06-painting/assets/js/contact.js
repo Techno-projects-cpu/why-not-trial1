@@ -1,3 +1,4 @@
+function fallbackT(key, english) { return english === undefined ? key : english; }
 /* WHYNOT — Trial 06 · Brush & Bloom · the enquiry form.
    Validates as you type, then says plainly what will happen. There is no server
    in this concept build, so on success it shows exactly what was captured and
@@ -5,6 +6,8 @@
    actually travel in the real shop.                                            */
 (function () {
   "use strict";
+
+  var T = window.WHYNOT_T || fallbackT;
 
   var form = document.querySelector("[data-contact-form]");
   if (!form) return;
@@ -143,4 +146,8 @@
         if (submit) { submit.disabled = false; submit.textContent = label; }
       });
   });
+
+  /* redraw the generated markup when the language changes */
+  window.WHYNOT_RERENDER = function () { var s = document.querySelector('[data-form-status]'); if (s && s.textContent) { s.textContent = s.textContent; } };
+
 })();

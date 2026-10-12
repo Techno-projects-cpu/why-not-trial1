@@ -178,8 +178,13 @@
         <span class="brand__tag">We drive the change</span>
       </span>
     </a>
-    <nav class="nav" aria-label="Primary"><a href="index.html">Home</a><a href="products.html" aria-current="page">Catalogue</a><a href="stores.html">Showrooms</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+    <nav class="nav" aria-label="Primary"><a data-i18n="Home" href="index.html">Home</a><a data-i18n="Catalogue" href="products.html" aria-current="page">Catalogue</a><a data-i18n="Showrooms" href="stores.html">Showrooms</a><a data-i18n="About" href="about.html">About</a><a data-i18n="Contact" href="contact.html">Contact</a></nav>
     <div class="header-actions">
+      <div class="langswitch" role="group" aria-label="Language / భాష">
+        <button type="button" class="langswitch__btn" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" class="langswitch__btn" data-lang="te" aria-pressed="false">తె</button>
+        <button type="button" class="langswitch__btn" data-lang="hi" aria-pressed="false">हि</button>
+      </div>
       <a class="icon-btn list-btn" href="products.html#my-list" aria-label="My list">
         <svg class="doodle" aria-hidden="true"><use href="#i-cart"></use></svg><span class="list-btn__count" data-list-count hidden>0</span>
       </a>
@@ -199,11 +204,11 @@
     <button class="icon-btn" type="button" data-drawer-close aria-label="Close menu"><svg class="doodle" aria-hidden="true"><use href="#i-close"></use></svg></button>
   </div>
   <nav class="drawer__nav" aria-label="Mobile">
-        <a href="index.html">Home</a>
-    <a href="products.html" aria-current="page">Catalogue</a>
-    <a href="stores.html">Showrooms</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
+        <a data-i18n="Home" href="index.html">Home</a>
+    <a data-i18n="Catalogue" href="products.html" aria-current="page">Catalogue</a>
+    <a data-i18n="Showrooms" href="stores.html">Showrooms</a>
+    <a data-i18n="About" href="about.html">About</a>
+    <a data-i18n="Contact" href="contact.html">Contact</a>
 
   </nav>
   <div class="drawer__foot">
@@ -217,9 +222,9 @@
 <section class="stage stage--pagehero">
   <div class="wrap">
     <div class="panel">
-      <p class="kicker">Catalogue · 17 products · 10 categories</p>
-      <h1 class="display display--lg" style="margin-top:16px">Pick what you like.<br>We'll price it.</h1>
-      <p class="lede">Add anything you're curious about to <strong>my list</strong>, send it in one tap, and someone from your nearest branch replies with today's price and stock. No card details, no checkout maze.</p>
+      <p data-i18n="Catalogue · 17 products · 10 categories" class="kicker">Catalogue · 17 products · 10 categories</p>
+      <h1 data-i18n-html="Pick what you like.<br>We'll price it." class="display display--lg" style="margin-top:16px">Pick what you like.<br>We'll price it.</h1>
+      <p data-i18n-html="Add anything you're curious about to <strong>my list</strong>, send it in one tap, and someone from your nearest branch replies with today's price and stock. No card details, no checkout maze." class="lede">Add anything you're curious about to <strong>my list</strong>, send it in one tap, and someone from your nearest branch replies with today's price and stock. No card details, no checkout maze.</p>
       <div class="hero__cta"></div>
     </div>
   </div>
@@ -231,10 +236,10 @@
   <div class="search">
     <label class="visually-hidden" for="q">Search the catalogue</label>
     <svg class="doodle" aria-hidden="true"><use href="#i-search"></use></svg>
-    <input id="q" type="search" placeholder="Search: TV, fridge, 1.5 ton…" autocomplete="off" data-product-search>
+    <input id="q" type="search" placeholder="Search: TV, fridge, 1.5 ton…" autocomplete="off" data-product-search data-i18n-ph="Search: TV, fridge, 1.5 ton…">
   </div>
   <label class="visually-hidden" for="town">Only show what is stocked in</label>
-  <select class="select" id="town" data-town-select><option value="all">All towns</option></select>
+  <select class="select" id="town" data-town-select><option data-i18n="All towns" value="all">All towns</option></select>
 </div>
 <div class="chips" role="group" aria-label="Popular searches" style="margin:-8px 0 16px">
   <a class="chip" href="products.html?cat=water"><svg class="doodle" aria-hidden="true"><use href="#i-geyser"></use></svg> Geysers</a>
@@ -249,14 +254,14 @@
 </section>
 <section class="stage stage--list">
 <div class="wrap">
-<div class="head"><p class="kicker">My list</p><h2 class="display"><span data-list-label>0 items</span> in your list</h2><p class="lede">It stays on this phone until you send it. WhatsApp, call or email — whichever is easiest. No account, no card, nothing charged.</p></div>
+<div class="head"><p data-i18n="My list" class="kicker">My list</p><h2 class="display"><span data-list-label>0 items</span> in your list</h2><p class="lede">It stays on this phone until you send it. WhatsApp, call or email — whichever is easiest. No account, no card, nothing charged.</p></div>
 
 <div data-list-panel></div>
 </div>
 </section>
 <section class="stage">
 <div class="wrap">
-<div class="head"><p class="kicker">How buying works here</p><h2 class="display">Three steps.<br>No maze.</h2></div><div class="steps"><div class="panel panel--tone1 how__step"><span class="q__no">01</span><p class="how__t">Add what you like</p><p class="muted">Build a list while you browse. Nothing is charged and no account is needed.</p></div><div class="panel panel--tone2 how__step"><span class="q__no">02</span><p class="how__t">Send it to us</p><p class="muted">One tap opens WhatsApp with your whole list written out, or dials the helpline.</p></div><div class="panel panel--tone3 how__step"><span class="q__no">03</span><p class="how__t">We call with the price</p><p class="muted">Today's price, which branch has it, EMI if you want it, and a delivery date.</p></div></div>
+<div class="head"><p data-i18n="How buying works here" class="kicker">How buying works here</p><h2 data-i18n-html="Three steps.<br>No maze." class="display">Three steps.<br>No maze.</h2></div><div class="steps"><div class="panel panel--tone1 how__step"><span class="q__no">01</span><p class="how__t">Add what you like</p><p class="muted">Build a list while you browse. Nothing is charged and no account is needed.</p></div><div class="panel panel--tone2 how__step"><span class="q__no">02</span><p class="how__t">Send it to us</p><p class="muted">One tap opens WhatsApp with your whole list written out, or dials the helpline.</p></div><div class="panel panel--tone3 how__step"><span class="q__no">03</span><p class="how__t">We call with the price</p><p class="muted">Today's price, which branch has it, EMI if you want it, and a delivery date.</p></div></div>
 </div>
 </section>
 <section class="stage stage--promises">
@@ -281,7 +286,7 @@
         <p><a href="https://play.google.com/store/apps/details?id=in.absolin.whynotcust" target="_blank" rel="noopener noreferrer">Get the WHYNOT app</a></p>
       </div>
       <div class="footer__col">
-        <h2>Shop</h2>
+        <h2 data-i18n="Shop">Shop</h2>
         <ul>
           <li><a href="products.html?cat=tv">Televisions</a></li>
           <li><a href="products.html?cat=fridge">Refrigerators</a></li>
@@ -292,16 +297,16 @@
         </ul>
       </div>
       <div class="footer__col">
-        <h2>Company</h2>
+        <h2 data-i18n="Company">Company</h2>
         <ul>
           <li><a href="about.html">About WHYNOT</a></li>
           <li><a href="stores.html">All 25 showrooms</a></li>
           <li><a href="contact.html">Contact &amp; service</a></li>
-          <li><a href="products.html#my-list">My list</a></li>
+          <li><a data-i18n="My list" href="products.html#my-list">My list</a></li>
         </ul>
       </div>
       <div class="footer__col">
-        <h2>Come over</h2>
+        <h2 data-i18n="Come over">Come over</h2>
         <ul>
           <li>RS No 24/1, Ground &amp; Cellar, Sri Sowdha Towers, Undrajavaram Road, Tanuku 534211, Andhra Pradesh</li>
           <li><a href="tel:+918886222448">88862 22448</a></li>
@@ -323,6 +328,7 @@
 </nav>
 
 <div class="toast" data-toast role="status" aria-live="polite" data-open="false"></div>
+<script src="assets/js/i18n.js" defer></script>
 <script src="assets/js/main.js" defer></script>
 <script src="assets/js/products.js" defer></script>
 </body>

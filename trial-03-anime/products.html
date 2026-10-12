@@ -166,14 +166,19 @@
     </a>
 
     <nav class="nav" aria-label="Primary">
-      <a href="index.html">Home</a>
-      <a href="products.html" aria-current="page">Catalogue</a>
-      <a href="stores.html">Showrooms</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
+      <a data-i18n="Home" href="index.html">Home</a>
+      <a data-i18n="Catalogue" href="products.html" aria-current="page">Catalogue</a>
+      <a data-i18n="Showrooms" href="stores.html">Showrooms</a>
+      <a data-i18n="About" href="about.html">About</a>
+      <a data-i18n="Contact" href="contact.html">Contact</a>
     </nav>
 
     <div class="header-actions">
+      <div class="langswitch" role="group" aria-label="Language / భాష">
+        <button type="button" class="langswitch__btn" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" class="langswitch__btn" data-lang="te" aria-pressed="false">తె</button>
+        <button type="button" class="langswitch__btn" data-lang="hi" aria-pressed="false">हि</button>
+      </div>
       <a class="icon-btn list-btn" href="products.html#my-list" aria-label="My list">
         <svg class="doodle " aria-hidden="true"><use href="#i-cart"></use></svg>
         <span class="list-btn__count" data-list-count hidden>0</span>
@@ -195,11 +200,11 @@
     <button class="icon-btn" type="button" data-drawer-close aria-label="Close menu"><svg class="doodle " aria-hidden="true"><use href="#i-close"></use></svg></button>
   </div>
   <nav class="drawer__nav" aria-label="Mobile">
-    <a href="index.html">Home</a>
-    <a href="products.html" aria-current="page">Catalogue</a>
-    <a href="stores.html">Showrooms</a>
-    <a href="about.html">About us</a>
-    <a href="contact.html">Contact</a>
+    <a data-i18n="Home" href="index.html">Home</a>
+    <a data-i18n="Catalogue" href="products.html" aria-current="page">Catalogue</a>
+    <a data-i18n="Showrooms" href="stores.html">Showrooms</a>
+    <a data-i18n="About us" href="about.html">About us</a>
+    <a data-i18n="Contact" href="contact.html">Contact</a>
   </nav>
   <div class="drawer__foot">
     <a class="btn btn--magenta btn--block" href="tel:+918886222448">Call 88862 22448</a>
@@ -215,9 +220,9 @@
       <svg viewBox="0 0 100 100" preserveAspectRatio="none"><use href="#d-speed"></use></svg>
     </div>
     <div class="wrap" style="position:relative;display:grid;gap:14px">
-      <p class="bubble" style="align-self:start">Catalogue · 17 products · 10 categories</p>
-      <h1 class="shout shout--lg" style="color:#fff">Pick what you like.<br><span class="ko ko--cyan">We'll price it.</span></h1>
-      <p class="hero__lead">Add anything you're curious about to <strong style="color:#fff">my list</strong>, send it in one tap, and someone from your nearest branch replies with today's price and stock. No card details, no checkout maze.</p>
+      <p data-i18n="Catalogue · 17 products · 10 categories" class="bubble" style="align-self:start">Catalogue · 17 products · 10 categories</p>
+      <h1 data-i18n-html="Pick what you like.<br>We'll price it." class="shout shout--lg" style="color:#fff">Pick what you like.<br><span class="ko ko--cyan">We'll price it.</span></h1>
+      <p data-i18n-html="Add anything you're curious about to <strong>my list</strong>, send it in one tap, and someone from your nearest branch replies with today's price and stock. No card details, no checkout maze." class="hero__lead">Add anything you're curious about to <strong style="color:#fff">my list</strong>, send it in one tap, and someone from your nearest branch replies with today's price and stock. No card details, no checkout maze.</p>
     </div>
   </section>
 
@@ -232,7 +237,7 @@
         <div class="search" style="border:0;box-shadow:none">
           <label class="visually-hidden" for="town">Only show what is stocked in</label>
           <select class="select" id="town" data-town-select>
-            <option value="all">All towns</option>
+            <option data-i18n="All towns" value="all">All towns</option>
           </select>
         </div>
       </div>
@@ -256,7 +261,7 @@
 
   <section class="section" id="my-list">
     <div class="wrap has-tab">
-      <span class="tab tab--magenta">My list</span>
+      <span data-i18n="My list" class="tab tab--magenta">My list</span>
       <div class="panel panel__pad">
         <div class="section-head" style="margin-bottom:18px">
           <h2 class="shout shout--md"><span data-list-label>0 items</span> in your list</h2>
@@ -271,7 +276,7 @@
     <div class="wrap">
       <div class="section-head">
         <p class="bubble"><svg class="doodle " aria-hidden="true"><use href="#i-check"></use></svg> How buying works here</p>
-        <h2 class="shout shout--lg">Three steps.<br>No maze.</h2>
+        <h2 data-i18n-html="Three steps.<br>No maze." class="shout shout--lg">Three steps.<br>No maze.</h2>
       </div>
       <div class="stack" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));display:grid">
         <div class="panel panel__pad stack" style="gap:8px">
@@ -330,7 +335,7 @@
       </div>
 
       <div class="footer__col">
-        <h2>Shop</h2>
+        <h2 data-i18n="Shop">Shop</h2>
         <ul>
           <li><a href="products.html?cat=tv">Televisions</a></li>
           <li><a href="products.html?cat=fridge">Refrigerators</a></li>
@@ -342,17 +347,17 @@
       </div>
 
       <div class="footer__col">
-        <h2>Company</h2>
+        <h2 data-i18n="Company">Company</h2>
         <ul>
           <li><a href="about.html">About WHYNOT</a></li>
           <li><a href="stores.html">All 25 showrooms</a></li>
           <li><a href="contact.html">Contact &amp; service</a></li>
-          <li><a href="products.html#my-list">My list</a></li>
+          <li><a data-i18n="My list" href="products.html#my-list">My list</a></li>
         </ul>
       </div>
 
       <div class="footer__col">
-        <h2>Come over</h2>
+        <h2 data-i18n="Come over">Come over</h2>
         <ul>
           <li>RS No 24/1, Ground &amp; Cellar,<br>Sri Sowdha Towers, Undrajavaram Road,<br>Tanuku 534211, Andhra Pradesh</li>
           <li><a href="tel:+918886222448">88862 22448</a></li>
@@ -375,6 +380,7 @@
 </nav>
 
 <div class="toast" data-toast role="status" aria-live="polite" data-open="false"></div>
+<script src="assets/js/i18n.js" defer></script>
 <script src="assets/js/main.js" defer></script>
 <script src="assets/js/products.js" defer></script>
 

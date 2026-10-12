@@ -166,14 +166,19 @@
     </a>
 
     <nav class="nav" aria-label="Primary">
-      <a href="index.html" aria-current="page">Home</a>
-      <a href="products.html">Catalogue</a>
-      <a href="stores.html">Showrooms</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
+      <a data-i18n="Home" href="index.html" aria-current="page">Home</a>
+      <a data-i18n="Catalogue" href="products.html">Catalogue</a>
+      <a data-i18n="Showrooms" href="stores.html">Showrooms</a>
+      <a data-i18n="About" href="about.html">About</a>
+      <a data-i18n="Contact" href="contact.html">Contact</a>
     </nav>
 
     <div class="header-actions">
+      <div class="langswitch" role="group" aria-label="Language / భాష">
+        <button type="button" class="langswitch__btn" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" class="langswitch__btn" data-lang="te" aria-pressed="false">తె</button>
+        <button type="button" class="langswitch__btn" data-lang="hi" aria-pressed="false">हि</button>
+      </div>
       <a class="icon-btn list-btn" href="products.html#my-list" aria-label="My list">
         <svg class="doodle " aria-hidden="true"><use href="#i-cart"></use></svg>
         <span class="list-btn__count" data-list-count hidden>0</span>
@@ -195,11 +200,11 @@
     <button class="icon-btn" type="button" data-drawer-close aria-label="Close menu"><svg class="doodle " aria-hidden="true"><use href="#i-close"></use></svg></button>
   </div>
   <nav class="drawer__nav" aria-label="Mobile">
-    <a href="index.html" aria-current="page">Home</a>
-    <a href="products.html">Catalogue</a>
-    <a href="stores.html">Showrooms</a>
-    <a href="about.html">About us</a>
-    <a href="contact.html">Contact</a>
+    <a data-i18n="Home" href="index.html" aria-current="page">Home</a>
+    <a data-i18n="Catalogue" href="products.html">Catalogue</a>
+    <a data-i18n="Showrooms" href="stores.html">Showrooms</a>
+    <a data-i18n="About us" href="about.html">About us</a>
+    <a data-i18n="Contact" href="contact.html">Contact</a>
   </nav>
   <div class="drawer__foot">
     <a class="btn btn--magenta btn--block" href="tel:+918886222448">Call 88862 22448</a>
@@ -217,9 +222,9 @@
 
     <div class="wrap hero__inner">
       <div class="hero__copy">
-        <p class="bubble" style="align-self:start">Godavari districts · since 1994</p>
-        <h1 class="shout shout--xl">Big brands.<br><span class="ko">Small towns.</span><br><span class="outline outline--light">Why not?</span></h1>
-        <p class="hero__lead">Twenty-five WHYNOT showrooms in 23 towns, every major brand, and a phone number that still works five years after you buy. That has been the whole story since 1994.</p>
+        <p data-i18n="Godavari districts · since 1994" class="bubble" style="align-self:start">Godavari districts · since 1994</p>
+        <h1 data-i18n-html="Big brands.<br>Small towns.<br>Why not?" class="shout shout--xl">Big brands.<br><span class="ko">Small towns.</span><br><span class="outline outline--light">Why not?</span></h1>
+        <p data-i18n="Twenty-five WHYNOT showrooms in 23 towns, every major brand, and a phone number that still works five years after you buy. That has been the whole story since 1994." class="hero__lead">Twenty-five WHYNOT showrooms in 23 towns, every major brand, and a phone number that still works five years after you buy. That has been the whole story since 1994.</p>
         <div class="hero__cta">
           <a class="btn btn--gold" href="products.html"><svg class="doodle " aria-hidden="true"><use href="#i-cart"></use></svg> See what we sell</a>
           <a class="btn btn--cyan" href="stores.html"><svg class="doodle " aria-hidden="true"><use href="#i-pin"></use></svg> Find my showroom</a>
@@ -252,10 +257,10 @@
   <section class="stats-strip" aria-label="WHYNOT at a glance">
     <div class="wrap" style="padding-inline:0">
       <div class="stats-strip__inner">
-        <div class="stat"><p class="stat__value"><span data-count="2.5">2.5</span>M</p><p class="stat__label">Customers served</p></div>
-        <div class="stat"><p class="stat__value"><span data-count="1">1</span>M</p><p class="stat__label">Products sold</p></div>
-        <div class="stat"><p class="stat__value"><span data-count="25">25</span></p><p class="stat__label">Showrooms, 23 towns</p></div>
-        <div class="stat"><p class="stat__value"><span data-count="32">32</span></p><p class="stat__label">Years since 1994</p></div>
+        <div class="stat"><p class="stat__value"><span data-count="2.5">2.5</span>M</p><p data-i18n="Customers served" class="stat__label">Customers served</p></div>
+        <div class="stat"><p class="stat__value"><span data-count="1">1</span>M</p><p data-i18n="Products sold" class="stat__label">Products sold</p></div>
+        <div class="stat"><p class="stat__value"><span data-count="25">25</span></p><p data-i18n="Showrooms, 23 towns" class="stat__label">Showrooms, 23 towns</p></div>
+        <div class="stat"><p class="stat__value"><span data-count="32">32</span></p><p data-i18n="Years since 1994" class="stat__label">Years since 1994</p></div>
       </div>
     </div>
   </section>
@@ -264,7 +269,7 @@
     <div class="wrap">
       <div class="section-head">
         <p class="bubble"><svg class="doodle " aria-hidden="true"><use href="#i-bolt"></use></svg> Shop by category</p>
-        <h2 class="shout shout--lg">Ten aisles.<br>One roof.</h2>
+        <h2 data-i18n-html="Ten aisles.<br>One roof." class="shout shout--lg">Ten aisles.<br>One roof.</h2>
         <p>Tap a panel to see what we stock. Prices move with the season, so every card asks you to get today's price — and we answer with the real number, not a range.</p>
       </div>
 
@@ -288,8 +293,8 @@
       <div class="section-head">
         <p class="bubble"><svg class="doodle " aria-hidden="true"><use href="#i-star"></use></svg> Popular right now</p>
         <span class="line-strip" aria-hidden="true"><svg viewBox="0 0 64 64"><use href="#d-lines"></use></svg></span>
-        <h2 class="shout shout--lg">What people<br>actually ask for</h2>
-        <p>The four a month of “what's good in this budget?” conversations usually end on. Sample catalogue — today's price comes from your branch.</p>
+        <h2 data-i18n-html="What people<br>actually ask for" class="shout shout--lg">What people<br>actually ask for</h2>
+        <p data-i18n="The four a month of “what's good in this budget?” conversations usually end on. Sample catalogue — today's price comes from your branch.">The four a month of “what's good in this budget?” conversations usually end on. Sample catalogue — today's price comes from your branch.</p>
       </div>
 
       <div class="products" data-featured></div>
@@ -310,7 +315,7 @@
                alt="Illustration: a small-town electronics showroom at dusk, lit windows, a scooter parked outside, the moon above.">
         </picture>
         <figcaption class="band__caption">
-          <p class="shout shout--sm">Every town deserves the good stuff</p>
+          <p data-i18n="Every town deserves the good stuff" class="shout shout--sm">Every town deserves the good stuff</p>
           <p>Tanuku · Tadepalligudem · Rajahmundry · Bhimavaram · Eluru · Kakinada · Palakollu · Narasapuram · Amalapuram · Mandapeta · Anakapalle · and 12 more.</p>
           <p><a class="label" style="color:var(--cyan)" href="stores.html">All 25 showrooms</a></p>
         </figcaption>
@@ -322,8 +327,8 @@
     <div class="wrap">
       <div class="section-head">
         <p class="bubble"><svg class="doodle " aria-hidden="true"><use href="#i-sparkle"></use></svg> The name is the question</p>
-        <h2 class="shout shout--lg">Why not…</h2>
-        <p>Four questions WHYNOT has answered the same way since an LML showroom in Tanuku in 1994.</p>
+        <h2 data-i18n="Why not…" class="shout shout--lg">Why not…</h2>
+        <p data-i18n="Four questions WHYNOT has answered the same way since an LML showroom in Tanuku in 1994.">Four questions WHYNOT has answered the same way since an LML showroom in Tanuku in 1994.</p>
       </div>
 
       <div class="qs">
@@ -355,7 +360,7 @@
     <div class="wrap">
       <div class="section-head">
         <p class="bubble"><svg class="doodle " aria-hidden="true"><use href="#i-tag"></use></svg> Brands</p>
-        <h2 class="shout shout--lg">Everything<br>you'd expect</h2>
+        <h2 data-i18n-html="Everything<br>you'd expect" class="shout shout--lg">Everything<br>you'd expect</h2>
       </div>
       <ul class="brands" data-reveal>
         <li>LG</li><li>Samsung</li><li>Sony</li><li>Whirlpool</li><li>Bosch</li>
@@ -363,7 +368,7 @@
         <li>Mitsubishi</li><li>Panasonic</li><li>Hitachi</li><li>Vivo</li><li>Oppo</li>
         <li>Voltas</li><li>Amaron</li><li>V-Guard</li><li>Luminous</li><li>AO Smith</li>
       </ul>
-      <p class="muted" style="font-size:var(--t-xs);margin-top:12px">Names only — no third-party logos were lifted for this concept.</p>
+      <p data-i18n="Names only — no third-party logos were lifted for this concept." class="muted" style="font-size:var(--t-xs);margin-top:12px">Names only — no third-party logos were lifted for this concept.</p>
     </div>
   </section>
 
@@ -371,8 +376,8 @@
     <div class="wrap">
       <div class="section-head">
         <p class="bubble"><svg class="doodle " aria-hidden="true"><use href="#i-heart"></use></svg> In their words</p>
-        <h2 class="shout shout--lg">People who<br>came back</h2>
-        <p>Reviews shown as they were written on the current site. Named, dated reviews with permission would do more work — see the notes in the repo.</p>
+        <h2 data-i18n-html="People who<br>came back" class="shout shout--lg">People who<br>came back</h2>
+        <p data-i18n="Reviews shown as they were written on the current site. Named, dated reviews with permission would do more work — see the notes in the repo.">Reviews shown as they were written on the current site. Named, dated reviews with permission would do more work — see the notes in the repo.</p>
       </div>
       <div class="stack" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px">
         <blockquote class="panel panel--gold panel__pad">
@@ -400,8 +405,8 @@
         <div class="cta__inner">
           <div class="stack">
             <p class="bubble" style="align-self:start"><svg class="doodle " aria-hidden="true"><use href="#i-clock"></use></svg> Open 10 am – 9 pm · <span data-shop-state>Open now</span></p>
-            <h2 class="shout shout--md">Come and see it in person</h2>
-            <p style="color:rgba(255,255,255,.8);max-width:46ch">Pick what you like in the catalogue, send the list, and a person from your nearest branch calls with today's price.</p>
+            <h2 data-i18n="Come and see it in person" class="shout shout--md">Come and see it in person</h2>
+            <p data-i18n="Pick what you like in the catalogue, send the list, and a person from your nearest branch calls with today's price." style="color:rgba(255,255,255,.8);max-width:46ch">Pick what you like in the catalogue, send the list, and a person from your nearest branch calls with today's price.</p>
             <p class="cta__phone"><a href="tel:+918886222448">88862 22448</a></p>
           </div>
           <div class="cta__actions">
@@ -431,7 +436,7 @@
       </div>
 
       <div class="footer__col">
-        <h2>Shop</h2>
+        <h2 data-i18n="Shop">Shop</h2>
         <ul>
           <li><a href="products.html?cat=tv">Televisions</a></li>
           <li><a href="products.html?cat=fridge">Refrigerators</a></li>
@@ -443,17 +448,17 @@
       </div>
 
       <div class="footer__col">
-        <h2>Company</h2>
+        <h2 data-i18n="Company">Company</h2>
         <ul>
           <li><a href="about.html">About WHYNOT</a></li>
           <li><a href="stores.html">All 25 showrooms</a></li>
           <li><a href="contact.html">Contact &amp; service</a></li>
-          <li><a href="products.html#my-list">My list</a></li>
+          <li><a data-i18n="My list" href="products.html#my-list">My list</a></li>
         </ul>
       </div>
 
       <div class="footer__col">
-        <h2>Come over</h2>
+        <h2 data-i18n="Come over">Come over</h2>
         <ul>
           <li>RS No 24/1, Ground &amp; Cellar,<br>Sri Sowdha Towers, Undrajavaram Road,<br>Tanuku 534211, Andhra Pradesh</li>
           <li><a href="tel:+918886222448">88862 22448</a></li>
@@ -476,6 +481,7 @@
 </nav>
 
 <div class="toast" data-toast role="status" aria-live="polite" data-open="false"></div>
+<script src="assets/js/i18n.js" defer></script>
 <script src="assets/js/main.js" defer></script>
 <script src="assets/js/products.js" defer></script>
 

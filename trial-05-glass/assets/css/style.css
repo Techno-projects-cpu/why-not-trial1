@@ -585,3 +585,56 @@ a { color: inherit; text-decoration: none; }
   .panel, .card, .store, .tile { background: #fff !important; border: 1px solid #999; box-shadow: none; backdrop-filter: none; }
   .card, .store { break-inside: avoid; }
 }
+
+/* ==========================================================================
+   Languages — Telugu and Hindi
+   The Latin faces in this design have no Indic glyphs, so the font
+   variables are re-pointed for those two languages. Indic scripts also
+   need looser tracking and real word spacing: the tight letter-spacing that
+   makes a Latin headline look designed makes Telugu look broken.
+   ========================================================================== */
+@font-face { font-family: "Noto Sans Telugu"; font-style: normal; font-weight: 400; font-display: swap;
+  src: url("../fonts/noto-telugu-400.woff2") format("woff2"); }
+@font-face { font-family: "Noto Sans Telugu"; font-style: normal; font-weight: 700; font-display: swap;
+  src: url("../fonts/noto-telugu-700.woff2") format("woff2"); }
+@font-face { font-family: "Noto Sans Devanagari"; font-style: normal; font-weight: 400; font-display: swap;
+  src: url("../fonts/noto-devanagari-400.woff2") format("woff2"); }
+@font-face { font-family: "Noto Sans Devanagari"; font-style: normal; font-weight: 700; font-display: swap;
+  src: url("../fonts/noto-devanagari-700.woff2") format("woff2"); }
+
+html[lang="te"] {
+  --font-body: "Noto Sans Telugu", --font-body;
+  --font-display: "Noto Sans Telugu", --font-display;
+}
+html[lang="te"] .display, html[lang="te"] .shout, html[lang="te"] h1, html[lang="te"] h2,
+html[lang="te"] h3, html[lang="te"] .btn, html[lang="te"] .brand__name, html[lang="te"] .stat__v {
+  font-weight: 700; letter-spacing: 0;
+}
+html[lang="te"] .kicker, html[lang="te"] .label, html[lang="te"] .card__cat,
+html[lang="te"] .stat__l, html[lang="te"] .count, html[lang="te"] .note {
+  letter-spacing: .02em;
+}
+
+html[lang="hi"] {
+  --font-body: "Noto Sans Devanagari", --font-body;
+  --font-display: "Noto Sans Devanagari", --font-display;
+}
+html[lang="hi"] .display, html[lang="hi"] .shout, html[lang="hi"] h1, html[lang="hi"] h2,
+html[lang="hi"] h3, html[lang="hi"] .btn, html[lang="hi"] .brand__name, html[lang="hi"] .stat__v {
+  font-weight: 700; letter-spacing: 0;
+}
+html[lang="hi"] .kicker, html[lang="hi"] .label, html[lang="hi"] .card__cat,
+html[lang="hi"] .stat__l, html[lang="hi"] .count, html[lang="hi"] .note {
+  letter-spacing: .02em;
+}
+
+/* the language switcher, styled from the trial's own tokens so it belongs */
+.langswitch { display: inline-flex; align-items: center; gap: 2px; padding: 3px;
+  border: 1px solid currentColor; border-radius: 999px; opacity: .92; }
+.langswitch__btn { min-width: 34px; min-height: 30px; padding: 0 6px; border: 0; border-radius: 999px;
+  background: transparent; color: inherit; font: inherit; font-size: .6875rem; font-weight: 700;
+  letter-spacing: 0; cursor: pointer; }
+.langswitch__btn:hover { background: rgba(128, 128, 128, .22); }
+.langswitch__btn[aria-pressed="true"] { background: currentColor; }
+.langswitch__btn[aria-pressed="true"] { color: transparent; text-shadow: 0 0 0 var(--paper, #fff); }
+@media (max-width: 560px) { .langswitch { padding: 2px; } .langswitch__btn { min-width: 30px; min-height: 26px; font-size: .625rem; } }

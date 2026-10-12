@@ -27,6 +27,12 @@ async function load(pagePath, scripts, url = "http://localhost/" ) {
   dom.window.matchMedia = () => ({ matches: false, addEventListener() {} });
   dom.window.requestAnimationFrame = (cb) => setTimeout(() => cb(Date.now()), 0);
   dom.window.URLSearchParams = URLSearchParams;
+  // the pages load i18n.js first: include it so the scripts see the real runtime
+  const dir = scripts[0].split("/assets/js/")[0];
+  const lang = dir + "/assets/js/i18n.js";
+  if (fs.existsSync(ROOT + "/" + lang) && !scripts.some((s) => s.endsWith("i18n.js"))) {
+    scripts = [lang, ...scripts];
+  }
   for (const f of scripts) {
     const code = fs.readFileSync(ROOT + "/" + f, "utf8");
     dom.window.eval(code);
@@ -316,6 +322,56 @@ for (const dir of NEW_TRIALS) {
   check([...d2.querySelectorAll("[data-store-list] a")].every((a) => a.href.startsWith("https://www.google.com/maps/search/")),
         `${label}: real Maps links, no about:invalid`);
   dom2.window.close();
+}
+
+
+console.log("\n— LANGUAGE (all trials) ————————————————————————————");
+{
+  const trials = ["trial-01-minimal", "trial-02-illustrated", "trial-03-anime",
+                  "trial-04-brutalist", "trial-05-glass", "trial-06-painting"];
+  const telugu = (s) => [...s].some((c) => c.charCodeAt(0) >= 0x0c00 && c.charCodeAt(0) <= 0x0c7f);
+  for (const dir of trials) {
+    const dom = await load(`${dir}/products.html`,
+      [`${dir}/assets/js/main.js`, `${dir}/assets/js/products.js`]);
+    const d = dom.window.document;
+    const en = {
+      nav: d.querySelector(".nav a").textContent.trim(),
+      add: d.querySelector("[data-add]").textContent.trim(),
+      count: d.querySelector("[data-result-count]").textContent.trim(),
+    };
+    const teBtn = d.querySelector('[data-lang="te"]');
+    check(!!teBtn, `${dir}: language switch on the page`);
+    teBtn.click();
+    check(d.documentElement.lang === "te", `${dir}: document language follows the switch`);
+    check(telugu(d.querySelector(".nav a").textContent), `${dir}: nav reads Telugu`);
+    check(telugu(d.querySelector("[data-add]").textContent),
+          `${dir}: the button the catalogue builds reads Telugu`);
+    check(d.querySelector("[data-result-count]").textContent.trim() !== en.count,
+          `${dir}: result count reads Telugu`);
+
+    // added items redraw after the switch, so this exercises the observer too
+    d.querySelector("[data-add]").click();
+    await new Promise((r) => setTimeout(r, 20));
+    check(telugu(d.querySelector("[data-list-panel]").textContent),
+          `${dir}: shortlist panel written after the switch reads Telugu`);
+
+    d.querySelector('[data-lang="en"]').click();
+    check(d.querySelector(".nav a").textContent.trim() === en.nav,
+          `${dir}: switching back restores the English`);
+    check(dom.window.localStorage.getItem("whynot-lang") === "en",
+          `${dir}: the choice is remembered`);
+    dom.window.close();
+
+    const dom2 = await load(`${dir}/stores.html`,
+      [`${dir}/assets/js/main.js`, `${dir}/assets/js/stores.js`]);
+    const d2 = dom2.window.document;
+    d2.querySelector('[data-lang="te"]').click();
+    check(telugu(d2.querySelector("[data-store-list] .store").textContent),
+          `${dir}: showroom cards read Telugu`);
+    check(d2.querySelectorAll("[data-store-list] .store").length === 25,
+          `${dir}: still 25 showrooms in Telugu`);
+    dom2.window.close();
+  }
 }
 
 console.log("\n" + "=".repeat(52));

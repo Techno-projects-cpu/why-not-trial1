@@ -1,3 +1,4 @@
+function fallbackT(key, english) { return english === undefined ? key : english; }
 /* WHYNOT — Trial 01 · catalogue + "My list".
    ---------------------------------------------------------------------------
    A calmer take on the shop: no illustration, no prices invented for a real
@@ -7,6 +8,8 @@
    --------------------------------------------------------------------------- */
 (function () {
   "use strict";
+
+  var T = window.WHYNOT_T || fallbackT;
 
   var STORE_KEY = "whynot-list-t1";
   var HELPLINE = "8886222448";
@@ -77,8 +80,8 @@
   function toggleItem(id) {
     var ids = readList();
     var i = ids.indexOf(id);
-    if (i === -1) { ids.push(id); flash("Added to your list"); }
-    else { ids.splice(i, 1); flash("Removed from your list"); }
+    if (i === -1) { ids.push(id); flash(T("addedToast", "Added to your list")); }
+    else { ids.splice(i, 1); flash(T("removed", "Removed from your list")); }
     writeList(ids);
   }
   function paintCounts() {
@@ -89,7 +92,7 @@
       nodes[i].hidden = n === 0;
     }
     var labels = document.querySelectorAll("[data-list-label]");
-    for (var j = 0; j < labels.length; j++) labels[j].textContent = n === 1 ? "1 item" : n + " items";
+    for (var j = 0; j < labels.length; j++) labels[j].textContent = n === 1 ? "1 item" : n + T("items", " items");
   }
 
   /* ------------------------------------------------------------- rendering */
@@ -105,7 +108,7 @@
         '<p class="pcard__price">Ask for today&rsquo;s price</p>' +
         '<div class="pcard__actions">' +
           '<button class="btn btn--sm ' + (added ? "btn--ghost" : "btn--brand") + '" type="button" data-add="' + p.id + '">' +
-            (added ? "In your list" : "Add to list") + "</button>" +
+            (added ? T("added", "In your list") : T("add", "Add to list")) + "</button>" +
           '<a class="btn btn--sm btn--ghost" href="contact.html?about=' + encodeURIComponent(p.title) + '">Enquire</a>' +
         "</div>" +
         (p.badge ? '<p class="pcard__badge">' + esc(p.badge) + "</p>" : "") +
@@ -117,7 +120,7 @@
     for (var i = 0; i < buttons.length; i++) {
       var added = inList(buttons[i].getAttribute("data-add"));
       buttons[i].className = "btn btn--sm " + (added ? "btn--ghost" : "btn--brand");
-      buttons[i].textContent = added ? "In your list" : "Add to list";
+      buttons[i].textContent = added ? T("added", "In your list") : T("add", "Add to list");
     }
   }
 
@@ -155,7 +158,7 @@
               '<p class="list-row__title">' + esc(p.title) + "</p>" +
               '<p class="list-row__meta">' + esc(cat(p.cat).label) + " · " + esc(p.specs.join(" · ")) + "</p>" +
             "</div>" +
-            '<button class="btn btn--sm btn--ghost" type="button" data-remove="' + p.id + '">Remove</button>' +
+            '<button class="btn btn--sm btn--ghost" type="button" data-remove="' + p.id + '">' + T("remove", "Remove") + '</button>' +
           "</li>";
         }).join("") +
       "</ul>" +
@@ -294,4 +297,8 @@
     for (var n = 0; n < els.length; n++) els[n].setAttribute("aria-pressed", els[n].getAttribute("data-cat") === wanted ? "true" : "false");
     renderGrid();
   }
+
+  /* redraw the generated markup when the language changes */
+  window.WHYNOT_RERENDER = function () { renderGrid(); renderFeatured(); renderPanel(); };
+
 })();

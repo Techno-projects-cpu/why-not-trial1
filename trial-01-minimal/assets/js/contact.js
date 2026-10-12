@@ -1,3 +1,4 @@
+function fallbackT(key, english) { return english === undefined ? key : english; }
 /* WHYNOT — contact form.
    Validation happens on the client so nobody types a whole message and only
    then learns the mobile number was wrong. There is no server here: this file
@@ -5,6 +6,8 @@
    Swapping in a real endpoint = replace sendToServer().                    */
 (function () {
   "use strict";
+
+  var T = window.WHYNOT_T || fallbackT;
 
   var form = document.querySelector("[data-contact-form]");
   if (!form) return;
@@ -146,4 +149,8 @@
         if (submit) { submit.disabled = false; submit.textContent = original; }
       });
   });
+
+  /* redraw the generated markup when the language changes */
+  window.WHYNOT_RERENDER = function () { var s = document.querySelector('[data-form-status]'); if (s && s.textContent) { s.textContent = s.textContent; } };
+
 })();

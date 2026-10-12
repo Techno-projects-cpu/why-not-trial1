@@ -166,14 +166,19 @@
     </a>
 
     <nav class="nav" aria-label="Primary">
-      <a href="index.html">Home</a>
-      <a href="products.html">Catalogue</a>
-      <a href="stores.html">Showrooms</a>
-      <a href="about.html" aria-current="page">About</a>
-      <a href="contact.html">Contact</a>
+      <a data-i18n="Home" href="index.html">Home</a>
+      <a data-i18n="Catalogue" href="products.html">Catalogue</a>
+      <a data-i18n="Showrooms" href="stores.html">Showrooms</a>
+      <a data-i18n="About" href="about.html" aria-current="page">About</a>
+      <a data-i18n="Contact" href="contact.html">Contact</a>
     </nav>
 
     <div class="header-actions">
+      <div class="langswitch" role="group" aria-label="Language / భాష">
+        <button type="button" class="langswitch__btn" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" class="langswitch__btn" data-lang="te" aria-pressed="false">తె</button>
+        <button type="button" class="langswitch__btn" data-lang="hi" aria-pressed="false">हि</button>
+      </div>
       <a class="icon-btn list-btn" href="products.html#my-list" aria-label="My list">
         <svg class="doodle " aria-hidden="true"><use href="#i-cart"></use></svg>
         <span class="list-btn__count" data-list-count hidden>0</span>
@@ -195,11 +200,11 @@
     <button class="icon-btn" type="button" data-drawer-close aria-label="Close menu"><svg class="doodle " aria-hidden="true"><use href="#i-close"></use></svg></button>
   </div>
   <nav class="drawer__nav" aria-label="Mobile">
-    <a href="index.html">Home</a>
-    <a href="products.html">Catalogue</a>
-    <a href="stores.html">Showrooms</a>
-    <a href="about.html" aria-current="page">About us</a>
-    <a href="contact.html">Contact</a>
+    <a data-i18n="Home" href="index.html">Home</a>
+    <a data-i18n="Catalogue" href="products.html">Catalogue</a>
+    <a data-i18n="Showrooms" href="stores.html">Showrooms</a>
+    <a data-i18n="About us" href="about.html" aria-current="page">About us</a>
+    <a data-i18n="Contact" href="contact.html">Contact</a>
   </nav>
   <div class="drawer__foot">
     <a class="btn btn--magenta btn--block" href="tel:+918886222448">Call 88862 22448</a>
@@ -216,7 +221,7 @@
     </div>
     <div class="wrap" style="position:relative;display:grid;gap:14px">
       <p class="bubble" style="align-self:start"><svg class="doodle " aria-hidden="true"><use href="#i-store"></use></svg> About us</p>
-      <h1 class="shout shout--lg" style="color:#fff">One shop.<br><span class="ko ko--cyan">One question.</span></h1>
+      <h1 data-i18n-html="One shop.<br>One question." class="shout shout--lg" style="color:#fff">One shop.<br><span class="ko ko--cyan">One question.</span></h1>
       <p class="hero__lead">On 27 February 1994 Mr. Jujjavarapu Venkata Rayudu opened an LML showroom in Tanuku and called it <strong style="color:#fff">Whynot</strong>. Thirty-two years later it is 25 showrooms and 300 people — still run by the same family.</p>
     </div>
   </section>
@@ -225,7 +230,7 @@
     <div class="wrap">
       <div class="section-head">
         <p class="bubble"><svg class="doodle " aria-hidden="true"><use href="#i-clock"></use></svg> The story</p>
-        <h2 class="shout shout--lg">Six panels,<br>32 years</h2>
+        <h2 data-i18n-html="Six panels,<br>32 years" class="shout shout--lg">Six panels,<br>32 years</h2>
       </div>
 
       <div class="stack" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px">
@@ -284,7 +289,7 @@
     <div class="wrap">
       <div class="section-head">
         <p class="bubble"><svg class="doodle " aria-hidden="true"><use href="#i-people"></use></svg> Leadership today</p>
-        <h2 class="shout shout--lg">The family<br>at the desk</h2>
+        <h2 data-i18n-html="The family<br>at the desk" class="shout shout--lg">The family<br>at the desk</h2>
       </div>
       <ul class="stack" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px">
         <li class="panel panel__pad"><p class="label" style="color:var(--magenta)">Managing Director</p><p class="shout shout--sm" style="margin-top:4px">Mr. Jujjavarapu Venkata Rayudu</p></li>
@@ -299,7 +304,7 @@
     <div class="wrap">
       <div class="section-head">
         <p class="bubble"><svg class="doodle " aria-hidden="true"><use href="#i-tag"></use></svg> Partners</p>
-        <h2 class="shout shout--lg">Trusted<br>to sell</h2>
+        <h2 data-i18n-html="Trusted<br>to sell" class="shout shout--lg">Trusted<br>to sell</h2>
       </div>
       <ul class="brands">
         <li>LG</li><li>Samsung</li><li>Sony</li><li>Whirlpool</li><li>Bosch</li>
@@ -329,7 +334,7 @@
       </div>
 
       <div class="footer__col">
-        <h2>Shop</h2>
+        <h2 data-i18n="Shop">Shop</h2>
         <ul>
           <li><a href="products.html?cat=tv">Televisions</a></li>
           <li><a href="products.html?cat=fridge">Refrigerators</a></li>
@@ -341,17 +346,17 @@
       </div>
 
       <div class="footer__col">
-        <h2>Company</h2>
+        <h2 data-i18n="Company">Company</h2>
         <ul>
           <li><a href="about.html">About WHYNOT</a></li>
           <li><a href="stores.html">All 25 showrooms</a></li>
           <li><a href="contact.html">Contact &amp; service</a></li>
-          <li><a href="products.html#my-list">My list</a></li>
+          <li><a data-i18n="My list" href="products.html#my-list">My list</a></li>
         </ul>
       </div>
 
       <div class="footer__col">
-        <h2>Come over</h2>
+        <h2 data-i18n="Come over">Come over</h2>
         <ul>
           <li>RS No 24/1, Ground &amp; Cellar,<br>Sri Sowdha Towers, Undrajavaram Road,<br>Tanuku 534211, Andhra Pradesh</li>
           <li><a href="tel:+918886222448">88862 22448</a></li>
@@ -374,6 +379,7 @@
 </nav>
 
 <div class="toast" data-toast role="status" aria-live="polite" data-open="false"></div>
+<script src="assets/js/i18n.js" defer></script>
 <script src="assets/js/main.js" defer></script>
 <script src="assets/js/products.js" defer></script>
 

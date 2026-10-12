@@ -248,8 +248,13 @@
         <span class="brand__tag">We drive the change</span>
       </span>
     </a>
-    <nav class="nav" aria-label="Primary"><a href="index.html">Home</a><a href="products.html">Catalogue</a><a href="stores.html" aria-current="page">Showrooms</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+    <nav class="nav" aria-label="Primary"><a data-i18n="Home" href="index.html">Home</a><a data-i18n="Catalogue" href="products.html">Catalogue</a><a data-i18n="Showrooms" href="stores.html" aria-current="page">Showrooms</a><a data-i18n="About" href="about.html">About</a><a data-i18n="Contact" href="contact.html">Contact</a></nav>
     <div class="header-actions">
+      <div class="langswitch" role="group" aria-label="Language / భాష">
+        <button type="button" class="langswitch__btn" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" class="langswitch__btn" data-lang="te" aria-pressed="false">తె</button>
+        <button type="button" class="langswitch__btn" data-lang="hi" aria-pressed="false">हि</button>
+      </div>
       <a class="icon-btn list-btn" href="products.html#my-list" aria-label="My list">
         <svg class="doodle" aria-hidden="true"><use href="#i-cart"></use></svg><span class="list-btn__count" data-list-count hidden>0</span>
       </a>
@@ -269,11 +274,11 @@
     <button class="icon-btn" type="button" data-drawer-close aria-label="Close menu"><svg class="doodle" aria-hidden="true"><use href="#i-close"></use></svg></button>
   </div>
   <nav class="drawer__nav" aria-label="Mobile">
-        <a href="index.html">Home</a>
-    <a href="products.html">Catalogue</a>
-    <a href="stores.html" aria-current="page">Showrooms</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
+        <a data-i18n="Home" href="index.html">Home</a>
+    <a data-i18n="Catalogue" href="products.html">Catalogue</a>
+    <a data-i18n="Showrooms" href="stores.html" aria-current="page">Showrooms</a>
+    <a data-i18n="About" href="about.html">About</a>
+    <a data-i18n="Contact" href="contact.html">Contact</a>
 
   </nav>
   <div class="drawer__foot">
@@ -287,9 +292,9 @@
 <section class="stage stage--pagehero">
   <div class="wrap">
     <div class="pagehero__copy">
-      <p class="kicker">Showrooms · 25 locations</p>
-      <h1 class="display display--lg" style="margin-top:16px">One is probably<br>20 minutes away.</h1>
-      <p class="lede">Search by town, district or pincode. Every address opens straight into Google Maps on your phone.</p>
+      <p data-i18n="Showrooms · 25 locations" class="kicker">Showrooms · 25 locations</p>
+      <h1 data-i18n-html="One is probably<br>20 minutes away." class="display display--lg" style="margin-top:16px">One is probably<br>20 minutes away.</h1>
+      <p data-i18n="Search by town, district or pincode. Every address opens straight into Google Maps on your phone." class="lede">Search by town, district or pincode. Every address opens straight into Google Maps on your phone.</p>
       <div class="hero__cta"><a href="tel:+918886222448" class="btn btn--brand"><svg class="doodle" aria-hidden="true"><use href="#i-call"></use></svg> Call 88862 22448</a><button type="button" class="btn btn--cyan"><svg class="doodle" aria-hidden="true"><use href="#i-copy"></use></svg> Copy number</button></div>
     </div>
     
@@ -302,9 +307,9 @@
   <div class="search">
     <label class="visually-hidden" for="store-search">Search showrooms</label>
     <svg class="doodle" aria-hidden="true"><use href="#i-search"></use></svg>
-    <input id="store-search" type="search" placeholder="Town, district or pincode…" autocomplete="off" data-store-search>
+    <input id="store-search" type="search" placeholder="Town, district or pincode…" autocomplete="off" data-store-search data-i18n-ph="Town, district or pincode…">
   </div>
-  <div class="chips" role="group" aria-label="Filter by district"><button class="chip" type="button" data-district="all" aria-pressed="true">All</button><button class="chip" type="button" data-district="West Godavari" aria-pressed="false">West Godavari</button><button class="chip" type="button" data-district="East Godavari" aria-pressed="false">East Godavari</button><button class="chip" type="button" data-district="Visakhapatnam" aria-pressed="false">Visakhapatnam</button></div>
+  <div class="chips" role="group" aria-label="Filter by district"><button data-i18n="All" class="chip" type="button" data-district="all" aria-pressed="true">All</button><button class="chip" type="button" data-district="West Godavari" aria-pressed="false">West Godavari</button><button class="chip" type="button" data-district="East Godavari" aria-pressed="false">East Godavari</button><button class="chip" type="button" data-district="Visakhapatnam" aria-pressed="false">Visakhapatnam</button></div>
 </div>
 <p class="count" data-store-count aria-live="polite">25 showrooms</p>
 <div class="stores" data-store-list><p class="muted">Loading the showroom list…</p></div>
@@ -320,7 +325,7 @@
 </section>
 <section class="stage">
 <div class="wrap">
-<div class="head"><p class="kicker">Good to know</p><h2 class="display">Before you<br>drive over</h2></div><div class="knows"><div class="panel panel--tone1 know"><p class="promise__t">Hours</p><p class="muted">Open 10 am – 9 pm. Festival weeks can shift that by an hour, so a call saves a trip.</p></div><div class="panel panel--tone2 know"><p class="promise__t">Stock is local</p><p class="muted">Each branch carries its own stock. Tell us the model and your town and we'll confirm which showroom has it on the floor.</p></div><div class="panel panel--tone3 know"><p class="promise__t">Brand stores in Tanuku</p><p class="muted">The flagship building also houses an LG Best Shop and a Samsung Smart Plaza.</p></div><div class="panel panel--tone4 know"><p class="promise__t">Already bought from us?</p><p class="muted">Installation, service or a fault — call the helpline or walk into your branch. You don't need this website for that.</p></div></div>
+<div class="head"><p data-i18n="Good to know" class="kicker">Good to know</p><h2 data-i18n-html="Before you<br>drive over" class="display">Before you<br>drive over</h2></div><div class="knows"><div class="panel panel--tone1 know"><p data-i18n="Hours" class="promise__t">Hours</p><p class="muted">Open 10 am – 9 pm. Festival weeks can shift that by an hour, so a call saves a trip.</p></div><div class="panel panel--tone2 know"><p data-i18n="Stock is local" class="promise__t">Stock is local</p><p class="muted">Each branch carries its own stock. Tell us the model and your town and we'll confirm which showroom has it on the floor.</p></div><div class="panel panel--tone3 know"><p data-i18n="Brand stores in Tanuku" class="promise__t">Brand stores in Tanuku</p><p class="muted">The flagship building also houses an LG Best Shop and a Samsung Smart Plaza.</p></div><div class="panel panel--tone4 know"><p data-i18n="Already bought from us?" class="promise__t">Already bought from us?</p><p class="muted">Installation, service or a fault — call the helpline or walk into your branch. You don't need this website for that.</p></div></div>
 </div>
 </section>
 
@@ -340,7 +345,7 @@
         <p><a href="https://play.google.com/store/apps/details?id=in.absolin.whynotcust" target="_blank" rel="noopener noreferrer">Get the WHYNOT app</a></p>
       </div>
       <div class="footer__col">
-        <h2>Shop</h2>
+        <h2 data-i18n="Shop">Shop</h2>
         <ul>
           <li><a href="products.html?cat=tv">Televisions</a></li>
           <li><a href="products.html?cat=fridge">Refrigerators</a></li>
@@ -351,16 +356,16 @@
         </ul>
       </div>
       <div class="footer__col">
-        <h2>Company</h2>
+        <h2 data-i18n="Company">Company</h2>
         <ul>
           <li><a href="about.html">About WHYNOT</a></li>
           <li><a href="stores.html">All 25 showrooms</a></li>
           <li><a href="contact.html">Contact &amp; service</a></li>
-          <li><a href="products.html#my-list">My list</a></li>
+          <li><a data-i18n="My list" href="products.html#my-list">My list</a></li>
         </ul>
       </div>
       <div class="footer__col">
-        <h2>Come over</h2>
+        <h2 data-i18n="Come over">Come over</h2>
         <ul>
           <li>RS No 24/1, Ground &amp; Cellar, Sri Sowdha Towers, Undrajavaram Road, Tanuku 534211, Andhra Pradesh</li>
           <li><a href="tel:+918886222448">88862 22448</a></li>
@@ -382,6 +387,7 @@
 </nav>
 
 <div class="toast" data-toast role="status" aria-live="polite" data-open="false"></div>
+<script src="assets/js/i18n.js" defer></script>
 <script src="assets/js/main.js" defer></script>
 <script src="assets/js/products.js" defer></script>
 </body>

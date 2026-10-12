@@ -42,7 +42,9 @@ ORNAMENTS = [
       </g>'''),
 ]
 
-MARQUEE = "25 showrooms ✳ 23 towns ✳ 20 brands ✳ open 10 to 9 ✳ since 1994 ✳ delivery &amp; installation "
+# the separator between items is drawn in CSS (.marquee span::after): the
+# subsets do not carry a suitable glyph, and a system fallback would be luck
+MARQUEE = "25 showrooms · 23 towns · 20 brands · open 10 to 9 · since 1994 · delivery &amp; installation "
 
 
 class Skin04(sections.BaseSkin):

@@ -1,3 +1,4 @@
+function fallbackT(key, english) { return english === undefined ? key : english; }
 /* WHYNOT — Trial 03 · catalogue + "My list"
    ---------------------------------------------------------------------------
    Same catalogue and the same behaviour as the other two trials; only the
@@ -9,6 +10,8 @@
    --------------------------------------------------------------------------- */
 (function () {
   "use strict";
+
+  var T = window.WHYNOT_T || fallbackT;
 
   var STORE_KEY = "whynot-list-t3";
   var HELPLINE = "8886222448";
@@ -85,8 +88,8 @@
   function toggleItem(id) {
     var ids = readList();
     var i = ids.indexOf(id);
-    if (i === -1) { ids.push(id); flash("Added to your list"); }
-    else { ids.splice(i, 1); flash("Removed from your list"); }
+    if (i === -1) { ids.push(id); flash(T("addedToast", "Added to your list")); }
+    else { ids.splice(i, 1); flash(T("removed", "Removed from your list")); }
     writeList(ids);
     return i === -1;
   }
@@ -99,7 +102,7 @@
       nodes[i].hidden = n === 0;
     }
     var labels = document.querySelectorAll("[data-list-label]");
-    for (var j = 0; j < labels.length; j++) labels[j].textContent = n === 1 ? "1 item" : n + " items";
+    for (var j = 0; j < labels.length; j++) labels[j].textContent = n === 1 ? "1 item" : n + T("items", " items");
   }
 
   /* ------------------------------------------------------------- rendering */
@@ -120,7 +123,7 @@
         "</div>" +
         '<div class="card__foot">' +
           '<button class="btn btn--sm ' + (added ? "btn--cyan" : "btn--magenta") + '" type="button" data-add="' + p.id + '">' +
-            (added ? "In your list" : "Add to list") +
+            (added ? T("added", "In your list") : T("add", "Add to list")) +
           "</button>" +
           '<a class="btn btn--sm btn--ghost" href="contact.html?about=' + encodeURIComponent(p.title) + '">Ask about this</a>' +
         "</div>" +
@@ -133,7 +136,7 @@
       var id = buttons[i].getAttribute("data-add");
       var added = inList(id);
       buttons[i].className = "btn btn--sm " + (added ? "btn--marker" : "btn--brand");
-      buttons[i].innerHTML = added ? "&#10003; In my list" : "+ Add to my list";
+      buttons[i].innerHTML = added ? T("added", "&#10003; In my list") : T("add", "+ Add to my list");
     }
   }
 
@@ -171,10 +174,10 @@
             '<span class="list-item__art">' + doodle(c.art) + "</span>" +
             '<div><p class="list-item__title">' + esc(p.title) + "</p>" +
             '<p class="list-item__meta">' + esc(c.label) + " \u00b7 " + esc(p.specs.join(" \u00b7 ")) + " \u00b7 " + esc(p.towns.join(", ")) + "</p></div>" +
-            '<button class="btn btn--sm btn--ghost" type="button" data-remove="' + p.id + '" aria-label="Remove ' + esc(p.title) + '">Remove</button>' +
+            '<button class="btn btn--sm btn--ghost" type="button" data-remove="' + p.id + '" aria-label="Remove ' + esc(p.title) + '">' + T("remove", "Remove") + '</button>' +
           "</div>";
         }).join("") +
-        '<p class="list-total">' + ids.length + (ids.length === 1 ? " item" : " items") + " \u2014 we will price it and call you</p>" +
+        '<p class="list-total">' + ids.length + (ids.length === 1 ? T("item", " item") : T("items", " items")) + " \u2014 we will price it and call you</p>" +
         '<div class="hero__cta">' +
           '<a class="btn btn--magenta" href="https://wa.me/91' + HELPLINE + "?text=" + encodeURIComponent(sendText()) + '" target="_blank" rel="noopener noreferrer">' +
             doodle("i-whatsapp") + " Send on WhatsApp</a>" +
@@ -348,4 +351,8 @@
     }
     renderGrid();
   }
+
+  /* redraw the generated markup when the language changes */
+  window.WHYNOT_RERENDER = function () { renderGrid(); renderFeatured(); renderPanel(); };
+
 })();
