@@ -33,7 +33,7 @@ Editorial minimalism. Warm paper, real typography, hairline rules instead of car
 
 ### What it fixes, concretely
 
-1. **"Find the nearest showroom" is now a job the site can do.** All 25 addresses live in one JavaScript array (`assets/js/stores.js`), with instant search by town, district or pincode, district filter chips, a result count and an empty state. Every "Directions" button opens a real `google.com/maps/search/?api=1&query=…` link — the old site's links went to `about:invalid#zClosurez` on all 23 entries.
+1. **"Find the nearest showroom" is now a job the site can do.** All 25 addresses live in one JavaScript array (`assets/js/stores.js`), with instant search by town, district or pincode, district filter chips, a result count and an empty state. Every "Directions" button opens a real `google.com/maps/search/?api=1&query=…` link — the old site's links went to `about:invalid#zClosurez` or `google.com/maps/undefined` on all 25 entries.
 2. **One phone number, one place, on every page.** Header, mobile drawer, CTAs, footer, contact page — all read from the same value. The contact page also tells you whether the showroom is open *right now* and what happens after you send an enquiry.
 3. **A form that does not waste your time.** Name, mobile and message are validated as you go, errors are attached to the fields with `aria-describedby` and announced with `role="alert"`, Indian mobile numbers are accepted with or without `+91`, and the success state says exactly who will call and when.
 4. **Numbers that agree with each other.** 25 showrooms, 23 towns, since 27 February 1994, 32 years, 300 staff — used consistently, with "2.5 million customers served" framed as served rather than as "happy clients".
