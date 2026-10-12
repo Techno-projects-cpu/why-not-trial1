@@ -414,6 +414,56 @@ class Walker:
         return self
 
 
+def verify_placement(html, name=""):
+    """Every hook must sit on the element whose text is that phrase.
+
+    The structural check above proves nothing moved; this proves each hook landed
+    on the right element. These pages carry a lot of near-identical markup, and an
+    offset that is a character or two out still produces valid HTML — it just
+    hooks the wrong node. Comparing the English back to the key is what catches it.
+    """
+    problems = []
+    class P(HTMLParser):
+        def __init__(self):
+            HTMLParser.__init__(self)
+            self.convert_charrefs = True
+            self.stack = []
+            self.text = []
+        def handle_starttag(self, tag, attrs):
+            if tag in ("br", "img", "hr", "input", "meta", "link"):
+                # a <br> is a line break in the phrase too, so it reads as one here
+                if tag == "br":
+                    for frame in self.stack:
+                        frame[2] += "\n"
+                return
+            a = dict(attrs)
+            key = a.get("data-i18n-html") or a.get("data-i18n") or a.get("data-i18n-ph")
+            self.stack.append([tag, key, "", a.get("placeholder") or ""])
+        def handle_data(self, data):
+            for frame in self.stack:
+                frame[2] += data
+        def handle_endtag(self, tag):
+            for i in range(len(self.stack) - 1, -1, -1):
+                if self.stack[i][0] == tag:
+                    frame = self.stack.pop(i)
+                    key = frame[1]
+                    if not key:
+                        break
+                    if key not in i18n.LOCALISABLE:
+                        problems.append("unknown key %r on <%s>" % (key, tag))
+                        break
+                    want = i18n.LOCALISABLE[key]["en"]
+                    got = frame[3] or frame[2]
+                    if normalise(got) != normalise(unescape(want)) and normalise(got) != normalise(want):
+                        problems.append("<%s> key %r says %r, element says %r"
+                                        % (tag, key, want[:40], got.strip()[:40]))
+                    break
+    P().feed(html)
+    if problems:
+        raise SystemExit("hook placement failed in %s:\n    %s" % (name or "?", "\n    ".join(problems[:6])))
+    return True
+
+
 def verify_hooks(before, after, name=""):
     """Every hook is an added attribute, and nothing else. If inserting them has
     moved, truncated or swallowed anything, the tag sequence or the text changes
@@ -508,6 +558,7 @@ def patch_attributes(html, name=""):
     # the hooks are the only change so far: assert that before adding the switcher
     if name:
         verify_hooks(before, html, name)
+        verify_placement(html, name)
 
     # the switcher, once per page
     if "langswitch" not in html:
@@ -646,6 +697,15 @@ def patch_js(text, report=None, name=""):
         key = i18n.JS_LITERALS.get(value)
         if not key:
             continue
+        # already patched? Patching twice used to wrap the wrapper, so a re-run
+        # grew T("k", T("k", T("k", ...))) — one phrase, seven deep, in the file a
+        # customer would read. A literal that is already this call's fallback, or
+        # its key, is left exactly as it is.
+        before_txt, after_txt = text[max(0, start - 40):start], text[end:end + 40]
+        if re.search(r'T\(\s*"%s"\s*,\s*$' % re.escape(key), before_txt):
+            continue
+        if re.match(r'\s*,\s*"%s"\s*\)' % re.escape(key), after_txt):
+            continue
         edits.append((start, end, 'T("%s", %s%s%s)' % (key, quote, raw, quote)))
 
     for start, end, replacement in sorted(edits, reverse=True):
@@ -712,6 +772,13 @@ def localise(root, report=print):
         text = patch_js(text, report, fn)
         if call:
             text = ensure_rerender(text, call)
+        # the pass has to be idempotent: a re-run must change nothing. It used to
+        # wrap its own wrapper, so running it twice left T("k", T("k", "English"))
+        # in the source — seven deep in the worst file, which is not what a
+        # customer should read when they open the script.
+        again = patch_js(text)
+        if again != text:
+            raise SystemExit("localiser is not idempotent: %s changed on a second pass" % fn)
         io.open(path, "w", encoding="utf-8").write(text)
 
     # stylesheet
@@ -761,9 +828,11 @@ def localise(root, report=print):
     runtime = runtime_js(used, keys)
     with io.open(os.path.join(js_dir, "i18n.js"), "w", encoding="utf-8") as f:
         f.write(runtime)
+    # bytes, not characters: Telugu and Hindi are three bytes each in UTF-8, so a
+    # character count under-reports the file by a third and the docs quoted it
     report("  wrote i18n.js — %d languages, %d page phrases + %d script keys of %d, %.1f KB" % (
         len(i18n.LANGS), len(used), len(keys), len(i18n.LOCALISABLE) + len(i18n.JS_STRINGS),
-        len(runtime) / 1024.0))
+        len(runtime.encode("utf-8")) / 1024.0))
 
     report("  %d phrases hooked in this trial" % total)
 

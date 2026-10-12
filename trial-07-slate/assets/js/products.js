@@ -1,3 +1,4 @@
+function fallbackT(key, english) { return english === undefined ? key : english; }
 /* WHYNOT — Trial 07 · Slate & Rail · catalogue + "my list".
    The same catalogue as every other trial — same data, same behaviour, same shortlist — laid out as table rows you scan down, because that is
    the opposite of the card grid the other six directions use.
@@ -82,8 +83,8 @@
   function toggleItem(id) {
     var ids = readList();
     var i = ids.indexOf(id);
-    if (i === -1) { ids.push(id); flash(T("addedToast", T("addedToast", T("addedToast", T("addedToast", T("addedToast", T("addedToast", "Added to your list"))))))); }
-    else { ids.splice(i, 1); flash(T("removed", T("removed", T("removed", T("removed", T("removed", T("removed", "Removed from your list"))))))); }
+    if (i === -1) { ids.push(id); flash(T("addedToast", "Added to your list")); }
+    else { ids.splice(i, 1); flash(T("removed", "Removed from your list")); }
     writeList(ids);
     return i === -1;
   }
@@ -96,7 +97,7 @@
       nodes[i].hidden = n === 0;
     }
     var labels = document.querySelectorAll("[data-list-label]");
-    for (var j = 0; j < labels.length; j++) labels[j].textContent = String(n) + (n === 1 ? T("item", T("item", T("item", T("item", T("item", T("item", " item")))))) : T("items", T("items", T("items", T("items", T("items", T("items", " items")))))));
+    for (var j = 0; j < labels.length; j++) labels[j].textContent = String(n) + (n === 1 ? T("item", " item") : T("items", " items"));
   }
 
   /* ------------------------------------------------------------- rendering */
@@ -119,9 +120,9 @@
         '<div class="row__act">' +
           '<button class="btn btn--sm ' + (added ? "btn--done" : "btn--primary") + '" type="button" ' +
             'data-add="' + p.id + '" aria-pressed="' + (added ? "true" : "false") + '">' +
-            (added ? T("added", T("added", T("added", T("added", T("added", T("added", "In my list")))))) : T("add", T("add", T("add", T("add", T("add", T("add", "Add to list"))))))) + "</button>" +
+            (added ? T("added", "In my list") : T("add", "Add to list")) + "</button>" +
           '<a class="btn btn--sm btn--ghost" href="contact.html?about=' + encodeURIComponent(p.title) + '">' +
-            T("askAbout", T("askAbout", T("askAbout", T("askAbout", T("askAbout", T("askAbout", "Ask about this")))))) + "</a>" +
+            T("askAbout", "Ask about this") + "</a>" +
         "</div>" +
       "</div>";
   }
@@ -132,7 +133,7 @@
       var id = buttons[i].getAttribute("data-add");
       var added = inList(id);
       buttons[i].className = "btn btn--sm " + (added ? "btn--done" : "btn--primary");
-      buttons[i].innerHTML = added ? T("added", T("added", T("added", T("added", T("added", T("added", "&#10003; In my list")))))) : T("add", T("add", T("add", T("add", T("add", T("add", "+ Add to my list"))))));
+      buttons[i].innerHTML = added ? T("added", "&#10003; In my list") : T("add", "+ Add to my list");
     }
   }
 
@@ -155,9 +156,9 @@
     if (!ids.length) {
       panel.innerHTML =
         '<div class="empty">' + icon("i-cart") +
-          '<p class="display display--xs">' + T("emptyList", T("emptyList", T("emptyList", T("emptyList", T("emptyList", T("emptyList", "Your list is empty")))))) + "</p>" +
+          '<p class="display display--xs">' + T("emptyList", "Your list is empty") + "</p>" +
           '<p class="note">' + T("emptyHelp", "Add anything you want priced. It stays on this device until you send it.") + "</p>" +
-          '<a class="btn btn--sm" href="#catalogue">' + T("browse", T("browse", T("browse", T("browse", T("browse", T("browse", "Browse the catalogue")))))) + "</a>" +
+          '<a class="btn btn--sm" href="#catalogue">' + T("browse", "Browse the catalogue") + "</a>" +
         "</div>";
       return;
     }
@@ -176,14 +177,14 @@
           "</div>";
         }).join("") +
         '<p class="list-total">' + ids.length +
-          (ids.length === 1 ? T("item", T("item", T("item", T("item", T("item", T("item", " item")))))) : T("items", T("items", T("items", T("items", T("items", T("items", " items"))))))) +
+          (ids.length === 1 ? T("item", " item") : T("items", " items")) +
           " \u2014 " + T("weWillPrice", "we will price it and call you") + "</p>" +
         '<div class="actions">' +
           '<a class="btn btn--primary" href="https://wa.me/91' + HELPLINE + "?text=" + encodeURIComponent(sendText()) + '" target="_blank" rel="noopener noreferrer">' +
-            icon("i-whatsapp") + " " + T("wa", T("wa", T("wa", T("wa", T("wa", T("wa", "Send on WhatsApp")))))) + "</a>" +
+            icon("i-whatsapp") + " " + T("wa", "Send on WhatsApp") + "</a>" +
           '<a class="btn" href="tel:+91' + HELPLINE + '">' + icon("i-call") + " " + T("callShort", "Call") + " " + HELPLINE + "</a>" +
           '<a class="btn btn--ghost" href="mailto:' + EMAIL + "?subject=" + encodeURIComponent("Price enquiry from the website") +
-            "&body=" + encodeURIComponent(sendText()) + '">' + T("emailList", T("emailList", T("emailList", T("emailList", T("emailList", T("emailList", "Email the list")))))) + "</a>" +
+            "&body=" + encodeURIComponent(sendText()) + '">' + T("emailList", "Email the list") + "</a>" +
         "</div>" +
         '<p class="note">' + T("conceptNote2", "No card details, no account, nothing charged. A person from your nearest branch replies with today\u2019s price.") + "</p>" +
       "</div>";
@@ -226,14 +227,14 @@
     grid.innerHTML = shown.length
       ? shown.map(rowHtml).join("")
       : '<div class="empty">' + icon("i-search") +
-        '<p class="display display--xs">' + T("noMatch", T("noMatch", T("noMatch", T("noMatch", T("noMatch", T("noMatch", "Nothing matches that")))))) + "</p>" +
+        '<p class="display display--xs">' + T("noMatch", "Nothing matches that") + "</p>" +
         '<p class="note">' + T("noMatchHelp", "Try a shorter word, or clear the filters.") + "</p>" +
-        '<button class="btn btn--sm" type="button" data-clear>' + T("clearF", T("clearF", T("clearF", T("clearF", T("clearF", T("clearF", "Clear filters")))))) + "</button></div>";
+        '<button class="btn btn--sm" type="button" data-clear>' + T("clearF", "Clear filters") + "</button></div>";
 
     var count = document.querySelector("[data-result-count]");
     if (count) {
       count.textContent = state.q || state.cat !== "all" || state.town !== "all"
-        ? T("showing", T("showing", T("showing", T("showing", T("showing", T("showing", "Showing")))))) + " " + shown.length + " " + T(T(T(T(T(T("of", "of"), T("of", "of")), T(T("of", "of"), T("of", "of"))), T(T(T("of", "of"), T("of", "of")), T(T("of", "of"), T("of", "of")))), T(T(T(T("of", "of"), T("of", "of")), T(T("of", "of"), T("of", "of"))), T(T(T("of", "of"), T("of", "of")), T(T("of", "of"), T("of", "of"))))), T(T(T(T(T("of", "of"), T("of", "of")), T(T("of", "of"), T("of", "of"))), T(T(T("of", "of"), T("of", "of")), T(T("of", "of"), T("of", "of")))), T(T(T(T("of", "of"), T("of", "of")), T(T("of", "of"), T("of", "of"))), T(T(T("of", "of"), T("of", "of")), T(T("of", "of"), T("of", "of")))))) + " " + PRODUCTS.length + " " +
+        ? T("showing", "Showing") + " " + shown.length + " " + T("of", "of") + " " + PRODUCTS.length + " " +
           T("products", "products")
         : PRODUCTS.length + " " + T("products", "products") + " \u00b7 " + CATS.length + " " +
           T("categories", "categories") + " \u00b7 " + T("askPrice", "ask for today's price");

@@ -78,7 +78,7 @@ These three share a builder (`_tools/sections.py`) and therefore share structure
 | Imagery | None at all — 25.6 KB of CSS, 5 icons, 6 pages |
 | Languages | English, Telugu, Hindi — 258 phrases hooked, 297 in the runtime table |
 | Measured | `_tools/contrast07.py`: 30 combinations, both modes, 0 below target |
-| First view | ≈235 KB uncompressed, **≈40 KB gzipped** (28 KB HTML, 23 KB CSS, 108 KB JS of which 46 KB is the three-language runtime, 76 KB latin type) |
+| First view | ≈232 KB uncompressed, **≈40 KB gzipped** (28 KB HTML, 23 KB CSS, 106 KB JS of which 64 KB is the three-language runtime, 76 KB latin type) |
 | Whole directory | 438 KB in 20 files — no images at all |
 
 **Why the form had to change:** the first six trials are all a header, a hero and a grid of cards. That is a good default and a bad habit — a shop with 25 branches is an information problem, so Trial 07 renders the catalogue as a list you scan (item, category, specification, branches, button) and keeps the shortlist beside it as a panel. Nothing about the content changed; the skeleton did.
@@ -188,6 +188,7 @@ _tools/
 ├── i18n.py                 every phrase in English, Telugu and Hindi, plus the runtime strings
 ├── i18n07.py               Trial 07's own copy, in the same three languages
 ├── localise.py             hooks the HTML, patches the scripts, subsets the Indic faces, writes i18n.js
+│                           (and refuses to write if a hook landed on the wrong element)
 │
 │   ── and the seventh direction ──
 ├── build-trial07.py        six pages: rail, tab bar, facts strip, table catalogue
@@ -223,6 +224,13 @@ _tools/
 ```bash
 cd _tools && npm install jsdom && node test-trials.mjs
 ```
+
+Two things exist because they were bugs first. `localise.py` verifies every hook twice: that the
+insertion changed attributes and nothing else (same tag sequence, same text), and that each hook sits
+on the element whose text is that phrase — an offset a character or two out still produces valid HTML,
+it just hooks the wrong node. And the script patch has to be idempotent: running it twice once wrapped
+its own wrapper, leaving `T("k", T("k", "English"))` in the file a customer would read, so a second
+pass now has to change nothing or the build stops.
 
 185 checks that run the real scripts against the real pages in a real DOM: 17 products render in all three skins, filters and search narrow correctly, the shortlist updates every badge and the WhatsApp and email links carry the list, all 25 map links in all three trials resolve to `google.com/maps/search`, district filters combine with search, the form rejects a bad mobile number and its success state stays honest about there being no server, Trial 03 ships AVIF with WebP behind it and declares its image dimensions, each trial uses only its own localStorage key, and the product data is byte-identical across all three. Trials 04–06 get a shared-contract block with two checks that catch design-port bugs specifically: **every class the rendered page uses must exist in that trial's stylesheet**, and every icon reference must resolve. Both found real bugs the moment they were written (a missing `[data-cat-chips]` container left the catalogue with no category filter at all, and several unstyled classes).
 
@@ -293,13 +301,13 @@ Trial 07 · Slate & Rail
 |---|---|---|
 | HTML, largest page (sprite included) | 27.9 KB | 6.4 KB |
 | CSS, both palettes, entire site | 23.0 KB | 5.5 KB |
-| JS, five files (i18n.js is 46 KB of it) | 107.8 KB | 28.0 KB |
+| JS, five files (i18n.js is 64 KB of it) | 105.6 KB | 27.9 KB |
 | Latin type, 4 faces | 75.9 KB | — |
 | Indic type, 4 faces | 97.5 KB | downloaded only if the reader picks Telugu or Hindi |
 | Images | none | — |
-| **First view, English** | **≈235 KB** | **≈40 KB** |
+| **First view, English** | **≈232 KB** | **≈40 KB** |
 
-The runtime carries only this trial's copy: 160 hooked phrases plus the 35 keys its scripts look up, out of 297 in the table. Every trial ships its own slice — Trial 01's runtime is 14.5 KB, Trial 07's 46.5 KB, which is the price of this design having the most copy in three languages.
+The runtime carries only this trial's copy: 160 hooked phrases plus the 35 keys its scripts look up, out of 297 in the table. Every trial ships its own slice — Trial 01's runtime is 18.1 KB on disk, Trial 07's 64.1 KB, which is the price of this design having the most copy in three languages.
 
 Seven trials, no analytics, no tag manager, no cookie banner (nothing to consent to), no third-party requests of any kind, and no embedded Google Maps iframe — the map only opens when the visitor chooses to ask for directions.
 

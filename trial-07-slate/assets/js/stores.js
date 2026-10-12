@@ -1,3 +1,4 @@
+function fallbackT(key, english) { return english === undefined ? key : english; }
 /* WHYNOT — Trial 07 · Slate & Rail · showroom directory.
    The same 25 addresses as every other trial, grouped by district — a
    directory you read down, in a design with no cards in it.
@@ -171,9 +172,9 @@
         '<p class="store__addr">' + esc(full) + "</p>" +
         '<div class="store__acts">' +
           '<a class="btn btn--sm" href="' + mapsUrl(s) + '" target="_blank" rel="noopener noreferrer">' +
-            icon("i-pin") + " " + T("directions", T("directions", T("directions", T("directions", T("directions", T("directions", "Directions")))))) + "</a>" +
+            icon("i-pin") + " " + T("directions", "Directions") + "</a>" +
           '<button class="btn btn--sm btn--ghost" type="button" data-copy="' + esc(full) + '">' +
-            icon("i-copy") + " " + T("copyAddr", T("copyAddr", T("copyAddr", T("copyAddr", T("copyAddr", T("copyAddr", "Copy address")))))) + "</button>" +
+            icon("i-copy") + " " + T("copyAddr", "Copy address") + "</button>" +
         "</div>" +
       "</article>";
   }
@@ -216,7 +217,7 @@
     });
     if (countEl) {
       countEl.textContent = state.q || state.district !== "all"
-        ? T("showing", T("showing", T("showing", T("showing", T("showing", T("showing", "Showing")))))) + " " + shown + " " + T(T(T(T(T(T("of", "of"), T("of", "of")), T(T("of", "of"), T("of", "of"))), T(T(T("of", "of"), T("of", "of")), T(T("of", "of"), T("of", "of")))), T(T(T(T("of", "of"), T("of", "of")), T(T("of", "of"), T("of", "of"))), T(T(T("of", "of"), T("of", "of")), T(T("of", "of"), T("of", "of"))))), T(T(T(T(T("of", "of"), T("of", "of")), T(T("of", "of"), T("of", "of"))), T(T(T("of", "of"), T("of", "of")), T(T("of", "of"), T("of", "of")))), T(T(T(T("of", "of"), T("of", "of")), T(T("of", "of"), T("of", "of"))), T(T(T("of", "of"), T("of", "of")), T(T("of", "of"), T("of", "of")))))) + " " + STORES.length
+        ? T("showing", "Showing") + " " + shown + " " + T("of", "of") + " " + STORES.length
         : STORES.length + " " + T("showrooms", "showrooms") + " \u00b7 " + T("twentyThreeTowns", "23 towns") +
           " \u00b7 " + T("oneHelpline", "1 helpline");
     }

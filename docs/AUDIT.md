@@ -159,7 +159,8 @@ Every trial now reads in English, Telugu and Hindi. The Telugu and Hindi were
 changes the shape of the copy: a terse English sentence becomes three words in
 Telugu, and a paragraph becomes a sentence. Trial 07, the tersest English of the
 seven, has 297 phrases in the runtime table; each trial ships only the slice it
-uses (14.5 KB for Trial 01, 46.5 KB for Trial 07).
+uses (18.1 KB on disk for Trial 01, 64.1 KB for Trial 07 — Telugu and Hindi are
+three bytes a character, so these are file sizes, not character counts).
 
 Type is self-hosted for all three scripts, subset per trial to the characters
 actually used: Noto Sans Telugu 20.1/20.6 KB and Noto Sans Devanagari

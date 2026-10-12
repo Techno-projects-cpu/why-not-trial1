@@ -40,6 +40,17 @@ def write(name, text):
     print("  wrote %-12s %5.1f KB" % (name, len(text) / 1024))
 
 
+def sub_either(text, olds, new, label):
+    """Trial 04's source may be plain or already localised, so try both."""
+    if new in text:
+        return text
+    for old in olds:
+        if old in text:
+            return text.replace(old, new, 1)
+    print("  ! could not map: %s" % label)
+    return text
+
+
 def sub_once(text, old, new, label):
     if old not in text:
         print("  ! could not map: %s" % label)
@@ -207,11 +218,14 @@ def main():
     # chips: this design's "all" chip carries no icon
     p = sub_once(p, 'icon("i-sparkle") + "All</button>"', 'T("all", "All") + "</button>"', "all chip")
 
-    # list labels: keep the count wording, this design has no mobile action bar
-    p = sub_once(p,
-                 'labels[j].textContent = n === 1 ? "1 item" : n + T("items", " items");',
-                 'labels[j].textContent = String(n) + (n === 1 ? T("item", " item") : T("items", " items"));',
-                 "list labels")
+    # list labels: keep the count wording, this design has no mobile action bar.
+    # The source is Trial 04's file, which may already be localised (it has been
+    # through localise.py) or still plain, so both spellings of the line are tried.
+    p = sub_either(p,
+                   ['labels[j].textContent = n === 1 ? "1 item" : n + T("items", " items");',
+                    'labels[j].textContent = n === 1 ? "1 item" : n + " items";'],
+                   'labels[j].textContent = String(n) + (n === 1 ? T("item", " item") : T("items", " items"));',
+                   "list labels")
 
     # ?q= from the 404 page's search box pre-fills the catalogue search
     p = sub_once(p, """  /* Deep link: products.html?cat=fridge, or a category tapped on the home page. */""",
@@ -313,9 +327,7 @@ def main():
         : STORES.length + " " + T("showrooms", "showrooms") + " \\u00b7 " + T("twentyThreeTowns", "23 towns") +
           " \\u00b7 " + T("oneHelpline", "1 helpline");
     }''', "store count")
-    s = sub_once(s, '        ? "Showing " + shown + " of " + STORES.length',
-                 '        ? T("showing", "Showing") + " " + shown + " " + T("of", "of") + " " + STORES.length',
-                 "store count (short)")
+    # the long form above may already have matched; this only fires on the short one
     s = sub_once(s, '''    nodes.forEach(function (el) {
       var ok = matches(el);
       el.hidden = !ok;

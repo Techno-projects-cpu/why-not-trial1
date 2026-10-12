@@ -88,8 +88,8 @@ function fallbackT(key, english) { return english === undefined ? key : english;
   function toggleItem(id) {
     var ids = readList();
     var i = ids.indexOf(id);
-    if (i === -1) { ids.push(id); flash(T("addedToast", T("addedToast", T("addedToast", "Added to your list")))); }
-    else { ids.splice(i, 1); flash(T("removed", T("removed", T("removed", "Removed from your list")))); }
+    if (i === -1) { ids.push(id); flash(T("addedToast", "Added to your list")); }
+    else { ids.splice(i, 1); flash(T("removed", "Removed from your list")); }
     writeList(ids);
     return i === -1;
   }
@@ -102,7 +102,7 @@ function fallbackT(key, english) { return english === undefined ? key : english;
       nodes[i].hidden = n === 0;
     }
     var labels = document.querySelectorAll("[data-list-label]");
-    for (var j = 0; j < labels.length; j++) labels[j].textContent = n === 1 ? "1 item" : n + T("items", T("items", T("items", " items")));
+    for (var j = 0; j < labels.length; j++) labels[j].textContent = n === 1 ? "1 item" : n + T("items", " items");
   }
 
   /* ------------------------------------------------------------- rendering */
@@ -123,7 +123,7 @@ function fallbackT(key, english) { return english === undefined ? key : english;
         "</div>" +
         '<div class="card__foot">' +
           '<button class="btn btn--sm ' + (added ? "btn--cyan" : "btn--magenta") + '" type="button" data-add="' + p.id + '">' +
-            (added ? T("added", T("added", T("added", "In your list"))) : T("add", T("add", T("add", "Add to list")))) +
+            (added ? T("added", "In your list") : T("add", "Add to list")) +
           "</button>" +
           '<a class="btn btn--sm btn--ghost" href="contact.html?about=' + encodeURIComponent(p.title) + '">Ask about this</a>' +
         "</div>" +
@@ -136,7 +136,7 @@ function fallbackT(key, english) { return english === undefined ? key : english;
       var id = buttons[i].getAttribute("data-add");
       var added = inList(id);
       buttons[i].className = "btn btn--sm " + (added ? "btn--brand" : "btn--brand");
-      buttons[i].innerHTML = added ? T("added", T("added", T("added", "&#10003; In my list"))) : T("add", T("add", T("add", "+ Add to my list")));
+      buttons[i].innerHTML = added ? T("added", "&#10003; In my list") : T("add", "+ Add to my list");
     }
   }
 
@@ -177,7 +177,7 @@ function fallbackT(key, english) { return english === undefined ? key : english;
             '<button class="btn btn--sm btn--ghost" type="button" data-remove="' + p.id + '" aria-label="Remove ' + esc(p.title) + '">' + T("remove", "Remove") + '</button>' +
           "</div>";
         }).join("") +
-        '<p class="list-total">' + ids.length + (ids.length === 1 ? T("item", T("item", T("item", " item"))) : T("items", T("items", T("items", " items")))) + " \u2014 we will price it and call you</p>" +
+        '<p class="list-total">' + ids.length + (ids.length === 1 ? T("item", " item") : T("items", " items")) + " \u2014 we will price it and call you</p>" +
         '<div class="actions">' +
           '<a class="btn btn--magenta" href="https://wa.me/91' + HELPLINE + "?text=" + encodeURIComponent(sendText()) + '" target="_blank" rel="noopener noreferrer">' +
             doodle("i-whatsapp") + " Send on WhatsApp</a>" +

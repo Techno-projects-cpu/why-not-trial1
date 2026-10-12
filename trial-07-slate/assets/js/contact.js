@@ -1,3 +1,4 @@
+function fallbackT(key, english) { return english === undefined ? key : english; }
 /* WHYNOT — Trial 07 · Slate & Rail · the enquiry form.
    Same validation and same honesty as the other trials: the form says
    plainly that there is no server behind it.

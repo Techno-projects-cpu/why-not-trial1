@@ -184,7 +184,7 @@ function fallbackT(key, english) { return english === undefined ? key : english;
         '<p class="store__addr">' + escapeHtml(full) + "</p>" +
         '<div class="store__actions">' +
           '<a class="btn btn--ghost btn--sm" href="' + mapsUrl(store) + '" target="_blank" rel="noopener noreferrer">' +
-            T("directions", T("directions", T("directions", "Directions"))) +
+            T("directions", "Directions") +
             '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M17 7H8M17 7v9"/></svg>' +
           "</a>" +
           '<button class="btn btn--sm" type="button" data-copy="' + escapeHtml(full) + '">Copy address</button>' +
