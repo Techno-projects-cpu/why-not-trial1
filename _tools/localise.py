@@ -66,6 +66,7 @@ def runtime_js(used, keys):
     comes from the page itself (it is captured at boot), so it is never carried
     twice — and a trial does not pay for the other six trials' copy."""
     import json
+    used = sorted(used)   # a set: sort it, or PYTHONHASHSEED rewrites the file every run
     te, hi = {}, {}
     for phrase in used:
         entry = i18n.LOCALISABLE.get(phrase)

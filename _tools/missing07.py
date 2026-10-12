@@ -184,13 +184,13 @@ def main():
     print("pages checked: %d" % len(pages))
     if not missing:
         print("every visible phrase on Trial 07 has a translation")
-        return 1
+        return 0
     print("phrases with no translation: %d" % sum(len(v) for v in missing.values()))
     for page, gaps in missing.items():
         print("\n  %s" % page)
         for gap in gaps:
             print("    %s" % gap[:160])
-    return 0
+    return 1
 
 
 if __name__ == "__main__":

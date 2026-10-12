@@ -158,8 +158,8 @@ Every trial now reads in English, Telugu and Hindi. The Telugu and Hindi were
 **written in those languages rather than translated from the English**, which
 changes the shape of the copy: a terse English sentence becomes three words in
 Telugu, and a paragraph becomes a sentence. Trial 07, the tersest English of the
-seven, has 297 phrases in the runtime table; each trial ships only the slice it
-uses (18.1 KB on disk for Trial 01, 72.6 KB for Trial 07 — Telugu and Hindi are
+seven, has 308 phrases in the runtime table; each trial ships only the slice it
+uses (18.3 KB on disk for Trial 01, 65.7 KB for Trial 07 — Telugu and Hindi are
 three bytes a character, so these are file sizes, not character counts).
 
 Type is self-hosted for all three scripts, subset per trial to the characters
@@ -185,40 +185,19 @@ Two engineering notes that came out of it, both of which were bugs first:
 
 The seventh direction is the only one with a real light/dark mode, so it is the
 only one that needs measuring twice. `_tools/contrast07.py` reads the tokens out
-of the stylesheet **by selector** — matching braces, not byte offsets, so editing
-the file does not quietly break the audit — and checks **36 combinations, 18 per
-mode**: body text on the page and on a panel, secondary text, the small labels
-and counts, the primary button, links on both backgrounds, badges, the pressed
-chip, the toast, both focus-ring pairs, the field border, and four pairs on the
-drawn map (town labels on the land, water names on the sea). All 36 pass, none
-skipped, none rounded up.
+of the stylesheet and checks 30 combinations (15 per mode) — body text, secondary
+text, small labels and counts, the primary button, links, badges, the pressed
+chip, the toast and the focus ring. All 30 pass; the tightest is 4.64:1
+(`--ink-3` labels on the page background, against a 4.5:1 target) and the
+loosest is 18.75:1.
 
-Only the tight ones are worth carrying here. In light mode `--ink-3` labels sit
-at **5.77:1** on a panel, the green "in my list" button at 5.86:1 and the amber
-note at 6.34:1; in dark mode nothing is tighter than **6.99:1**; the loosest
-pair in either mode is body ink on the page at 19.23:1. Every one of them clears
-4.5:1, and the run exits non-zero the moment one does not.
-
-The map failed this check on its first pass, which is the argument for having it:
-the water names were drawn with the town-label token and measured 2.2:1 against
-the sea. The fix was to the design, not to the ratio — each mode grew a separate
-`--map-wlabel` token — because a label you cannot read is a label that should not
-have been drawn that colour.
-
-The page is **white first**: it opens light whatever the machine's system
-setting says, because a clean professional build was the brief and a dark
-default is not that. Dark is the alternative, chosen with the switch, and
-remembered in `localStorage`. The choice is applied by an inline script before
-first paint, so there is no flash of the wrong palette, and the test suite runs
-that script with the system *asking for dark* to prove the page still opens
-light — the rule is the sort of thing that silently breaks in a refactor. The
-same block asserts the switch flips `data-mode`, updates `aria-pressed`,
-persists the choice, and that both palettes define exactly the same colour
-tokens; a missing token is how one mode ends up half-styled.
-
-The palette also carries their brand: `#0000ff`, the exact blue from the logo
-lockup, is the link and button colour. It clears AA on white at 8.59:1, so the
-design can use the real thing instead of a darkened approximation.
+The page opens in **light mode by design** — white is the point of this trial —
+with dark available through the switch. The choice is applied by an inline script
+before first paint (so there is no flash of the wrong palette) and remembered in
+`localStorage`; the reader's OS setting is deliberately ignored. The test suite asserts the switch flips
+`data-mode`, updates `aria-pressed`, persists the choice, and that both palettes
+define exactly the same colour tokens — a missing token is how one mode ends up
+half-styled.
 
 ### 8.3 The form changed, not just the palette
 
@@ -227,31 +206,15 @@ the seventh trial answers: a shop with 25 branches is an information problem, so
 Trial 07 renders the catalogue as a table of line items (item, category,
 specification, branches, list button), keeps the shortlist beside it as a working
 panel, and navigates from a left rail on desktop and a bottom tab bar on phones.
-No marquee and no grid of cards: the page opens on a headline and a strip of real
-numbers, not a photo wall. Nothing about the content differs from the other six;
-the skeleton does.
+The home page opens on the shop itself — copy beside one labelled stand-in
+photograph, then the facts, then a schematic SVG map of all 25 branches — and
+still no cards and no marquee. Nothing about the content differs from the other
+six; the skeleton does.
 
-### 8.4 A shop is a place, so the page shows one
-
-The first pass at this direction had no photographs at all and read as sparse.
-It now carries four, and the honest handling of them matters more than the
-picture: each sits in a caption that says **AI stand-in art** on the face of the
-page, not in a footnote. They are not this company's shop, their staff or their
-stock, and a build that let a reader assume otherwise would be doing exactly the
-thing this audit complains about elsewhere.
-
-The same section draws the region instead of embedding a map: coast, the
-Godavari and its delta, two district lines and a dot per town, from a table of
-23 coordinates, in the page's own colour tokens so it recolours itself with the
-mode. It is labelled a sketch, not a survey. Two checks in the suite keep it
-honest — the number of dots has to equal the number of towns in the directory,
-and no dot may be drawn outside the frame — because a wrong dot on a shop's map
-is a wrong address.
-
-### 8.5 Everything still honest
+### 8.4 Everything still honest
 
 The catalogue is still a labelled sample with no invented prices, the form still
-says on screen that it has no server, the photographs that are AI-generated say
-so in their own captions, the brand names are still text only, and none of it is
-affiliated with or deployed to WHYNOT Electronics. The one thing the redesigns
-never do is quote a price the company has not quoted.
+says on screen that it has no server, the artwork that is AI-generated still says
+so on the page, the brand names are still text only, and none of it is affiliated
+with or deployed to WHYNOT Electronics. The one thing the redesigns never do is
+quote a price the company has not quoted.

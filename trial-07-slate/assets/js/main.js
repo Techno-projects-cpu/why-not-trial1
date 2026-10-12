@@ -37,18 +37,6 @@ function fallbackT(key, english) { return english === undefined ? key : english;
     });
   }
 
-  /* if the reader has not chosen, follow the system as it changes */
-  if (window.matchMedia) {
-    var mq = window.matchMedia("(prefers-color-scheme: dark)");
-    var follow = function (e) {
-      var saved = null;
-      try { saved = localStorage.getItem("whynot-mode"); } catch (err) {}
-      if (!saved) setMode(e.matches ? "dark" : "light", false);
-    };
-    if (mq.addEventListener) mq.addEventListener("change", follow);
-    else if (mq.addListener) mq.addListener(follow);
-  }
-
   /* the shortlist sheet on phones: Escape closes it, tapping the backdrop too */
   document.addEventListener("keydown", function (e) {
     if (e.key !== "Escape") return;

@@ -5,18 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Not found — WHYNOT redesign concept (Trial 07)</title>
 <meta name="description" content="That page is not here. The catalogue and the showroom list are.">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0d12" media="(prefers-color-scheme: dark)">
 <link rel="stylesheet" href="assets/css/style.css">
 <script>
-  /* White first. The page opens light whatever the machine's system setting
-     says — the mode switch is there for the reader who wants dark, and the
-     choice is remembered. Applying it here, before first paint, is what stops
-     the flash of the wrong palette a mode switch usually causes. */
+  /* The page is light unless the reader has chosen dark before. Not the system
+     setting: this design opens white on purpose, and a saved choice is the only
+     thing allowed to make it dark. Applied before first paint, so no flash. */
   (function () {
     try {
-      if (localStorage.getItem("whynot-mode") === "dark") {
-        document.documentElement.setAttribute("data-mode", "dark");
-      }
+      var dark = localStorage.getItem("whynot-mode") === "dark";
+      document.documentElement.setAttribute("data-mode", dark ? "dark" : "light");
     } catch (e) {}
   })();
 </script>
@@ -158,7 +157,7 @@
     <span><span class="brand__name">WHYNOT</span>
       <span data-i18n="Electronics · 1994" class="brand__sub">Electronics · 1994</span></span>
   </a>
-  <nav class="rail__nav"><a href="index.html"><svg class="icon" aria-hidden="true"><use href="#i-slate"></use></svg><span data-i18n="Home">Home</span></a><a href="products.html"><svg class="icon" aria-hidden="true"><use href="#i-tag"></use></svg><span data-i18n="Catalogue">Catalogue</span></a><a href="stores.html"><svg class="icon" aria-hidden="true"><use href="#i-pin"></use></svg><span data-i18n="Showrooms">Showrooms</span></a><a href="about.html"><svg class="icon" aria-hidden="true"><use href="#i-people"></use></svg><span data-i18n="About">About</span></a><a href="contact.html"><svg class="icon" aria-hidden="true"><use href="#i-call"></use></svg><span data-i18n="Contact">Contact</span></a></nav>
+  <nav class="rail__nav"><a data-i18n="Home" href="index.html">Home</a><a data-i18n="Catalogue" href="products.html">Catalogue</a><a data-i18n="Showrooms" href="stores.html">Showrooms</a><a data-i18n="About" href="about.html">About</a><a data-i18n="Contact" href="contact.html">Contact</a></nav>
   <div class="rail__pick">
     <span><span data-i18n="My list" class="label">My list</span><br><strong data-list-count hidden>0</strong>
       <span data-i18n="0 items" class="note" data-list-label>0 items</span></span>
@@ -207,7 +206,7 @@
         <a data-i18n="Find a showroom" class="btn" href="stores.html">Find a showroom</a>
         <a data-i18n="Call a person" class="btn" href="contact.html">Call a person</a>
       </div>
-      <div class="panel panel--raised" style="margin-top:26px">
+      <div class="panel" style="margin-top:22px">
         <div class="panel__body">
           <form class="stack" action="products.html" method="get">
             <label class="field"><span data-i18n="Search the catalogue instead">Search the catalogue instead</span>
@@ -219,51 +218,6 @@
              box takes you there with your words.</p>
         </div>
       </div>
-      <section class="stage" aria-labelledby="lost">
-        <div class="stage__head"><h2 data-i18n="Or start from the map" class="display display--l" id="lost">Or start from the map</h2></div>
-        <svg viewBox="0 0 900 700" role="img" aria-labelledby="map-t map-d" class="map__svg">
-        <title id="map-t">Map of the Godavari districts and Visakhapatnam</title>
-        <desc id="map-d">A drawn map: 25 doors in 23 towns, from Chintalapudi and Jangareddygudem in the west to Kakinada and Anakapalle on the coast. A sketch, not a survey.</desc>
-        <rect class="map__land" x="0" y="0" width="900" height="700"/>
-        <path class="map__sea" d="M927 -167 L825 106 L730 156 L655 215 L570 282 L519 358 L478 429 L492 509 L485 593 L451 677 L390 761 L332 845 L900 700 L900 0 Z"/>
-        <path class="map__river" d="M64 257 L172 308 L254 358 L315 400 L383 425 L444 459 L485 492"/>
-        <path class="map__river" d="M400 484 L431 560 L458 627" style="stroke-width:1.4"/>
-        <path class="map__river" d="M458 467 L485 543 L485 593" style="stroke-width:1.4"/>
-        <path class="map__line map__line--soft" d="M220 249 L254 333 L288 392 L342 459 L370 534 L376 644"/>
-        <path class="map__line map__line--soft" d="M397 64 L458 165 L499 257 L485 358"/>
-        <text data-i18n="Bay of Bengal" class="map__name map__name--sea" x="620" y="600">Bay of Bengal</text>
-        <text data-i18n="Godavari" class="map__name map__name--sea" x="176" y="296">Godavari</text>
-        <g class="map__compass" aria-hidden="true">
-          <path d="M852 74 L860 46 L868 74 L860 66 Z"/>
-          <text class="map__name" x="860" y="90" text-anchor="middle">N</text>
-        </g>
-        <rect class="map__dot map__dot--brand" x="271" y="514" width="7" height="7" rx="1.5"/><rect class="map__dot map__dot--brand" x="280" y="514" width="7" height="7" rx="1.5"/>
-          <circle class="map__halt" cx="274" cy="505" r="10"/><circle class="map__dot map__dot--big" cx="274" cy="505" r="4.4"/><text class="map__name map__name--strong" x="285" y="502" text-anchor="start">Tanuku</text>
-          <circle class="map__dot" cx="213" cy="471" r="4.4"/><text class="map__name" x="202" y="454" text-anchor="end">Tadepalligudem</text>
-          <circle class="map__dot" cx="138" cy="480" r="4.4"/><text class="map__name" x="127" y="475" text-anchor="end">Bhimadolu</text>
-          <circle class="map__dot" cx="274" cy="442" r="4.4"/><text class="map__name" x="263" y="438" text-anchor="end">Nidadavolu</text>
-          <circle class="map__dot" cx="281" cy="635" r="4.4"/><text class="map__name" x="275" y="651" text-anchor="end">Narasapuram</text>
-          <circle class="map__dot" cx="291" cy="602" r="4.4"/><text class="map__name" x="302" y="604" text-anchor="start">Palakollu</text>
-          <circle class="map__dot" cx="138" cy="350" r="4.4"/><text class="map__name" x="149" y="352" text-anchor="start">Jangareddygudem</text>
-          <circle class="map__dot" cx="152" cy="421" r="4.4"/><text class="map__name" x="141" y="423" text-anchor="end">Devarapalli</text>
-          <circle class="map__dot" cx="77" cy="522" r="4.4"/><text class="map__name map__name--strong" x="88" y="524" text-anchor="start">Eluru</text>
-          <circle class="map__dot" cx="53" cy="371" r="4.4"/><text class="map__name" x="64" y="373" text-anchor="start">Chintalapudi</text>
-          <circle class="map__dot" cx="186" cy="455" r="4.4"/><text class="map__name" x="173" y="478" text-anchor="end">Nallajarla</text>
-          <circle class="map__dot" cx="247" cy="518" r="4.4"/><text class="map__name" x="236" y="515" text-anchor="end">Attili</text>
-          <circle class="map__dot" cx="220" cy="593" r="4.4"/><text class="map__name" x="209" y="595" text-anchor="end">Bhimavaram</text>
-          <circle class="map__dot map__dot--east" cx="315" cy="400" r="4.4"/><text class="map__name map__name--strong" x="326" y="397" text-anchor="start">Rajahmundry</text>
-          <circle class="map__dot map__dot--east" cx="291" cy="396" r="4.4"/><text class="map__name" x="280" y="392" text-anchor="end">Kovvur</text>
-          <circle class="map__dot map__dot--east" cx="383" cy="576" r="4.4"/><text class="map__name" x="394" y="579" text-anchor="start">Amalapuram</text>
-          <circle class="map__dot map__dot--east" cx="390" cy="610" r="4.4"/><text class="map__name" x="399" y="626" text-anchor="start">Tatipaka</text>
-          <circle class="map__dot map__dot--east" cx="325" cy="505" r="4.4"/><text class="map__name" x="336" y="518" text-anchor="start">Ravulapalem</text>
-          <circle class="map__dot map__dot--east" cx="359" cy="459" r="4.4"/><text class="map__name" x="370" y="456" text-anchor="start">Mandapeta</text>
-          <circle class="map__dot map__dot--east" cx="421" cy="282" r="4.4"/><text class="map__name" x="432" y="279" text-anchor="start">Yeleswaram</text>
-          <circle class="map__dot map__dot--east" cx="468" cy="354" r="4.4"/><text class="map__name" x="479" y="351" text-anchor="start">Pithapuram</text>
-          <circle class="map__dot map__dot--east" cx="465" cy="417" r="4.4"/><text class="map__name map__name--strong" x="476" y="420" text-anchor="start">Kakinada</text>
-          <circle class="map__dot map__dot--vizag" cx="720" cy="110" r="4.4"/><text data-i18n="Anakapalle" class="map__name map__name--strong" x="709" y="113" text-anchor="end">Anakapalle</text>
-        
-      </svg>
-      </section>
 
   </main>
   <footer class="wrap foot">
@@ -271,17 +225,16 @@
       <p><strong>WHYNOT Electronics Pvt Ltd</strong><br>RS No 24/1, Ground &amp; Cellar<br>Sri Sowdha Towers, Undrajavaram Road<br>Tanuku 534211, Andhra Pradesh</p>
       <p>Helpline <a href="tel:+918886222448">88862 22448</a><br>
          <a href="mailto:whynot.rayudu@gmail.com">whynot.rayudu@gmail.com</a> · open 10 am to 9 pm</p>
-      <p data-i18n="A redesign concept for whynotindia.in, built as portfolio work. Not affiliated with the company and not deployed anywhere. Photographs on this page are AI-generated stand-in art and the enquiry form has no server behind it." class="note">A redesign concept for whynotindia.in, built as portfolio work.
-         Not affiliated with the company and not deployed anywhere. Photographs on
-         this page are AI-generated stand-in art and the enquiry form has no server
-         behind it.</p>
+      <p data-i18n="A redesign concept for whynotindia.in, built as portfolio work. Not affiliated with the company and not deployed anywhere. Artwork is AI-generated stand-in art, and the enquiry form has no server behind it." class="note">A redesign concept for whynotindia.in, built as portfolio work.
+         Not affiliated with the company and not deployed anywhere. Artwork is
+         AI-generated stand-in art, and the enquiry form has no server behind it.</p>
       <p class="note">© <span data-year>2026</span> concept build.</p>
     </div>
   </footer>
 </div>
 
 <nav class="tabs" aria-label="Pages">
-<a href="index.html"><svg class="icon" aria-hidden="true"><use href="#i-slate"></use></svg><span data-i18n="Home">Home</span></a><a href="products.html"><svg class="icon" aria-hidden="true"><use href="#i-tag"></use></svg><span data-i18n="Catalogue">Catalogue</span></a><a href="stores.html"><svg class="icon" aria-hidden="true"><use href="#i-pin"></use></svg><span data-i18n="Showrooms">Showrooms</span></a><a href="about.html"><svg class="icon" aria-hidden="true"><use href="#i-people"></use></svg><span data-i18n="About">About</span></a><a href="contact.html"><svg class="icon" aria-hidden="true"><use href="#i-call"></use></svg><span data-i18n="Contact">Contact</span></a></nav>
+<a data-i18n="Home" href="index.html">Home</a><a data-i18n="Catalogue" href="products.html">Catalogue</a><a data-i18n="Showrooms" href="stores.html">Showrooms</a><a data-i18n="About" href="about.html">About</a><a data-i18n="Contact" href="contact.html">Contact</a></nav>
 <div class="toast" data-toast role="status" aria-live="polite"></div>
 </body>
 </html>

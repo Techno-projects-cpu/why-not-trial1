@@ -327,7 +327,7 @@ for (const dir of NEW_TRIALS) {
 
 
 
-console.log("\n— TRIAL 07 white first, and the mode switch ————————————————");
+console.log("\n— TRIAL 07 light / dark, white first ————————————————————");
 {
   const dir = "trial-07-slate";
   const css = fs.readFileSync(`${ROOT}/${dir}/assets/css/style.css`, "utf8");
@@ -336,39 +336,40 @@ console.log("\n— TRIAL 07 white first, and the mode switch ——————�
   const btn = d.querySelector("[data-mode-toggle]");
 
   check(!!btn, "the mode switch is on the page");
-  check(d.documentElement.getAttribute("data-mode") === "light", "the page is written light");
+  check(d.documentElement.getAttribute("data-mode") === "light", "first paint is light — the default, system setting ignored");
 
   /* The rule this design is built on: white first, whatever the machine says.
      The inline script is what decides that, so the test runs it with the system
-     asking for dark and no stored choice. */
+     asking for dark and nothing stored — the page must stay light. */
   const inline = [...d.querySelectorAll("script:not([src])")].map((s) => s.textContent).join("\n");
   w.localStorage.clear();
   w.matchMedia = () => ({ matches: true, addEventListener() {} });
-  d.documentElement.setAttribute("data-mode", "light");   // as the markup ships
+  d.documentElement.setAttribute("data-mode", "light");
   w.eval(inline);
   check(d.documentElement.getAttribute("data-mode") === "light",
         "white even when the system asks for dark");
-
-  // a reader who chose dark gets dark on the next page, before first paint
   w.localStorage.setItem("whynot-mode", "dark");
   d.documentElement.setAttribute("data-mode", "light");
   w.eval(inline);
-  check(d.documentElement.getAttribute("data-mode") === "dark", "and dark is remembered once chosen");
+  check(d.documentElement.getAttribute("data-mode") === "dark",
+        "and dark is remembered once chosen");
+  // hand a clean slate back to the switch flow below
+  w.localStorage.removeItem("whynot-mode");
+  d.documentElement.setAttribute("data-mode", "light");
 
   btn.click();
-  check(d.documentElement.getAttribute("data-mode") === "light", "the switch goes back to light");
-  check(btn.getAttribute("aria-pressed") === "false", "the switch says it is not pressed");
-  btn.click();
-  check(d.documentElement.getAttribute("data-mode") === "dark", "and to dark");
+  check(d.documentElement.getAttribute("data-mode") === "dark", "the switch goes dark");
   check(btn.getAttribute("aria-pressed") === "true", "the switch says it is pressed");
   check(w.localStorage.getItem("whynot-mode") === "dark", "the choice is remembered");
-  d.documentElement.setAttribute("data-mode", "light");
+
+  btn.click();
+  check(d.documentElement.getAttribute("data-mode") === "light", "and back to light");
+  check(w.localStorage.getItem("whynot-mode") === "light", "the change is remembered too");
   dom.window.close();
 
   // both palettes must define the same tokens, or one mode renders half-styled
-  const at = (sel) => css.indexOf(sel);
-  const lightBlock = css.slice(at(":root {"), at('html[data-mode="dark"]'));
-  const darkBlock = css.slice(at('html[data-mode="dark"]'), at("*, *::before"));
+  const lightBlock = css.slice(css.indexOf(":root {"), css.indexOf('html[data-mode="dark"]'));
+  const darkBlock = css.slice(css.indexOf('html[data-mode="dark"]'), css.indexOf("* , *::before"));
   // only the COLOUR tokens have to exist in both palettes; type, radii and
   // shadows are set once and deliberately do not change with the mode
   const colours = (block) => new Set([...block.matchAll(/(--[a-z0-9-]+)\s*:\s*(#[0-9a-fA-F]{3,8}|rgba?\()/g)]
@@ -381,7 +382,7 @@ console.log("\n— TRIAL 07 white first, and the mode switch ——————�
         (orphan.length ? ` — extra ${orphan.join(", ")}` : ""));
 }
 
-console.log("\n— TRIAL 07 photographs, map and diagrams ————————————————");
+console.log("\n— TRIAL 07 the photograph and the drawn map —————————————————");
 {
   const dir = "trial-07-slate";
   const pages = ["index.html", "products.html", "stores.html", "about.html", "contact.html", "404.html"];
@@ -389,57 +390,54 @@ console.log("\n— TRIAL 07 photographs, map and diagrams ———————�
   const towns = [...stores.matchAll(/town:\s*"([^"]+)"/g)].map((m) => m[1]);
   const mapTowns = [...new Set(towns)].filter((t) => !/Best Shop|Smart Plaza/.test(t));
 
-  // 1. every photograph: real file, declared size, alt text, and a caption that
-  //    says the picture is a stand-in rather than a photograph of their shop
-  let images = 0, noSize = [], noAlt = [], missingFile = [];
+  // every photograph: real file, declared size, alt text that says something
+  let images = 0; const noSize = [], noAlt = [], missingFile = [];
   for (const page of pages) {
     const html = fs.readFileSync(`${ROOT}/${dir}/${page}`, "utf8");
     for (const m of html.matchAll(/<img\s[^>]*>/g)) {
       images++;
       const tag = m[0];
       const src = (tag.match(/src="([^"]+)"/) || [])[1];
-      if (!/width="\d+"/.test(tag) || !/height="\d+"/.test(tag)) noSize.push(page + ":" + src);
+      if (!/width="\d+"/.test(tag) || !/height="\d+"/.test(tag)) noSize.push(page + ": " + src);
       const alt = (tag.match(/alt="([^"]*)"/) || [])[1];
-      if (alt === undefined || alt.trim().length < 12) noAlt.push(page + ":" + src);
+      if (alt === undefined || alt.trim().length < 12) noAlt.push(page + ": " + src);
       if (src && !fs.existsSync(`${ROOT}/${dir}/${src}`)) missingFile.push(src);
     }
     for (const m of html.matchAll(/<source srcset="([^"]+)"/g)) {
       if (!fs.existsSync(`${ROOT}/${dir}/${m[1]}`)) missingFile.push(m[1]);
     }
   }
-  check(images >= 5, `the photographs are on the pages (${images} img elements)`);
+  check(images >= 1, `the photograph is on the pages (${images} img elements)`);
   check(noSize.length === 0, "every photograph declares its size, so the page does not jump" +
         (noSize.length ? ` — ${noSize.join(", ")}` : ""));
-  check(noAlt.length === 0, "and carries real alt text" + (noAlt.length ? ` — ${noAlt.join(", ")}` : ""));
+  check(noAlt.length === 0, "and carries real alt text" +
+        (noAlt.length ? ` — ${noAlt.join(", ")}` : ""));
   check(missingFile.length === 0, "every image file it points at exists" +
         (missingFile.length ? ` — ${missingFile.join(", ")}` : ""));
 
-  const dom = await load(`${dir}/stores.html`, [`${dir}/assets/js/stores.js`]);
+  const dom = await load(`${dir}/stores.html`, [`${dir}/assets/js/main.js`, `${dir}/assets/js/stores.js`]);
   const d = dom.window.document;
   const svg = d.querySelector(".map svg");
   check(!!svg, "the drawn map is on the showroom page");
-  const dots = svg.querySelectorAll("circle.map__dot");
+  const dots = [...svg.querySelectorAll("circle.map__dot")]
+    .filter((c) => !c.classList.contains("map__dot--hollow"));
   check(dots.length === mapTowns.length,
         `one dot per town (${dots.length} dots, ${mapTowns.length} towns)`);
-  const labels = [...svg.querySelectorAll("text.map__name")].map((t) => t.textContent.trim());
-  const labelled = labels.filter((l) => mapTowns.includes(l));
-  check(labelled.length === mapTowns.length,
-        `every town on the map is named (${labelled.length} labels)`);
-  const offMap = [...dots].filter((c) => +c.getAttribute("cx") > 920 || +c.getAttribute("cy") > 700);
-  check(offMap.length === 0, "no dot is drawn outside the map frame");
-  check(!!d.querySelector(".map__legend"), "and the map carries a key");
-  check(/sketch, not a survey/i.test(d.body.textContent), "the map says it is a sketch, not a survey");
+  const names = [...svg.querySelectorAll("text, title")].map((n) => n.textContent.trim());
+  const named = mapTowns.filter((t) => names.some((n) => n.includes(t)));
+  check(named.length === mapTowns.length,
+        `every town is on the map (${named.length} of ${mapTowns.length})`);
+  const off = dots.filter((c) => +c.getAttribute("cx") > 920 || +c.getAttribute("cy") > 700);
+  check(off.length === 0, "no dot is drawn outside the map frame");
+  check(!!d.querySelector(".map__key"), "and the map carries a key");
+  check(/schematic/i.test(d.body.textContent), "the map says it is a schematic");
   dom.window.close();
 
-  // 3. the buying diagram: four numbered steps, each with a heading and a line
-  const home = await load(`${dir}/index.html`, [`${dir}/assets/js/products.js`]);
+  const home = await load(`${dir}/index.html`, [`${dir}/assets/js/main.js`, `${dir}/assets/js/products.js`]);
   const h = home.window.document;
-  const nodes = h.querySelectorAll(".diagram .diagram__node");
-  check(nodes.length === 4, `the buying diagram has four steps (${nodes.length})`);
-  check([...nodes].every((n) => /Step \d/.test(n.textContent) && n.querySelector("p")),
-        "each step is numbered and explains itself");
-  check(h.querySelectorAll(".hero .shot img").length === 1, "the hero carries one photograph");
-  check(!!h.querySelector(".hero .shot__tag"), "and the photograph is labelled as stand-in art");
+  const cap = h.querySelector(".hero__fig figcaption");
+  check(!!cap && /stand-in photograph/i.test(cap.textContent),
+        "the photograph is labelled as a stand-in on the page");
   home.window.close();
 }
 

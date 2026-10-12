@@ -21,8 +21,8 @@ PHRASES = {
     "Towns served": dict(en="Towns served", te="ఊళ్లు", hi="शहर"),
     "Trading since": dict(en="Trading since", te="మొదలు", hi="शुरुआत"),
     "People on the floor": dict(en="People on the floor", te="మా జనం", hi="हमारे लोग"),
-    "A redesign concept for whynotindia.in, built as portfolio work. Not affiliated with the company and not deployed anywhere. Photographs on this page are AI-generated stand-in art and the enquiry form has no server behind it.":
-        dict(en="A redesign concept for whynotindia.in, built as portfolio work. Not affiliated with the company and not deployed anywhere. Photographs on this page are AI-generated stand-in art and the enquiry form has no server behind it.",
+    "A redesign concept for whynotindia.in, built as portfolio work. Not affiliated with the company and not deployed anywhere. Artwork is AI-generated stand-in art, and the enquiry form has no server behind it.":
+        dict(en="A redesign concept for whynotindia.in, built as portfolio work. Not affiliated with the company and not deployed anywhere. Artwork is AI-generated stand-in art, and the enquiry form has no server behind it.",
              te="ఇది whynotindia.in కోసం చేసిన డిజైన్ నమూనా. కంపెనీకి సంబంధం లేదు, ఎక్కడా లైవ్‌లో లేదు. బొమ్మలు AI తో చేసినవి. ఫారం ఎక్కడికీ పంపదు.",
              hi="यह whynotindia.in के लिए बनाया गया डिज़ाइन नमूना है. कंपनी से कोई संबंध नहीं, कहीं लाइव नहीं. तस्वीरें AI से बनी हैं. फ़ॉर्म कहीं नहीं भेजता."),
 
@@ -138,6 +138,29 @@ PHRASES = {
              te="గోదావరి జిల్లాలు, విశాఖపట్నంలో కలిపి 25 షాపులు. నచ్చినవి ఎంచుకోండి, జాబితా పంపండి — దగ్గరి షాపు నుంచి ఈరోజు ధర, స్టాక్ చెప్పడానికి ఫోన్ వస్తుంది.",
              hi="गोदावरी ज़िलों और विशाखापट्टनम में 25 दुकानें. पसंद का सामान चुनें, सूची भेजें — नज़दीकी दुकान से आज का दाम और स्टॉक बताने फ़ोन आएगा."),
     "Find your showroom": dict(en="Find your showroom", te="మీ షాపు కనుగొనండి", hi="अपनी दुकान खोजें"),
+    "Stand-in photograph, generated for this concept — not a real branch.":
+        dict(en="Stand-in photograph, generated for this concept — not a real branch.",
+             te="నమూనా ఫోటో — ఇది నిజమైన షాపు కాదు.",
+             hi="नमूना तस्वीर — असली दुकान नहीं."),
+    "Where we are": dict(en="Where we are", te="మేమెక్కడ", hi="हम कहाँ हैं"),
+    "Fifteen in West Godavari, nine in East Godavari, one in Visakhapatnam.":
+        dict(en="Fifteen in West Godavari, nine in East Godavari, one in Visakhapatnam.",
+             te="పశ్చిమ గోదావరిలో 15, తూర్పు గోదావరిలో 9, విశాఖలో 1.",
+             hi="पश्चिम गोदावरी में 15, पूर्वी गोदावरी में 9, विशाखा में 1."),
+    "Schematic — dots mark towns, not boundaries.":
+        dict(en="Schematic — dots mark towns, not boundaries.",
+             te="పటం సూచనమాత్రం — చుక్కలు ఊళ్లు.",
+             hi="नक्शा सांकेतिक — बिंदु शहर हैं."),
+    "a showroom": dict(en="a showroom", te="ఒక షాపు", hi="एक दुकान"),
+    # gaps _tools/missing07.py found: text the pages show that the table had no
+    # entry for, so it would have stayed English in Telugu and Hindi
+    "Browse the catalogue": dict(en="Browse the catalogue", te="జాబితా చూడండి", hi="सूची देखें"),
+    "25 showrooms": dict(en="25 showrooms", te="25 షాపులు", hi="25 दुकानें"),
+    "23 towns": dict(en="23 towns", te="23 ఊళ్లు", hi="23 शहर"),
+    "Nothing matches that": dict(en="Nothing matches that", te="అలా ఏదీ దొరకలేదు", hi="ऐसा कुछ नहीं मिला"),
+    "All 25 showrooms": dict(en="All 25 showrooms", te="25 షాపులూ", hi="सभी 25 दुकानें"),
+    "Open 10 am to 9 pm": dict(en="Open 10 am to 9 pm", te="ఉదయం 10 నుంచి రాత్రి 9 వరకు", hi="सुबह 10 से रात 9 तक"),
+    "the flagship": dict(en="the flagship", te="ప్రధాన షాపు", hi="मुख्य दुकान"),
     "20 brands": dict(en="20 brands", te="20 బ్రాండ్లు", hi="20 ब्रांड"),
     "open 10 to 9": dict(en="open 10 to 9", te="10 నుంచి 9 వరకు తెరిచి", hi="10 से 9 तक खुला"),
     "delivery and installation": dict(en="delivery and installation", te="డెలివరీ, ఇన్‌స్టాలేషన్", hi="डिलीवरी और इंस्टॉलेशन"),
@@ -172,8 +195,8 @@ PHRASES = {
              te="ఈ పేజీలో ధరలు ఊహించి రాయలేదు. ఈరోజు ధర అడిగితే, నిజంగా అమ్మగలిగే ధర చెప్తాం.",
              hi="इस पन्ने पर दाम बनावटी नहीं. आज का पूछें, जिस दाम पर बेच सकते हैं वही मिलेगा."),
     "About this build:": dict(en="About this build:", te="ఈ నమూనా గురించి:", hi="इस डिज़ाइन के बारे में:"),
-    "a design concept for whynotindia.in, made as portfolio work. It is not affiliated with WHYNOT Electronics and is not deployed anywhere. The photographs are AI-generated stand-in art, and the enquiry form does not send anything — there is no server behind it.":
-        dict(en="a design concept for whynotindia.in, made as portfolio work. It is not affiliated with WHYNOT Electronics and is not deployed anywhere. The photographs are AI-generated stand-in art, and the enquiry form does not send anything — there is no server behind it.",
+    "a design concept for whynotindia.in, made as portfolio work. It is not affiliated with WHYNOT Electronics and is not deployed anywhere. The artwork is AI-generated stand-in art, and the enquiry form does not send anything — there is no server behind it.":
+        dict(en="a design concept for whynotindia.in, made as portfolio work. It is not affiliated with WHYNOT Electronics and is not deployed anywhere. The artwork is AI-generated stand-in art, and the enquiry form does not send anything — there is no server behind it.",
              te="whynotindia.in కోసం చేసిన డిజైన్ నమూనా. WHYNOT కంపెనీకి సంబంధం లేదు, ఎక్కడా లైవ్‌లో లేదు. బొమ్మలు AI తో చేసినవి, ఫారం ఎక్కడికీ పంపదు.",
              hi="whynotindia.in के लिए बनाया डिज़ाइन नमूना. WHYNOT कंपनी से संबंध नहीं, कहीं लाइव नहीं. तस्वीरें AI से, फ़ॉर्म कहीं कुछ नहीं भेजता."),
 
@@ -289,85 +312,6 @@ PHRASES = {
         dict(en="Unsure between two models? Call the helpline and describe the room. We do this all day.",
              te="రెండు మోడళ్ల మధ్య సందిగ్ధమా? హెల్ప్‌లైన్‌కు కాల్ చేసి గది వివరాలు చెప్పండి. ఇదే మా పని.",
              hi="दो मॉडल में उलझन? हेल्पलाइन पर फ़ोन करके कमरे के बारे में बताइए. यही हमारा रोज़ का काम है."),
-    # ---------------------------------------------- photograph captions + map
-    # the tag next to every photograph, and the four captions it sits on
-    "AI stand-in art": dict(en="AI stand-in art", te="AI బొమ్మ", hi="AI तस्वीर"),
-    "The floor at Tanuku, as this concept build imagines it":
-        dict(en="The floor at Tanuku, as this concept build imagines it",
-             te="తనుకు షాపు — ఇది ఊహా చిత్రం.",
-             hi="तनुकू की दुकान — यह कल्पना का चित्र है."),
-    "A display wall: appliances in a line, boxes behind":
-        dict(en="A display wall: appliances in a line, boxes behind",
-             te="సరుకు వరుసలో, వెనుక డబ్బాలు.",
-             hi="सामान कतार में, पीछे डिब्बे."),
-    "A branch on a main road, shutters up at ten":
-        dict(en="A branch on a main road, shutters up at ten",
-             te="మెయిన్ రోడ్డు మీద షాపు — పదికి షట్టర్ లేస్తుంది.",
-             hi="मेन रोड पर दुकान — दस बजे शटर खुलता है."),
-    "The bill, the keys, the handover":
-        dict(en="The bill, the keys, the handover",
-             te="బిల్లు, తాళం చెవులు, అప్పగింత.",
-             hi="बिल, चाबियाँ, सौंपना."),
-
-    # the drawn map. Town names stay in Latin script — a place is a place; these
-    # are the words around them.
-    "Where the 25 doors are": dict(en="Where the 25 doors are", te="25 షాపులు ఎక్కడ?", hi="25 दुकानें कहाँ?"),
-    "The region, drawn": dict(en="The region, drawn", te="మా ప్రాంతం — గీతల్లో.", hi="हमारा इलाक़ा — रेखाओं में."),
-    "How to read it": dict(en="How to read it", te="ఇది ఎలా చదవాలి", hi="इसे कैसे पढ़ें"),
-    "Or start from the map": dict(en="Or start from the map", te="లేదా మ్యాప్ నుంచి మొదలుపెట్టండి", hi="या नक़्शे से शुरू करें"),
-    "Bay of Bengal": dict(en="Bay of Bengal", te="బంగాళాఖాతం", hi="बंगाल की खाड़ी"),
-    "Godavari": dict(en="Godavari", te="గోదావరి", hi="गोदावरी"),
-    "A drawn sketch of the region, not a survey: the dots sit in the right town, the distances are not to scale.":
-        dict(en="A drawn sketch of the region, not a survey: the dots sit in the right town, the distances are not to scale.",
-             te="ఇది గీసిన చిత్రం, సర్వే కాదు. చుక్కలు సరైన ఊళ్లలో ఉన్నాయి, దూరాలు కొలతలో లేవు.",
-             hi="यह हाथ से बना नक़्शा है, सर्वे नहीं. बिंदु सही शहरों में हैं, दूरियाँ नापी नहीं गईं."),
-    "A sketch, not a survey — the dots are in the right towns, the distances are drawn to fit the page.":
-        dict(en="A sketch, not a survey — the dots are in the right towns, the distances are drawn to fit the page.",
-             te="గీసిన చిత్రం, సర్వే కాదు — చుక్కలు సరైన ఊళ్లలో ఉన్నాయి, దూరాలు పేజీకి తగ్గట్టు.",
-             hi="यह नक़्शा है, सर्वे नहीं — बिंदु सही शहरों में हैं, दूरियाँ पन्ने के हिसाब से."),
-    "Twenty-five doors in twenty-three towns. The coast runs north to south: Anakapalle and Visakhapatnam district at the top, the Godavari delta at the bottom right, and the inland towns to the west.":
-        dict(en="Twenty-five doors in twenty-three towns. The coast runs north to south: Anakapalle and Visakhapatnam district at the top, the Godavari delta at the bottom right, and the inland towns to the west.",
-             te="23 ఊళ్లలో 25 షాపులు. తీరం ఉత్తరం నుంచి దక్షిణానికి: పైన అనకాపల్లి, విశాఖపట్నం జిల్లా; కుడి కింద గోదావరి డెల్టా; పడమర లోపలి ఊళ్లు.",
-             hi="23 शहरों में 25 दुकानें. तट उत्तर से दक्षिण: ऊपर अनकापल्ली और विशाखापट्टनम ज़िला, नीचे दाईं ओर गोदावरी डेल्टा, पश्चिम में अंदरूनी कस्बे."),
-    "25 doors · 23 towns": dict(en="25 doors · 23 towns", te="25 షాపులు · 23 ఊళ్లు", hi="25 दुकानें · 23 शहर"),
-    "25 showrooms": dict(en="25 showrooms", te="25 షాపులు", hi="25 दुकानें"),
-    "23 towns": dict(en="23 towns", te="23 ఊళ్లు", hi="23 शहर"),
-
-    # the three district names, so the map legend, the filter chips and the
-    # headings the script builds all read in the reader's own script
-    "West Godavari": dict(en="West Godavari", te="పశ్చిమ గోదావరి", hi="पश्चिम गोदावरी"),
-    "East Godavari": dict(en="East Godavari", te="తూర్పు గోదావరి", hi="पूर्वी गोदावरी"),
-    "Visakhapatnam": dict(en="Visakhapatnam", te="విశాఖపట్నం", hi="विशाखापट्टनम"),
-    "Doors in West Godavari": dict(en="Doors in West Godavari", te="పశ్చిమ గోదావరిలో షాపులు", hi="पश्चिम गोदावरी में दुकानें"),
-    "In Anakapalle": dict(en="In Anakapalle", te="అనకాపల్లిలో ఒకటి", hi="अनकापल्ली में एक"),
-    "Nothing matches that": dict(en="Nothing matches that", te="అలా ఏదీ దొరకలేదు", hi="ऐसा कुछ नहीं मिला"),
-
-    # ------------------------------------------------ the hero and the diagram
-    "The shop,<br>not the app.":
-        dict(html=True, en="The shop,<br>not the app.", te="యాప్ కాదు,<br>షాపు.", hi="ऐप नहीं,<br>दुकान."),
-    "Browse the catalogue": dict(en="Browse the catalogue", te="జాబితా చూడండి", hi="सूची देखें"),
-    "All 25 showrooms": dict(en="All 25 showrooms", te="25 షాపులూ", hi="सभी 25 दुकानें"),
-    "Open 10 am to 9 pm": dict(en="Open 10 am to 9 pm", te="ఉదయం 10 నుంచి రాత్రి 9 వరకు", hi="सुबह 10 से रात 9 तक"),
-    "One helpline, a person answers": dict(en="One helpline, a person answers", te="ఒకే హెల్ప్‌లైన్ — మనిషే మాట్లాడతాడు", hi="एक हेल्पलाइन — इंसान जवाब देता है"),
-    "Step 1": dict(en="Step 1", te="అడుగు 1", hi="चरण 1"),
-    "Step 2": dict(en="Step 2", te="అడుగు 2", hi="चरण 2"),
-    "Step 3": dict(en="Step 3", te="అడుగు 3", hi="चरण 3"),
-    "Step 4": dict(en="Step 4", te="అడుగు 4", hi="चरण 4"),
-    "Collect at your branch": dict(en="Collect at your branch", te="మీ షాపులో తీసుకోండి", hi="अपनी दुकान से लें"),
-    "Fixed at the counter: delivery, installation and who to call afterwards.":
-        dict(en="Fixed at the counter: delivery, installation and who to call afterwards.",
-             te="కౌంటర్‌లోనే ఖాయం: డెలివరీ, ఇన్‌స్టాలేషన్, తర్వాత ఎవరికి ఫోన్ చేయాలో.",
-             hi="काउंटर पर तय: डिलीवरी, इंस्टॉलेशन, और बाद में किसे फ़ोन करना है."),
-    "Tanuku, the flagship": dict(en="Tanuku, the flagship", te="తనుకు — ప్రధాన షాపు", hi="तनुकू — मुख्य दुकान"),
-    "Two brand stores in the same building":
-        dict(en="Two brand stores in the same building",
-             te="అదే భవనంలో రెండు బ్రాండ్ షాపులు.",
-             hi="उसी इमारत में दो ब्रांड दुकानें."),
-    "Every branch has its own phone number and a map link, on the showroom list.":
-        dict(en="Every branch has its own phone number and a map link, on the showroom list.",
-             te="ప్రతి షాపు ఫోన్ నంబర్, మ్యాప్ లింక్ షాపుల జాబితాలో ఉన్నాయి.",
-             hi="हर दुकान का फ़ोन नंबर और मैप लिंक दुकानों की सूची में है."),
-
 }
 
 # Strings the scripts build at runtime that Trial 07 needs and the other trials

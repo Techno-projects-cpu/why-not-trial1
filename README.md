@@ -10,7 +10,7 @@ This repository is a **lab**: each trial is a complete, self-contained rebuild o
 
 | What | Where |
 |---|---|
-| **The lab** — all seven trials in live desktop + phone preview boxes | [`index.html`](index.html) |
+| **The lab** — both trials in live desktop + phone preview boxes | [`index.html`](index.html) |
 | **The audit** — what's wrong with the current site, and why it costs money | [`docs/AUDIT.md`](docs/AUDIT.md) |
 | **Trial 01 · "Paper & Ink"** — minimal, editorial | [`trial-01-minimal/`](trial-01-minimal/) |
 | **Trial 02 · "Crayon & Paper"** — hand-drawn, vibrant | [`trial-02-illustrated/`](trial-02-illustrated/) |
@@ -18,7 +18,6 @@ This repository is a **lab**: each trial is a complete, self-contained rebuild o
 | **Trial 04 · "Slab & Stencil"** — neo-brutalism | [`trial-04-brutalist/`](trial-04-brutalist/) |
 | **Trial 05 · "Glass & Glow"** — glassmorphism | [`trial-05-glass/`](trial-05-glass/) |
 | **Trial 06 · "Brush & Bloom"** — pastel, painterly | [`trial-06-painting/`](trial-06-painting/) |
-| **Trial 07 · "Slate & Rail"** — clean and professional, white first, light/dark | [`trial-07-slate/`](trial-07-slate/) |
 
 ### Running it
 
@@ -33,9 +32,9 @@ Serve it rather than opening the files directly — the preview iframes, the Goo
 
 ---
 
-## The directions
+## The two directions
 
-Every trial covers the same six pages, the same 25 verified showroom addresses, the same sample catalogue of 17 products, and the same fix-list from the audit. Only the visual language changes — which is the point of building seven. The first three are compared here; 04–06 share a builder and are compared to each other; 07 changes the form as well as the palette and gets its own table below.
+Both trials cover the same six pages, the same 25 verified showroom addresses, the same sample catalogue of 17 products, and the same fix-list from the audit. Only the language changes — which is the point of building two.
 
 | | **01 · Paper & Ink** | **02 · Crayon & Paper** | **03 · Panel & Ink** |
 |---|---|---|---|
@@ -72,34 +71,28 @@ These three share a builder (`_tools/sections.py`) and therefore share structure
 | | **07 · Slate & Rail** |
 |---|---|
 | Direction | Clean and professional: a working document, not a poster |
-| Form | **Left rail on desktop, bottom tab bar on phones, table catalogue, side-panel shortlist** — no marquee, no cards |
+| Form | **Left rail on desktop, bottom tab bar on phones, table catalogue, side-panel shortlist** — a hero built from one photograph and a map of all 25 branches, no cards, no marquee |
 | Type | Inter + IBM Plex Mono (figures, labels, counts) |
-| Colour | Two designed palettes: their exact logo blue (`#0000ff`) on white, and a true dark mode (not an inversion) |
-| Mode | **White first**: the page opens light whatever the machine's system setting says, because that is what was asked for; the switch goes dark and the choice is remembered in `localStorage`, applied before first paint so there is no flash |
-| Imagery | Four photographs (AI stand-ins, labelled on the page, in AVIF/WebP/JPEG), a drawn SVG map of the 23 towns, a four-step buying diagram, 40 icons |
-| Languages | English, Telugu, Hindi — 328 phrases hooked, 330 in the runtime table |
-| Measured | `_tools/contrast07.py`: 36 combinations, both modes, 0 below target |
-| First view | ≈514 KB uncompressed, **≈84 KB over the wire** (37 KB HTML, 32 KB CSS, 114 KB JS, 100 KB latin type, 39 KB AVIF hero — of which the gzipped text is 45 KB) |
-| Whole directory | 1.4 MB in 33 files, photographs in three formats included |
+| Colour | Two designed palettes: slate on white, and a true dark mode (not an inversion) |
+| Mode | **Light by default — white is the point** — with a switch to dark, remembered in `localStorage` and applied before first paint so there is no flash; the reader's OS setting is deliberately ignored |
+| Imagery | One AI stand-in photograph of a showroom floor (AVIF + WebP + JPEG, labelled on the page) plus a hand-drawn SVG map of the 25 branches |
+| Languages | English, Telugu, Hindi — 301 phrases hooked, 308 in the runtime table |
+| Measured | `_tools/contrast07.py`: 30 combinations, both modes, 0 below target |
+| First view | ≈336 KB uncompressed — **≈42 KB gzipped** of text (34 KB HTML, 26 KB CSS, 107 KB JS of which 66 KB is the three-language runtime, 76 KB latin type) plus a 94 KB AVIF hero |
+| Whole directory | 789 KB in 23 files — one photograph in three formats, the rest CSS and SVG |
 
 **Why the form had to change:** the first six trials are all a header, a hero and a grid of cards. That is a good default and a bad habit — a shop with 25 branches is an information problem, so Trial 07 renders the catalogue as a list you scan (item, category, specification, branches, button) and keeps the shortlist beside it as a panel. Nothing about the content changed; the skeleton did.
-
-**Why there are photographs here and not in the first six:** the first pass at this direction had no imagery at all, and it read as sparse — the honest complaint. A shop is a place, so the seventh direction now shows one: the floor, a display wall, a branch on a main road, and a handover at the counter. All four are AI-generated stand-ins, labelled on the page face rather than in a footnote, because pretending a stock photograph is their shop would be the sort of thing this whole project is a complaint about.
-
-**The map, and how it went wrong first:** the showroom page draws the region — coast, the Godavari and its delta, two district lines and one dot per town — from a table of 23 longitudes and latitudes in the builder, projected into the SVG. The first version had the coast running diagonally through the middle of the page, which put Kakinada, Pithapuram, Yeleswaram and Anakapalle in the Bay of Bengal. Nothing about a map is decorative: a wrong dot is a wrong address, so the projection was rebuilt, the towns re-anchored so no two labels collide, and the test now checks that the number of dots equals the number of towns in the directory and that no dot is drawn outside the frame.
-
-**The contrast pass grew with it:** 36 combinations per the two palettes now, including the map's town labels against the map background and the water names against the sea — the map is drawn from the same tokens as the rest of the page, so it recolours itself rather than being a picture of a map.
 
 **Why the icon sets are shared geometry with three different pens:** 60+ hand-written SVG paths per trial is a lot of output for something that reads as a 24px silhouette. Trials 04–06 take the canonical geometry and restyle it — stroke weight, cap, join, and a translucent halo underlay for the painted cut. The *ornaments* (marquee marks, glass prisms, brush strokes) are drawn individually, because that is where the personality actually lives. All three keep the same symbol ids, so one set of JavaScript drives all of them.
 
 ---
 
-## What every trial actually fixes
+## What both trials actually fix
 
 1. **One true set of facts.** The current site claims 23, 25 and 40 branches on three different pages. Both trials say 25 showrooms in 23 towns — and say it once.
 2. **"Find your nearest showroom" is a job the site can do.** All 25 addresses live in one JavaScript array. Search by town, district or pincode, district filter chips, result counts, an empty state that offers the helpline — and real `google.com/maps/search/?api=1&query=…` deep links that open the Maps app on a phone. (Every one of the 25 map links on the live site is broken.)
 3. **A phone number one tap away, on every page,** with an honest "Open now / Closed now" state. The live contact page has no phone number at all.
-4. **Products worth browsing.** Every trial ships a catalogue: 10 categories, 17 sample products, live search with a proper keyword index ("fridge" finds refrigerators, "geyser" finds the geyser), a town filter, and a shortlist that travels to the counter complete with every item written out.
+4. **Products worth browsing.** Both trials ship a catalogue: 10 categories, 17 sample products, live search with a proper keyword index ("fridge" finds refrigerators, "geyser" finds the geyser), a town filter, and a shortlist that travels to the counter complete with every item written out.
 5. **A page that loads in a village.** No framework, no CDN, no analytics, no tag manager, no popup, no embedded map. Readable before the fonts land, and every action works with the keyboard.
 6. **Accessibility as a baseline.** Skip links, one `h1` per page, real landmarks, visible focus rings, 44 px tap targets, labelled controls, errors tied to fields with `aria-describedby` and `role="alert"`, `prefers-reduced-motion` honoured.
 7. **About the money honestly.** No prices are invented for a real company's real products: cards say "Ask today's price", which is also how most Indian electronics retail actually works. Wiring a live price feed or a real cart with payment is a phase-two decision, and the shortlist already maps onto a cart item for item.
@@ -200,9 +193,8 @@ _tools/
 │   ── and the seventh direction ──
 ├── build-trial07.py        six pages: rail, tab bar, facts strip, table catalogue
 ├── port-js07.py            the catalogue logic, re-rendered as rows, a directory and a panel
-├── contrast07.py           both Trial 07 palettes: 36 combinations against WCAG AA
-├── missing07.py            lists Trial 07 copy that has no entry in the language table
-└── test-trials.mjs         201 tests across all seven trials (jsdom), including the languages
+├── contrast07.py           both Trial 07 palettes: 30 combinations against WCAG AA
+└── test-trials.mjs         185 tests across all seven trials (jsdom), including the languages
 ```
 
 ### Editing the parts you'll want to edit
@@ -219,7 +211,6 @@ _tools/
 | **Any Telugu or Hindi copy** | `_tools/i18n.py` (all trials) and `_tools/i18n07.py` (Trial 07), then `python3 _tools/localise.py` |
 | **Trial 07's pages** | `_tools/build-trial07.py` (pages) and `port-js07.py` (scripts), then `python3 _tools/localise.py trial-07-slate` |
 | **Trial 07's colours, both modes** | `trial-07-slate/assets/css/style.css` — the `:root` and `html[data-mode="dark"]` token blocks, then `python3 _tools/contrast07.py` |
-| **Trial 07's map** | `_tools/build-trial07.py` — the `TOWNS` table (longitude, latitude, label offset) and `map_svg()`, then rebuild |
 | Add or remove a showroom | `assets/js/stores.js` in either trial — one object in the `STORES` array |
 | Add or edit a product | `assets/js/products.js` in any trial — one object in `PRODUCTS` (keep the three files' data blocks identical; the test suite asserts that they are) |
 | Phone number, email, address, opening hours | `assets/js/main.js` (`OPEN_HOUR` / `CLOSE_HOUR`) plus the literal number in each page's header and footer |
@@ -241,7 +232,7 @@ it just hooks the wrong node. And the script patch has to be idempotent: running
 its own wrapper, leaving `T("k", T("k", "English"))` in the file a customer would read, so a second
 pass now has to change nothing or the build stops.
 
-201 checks that run the real scripts against the real pages in a real DOM: 17 products render in all three skins, filters and search narrow correctly, the shortlist updates every badge and the WhatsApp and email links carry the list, all 25 map links in all three trials resolve to `google.com/maps/search`, district filters combine with search, the form rejects a bad mobile number and its success state stays honest about there being no server, Trial 03 ships AVIF with WebP behind it and declares its image dimensions, each trial uses only its own localStorage key, and the product data is byte-identical across all three. Trials 04–06 get a shared-contract block with two checks that catch design-port bugs specifically: **every class the rendered page uses must exist in that trial's stylesheet**, and every icon reference must resolve. Both found real bugs the moment they were written (a missing `[data-cat-chips]` container left the catalogue with no category filter at all, and several unstyled classes).
+185 checks that run the real scripts against the real pages in a real DOM: 17 products render in all three skins, filters and search narrow correctly, the shortlist updates every badge and the WhatsApp and email links carry the list, all 25 map links in all three trials resolve to `google.com/maps/search`, district filters combine with search, the form rejects a bad mobile number and its success state stays honest about there being no server, Trial 03 ships AVIF with WebP behind it and declares its image dimensions, each trial uses only its own localStorage key, and the product data is byte-identical across all three. Trials 04–06 get a shared-contract block with two checks that catch design-port bugs specifically: **every class the rendered page uses must exist in that trial's stylesheet**, and every icon reference must resolve. Both found real bugs the moment they were written (a missing `[data-cat-chips]` container left the catalogue with no category filter at all, and several unstyled classes).
 
 The language block runs on all seven trials: it switches to Telugu, checks that the nav, the button the catalogue *builds*, the result count and the shortlist panel are all in the reader's script (including text generated after a switch, which is what the DOM pass and its observer are for), switches back, and checks the choice was remembered. Trial 07 gets a mode block as well: the switch flips `data-mode`, updates `aria-pressed`, persists the choice, and both palettes are checked to define the same colour tokens — a missing token is how one mode ends up half-styled.
 
@@ -308,15 +299,15 @@ Trial 07 · Slate & Rail
 
 | Asset | Raw | Gzipped |
 |---|---|---|
-| HTML, largest page (sprite and map included) | 36.7 KB | 8.2 KB |
-| CSS, both palettes, entire site | 32.4 KB | 7.5 KB |
-| JS, five files (i18n.js is 72.6 KB of it) | 114.1 KB | 29.4 KB |
-| Latin type, 5 faces | 99.7 KB | — |
+| HTML, largest page (sprite included) | 33.7 KB | 8.0 KB |
+| CSS, both palettes, entire site | 25.7 KB | 6.0 KB |
+| JS, five files (i18n.js is 66 KB of it) | 106.7 KB | 27.9 KB |
+| Latin type, 4 faces | 75.9 KB | — |
 | Indic type, 4 faces | 97.5 KB | downloaded only if the reader picks Telugu or Hindi |
-| Photographs, 4 shots × AVIF/WebP/JPEG | 871 KB | the four AVIF files are 160 KB; a browser takes the AVIF and skips the rest |
-| **First view, English** | **≈514 KB** | **≈84 KB** |
+| Hero photograph (AVIF / WebP / JPEG) | 94.1 / 83.9 / 160.6 KB | already compressed |
+| **First view, English** | **≈336 KB** | **≈42 KB text, +94 KB AVIF** |
 
-The runtime carries only this trial's copy: 185 hooked phrases plus the 35 keys its scripts look up, out of 330 in the table — the table holds every phrase any trial uses, and the runtime ships only the slice this one needs. Every trial ships its own slice — Trial 01's runtime is 18.1 KB on disk, Trial 07's 72.6 KB, which is the price of this design having the most copy in three languages.
+The runtime carries only this trial's copy: 166 hooked phrases plus the 35 keys its scripts look up, out of 308 in the table. Every trial ships its own slice — Trial 01's runtime is 18.3 KB on disk, Trial 07's 65.7 KB, which is the price of this design having the most copy in three languages.
 
 Seven trials, no analytics, no tag manager, no cookie banner (nothing to consent to), no third-party requests of any kind, and no embedded Google Maps iframe — the map only opens when the visitor chooses to ask for directions.
 
@@ -330,12 +321,12 @@ Seven trials, no analytics, no tag manager, no cookie banner (nothing to consent
 - **Neither trial has a backend.** The contact forms validate properly, then say on screen that nothing was sent. Wiring them to a CRM, WhatsApp Business API or an email relay is an afternoon's work.
 - **Reviews are reproduced as written** on the current site, unattributed, with a note on the page that named and dated reviews would be better. Inventing testimonials was not an option.
 - **The paintings in Trial 06 and the key art in Trial 03 are AI-generated** stand-ins, and those are the two directions where bought-in artwork would change the most: pastel landscape and anime are both craft styles. Trial 01's photography is a third. Each of those is a line item worth quoting separately rather than hiding inside a build price.
-- **The glassmorphism trial's contrast numbers are measured, not asserted** (`_tools/contrast.py`), because that is the one visual direction in the set where taste and readability pull against each other. Trial 07 is measured twice over for the same reason (`_tools/contrast07.py`, both modes, 36 combinations).
+- **The glassmorphism trial's contrast numbers are measured, not asserted** (`_tools/contrast.py`), because that is the one visual direction in the set where taste and readability pull against each other. Trial 07 is measured twice over for the same reason (`_tools/contrast07.py`, both modes, 30 combinations).
 - **The Telugu and Hindi were written in those languages, not translated.** A literal translation of a terse English sentence reads like a telegram in Telugu, so the two blocks differ in shape — shorter, and using the words a shop in Tanuku would use. Where a phrase carries a number or a town name, the runtime patches it live ("In stock at Tanuku" becomes "స్టాక్ ఉన్నది: Tanuku").
 
 - **Photography in Trial 01 and the key art in Trial 03 are AI-generated** stand-ins. Trial 01's would be replaced by photographs of the real showrooms; Trial 03's by commissioned illustration, which is a genuine cost worth quoting separately — anime art is a craft style and the difference between generated stand-in art and a real illustrator's work is visible. Trial 02 uses no photography or raster art at all.
 - **No third-party logos or trademarks** are reproduced. Brand names appear as text only.
-- **Four glyphs are deliberately avoided.** The self-hosted latin subsets set contains none of `₹` (U+20B9), `✓` (U+2713), `→` (U+2192) or `↗` (U+2197), so prices are written "Rs", a chosen item is an inline SVG mark, and every arrow is inline SVG too — including the ones the scripts build. Falling back to a system font for one character is exactly the kind of detail that makes an otherwise composed page look assembled, and a script that builds that character is how it happens by accident.
+- **Two glyphs are deliberately avoided.** The latin subsets of these fonts contain neither `₹` (U+20B9) nor `↗` (U+2197), so prices are written "Rs" and external arrows are inline SVG. Falling back to a system font for one character is exactly the kind of detail that makes an otherwise composed page look assembled.
 - **Not affiliated** with WHYNOT Electronics Pvt Ltd. This is a portfolio/redesign exercise built entirely from public information.
 
 ## Trials
@@ -346,6 +337,6 @@ Seven trials, no analytics, no tag manager, no cookie banner (nothing to consent
 - **04 — Slab & Stencil** ✅ neo-brutalism (6 pages, catalogue)
 - **05 — Glass & Glow** ✅ glassmorphism (6 pages, catalogue, measured contrast pass)
 - **06 — Brush & Bloom** ✅ pastel, painterly (6 pages, catalogue, three paintings)
-- **07 — Slate & Rail** ✅ clean and professional, **white first** with a real dark mode behind a switch, table catalogue with the shortlist as a side panel, four labelled AI stand-in photographs and a drawn map of the 23 towns (6 pages, catalogue)
+- **07 — Slate & Rail** ✅ clean, professional, light/dark modes, table catalogue, structurally different (6 pages, catalogue)
 - **All seven** ✅ English, Telugu and Hindi, with the Telugu and Hindi written natively
 - **Next, if anyone wants more** ⏳ commerce-first with a real cart and payment gateway (every trial's shortlist already maps onto a cart item for item), or a map-first build where the district map is the homepage and each of the 23 towns gets its own page for local search

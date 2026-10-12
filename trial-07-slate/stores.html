@@ -4,19 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Showrooms — WHYNOT redesign concept (Trial 07)</title>
-<meta name="description" content="All 25 WHYNOT showrooms across the Godavari districts and Visakhapatnam, with addresses, a drawn map and map links.">
-<meta name="theme-color" content="#ffffff">
+<meta name="description" content="All 25 WHYNOT showrooms across the Godavari districts and Visakhapatnam, with addresses and map links.">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0d12" media="(prefers-color-scheme: dark)">
 <link rel="stylesheet" href="assets/css/style.css">
 <script>
-  /* White first. The page opens light whatever the machine's system setting
-     says — the mode switch is there for the reader who wants dark, and the
-     choice is remembered. Applying it here, before first paint, is what stops
-     the flash of the wrong palette a mode switch usually causes. */
+  /* The page is light unless the reader has chosen dark before. Not the system
+     setting: this design opens white on purpose, and a saved choice is the only
+     thing allowed to make it dark. Applied before first paint, so no flash. */
   (function () {
     try {
-      if (localStorage.getItem("whynot-mode") === "dark") {
-        document.documentElement.setAttribute("data-mode", "dark");
-      }
+      var dark = localStorage.getItem("whynot-mode") === "dark";
+      document.documentElement.setAttribute("data-mode", dark ? "dark" : "light");
     } catch (e) {}
   })();
 </script>
@@ -158,7 +157,7 @@
     <span><span class="brand__name">WHYNOT</span>
       <span data-i18n="Electronics · 1994" class="brand__sub">Electronics · 1994</span></span>
   </a>
-  <nav class="rail__nav"><a href="index.html"><svg class="icon" aria-hidden="true"><use href="#i-slate"></use></svg><span data-i18n="Home">Home</span></a><a href="products.html"><svg class="icon" aria-hidden="true"><use href="#i-tag"></use></svg><span data-i18n="Catalogue">Catalogue</span></a><a href="stores.html" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#i-pin"></use></svg><span data-i18n="Showrooms">Showrooms</span></a><a href="about.html"><svg class="icon" aria-hidden="true"><use href="#i-people"></use></svg><span data-i18n="About">About</span></a><a href="contact.html"><svg class="icon" aria-hidden="true"><use href="#i-call"></use></svg><span data-i18n="Contact">Contact</span></a></nav>
+  <nav class="rail__nav"><a data-i18n="Home" href="index.html">Home</a><a data-i18n="Catalogue" href="products.html">Catalogue</a><a data-i18n="Showrooms" href="stores.html" aria-current="page">Showrooms</a><a data-i18n="About" href="about.html">About</a><a data-i18n="Contact" href="contact.html">Contact</a></nav>
   <div class="rail__pick">
     <span><span data-i18n="My list" class="label">My list</span><br><strong data-list-count hidden>0</strong>
       <span data-i18n="0 items" class="note" data-list-label>0 items</span></span>
@@ -204,87 +203,24 @@
          that reaches it. The flagship is in Tanuku; the rest are in the towns the
          company has traded in since 1994.</p>
 
-      <div class="strip" style="margin-top:26px">
+      <div class="strip" style="margin-top:20px">
         <div class="strip__cell"><p data-i18n="Open now" class="strip__v" data-shop-state>Open now</p>
           <p data-i18n="Today · 10 am to 9 pm" class="strip__k">Today · 10 am to 9 pm</p></div>
         <div class="strip__cell"><p class="strip__v">88862 22448</p><p data-i18n="Helpline" class="strip__k">Helpline</p></div>
-        <div class="strip__cell"><p class="strip__v">15</p><p data-i18n="Doors in West Godavari" class="strip__k">Doors in West Godavari</p></div>
-        <div class="strip__cell"><p class="strip__v">1</p><p data-i18n="In Anakapalle" class="strip__k">In Anakapalle</p></div>
+        <div class="strip__cell"><p data-i18n="West Godavari" class="strip__v">West Godavari</p><p data-i18n="15 showrooms" class="strip__k">15 showrooms</p></div>
+        <div class="strip__cell"><p data-i18n="Visakhapatnam" class="strip__v">Visakhapatnam</p><p data-i18n="Anakapalle" class="strip__k">Anakapalle</p></div>
       </div>
 
-      <section class="stage" aria-labelledby="map-heading">
-        <div class="stage__head"><h2 data-i18n="The region, drawn" class="display display--l" id="map-heading">The region, drawn</h2>
-          <span data-i18n="25 doors · 23 towns" class="note">25 doors · 23 towns</span></div>
-        <div class="map">
-          <div class="map__frame"><svg viewBox="0 0 900 700" role="img" aria-labelledby="map-t map-d" class="map__svg">
-        <title id="map-t">Map of the Godavari districts and Visakhapatnam</title>
-        <desc id="map-d">A drawn map: 25 doors in 23 towns, from Chintalapudi and Jangareddygudem in the west to Kakinada and Anakapalle on the coast. A sketch, not a survey.</desc>
-        <rect class="map__land" x="0" y="0" width="900" height="700"/>
-        <path class="map__sea" d="M927 -167 L825 106 L730 156 L655 215 L570 282 L519 358 L478 429 L492 509 L485 593 L451 677 L390 761 L332 845 L900 700 L900 0 Z"/>
-        <path class="map__river" d="M64 257 L172 308 L254 358 L315 400 L383 425 L444 459 L485 492"/>
-        <path class="map__river" d="M400 484 L431 560 L458 627" style="stroke-width:1.4"/>
-        <path class="map__river" d="M458 467 L485 543 L485 593" style="stroke-width:1.4"/>
-        <path class="map__line map__line--soft" d="M220 249 L254 333 L288 392 L342 459 L370 534 L376 644"/>
-        <path class="map__line map__line--soft" d="M397 64 L458 165 L499 257 L485 358"/>
-        <text data-i18n="Bay of Bengal" class="map__name map__name--sea" x="620" y="600">Bay of Bengal</text>
-        <text data-i18n="Godavari" class="map__name map__name--sea" x="176" y="296">Godavari</text>
-        <g class="map__compass" aria-hidden="true">
-          <path d="M852 74 L860 46 L868 74 L860 66 Z"/>
-          <text class="map__name" x="860" y="90" text-anchor="middle">N</text>
-        </g>
-        <rect class="map__dot map__dot--brand" x="271" y="514" width="7" height="7" rx="1.5"/><rect class="map__dot map__dot--brand" x="280" y="514" width="7" height="7" rx="1.5"/>
-          <circle class="map__halt" cx="274" cy="505" r="10"/><circle class="map__dot map__dot--big" cx="274" cy="505" r="4.4"/><text class="map__name map__name--strong" x="285" y="502" text-anchor="start">Tanuku</text>
-          <circle class="map__dot" cx="213" cy="471" r="4.4"/><text class="map__name" x="202" y="454" text-anchor="end">Tadepalligudem</text>
-          <circle class="map__dot" cx="138" cy="480" r="4.4"/><text class="map__name" x="127" y="475" text-anchor="end">Bhimadolu</text>
-          <circle class="map__dot" cx="274" cy="442" r="4.4"/><text class="map__name" x="263" y="438" text-anchor="end">Nidadavolu</text>
-          <circle class="map__dot" cx="281" cy="635" r="4.4"/><text class="map__name" x="275" y="651" text-anchor="end">Narasapuram</text>
-          <circle class="map__dot" cx="291" cy="602" r="4.4"/><text class="map__name" x="302" y="604" text-anchor="start">Palakollu</text>
-          <circle class="map__dot" cx="138" cy="350" r="4.4"/><text class="map__name" x="149" y="352" text-anchor="start">Jangareddygudem</text>
-          <circle class="map__dot" cx="152" cy="421" r="4.4"/><text class="map__name" x="141" y="423" text-anchor="end">Devarapalli</text>
-          <circle class="map__dot" cx="77" cy="522" r="4.4"/><text class="map__name map__name--strong" x="88" y="524" text-anchor="start">Eluru</text>
-          <circle class="map__dot" cx="53" cy="371" r="4.4"/><text class="map__name" x="64" y="373" text-anchor="start">Chintalapudi</text>
-          <circle class="map__dot" cx="186" cy="455" r="4.4"/><text class="map__name" x="173" y="478" text-anchor="end">Nallajarla</text>
-          <circle class="map__dot" cx="247" cy="518" r="4.4"/><text class="map__name" x="236" y="515" text-anchor="end">Attili</text>
-          <circle class="map__dot" cx="220" cy="593" r="4.4"/><text class="map__name" x="209" y="595" text-anchor="end">Bhimavaram</text>
-          <circle class="map__dot map__dot--east" cx="315" cy="400" r="4.4"/><text class="map__name map__name--strong" x="326" y="397" text-anchor="start">Rajahmundry</text>
-          <circle class="map__dot map__dot--east" cx="291" cy="396" r="4.4"/><text class="map__name" x="280" y="392" text-anchor="end">Kovvur</text>
-          <circle class="map__dot map__dot--east" cx="383" cy="576" r="4.4"/><text class="map__name" x="394" y="579" text-anchor="start">Amalapuram</text>
-          <circle class="map__dot map__dot--east" cx="390" cy="610" r="4.4"/><text class="map__name" x="399" y="626" text-anchor="start">Tatipaka</text>
-          <circle class="map__dot map__dot--east" cx="325" cy="505" r="4.4"/><text class="map__name" x="336" y="518" text-anchor="start">Ravulapalem</text>
-          <circle class="map__dot map__dot--east" cx="359" cy="459" r="4.4"/><text class="map__name" x="370" y="456" text-anchor="start">Mandapeta</text>
-          <circle class="map__dot map__dot--east" cx="421" cy="282" r="4.4"/><text class="map__name" x="432" y="279" text-anchor="start">Yeleswaram</text>
-          <circle class="map__dot map__dot--east" cx="468" cy="354" r="4.4"/><text class="map__name" x="479" y="351" text-anchor="start">Pithapuram</text>
-          <circle class="map__dot map__dot--east" cx="465" cy="417" r="4.4"/><text class="map__name map__name--strong" x="476" y="420" text-anchor="start">Kakinada</text>
-          <circle class="map__dot map__dot--vizag" cx="720" cy="110" r="4.4"/><text data-i18n="Anakapalle" class="map__name map__name--strong" x="709" y="113" text-anchor="end">Anakapalle</text>
-        
-      </svg></div>
-          <div class="panel">
-          <div class="panel__body">
-            <p data-i18n="How to read it" class="label">How to read it</p>
-            <ul class="map__legend" style="margin-top:12px">
-              <li><i></i><span data-i18n="West Godavari">West Godavari</span><b class="map__n">13</b></li>
-              <li><i class="k-east"></i><span data-i18n="East Godavari">East Godavari</span><b class="map__n">9</b></li>
-              <li><i class="k-vizag"></i><span data-i18n="Visakhapatnam">Visakhapatnam</span><b class="map__n">1</b></li>
-              <li><i class="k-town"></i><span data-i18n="Tanuku, the flagship">Tanuku, the flagship</span></li>
-              <li><i class="k-brand"></i><span data-i18n="Two brand stores in the same building">Two brand stores in the same building</span></li>
-            </ul>
-            <p data-i18n="Twenty-five doors in twenty-three towns. The coast runs north to south: Anakapalle and Visakhapatnam district at the top, the Godavari delta at the bottom right, and the inland towns to the west." class="note" style="margin-top:14px">Twenty-five doors in twenty-three
-               towns. The coast runs north to south: Anakapalle and Visakhapatnam
-               district at the top, the Godavari delta at the bottom right, and the
-               inland towns to the west.</p>
-            <p data-i18n="A sketch, not a survey — the dots are in the right towns, the distances are drawn to fit the page." class="note" style="margin-top:10px">A sketch, not a survey — the dots
-               are in the right towns, the distances are drawn to fit the page.</p>
-          </div></div>
-        </div>
-      </section>
+      <figure class="panel map" style="margin-top:20px">
+<svg class="map__svg" viewBox="0 0 1000 704" role="img"
+     aria-label="Schematic map of the Godavari coast: all 25 WHYNOT showroom towns plotted where they lie."><defs><pattern id="mapgrid" width="62.5" height="58.7" patternUnits="userSpaceOnUse"><path d="M62.5 0H0v58.7" fill="none" stroke="currentColor" class="map__grid"/></pattern></defs><polygon class="map__sea" points="992.3,0.0 942.3,80.5 930.8,148.8 903.8,181.0 865.4,205.2 815.4,241.4 750.0,309.8 673.1,382.2 634.6,402.3 584.6,422.4 553.8,446.5 538.5,474.7 515.4,502.9 492.3,535.0 484.6,575.3 461.5,611.5 415.4,639.6 361.5,655.7 307.7,671.8 250.0,687.9 173.1,704.0 96.2,712.0 19.2,720.1 1000.0,704.0 1000.0,0.0"/><rect x="0" y="0" width="1000" height="704" fill="url(#mapgrid)"/><ellipse class="map__lake" cx="153.8" cy="595.4" rx="73" ry="44"/><polyline class="river" points="0.0,382.2 96.2,406.3 211.5,434.5 315.4,426.4 342.3,426.4"/><polyline class="river river--arm" points="342.3,426.4 396.2,454.6 453.8,482.7 492.3,506.9"/><polyline class="river river--arm" points="342.3,426.4 346.2,470.7 334.6,523.0 323.1,575.3 315.4,631.6 311.5,659.7"/><polyline class="map__coast" points="992.3,0.0 942.3,80.5 930.8,148.8 903.8,181.0 865.4,205.2 815.4,241.4 750.0,309.8 673.1,382.2 634.6,402.3 584.6,422.4 553.8,446.5 538.5,474.7 515.4,502.9 492.3,535.0 484.6,575.3 461.5,611.5 415.4,639.6 361.5,655.7 307.7,671.8 250.0,687.9 173.1,704.0 96.2,712.0 19.2,720.1"/><polyline class="map__coast map__coast--island" points="584.6,442.5 623.1,454.6 615.4,482.7 576.9,486.8"/><circle class="map__dot" cx="76.9" cy="539.1" r="5"><title>Eluru</title></circle><text class="map__town" x="86.9" y="543.1" text-anchor="start">Eluru</text><circle class="map__dot" cx="192.3" cy="535.0" r="5"><title>Bhimadolu</title></circle><circle class="map__dot" cx="173.1" cy="482.7" r="5"><title>Chintalapudi</title></circle><circle class="map__dot" cx="200.0" cy="454.6" r="5"><title>Devarapalli</title></circle><circle class="map__dot" cx="238.5" cy="575.3" r="5"><title>Nallajarla</title></circle><circle class="map__dot" cx="269.2" cy="543.1" r="5"><title>Attili</title></circle><circle class="map__dot" cx="238.5" cy="607.5" r="5"><title>Bhimavaram</title></circle><text class="map__town" x="238.5" y="628.5" text-anchor="middle">Bhimavaram</text><circle class="map__dot" cx="319.2" cy="615.5" r="5"><title>Palakollu</title></circle><circle class="map__dot" cx="307.7" cy="647.7" r="5"><title>Narasapuram</title></circle><text class="map__town" x="297.7" y="651.7" text-anchor="end">Narasapuram</text><circle class="map__dot" cx="296.2" cy="458.6" r="5"><title>Nidadavolu</title></circle><circle class="map__dot" cx="242.3" cy="494.8" r="5"><title>Tadepalligudem</title></circle><circle class="map__dot" cx="315.4" cy="390.2" r="5"><title>Jangareddygudem</title></circle><circle class="map__ring" cx="319.2" cy="535.0" r="10.5"/><circle class="map__dot" cx="319.2" cy="535.0" r="5.5"><title>Tanuku — the flagship</title></circle><text class="map__town" x="319.2" y="505.0" text-anchor="middle">Tanuku</text><circle class="map__dot map__dot--hollow" cx="303.8" cy="527.0" r="5"><title>LG Best Shop — brand store, inside the Tanuku flagship</title></circle><circle class="map__dot map__dot--hollow" cx="334.6" cy="543.1" r="5"><title>Samsung Smart Plaza — brand store, inside the Tanuku flagship</title></circle><circle class="map__dot" cx="342.3" cy="426.4" r="5"><title>Rajahmundry</title></circle><text class="map__town" x="353.3" y="430.4" text-anchor="start">Rajahmundry</text><circle class="map__dot" cx="373.1" cy="406.3" r="5"><title>Kovvur</title></circle><circle class="map__dot" cx="396.2" cy="474.7" r="5"><title>Mandapeta</title></circle><circle class="map__dot" cx="392.3" cy="442.5" r="5"><title>Ravulapalem</title></circle><circle class="map__dot" cx="423.1" cy="591.4" r="5"><title>Amalapuram</title></circle><text class="map__town" x="433.1" y="595.4" text-anchor="start">Amalapuram</text><circle class="map__dot" cx="480.8" cy="362.1" r="5"><title>Yeleswaram</title></circle><circle class="map__dot" cx="469.2" cy="518.9" r="5"><title>Tatipaka</title></circle><circle class="map__dot" cx="519.2" cy="374.1" r="5"><title>Pithapuram</title></circle><circle class="map__dot" cx="507.7" cy="426.4" r="5"><title>Kakinada</title></circle><text class="map__town" x="517.7" y="430.4" text-anchor="start">Kakinada</text><circle class="map__dot" cx="807.7" cy="144.8" r="5"><title>Anakapalle</title></circle><text data-i18n="Anakapalle" class="map__town" x="797.7" y="148.8" text-anchor="end">Anakapalle</text><text data-i18n="West Godavari" class="map__dist" x="66" y="360" text-anchor="start">West Godavari</text><text data-i18n="East Godavari" class="map__dist" x="540" y="318" text-anchor="end">East Godavari</text><circle class="map__city" cx="930.8" cy="148.8" r="4"/><text data-i18n="Visakhapatnam" class="map__town map__town--city" x="930.8" y="132.8" text-anchor="middle">Visakhapatnam</text></svg>
+        <figcaption class="map__foot">
+          <p data-i18n="Schematic — dots mark towns, not boundaries." class="note">Schematic — dots mark towns, not boundaries.</p>
+          <span class="map__key"><span class="map__key-dot"></span><span data-i18n="a showroom" class="note">a showroom</span><span class="map__key-dot map__key-dot--flag"></span><span data-i18n="the flagship" class="note">the flagship</span></span>
+        </figcaption>
+      </figure>
 
-      <figure class="band"><picture>
-<source srcset="assets/img/storefront.avif" type="image/avif">
-<source srcset="assets/img/storefront.webp" type="image/webp">
-<img src="assets/img/storefront.jpg" width="1200" height="670" loading="lazy" decoding="async" alt="A branch on a main road, shutters up at ten">
-</picture><figcaption><span data-i18n="AI stand-in art" class="shot__tag">AI stand-in art</span><span data-i18n="A branch on a main road, shutters up at ten">A branch on a main road, shutters up at ten</span></figcaption></figure>
-
-      <div class="panel" style="margin-top:26px">
+      <div class="panel" style="margin-top:18px">
         <div class="panel__body">
           <div class="filters">
             <div class="filters__row">
@@ -299,13 +235,13 @@
         </div>
       </div>
 
-      <div class="dir" data-store-list style="margin-top:20px"></div>
+      <div class="dir" data-store-list style="margin-top:18px"></div>
       <p class="panel" data-store-empty hidden><span class="empty">
         <svg class="icon" aria-hidden="true"><use href="#i-search"></use></svg>
         <span data-i18n="Nothing matches that" class="display display--xs">Nothing matches that</span>
         <span data-i18n="Try a town, a road or a pincode — or call the helpline and ask." class="note">Try a town, a road or a pincode — or call the helpline and ask.</span></span></p>
 
-      <p data-i18n="Open until 9 pm today." class="notice" style="margin-top:24px" data-shop-note>Open until 9 pm today.</p>
+      <p data-i18n="Open until 9 pm today." class="notice" style="margin-top:22px" data-shop-note>Open until 9 pm today.</p>
 
   </main>
   <footer class="wrap foot">
@@ -313,17 +249,16 @@
       <p><strong>WHYNOT Electronics Pvt Ltd</strong><br>RS No 24/1, Ground &amp; Cellar<br>Sri Sowdha Towers, Undrajavaram Road<br>Tanuku 534211, Andhra Pradesh</p>
       <p>Helpline <a href="tel:+918886222448">88862 22448</a><br>
          <a href="mailto:whynot.rayudu@gmail.com">whynot.rayudu@gmail.com</a> · open 10 am to 9 pm</p>
-      <p data-i18n="A redesign concept for whynotindia.in, built as portfolio work. Not affiliated with the company and not deployed anywhere. Photographs on this page are AI-generated stand-in art and the enquiry form has no server behind it." class="note">A redesign concept for whynotindia.in, built as portfolio work.
-         Not affiliated with the company and not deployed anywhere. Photographs on
-         this page are AI-generated stand-in art and the enquiry form has no server
-         behind it.</p>
+      <p data-i18n="A redesign concept for whynotindia.in, built as portfolio work. Not affiliated with the company and not deployed anywhere. Artwork is AI-generated stand-in art, and the enquiry form has no server behind it." class="note">A redesign concept for whynotindia.in, built as portfolio work.
+         Not affiliated with the company and not deployed anywhere. Artwork is
+         AI-generated stand-in art, and the enquiry form has no server behind it.</p>
       <p class="note">© <span data-year>2026</span> concept build.</p>
     </div>
   </footer>
 </div>
 
 <nav class="tabs" aria-label="Pages">
-<a href="index.html"><svg class="icon" aria-hidden="true"><use href="#i-slate"></use></svg><span data-i18n="Home">Home</span></a><a href="products.html"><svg class="icon" aria-hidden="true"><use href="#i-tag"></use></svg><span data-i18n="Catalogue">Catalogue</span></a><a href="stores.html" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#i-pin"></use></svg><span data-i18n="Showrooms">Showrooms</span></a><a href="about.html"><svg class="icon" aria-hidden="true"><use href="#i-people"></use></svg><span data-i18n="About">About</span></a><a href="contact.html"><svg class="icon" aria-hidden="true"><use href="#i-call"></use></svg><span data-i18n="Contact">Contact</span></a></nav>
+<a data-i18n="Home" href="index.html">Home</a><a data-i18n="Catalogue" href="products.html">Catalogue</a><a data-i18n="Showrooms" href="stores.html" aria-current="page">Showrooms</a><a data-i18n="About" href="about.html">About</a><a data-i18n="Contact" href="contact.html">Contact</a></nav>
 <div class="toast" data-toast role="status" aria-live="polite"></div>
 </body>
 </html>
