@@ -1,0 +1,10 @@
+# The trials themselves have no dependencies — these only appear if you install
+# jsdom to run the test suite in _tools/.
+node_modules/
+package-lock.json
+package.json
+
+# editor / OS noise
+.DS_Store
+Thumbs.db
+*.swp

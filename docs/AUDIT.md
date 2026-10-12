@@ -74,9 +74,14 @@ Not a paint job. In priority order:
 
 ---
 
-## 4. What this trial (Trial 01 · "Paper & Ink") demonstrates
+## 4. What the redesigns demonstrate
 
-A deliberately minimal counter-argument to the current site. Same facts, same brand blue `#0000FF`, nothing decorative:
+Two complete builds, same fix-list, deliberately opposite personalities — because the direction is a business decision the client should be able to see rather than imagine:
+
+- **Trial 01 · "Paper & Ink"** — editorial minimalism. Warm paper, hairline rules, real typography, the brand blue `#0000FF` doing all the shouting.
+- **Trial 02 · "Crayon & Paper"** — hand-drawn and vibrant. Marker-pen doodles, sticker buttons, wobbling pen borders, a maths-book dot grid, and 37 icons written as SVG paths by hand.
+
+Both cover six pages, both carry the full showroom directory and a browsable catalogue with a shortlist that travels to the counter by WhatsApp, phone or email, and both are built with no framework, no build step and no third-party requests. What follows uses Trial 01 as the reference for the shared engineering.
 
 - **Whole site in one screen of CSS + two small scripts.** No framework, no build step, no jQuery, no CDN.
 - **Typography done properly.** Two self-hosted families, five faces total: Instrument Serif (regular + italic) for the big statements, Inter (400/500/600) for interface text. Total font payload ≈ 113 KB, latin subset only, `font-display: swap`, so text paints immediately.
@@ -87,7 +92,11 @@ A deliberately minimal counter-argument to the current site. Same facts, same br
 - **One place for every fact.** Change the phone number once; it changes in the header, drawer, CTA, footer, contact page and schema.
 - **SEO basics done once:** unique title + description + canonical per page, OG tags, `Store` structured data, favicons, theme colour.
 
-### Performance budget (this trial)
+### One more thing the redesigns add: the shop
+
+The current site has a shopping cart in the navigation and nothing to put in it. Both trials replace that with the thing a 25-branch retailer can actually run: a catalogue of the categories they already sell, live search with a real keyword index, a filter for "what is stocked in my town", and a shortlist that sends itself to the counter — the whole list written out, in one tap, to WhatsApp, email or the helpline. Prices are deliberately not invented; cards say "ask today's price", which is also how most Indian electronics retail works. A real cart with a payment gateway is a phase-two decision, and the shortlist maps onto one item for item.
+
+### Performance budget (Trial 01, measured)
 
 | Asset | Weight |
 |---|---|

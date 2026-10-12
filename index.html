@@ -3,147 +3,415 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>WHYNOT — redesign trials</title>
-<meta name="description" content="Independent redesign concepts for whynotindia.in. Each trial is a complete, self-contained build in a different visual direction.">
+<title>WHYNOT redesign lab — trials 01 &amp; 02</title>
+<meta name="description" content="Independent redesign concepts for whynotindia.in: two complete builds in different visual directions, each shown live in a desktop and phone preview.">
 <meta name="theme-color" content="#0c0c0e">
 <link rel="icon" href="trial-01-minimal/assets/img/logo-mark.svg" type="image/svg+xml">
-<link rel="stylesheet" href="trial-01-minimal/assets/css/style.css">
 <style>
-  /* The index borrows the trial's design language, then inverts it: ink page. */
-  .lab {
+  /* ---------------------------------------------------------------------
+     The lab page is deliberately self-contained: its own small stylesheet,
+     no dependency on either trial's CSS. The previews are real, scrollable
+     iframes of the built pages — what you see is the actual site, not a
+     screenshot.
+     --------------------------------------------------------------------- */
+  :root {
+    --ink: #0c0c0e;
+    --ink-2: #16161a;
+    --ink-3: #1e1e24;
+    --paper: #f4f2ee;
+    --paper-2: #ffffff;
+    --muted: #8c8c95;
+    --line: #26262d;
+    --blue: #4d4dff;
+    --yellow: #ffd43b;
+    --coral: #ff5a5f;
+    --lime: #a7e04a;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
     background: var(--ink);
     color: var(--paper);
-    min-height: 100vh;
+    font-family: var(--sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
-  .lab__top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    padding-block: 22px;
-    border-bottom: 1px solid color-mix(in srgb, var(--paper) 14%, transparent);
-    flex-wrap: wrap;
-  }
-  .lab .brand__name { color: var(--paper); }
-  .lab .brand__tag { color: color-mix(in srgb, var(--paper) 55%, transparent); }
-  .lab__eyebrow { font-size: var(--step--2); letter-spacing: .16em; text-transform: uppercase; color: color-mix(in srgb, var(--paper) 50%, transparent); }
-  .lab__hero { padding-block: clamp(48px, 9vw, 120px) clamp(40px, 6vw, 72px); display: grid; gap: 22px; max-width: 22ch; }
-  .lab__hero h1 { font-family: var(--font-display); font-size: var(--step-5); line-height: .96; letter-spacing: -.02em; }
-  .lab__hero p { max-width: 52ch; color: color-mix(in srgb, var(--paper) 65%, transparent); }
-  .lab__note { font-size: var(--step--1); color: color-mix(in srgb, var(--paper) 50%, transparent); max-width: 62ch; }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+  h1, h2, h3 { line-height: 1.05; letter-spacing: -.02em; text-wrap: balance; }
+  .wrap { width: 100%; max-width: 1280px; margin-inline: auto; padding-inline: clamp(18px, 4vw, 56px); }
+  :focus-visible { outline: 2px solid var(--yellow); outline-offset: 3px; border-radius: 3px; }
 
-  .trials { display: grid; gap: 0; border-top: 1px solid color-mix(in srgb, var(--paper) 14%, transparent); }
-  .trial {
-    display: grid;
-    gap: 22px;
-    padding-block: clamp(28px, 4vw, 44px);
-    border-bottom: 1px solid color-mix(in srgb, var(--paper) 14%, transparent);
-    align-content: start;
+  .top {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding-block: 20px; border-bottom: 1px solid var(--line); flex-wrap: wrap;
   }
-  @media (min-width: 860px) {
-    .trial { grid-template-columns: 84px minmax(0, 1fr) minmax(0, 26ch) auto; gap: 40px; align-items: start; }
+  .brand { display: inline-flex; align-items: center; gap: 10px; }
+  .brand__mark {
+    width: 30px; height: 30px; border-radius: 8px; background: #0000ff;
+    display: grid; place-items: center; font-weight: 700; font-size: 15px; color: #fff;
   }
-  .trial__no { font-family: var(--font-display); font-size: var(--step-3); color: color-mix(in srgb, var(--paper) 40%, transparent); line-height: 1; }
-  .trial__body { display: grid; gap: 12px; }
-  .trial__title { font-family: var(--font-display); font-size: var(--step-3); line-height: 1.02; letter-spacing: -.02em; }
-  .trial__body p { color: color-mix(in srgb, var(--paper) 65%, transparent); font-size: var(--step--1); max-width: 62ch; }
-  .trial__tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+  .brand__name { font-weight: 600; letter-spacing: .16em; text-transform: uppercase; font-size: .9375rem; }
+  .top__note { font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+
+  .hero { padding-block: clamp(44px, 9vw, 112px) clamp(32px, 5vw, 56px); display: grid; gap: 20px; max-width: 900px; }
+  .kicker { font-family: var(--mono); font-size: .75rem; letter-spacing: .16em; text-transform: uppercase; color: var(--yellow); }
+  .hero h1 { font-size: clamp(2.25rem, 6.4vw, 4.5rem); font-weight: 500; }
+  .hero p { color: #b9b9c2; max-width: 62ch; font-size: 1.0625rem; }
+  .hero__actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    min-height: 46px; padding: 0 18px;
+    border: 1px solid var(--line); border-radius: 999px;
+    font-size: .875rem; font-weight: 500; text-decoration: none;
+    background: transparent; color: var(--paper); cursor: pointer;
+    transition: background-color .18s ease, border-color .18s ease, color .18s ease, transform .18s ease;
+  }
+  .btn:hover { transform: translateY(-1px); border-color: #4a4a55; }
+  .btn--primary { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+  .btn--primary:hover { background: #fff; }
+  .btn--yellow { background: var(--yellow); color: var(--ink); border-color: var(--yellow); }
+  .btn--sm { min-height: 38px; padding: 0 14px; font-size: .8125rem; }
+
+  /* ---- the brief ------------------------------------------------------ */
+  .brief { display: grid; gap: 16px; padding-block: clamp(28px, 5vw, 52px); border-top: 1px solid var(--line); }
+  @media (min-width: 900px) { .brief { grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 56px; align-items: start; } }
+  .brief h2 { font-size: clamp(1.5rem, 3vw, 2.125rem); font-weight: 500; }
+  .brief ol { display: grid; gap: 14px; counter-reset: brief; }
+  .brief li {
+    display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px;
+    font-size: .9375rem; color: #b9b9c2;
+    counter-increment: brief;
+  }
+  .brief li::before {
+    content: counter(brief, decimal-leading-zero);
+    font-family: var(--mono); font-size: .75rem; color: var(--yellow); padding-top: 3px;
+  }
+  .brief strong { color: var(--paper); font-weight: 500; }
+
+  /* ---- trials --------------------------------------------------------- */
+  .trials { display: grid; gap: clamp(28px, 5vw, 64px); padding-block: clamp(24px, 4vw, 48px) 0; }
+  .trial { border-top: 1px solid var(--line); padding-top: clamp(24px, 4vw, 44px); display: grid; gap: 22px; }
+  .trial__head { display: grid; gap: 12px; }
+  .trial__no {
+    font-family: var(--mono); font-size: .75rem; letter-spacing: .18em; text-transform: uppercase; color: var(--muted);
+  }
+  .trial h3 { font-size: clamp(1.625rem, 4vw, 2.75rem); font-weight: 500; }
+  .trial__sub { color: #b9b9c2; max-width: 68ch; font-size: 1rem; }
+  .trial__tags { display: flex; flex-wrap: wrap; gap: 8px; }
   .trial__tags span {
-    font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
-    border: 1px solid color-mix(in srgb, var(--paper) 22%, transparent);
-    color: color-mix(in srgb, var(--paper) 62%, transparent);
-    border-radius: 999px; padding: 4px 10px;
+    font-size: .6875rem; letter-spacing: .1em; text-transform: uppercase;
+    border: 1px solid var(--line); border-radius: 999px; padding: 5px 11px; color: #a5a5af;
   }
-  .trial__thumb { border: 1px solid color-mix(in srgb, var(--paper) 14%, transparent); border-radius: 4px; overflow: hidden; }
-  .trial__thumb img { width: 100%; aspect-ratio: 4/3; object-fit: cover; opacity: .92; }
-  .trial__meta { display: grid; gap: 10px; font-size: var(--step--2); color: color-mix(in srgb, var(--paper) 50%, transparent); }
-  .lab .btn { --btn-bg: var(--paper); --btn-fg: var(--ink); }
-  .lab .btn--ghost { --btn-bg: transparent; --btn-fg: var(--paper); border-color: color-mix(in srgb, var(--paper) 30%, transparent); }
-  .lab .btn[aria-disabled="true"] { opacity: .45; pointer-events: none; }
-  .lab__foot { padding-block: clamp(40px, 6vw, 72px); display: grid; gap: 14px; font-size: var(--step--1); color: color-mix(in srgb, var(--paper) 55%, transparent); }
-  .lab__foot a { text-decoration: underline; text-underline-offset: 3px; }
-  .lab__foot a:hover { color: var(--paper); }
+  .trial--01 .trial__no { color: #9a9a9a; }
+  .trial--02 .trial__no { color: var(--yellow); }
+
+  .trial__actions { display: flex; flex-wrap: wrap; gap: 10px; }
+  .trial__specs { display: flex; flex-wrap: wrap; gap: 8px 26px; font-size: .8125rem; color: var(--muted); font-family: var(--mono); }
+
+  /* ---- preview frames ------------------------------------------------- */
+  .previews { display: grid; gap: 20px; align-items: start; }
+  @media (min-width: 720px) { .previews { grid-template-columns: minmax(0, 1fr) 240px; gap: 26px; } }
+
+  .preview { display: grid; gap: 10px; }
+  .preview__label {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    font-family: var(--mono); font-size: .6875rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+  }
+  .frame {
+    position: relative;
+    background: var(--paper-2);
+    border: 1px solid #33333c;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .9);
+  }
+  .frame__bar {
+    display: flex; align-items: center; gap: 6px;
+    padding: 9px 12px;
+    background: #1b1b21;
+    border-bottom: 1px solid #2c2c34;
+  }
+  .frame__dot { width: 9px; height: 9px; border-radius: 50%; background: #3a3a44; }
+  .frame__url {
+    margin-left: 8px; flex: 1;
+    font-family: var(--mono); font-size: .625rem; color: #7d7d87;
+    background: #101014; border: 1px solid #26262d; border-radius: 999px;
+    padding: 3px 10px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .frame__view { position: relative; overflow: hidden; background: #fff; }
+  .frame__view iframe {
+    position: absolute; top: 0; left: 0;
+    border: 0; transform-origin: 0 0;
+    width: 1280px; height: 900px;   /* JS replaces these with the scaled size */
+    background: #fff;
+  }
+  .preview--phone .frame { border-radius: 22px; padding: 7px; background: #17171c; }
+  .preview--phone .frame__view { border-radius: 16px; background: #fff; }
+  .preview--phone .frame__view iframe { width: 390px; height: 780px; }
+  .frame__hint {
+    position: absolute; inset: auto 0 0 0;
+    padding: 8px 12px; font-size: .6875rem; color: #fff;
+    background: linear-gradient(to top, rgba(12, 12, 14, .92), transparent);
+    text-align: center; pointer-events: none;
+  }
+  .preview--phone .frame__hint { font-size: .625rem; }
+  @media (max-width: 719px) {
+    .preview--desktop { display: none; }   /* mobile-first: show the phone view */
+    .previews { grid-template-columns: minmax(0, 1fr); }
+    .preview--phone { max-width: 320px; }
+  }
+
+  /* ---- reserved slot -------------------------------------------------- */
+  .trial--soon { opacity: .72; }
+  .soon {
+    border: 1px dashed #34343d; border-radius: 12px;
+    padding: 22px; display: grid; gap: 8px;
+    font-size: .875rem; color: #a5a5af;
+  }
+  .soon strong { color: var(--paper); font-weight: 500; }
+
+  .fail {
+    display: none;
+    padding: 22px; border: 1px dashed #34343d; border-radius: 12px;
+    font-size: .875rem; color: #a5a5af;
+  }
+
+  /* ---- footer --------------------------------------------------------- */
+  .foot {
+    margin-top: clamp(48px, 8vw, 96px);
+    border-top: 1px solid var(--line);
+    padding-block: clamp(28px, 5vw, 56px);
+    display: grid; gap: 12px;
+    font-size: .875rem; color: #8f8f99;
+  }
+  .foot strong { color: var(--paper); font-weight: 500; }
+  .foot a { color: #b9b9c2; }
+  .foot a:hover { color: var(--paper); }
 </style>
 </head>
-<body class="lab">
+<body>
 <div class="wrap">
-  <div class="lab__top">
+
+  <div class="top">
     <span class="brand">
-      <img class="brand__mark" src="trial-01-minimal/assets/img/logo-mark.svg" alt="" width="30" height="30">
-      <span class="brand__text">
-        <span class="brand__name">Whynot</span>
-        <span class="brand__tag">We drive the change</span>
-      </span>
+      <span class="brand__mark" aria-hidden="true">W</span>
+      <span class="brand__name">Whynot</span>
     </span>
-    <p class="lab__eyebrow">Redesign lab · whynotindia.in</p>
+    <p class="top__note">Redesign lab · whynotindia.in · concept work</p>
   </div>
 
-  <section class="lab__hero">
-    <p class="lab__eyebrow">Independent concept work</p>
-    <h1>Three ways to fix a 32-year-old business's website.</h1>
-    <p class="lab__note">Each trial is a complete, self-contained build of the same content — different visual direction, same job: make a customer trust WHYNOT in five seconds, then get them to the nearest of 25 showrooms or to a phone that works.</p>
-    <p><a class="btn btn--ghost" href="docs/AUDIT.md">Read the audit of the current site <svg class="i-inline" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M17 7H8M17 7v9"/></svg></a></p>
+  <section class="hero">
+    <p class="kicker">Two directions, one fix-list</p>
+    <h1>Two ways to fix a 32-year-old business&rsquo;s website.</h1>
+    <p>WHYNOT Electronics runs 25 showrooms across the Godavari districts and has been trading since 1994. Their current site buries the phone number, breaks every map link and shows a shopping cart with nothing in it. These are two complete redesigns of the same content &mdash; different visual language, identical job: make a customer trust them in five seconds, then get them to the nearest showroom or a catalog they can order from.</p>
+    <div class="hero__actions">
+      <a class="btn btn--primary" href="docs/AUDIT.md">Read the audit of the current site</a>
+      <a class="btn" href="#trials">Jump to the trials</a>
+      <a class="btn" href="https://www.whynotindia.in/" target="_blank" rel="noopener noreferrer">The live site &nearr;</a>
+    </div>
   </section>
 
-  <section class="trials">
-    <article class="trial">
-      <p class="trial__no num">01</p>
-      <div class="trial__body">
-        <h2 class="trial__title">Paper &amp; Ink — the quiet one</h2>
-        <p>Editorial minimalism: warm paper, real typography, hairline rules instead of boxes. Almost no chrome. The design gets out of the way and lets the addresses, the phone number and the facts do the selling. Built to load on a 4G phone in a village and to look composed on a 6-inch screen and a 27-inch monitor alike.</p>
+  <section class="brief">
+    <div>
+      <p class="kicker">The brief</p>
+      <h2>Same five problems in both builds</h2>
+      <p style="color:#8f8f99;font-size:.875rem;margin-top:10px">Both trials carry the full fix-list. The difference is entirely in how they look and feel &mdash; which is the point of building two.</p>
+    </div>
+    <ol>
+      <li><span><strong>One true set of facts.</strong> The current site claims 23, 25 and 40 branches on three different pages. Both trials say 25 showrooms in 23 towns, and say it once.</span></li>
+      <li><span><strong>A showroom directory that works.</strong> Search by town, district or pincode, with real Google Maps links. Every map link on the live site is broken.</span></li>
+      <li><span><strong>A phone number one tap away</strong>, on every page, with an honest open/closed state &mdash; the live contact page has no number at all.</span></li>
+      <li><span><strong>Products worth browsing.</strong> Both trials ship a real catalogue with categories, search, town filters and a shortlist that travels to the counter by WhatsApp, phone or email.</span></li>
+      <li><span><strong>A page that loads in a village.</strong> No framework, no CDN, no analytics, no popup. Under 250 KB for the first view, readable before the fonts land.</span></li>
+    </ol>
+  </section>
+
+  <section class="trials" id="trials">
+
+    <!-- ================================================ TRIAL 01 ======== -->
+    <article class="trial trial--01">
+      <div class="trial__head">
+        <p class="trial__no">Trial 01</p>
+        <h3>Paper &amp; Ink — the quiet one</h3>
+        <p class="trial__sub">Editorial minimalism. Warm paper, hairline rules, real typography and a single brand blue doing all the shouting. Almost no chrome: the design gets out of the way so the addresses, the prices-on-request and the phone number can do the selling. It is the direction for a company that wants to look like it has nothing to prove.</p>
         <div class="trial__tags">
-          <span>Minimal / editorial</span>
-          <span>Paper &amp; ink</span>
-          <span>System-weight CSS</span>
-          <span>Dark mode</span>
-          <span>Accessible baseline</span>
+          <span>Minimal / editorial</span><span>Warm paper</span><span>Hairlines not cards</span>
+          <span>Dark mode</span><span>Accessible baseline</span><span>Mobile first</span>
         </div>
-        <div class="trial__tags" style="margin-top:14px">
-          <a class="btn" href="trial-01-minimal/index.html">Open Trial 01</a>
-          <a class="btn btn--ghost" href="trial-01-minimal/stores.html">Showroom directory</a>
-          <a class="btn btn--ghost" href="trial-01-minimal/contact.html">Contact</a>
+        <div class="trial__specs">
+          <span>6 pages</span><span>zero dependencies</span><span>165 KB first view</span>
+          <span>one 30 KB stylesheet</span><span>catalogue + shortlist</span>
+        </div>
+        <div class="trial__actions">
+          <a class="btn btn--primary" href="trial-01-minimal/index.html">Open Trial 01</a>
+          <a class="btn" href="trial-01-minimal/products.html">Catalogue</a>
+          <a class="btn" href="trial-01-minimal/stores.html">Showrooms</a>
+          <a class="btn" href="trial-01-minimal/contact.html">Contact</a>
         </div>
       </div>
-      <div class="trial__thumb">
-        <img src="trial-01-minimal/assets/img/showroom-hero.jpg" alt="Preview of Trial 01: a quiet showroom aisle in warm light." width="1000" height="750" loading="lazy">
-      </div>
-      <div class="trial__meta">
-        <p>5 pages</p>
-        <p>No dependencies</p>
-        <p>&lt; 250 KB first view</p>
+
+      <div class="previews">
+        <figure class="preview preview--desktop">
+          <div class="frame">
+            <div class="frame__bar">
+              <span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span>
+              <span class="frame__url">whynotindia.in — Paper &amp; Ink (desktop)</span>
+            </div>
+            <div class="frame__view" data-preview data-src="trial-01-minimal/index.html" data-w="1280" data-h="900" style="aspect-ratio:1280/900">
+              <iframe src="trial-01-minimal/index.html" title="Trial 01, live desktop preview" loading="lazy" tabindex="-1" scrolling="no"></iframe>
+              <span class="frame__hint">Live page, scaled down &mdash; open it to scroll</span>
+            </div>
+          </div>
+          <figcaption class="preview__label"><span>Desktop · 1280px</span><span>live iframe</span></figcaption>
+        </figure>
+
+        <figure class="preview preview--phone">
+          <div class="frame">
+            <div class="frame__view" data-preview data-src="trial-01-minimal/index.html" data-w="390" data-h="780" style="aspect-ratio:390/780">
+              <iframe src="trial-01-minimal/index.html" title="Trial 01, live phone preview" loading="lazy" tabindex="-1" scrolling="no"></iframe>
+            </div>
+          </div>
+          <figcaption class="preview__label"><span>Phone · 390px</span><span>live iframe</span></figcaption>
+        </figure>
       </div>
     </article>
 
-    <article class="trial">
-      <p class="trial__no num">02</p>
-      <div class="trial__body">
-        <h2 class="trial__title">— direction to be chosen</h2>
-        <p>Reserved. Trial 02 gets its own brief and its own visual language; the audit's fix-list stays the same, so the comparison is honest.</p>
+    <!-- ================================================ TRIAL 02 ======== -->
+    <article class="trial trial--02">
+      <div class="trial__head">
+        <p class="trial__no">Trial 02</p>
+        <h3>Crayon &amp; Paper — the loud one</h3>
+        <p class="trial__sub">Hand-drawn and vibrant. Marker-pen doodles, sticker buttons with hard offset shadows, wobbly pen borders and a maths-exercise-book dot grid. Every icon is a hand-written SVG path rather than a stock glyph, and the copy talks like a shopkeeper instead of a brochure. This is the direction for a brand that wants to feel like the friendly expert in town rather than a showroom.</p>
+        <div class="trial__tags">
+          <span>Illustrated / hand-drawn</span><span>Vibrant</span><span>Marker + paper</span>
+          <span>Custom SVG doodles</span><span>Mobile first</span><span>WhatsApp-first buying</span>
+        </div>
+        <div class="trial__specs">
+          <span>6 pages</span><span>zero dependencies</span><span>37 hand-drawn icons</span>
+          <span>sticky phone action bar</span><span>catalogue + shortlist</span>
+        </div>
+        <div class="trial__actions">
+          <a class="btn btn--primary" href="trial-02-illustrated/index.html">Open Trial 02</a>
+          <a class="btn" href="trial-02-illustrated/products.html">Catalogue</a>
+          <a class="btn" href="trial-02-illustrated/stores.html">Showrooms</a>
+          <a class="btn" href="trial-02-illustrated/about.html">About</a>
+        </div>
       </div>
-      <div class="trial__thumb" aria-hidden="true" style="background:linear-gradient(135deg,color-mix(in srgb, var(--paper) 8%, transparent),transparent)"></div>
-      <div class="trial__meta">
-        <p>Not started</p>
+
+      <div class="previews">
+        <figure class="preview preview--desktop">
+          <div class="frame">
+            <div class="frame__bar">
+              <span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span>
+              <span class="frame__url">whynotindia.in — Crayon &amp; Paper (desktop)</span>
+            </div>
+            <div class="frame__view" data-preview data-src="trial-02-illustrated/index.html" data-w="1280" data-h="900" style="aspect-ratio:1280/900">
+              <iframe src="trial-02-illustrated/index.html" title="Trial 02, live desktop preview" loading="lazy" tabindex="-1" scrolling="no"></iframe>
+              <span class="frame__hint">Live page, scaled down &mdash; open it to scroll</span>
+            </div>
+          </div>
+          <figcaption class="preview__label"><span>Desktop · 1280px</span><span>live iframe</span></figcaption>
+        </figure>
+
+        <figure class="preview preview--phone">
+          <div class="frame">
+            <div class="frame__view" data-preview data-src="trial-02-illustrated/index.html" data-w="390" data-h="780" style="aspect-ratio:390/780">
+              <iframe src="trial-02-illustrated/index.html" title="Trial 02, live phone preview" loading="lazy" tabindex="-1" scrolling="no"></iframe>
+            </div>
+          </div>
+          <figcaption class="preview__label"><span>Phone · 390px</span><span>live iframe</span></figcaption>
+        </figure>
       </div>
     </article>
 
-    <article class="trial">
-      <p class="trial__no num">03</p>
-      <div class="trial__body">
-        <h2 class="trial__title">— reserved</h2>
-        <p>Third direction, if the first two aren't it.</p>
+    <!-- ================================================ RESERVED ======== -->
+    <article class="trial trial--soon">
+      <div class="trial__head">
+        <p class="trial__no">Trial 03 &amp; 04</p>
+        <h3>Reserved</h3>
+        <p class="trial__sub">Two more slots, for two more directions. Each gets its own preview box here as soon as it is built, so the whole lab stays one page.</p>
+        <div class="trial__tags">
+          <span>Commerce-first catalogue</span><span>Map-first / hyper-local</span><span>Dark &amp; cinematic</span>
+        </div>
       </div>
-      <div class="trial__thumb" aria-hidden="true" style="background:linear-gradient(135deg,color-mix(in srgb, var(--paper) 8%, transparent),transparent)"></div>
-      <div class="trial__meta">
-        <p>Not started</p>
+      <div class="soon">
+        <strong>Ideas on the shelf:</strong>
+        <p>A commerce-first build, where the catalogue leads and a real cart plus payment gateway sits behind it (the shortlist in trials 01 and 02 already maps onto a cart item for item). A map-first build, where the district map is the homepage and every one of the 23 towns gets its own page for local search. Or a dark, cinematic product-led build for the brand store side of the business.</p>
       </div>
     </article>
+
   </section>
 
-  <footer class="lab__foot">
-    <p><strong style="color:var(--paper)">Concept work only.</strong> Nothing here is affiliated with, endorsed by, or deployed to WHYNOT Electronics Pvt Ltd. All company facts, addresses, phone number and brand names are theirs, taken from their public website on 12 October 2026 and used to show what a rebuild could look like.</p>
-    <p>Images are AI-generated stand-ins for photography that would be shot at the real showrooms. Brand names are text only, with no third-party logos used.</p>
-    <p><a href="https://www.whynotindia.in/" target="_blank" rel="noopener noreferrer">The current live site <svg class="i-inline" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M17 7H8M17 7v9"/></svg></a></p>
+  <footer class="foot">
+    <p><strong>Concept work only.</strong> Not affiliated with, endorsed by or deployed to WHYNOT Electronics Pvt Ltd. Company facts, addresses, phone number and brand names are theirs, taken from their public website on 12 October 2026, and used here to show what a rebuild could look like.</p>
+    <p>Photography in Trial 01 is AI-generated stand-in imagery for photography that would be shot in the real showrooms. Every illustration in Trial 02 is a hand-written SVG path in this repository. No third-party logos or trademarks are reproduced &mdash; brand names appear as text only.</p>
+    <p>Previews on this page are the actual built pages, loaded in scaled iframes. Two trials, six pages each, no build step, no dependencies, no external requests. <a href="docs/AUDIT.md">Audit</a> · <a href="README.md">README</a></p>
   </footer>
 </div>
+
+<script>
+  /* Scale the live previews to fit their frames.
+     Each preview declares the viewport it is pretending to be (1280×900 for
+     desktop, 390×780 for the phone) and the iframe is scaled down to whatever
+     width the frame actually has, so the box is fluid without a re-layout of
+     the trial inside it. */
+  (function () {
+    "use strict";
+    var frames = Array.prototype.slice.call(document.querySelectorAll("[data-preview]"));
+    if (!frames.length) return;
+
+    function fit(frame) {
+      var view = frame;
+      var iframe = view.querySelector("iframe");
+      if (!iframe) return;
+
+      var w = parseFloat(view.getAttribute("data-w")) || 1280;
+      var h = parseFloat(view.getAttribute("data-h")) || 900;
+      var box = view.clientWidth;
+      if (!box) return;                       /* hidden (e.g. desktop frame on a phone) */
+
+      var scale = box / w;
+      iframe.style.width = w + "px";
+      iframe.style.height = h + "px";
+      iframe.style.transform = "scale(" + scale + ")";
+      view.style.height = Math.round(h * scale) + "px";
+      view.style.aspectRatio = "auto";
+
+      /* a phone frame is taller than it is wide: let it show the same width */
+      if (Math.abs(scale - 1) > 0.001) {
+        view.style.overflow = "hidden";
+      }
+    }
+
+    function fitAll() { frames.forEach(fit); }
+
+    fitAll();
+    window.addEventListener("load", fitAll);
+
+    var t;
+    window.addEventListener("resize", function () {
+      clearTimeout(t);
+      t = setTimeout(fitAll, 140);
+    });
+
+    /* If a preview cannot be shown (bad path, blocked), say so instead of
+       leaving an empty white box. */
+    frames.forEach(function (view) {
+      var iframe = view.querySelector("iframe");
+      if (!iframe) return;
+      iframe.addEventListener("error", function () {
+        var fail = document.createElement("p");
+        fail.className = "fail";
+        fail.style.display = "block";
+        fail.textContent = "This preview could not load. Open the trial with the button above.";
+        view.parentNode.appendChild(fail);
+      });
+    });
+  })();
+</script>
 </body>
 </html>

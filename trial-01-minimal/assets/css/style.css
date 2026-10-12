@@ -102,7 +102,7 @@
   --step-2: clamp(1.375rem, 1.24rem + .66vw, 1.875rem);
   --step-3: clamp(1.75rem, 1.45rem + 1.5vw, 2.75rem);
   --step-4: clamp(2.25rem, 1.72rem + 2.6vw, 4rem);
-  --step-5: clamp(2.75rem, 1.85rem + 4.4vw, 5.75rem);
+  --step-5: clamp(2.25rem, 1.75rem + 4.4vw, 5.75rem);
 
   --gap: clamp(16px, 2.2vw, 28px);
   --pad: clamp(20px, 4.5vw, 48px);
@@ -724,6 +724,61 @@ h1, h2, h3, h4 { font-weight: 500; line-height: 1.12; letter-spacing: -.018em; t
 .cta__actions { display: flex; flex-wrap: wrap; gap: 12px; }
 .cta .btn { --btn-bg: var(--paper); --btn-fg: var(--ink); }
 .cta .btn--ghost { --btn-bg: transparent; --btn-fg: var(--paper); border-color: color-mix(in srgb, var(--paper) 35%, transparent); }
+
+/* Header on a small phone: brand + three icon buttons, nothing else.
+   The full call-to-action lives in the drawer, one tap away. */
+.call-btn { display: inline-grid; }
+@media (min-width: 561px) { .call-btn { display: none; } }
+@media (max-width: 560px) { .header-actions .btn { display: none; } }
+
+/* 9b. Catalogue ---------------------------------------------------------- */
+.grid--products { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+.pcard {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  padding: 22px;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  transition: border-color var(--dur) var(--ease);
+}
+.pcard:hover { border-color: var(--line-2); }
+.pcard__cat { font-size: var(--step--2); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); }
+.pcard__title { font-size: var(--step-1); font-weight: 500; letter-spacing: -.01em; }
+.pcard__specs { font-size: var(--step--1); color: var(--ink-2); }
+.pcard__meta { font-size: var(--step--2); color: var(--ink-3); }
+.pcard__price { font-size: var(--step--1); font-weight: 500; color: var(--brand); }
+.pcard__actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px; }
+.pcard__badge {
+  font-size: var(--step--2); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3);
+  border-top: 1px solid var(--line); padding-top: 10px;
+}
+
+.list-panel { display: grid; border-top: 1px solid var(--line); }
+.list-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 16px 0; border-bottom: 1px solid var(--line);
+}
+.list-row__title { font-weight: 500; }
+.list-row__meta { font-size: var(--step--2); color: var(--ink-3); }
+.list-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+
+.list-btn { position: relative; }
+.list-btn__count {
+  position: absolute; top: -3px; right: -3px;
+  min-width: 19px; height: 19px; padding: 0 5px;
+  display: grid; place-items: center;
+  background: var(--brand-fill); color: var(--brand-on);
+  border-radius: 999px; font-size: 10px; font-weight: 600;
+}
+.list-btn__count[hidden] { display: none; }
+
+/* stacked toolbar reads better under 620 px */
+@media (max-width: 620px) {
+  .toolbar__row { flex-direction: column; align-items: stretch; }
+  .toolbar .chips { flex-wrap: nowrap; overflow-x: auto; }
+}
 
 /* 10. Store directory --------------------------------------------------- */
 .toolbar {
