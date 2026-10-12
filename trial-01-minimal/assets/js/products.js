@@ -80,8 +80,8 @@ function fallbackT(key, english) { return english === undefined ? key : english;
   function toggleItem(id) {
     var ids = readList();
     var i = ids.indexOf(id);
-    if (i === -1) { ids.push(id); flash(T("addedToast", "Added to your list")); }
-    else { ids.splice(i, 1); flash(T("removed", "Removed from your list")); }
+    if (i === -1) { ids.push(id); flash(T("addedToast", T("addedToast", T("addedToast", "Added to your list")))); }
+    else { ids.splice(i, 1); flash(T("removed", T("removed", T("removed", "Removed from your list")))); }
     writeList(ids);
   }
   function paintCounts() {
@@ -92,7 +92,7 @@ function fallbackT(key, english) { return english === undefined ? key : english;
       nodes[i].hidden = n === 0;
     }
     var labels = document.querySelectorAll("[data-list-label]");
-    for (var j = 0; j < labels.length; j++) labels[j].textContent = n === 1 ? "1 item" : n + T("items", " items");
+    for (var j = 0; j < labels.length; j++) labels[j].textContent = n === 1 ? "1 item" : n + T("items", T("items", T("items", " items")));
   }
 
   /* ------------------------------------------------------------- rendering */
@@ -108,7 +108,7 @@ function fallbackT(key, english) { return english === undefined ? key : english;
         '<p class="pcard__price">Ask for today&rsquo;s price</p>' +
         '<div class="pcard__actions">' +
           '<button class="btn btn--sm ' + (added ? "btn--ghost" : "btn--brand") + '" type="button" data-add="' + p.id + '">' +
-            (added ? T("added", "In your list") : T("add", "Add to list")) + "</button>" +
+            (added ? T("added", T("added", T("added", "In your list"))) : T("add", T("add", T("add", "Add to list")))) + "</button>" +
           '<a class="btn btn--sm btn--ghost" href="contact.html?about=' + encodeURIComponent(p.title) + '">Enquire</a>' +
         "</div>" +
         (p.badge ? '<p class="pcard__badge">' + esc(p.badge) + "</p>" : "") +
@@ -120,7 +120,7 @@ function fallbackT(key, english) { return english === undefined ? key : english;
     for (var i = 0; i < buttons.length; i++) {
       var added = inList(buttons[i].getAttribute("data-add"));
       buttons[i].className = "btn btn--sm " + (added ? "btn--ghost" : "btn--brand");
-      buttons[i].textContent = added ? T("added", "In your list") : T("add", "Add to list");
+      buttons[i].textContent = added ? T("added", T("added", T("added", "In your list"))) : T("add", T("add", T("add", "Add to list")));
     }
   }
 

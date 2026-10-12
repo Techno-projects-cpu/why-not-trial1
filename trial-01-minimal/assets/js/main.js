@@ -1,8 +1,11 @@
+function fallbackT(key, english) { return english === undefined ? key : english; }
 /* WHYNOT — Trial 01 runtime.
    No dependencies. Nothing here is required for the page to be readable:
    every feature below is a progressive enhancement. */
 (function () {
   "use strict";
+
+  var T = window.WHYNOT_T || fallbackT;
 
   var $ = function (sel, ctx) { return (ctx || document).querySelector(sel); };
   var $$ = function (sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); };

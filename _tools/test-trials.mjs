@@ -272,16 +272,17 @@ console.log("\n— three trials, three separate lists ————————�
   }
 }
 
-const productData = ["trial-01-minimal", "trial-02-illustrated", "trial-03-anime"].map((t) => {
+const productData = ["trial-01-minimal", "trial-02-illustrated", "trial-03-anime", "trial-04-brutalist",
+                     "trial-05-glass", "trial-06-painting", "trial-07-slate"].map((t) => {
   const src = fs.readFileSync(`${ROOT}/${t}/assets/js/products.js`, "utf8");
   const start = src.indexOf("var PRODUCTS = [");
   return src.slice(start, src.indexOf("];", start) + 2);
 });
-check(new Set(productData).size === 1, "the product data is byte-identical across all three trials");
+check(new Set(productData).size === 1, "the product data is byte-identical across all seven trials");
 
 
-console.log("\n— TRIALS 04–06 (the shared contract) ————————————————");
-const NEW_TRIALS = ["trial-04-brutalist", "trial-05-glass", "trial-06-painting"];
+console.log("\n— TRIALS 04–07 (the shared contract) ————————————————");
+const NEW_TRIALS = ["trial-04-brutalist", "trial-05-glass", "trial-06-painting", "trial-07-slate"];
 for (const dir of NEW_TRIALS) {
   if (!fs.existsSync(`${ROOT}/${dir}/assets/js/products.js`)) { console.log(`  --   ${dir}: not built yet, skipped`); continue; }
   const label = dir.replace("trial-0", "T0").replace("-", " ");
@@ -289,7 +290,7 @@ for (const dir of NEW_TRIALS) {
 
   const dom = await load(`${dir}/products.html`, [`${dir}/assets/js/main.js`, `${dir}/assets/js/products.js`]);
   const d = dom.window.document;
-  check(d.querySelectorAll("[data-products] .card").length === 17, `${label}: 17 products render`);
+  check(d.querySelectorAll("[data-products] [data-add]").length === 17, `${label}: 17 products render`);
   check(d.querySelectorAll("[data-cat-chips] .chip").length === 11, `${label}: category chips built`);
   check(d.querySelectorAll(".store, [data-store-list]").length >= 0, `${label}: catalogue page intact`);
 
@@ -325,17 +326,57 @@ for (const dir of NEW_TRIALS) {
 }
 
 
+
+console.log("\n— TRIAL 07 light / dark ————————————————————————————");
+{
+  const dir = "trial-07-slate";
+  const css = fs.readFileSync(`${ROOT}/${dir}/assets/css/style.css`, "utf8");
+  const dom = await load(`${dir}/index.html`, [`${dir}/assets/js/main.js`]);
+  const d = dom.window.document, w = dom.window;
+  const btn = d.querySelector("[data-mode-toggle]");
+
+  check(!!btn, "the mode switch is on the page");
+  check(d.documentElement.getAttribute("data-mode") === "light", "first paint is the system setting (stubbed to light)");
+
+  btn.click();
+  check(d.documentElement.getAttribute("data-mode") === "dark", "the switch goes dark");
+  check(btn.getAttribute("aria-pressed") === "true", "the switch says it is pressed");
+  check(w.localStorage.getItem("whynot-mode") === "dark", "the choice is remembered");
+
+  btn.click();
+  check(d.documentElement.getAttribute("data-mode") === "light", "and back to light");
+  check(w.localStorage.getItem("whynot-mode") === "light", "the change is remembered too");
+  dom.window.close();
+
+  // both palettes must define the same tokens, or one mode renders half-styled
+  const lightBlock = css.slice(css.indexOf(":root {"), css.indexOf('html[data-mode="dark"]'));
+  const darkBlock = css.slice(css.indexOf('html[data-mode="dark"]'), css.indexOf("* , *::before"));
+  // only the COLOUR tokens have to exist in both palettes; type, radii and
+  // shadows are set once and deliberately do not change with the mode
+  const colours = (block) => new Set([...block.matchAll(/(--[a-z0-9-]+)\s*:\s*(#[0-9a-fA-F]{3,8}|rgba?\()/g)]
+    .map((m) => m[1]));
+  const missing = [...colours(lightBlock)].filter((t) => !colours(darkBlock).has(t));
+  check(missing.length === 0, "every colour token is defined in both palettes" +
+        (missing.length ? ` — missing ${missing.join(", ")}` : ""));
+  const orphan = [...colours(darkBlock)].filter((t) => !colours(lightBlock).has(t));
+  check(orphan.length === 0, "and no colour exists only in dark" +
+        (orphan.length ? ` — extra ${orphan.join(", ")}` : ""));
+}
+
 console.log("\n— LANGUAGE (all trials) ————————————————————————————");
 {
   const trials = ["trial-01-minimal", "trial-02-illustrated", "trial-03-anime",
-                  "trial-04-brutalist", "trial-05-glass", "trial-06-painting"];
+                  "trial-04-brutalist", "trial-05-glass", "trial-06-painting", "trial-07-slate"];
   const telugu = (s) => [...s].some((c) => c.charCodeAt(0) >= 0x0c00 && c.charCodeAt(0) <= 0x0c7f);
   for (const dir of trials) {
     const dom = await load(`${dir}/products.html`,
       [`${dir}/assets/js/main.js`, `${dir}/assets/js/products.js`]);
     const d = dom.window.document;
+    /* Trial 07 navigates from a rail and a tab bar; the others from a header nav,
+       so the language checks look for whichever this trial actually has. */
+    const navSel = ".nav a, .rail__nav a, .tabs a";
     const en = {
-      nav: d.querySelector(".nav a").textContent.trim(),
+      nav: d.querySelector(navSel).textContent.trim(),
       add: d.querySelector("[data-add]").textContent.trim(),
       count: d.querySelector("[data-result-count]").textContent.trim(),
     };
@@ -343,7 +384,7 @@ console.log("\n— LANGUAGE (all trials) —————————————
     check(!!teBtn, `${dir}: language switch on the page`);
     teBtn.click();
     check(d.documentElement.lang === "te", `${dir}: document language follows the switch`);
-    check(telugu(d.querySelector(".nav a").textContent), `${dir}: nav reads Telugu`);
+    check(telugu(d.querySelector(navSel).textContent), `${dir}: nav reads Telugu`);
     check(telugu(d.querySelector("[data-add]").textContent),
           `${dir}: the button the catalogue builds reads Telugu`);
     check(d.querySelector("[data-result-count]").textContent.trim() !== en.count,
@@ -356,7 +397,7 @@ console.log("\n— LANGUAGE (all trials) —————————————
           `${dir}: shortlist panel written after the switch reads Telugu`);
 
     d.querySelector('[data-lang="en"]').click();
-    check(d.querySelector(".nav a").textContent.trim() === en.nav,
+    check(d.querySelector(navSel).textContent.trim() === en.nav,
           `${dir}: switching back restores the English`);
     check(dom.window.localStorage.getItem("whynot-lang") === "en",
           `${dir}: the choice is remembered`);

@@ -1,6 +1,9 @@
+function fallbackT(key, english) { return english === undefined ? key : english; }
 /* WHYNOT — Trial 02 runtime. Small, dependency-free, all progressive. */
 (function () {
   "use strict";
+
+  var T = window.WHYNOT_T || fallbackT;
 
   var $ = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };

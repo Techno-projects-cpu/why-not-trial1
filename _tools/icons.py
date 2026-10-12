@@ -18,6 +18,9 @@ CUTS = {
     "glass": dict(stroke="1.8", cap="round", join="round", halo=None, scale=1.0),
     # painting: soft, rounded, with a translucent bloom underneath
     "paint": dict(stroke="2.7", cap="round", join="round", halo="10", scale=1.0),
+    # slate: the professional cut — even weight, round joins, nothing decorative
+    # (Trial 07). Same geometry as the others, so one script still drives it.
+    "slate": dict(stroke="3.2", cap="round", join="round", halo=None, scale=1.0),
 }
 
 # The two "background" symbols stretch, so they keep their own aspect handling.

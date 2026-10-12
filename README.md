@@ -52,7 +52,7 @@ The third direction is the interesting one to compare against the first two: sam
 
 ### Trials 04–06
 
-These three share a builder (`_tools/sections.py`) and therefore share structure, copy and behaviour exactly. They differ only in design — which is the point: it makes them directly comparable, and it means a content change happens once.
+These three share a builder (`_tools/sections.py`) and therefore share structure, copy and behaviour exactly. They differ only in design — which is the point: it makes them directly comparable, and it means a content change happens once. Trial 07 was added afterwards and deliberately breaks that pattern: sharing a skeleton across three directions is a fair criticism of 04–06, so the seventh changes the form as well as the palette.
 
 | | **04 · Slab & Stencil** | **05 · Glass & Glow** | **06 · Brush & Bloom** |
 |---|---|---|---|
@@ -65,6 +65,23 @@ These three share a builder (`_tools/sections.py`) and therefore share structure
 | Signature move | The marquee strip, and a poster of stacked blocks | The measured contrast pass | Brush-stroke ribbon dividers, feathered canvas edges |
 | First view | ≈159 KB | ≈168 KB | ≈321 KB (the hero painting is 148 KB of it) |
 | Whole directory | 278 KB | 397 KB | 1.6 MB (three paintings × three formats) |
+
+### Trial 07 · Slate & Rail
+
+| | **07 · Slate & Rail** |
+|---|---|
+| Direction | Clean and professional: a working document, not a poster |
+| Form | **Left rail on desktop, bottom tab bar on phones, table catalogue, side-panel shortlist** — no hero image, no marquee, no cards |
+| Type | Inter + IBM Plex Mono (figures, labels, counts) |
+| Colour | Two designed palettes: slate on white, and a true dark mode (not an inversion) |
+| Mode | Light/dark switch that follows the OS until the reader chooses; remembered in `localStorage`; applied before first paint so there is no flash |
+| Imagery | None at all — 25.6 KB of CSS, 5 icons, 6 pages |
+| Languages | English, Telugu, Hindi — 258 phrases hooked, 297 in the runtime table |
+| Measured | `_tools/contrast07.py`: 30 combinations, both modes, 0 below target |
+| First view | ≈235 KB uncompressed, **≈40 KB gzipped** (28 KB HTML, 23 KB CSS, 108 KB JS of which 46 KB is the three-language runtime, 76 KB latin type) |
+| Whole directory | 438 KB in 20 files — no images at all |
+
+**Why the form had to change:** the first six trials are all a header, a hero and a grid of cards. That is a good default and a bad habit — a shop with 25 branches is an information problem, so Trial 07 renders the catalogue as a list you scan (item, category, specification, branches, button) and keeps the shortlist beside it as a panel. Nothing about the content changed; the skeleton did.
 
 **Why the icon sets are shared geometry with three different pens:** 60+ hand-written SVG paths per trial is a lot of output for something that reads as a 24px silhouette. Trials 04–06 take the canonical geometry and restyle it — stroke weight, cap, join, and a translucent halo underlay for the painted cut. The *ornaments* (marquee marks, glass prisms, brush strokes) are drawn individually, because that is where the personality actually lives. All three keep the same symbol ids, so one set of JavaScript drives all of them.
 
@@ -139,6 +156,9 @@ trial-02-illustrated/
 └── assets/                 style.css (~30 KB) · 4 scripts · doodle sprite · 5 font faces
 trial-04-brutalist/                          trial-05-glass/                     trial-06-painting/
 ├── six pages each, built from _tools/sections.py — identical content, three designs
+trial-07-slate/
+├── six pages, built by _tools/build-trial07.py — rail + tab bar, table catalogue
+└── assets/                style.css (light + dark tokens) · 4 scripts · i18n.js · 9 font faces
 trial-03-anime/
 ├── index.html              dark hero panel + key art, stats strip, categories, popular, art band, reviews, CTA
 ├── products.html           catalogue, filters, my list, how buying works
@@ -163,7 +183,17 @@ _tools/
 ├── build-trial06.py        Skin06 — pastel painting
 ├── port-js.py              ports the JavaScript to a new trial, renaming classes and reporting leftovers
 ├── contrast.py             the glassmorphism WCAG audit (parses the stylesheet, composites the layers)
-└── test-trials.mjs         96 behavioural tests across all six trials (jsdom)
+│
+│   ── and the three languages on all seven ──
+├── i18n.py                 every phrase in English, Telugu and Hindi, plus the runtime strings
+├── i18n07.py               Trial 07's own copy, in the same three languages
+├── localise.py             hooks the HTML, patches the scripts, subsets the Indic faces, writes i18n.js
+│
+│   ── and the seventh direction ──
+├── build-trial07.py        six pages: rail, tab bar, facts strip, table catalogue
+├── port-js07.py            the catalogue logic, re-rendered as rows, a directory and a panel
+├── contrast07.py           both Trial 07 palettes: 30 combinations against WCAG AA
+└── test-trials.mjs         185 tests across all seven trials (jsdom), including the languages
 ```
 
 ### Editing the parts you'll want to edit
@@ -176,7 +206,10 @@ _tools/
 | **Trial 03's icons and panel ornaments** | `_tools/panels.py` — crisp, geometric, with `preserveAspectRatio="none"` on the two stretchy backgrounds. |
 | **Any copy in trials 04–06** | `_tools/content.py` — one file, then rebuild all three: `python3 _tools/build-trial04.py` (and 05, 06). |
 | **A page's structure in trials 04–06** | `_tools/sections.py` if it is shared, the trial's own `build-trial06.py`-style skin if it is not. |
-| **Trial 04–06 icons** | `_tools/icons.py` — one geometry, three cuts (`brutal`, `glass`, `paint`). |
+| **Trial 04–07 icons** | `_tools/icons.py` — one geometry, four cuts (`brutal`, `glass`, `paint`, `slate`). |
+| **Any Telugu or Hindi copy** | `_tools/i18n.py` (all trials) and `_tools/i18n07.py` (Trial 07), then `python3 _tools/localise.py` |
+| **Trial 07's pages** | `_tools/build-trial07.py` (pages) and `port-js07.py` (scripts), then `python3 _tools/localise.py trial-07-slate` |
+| **Trial 07's colours, both modes** | `trial-07-slate/assets/css/style.css` — the `:root` and `html[data-mode="dark"]` token blocks, then `python3 _tools/contrast07.py` |
 | Add or remove a showroom | `assets/js/stores.js` in either trial — one object in the `STORES` array |
 | Add or edit a product | `assets/js/products.js` in any trial — one object in `PRODUCTS` (keep the three files' data blocks identical; the test suite asserts that they are) |
 | Phone number, email, address, opening hours | `assets/js/main.js` (`OPEN_HOUR` / `CLOSE_HOUR`) plus the literal number in each page's header and footer |
@@ -191,7 +224,9 @@ _tools/
 cd _tools && npm install jsdom && node test-trials.mjs
 ```
 
-96 checks that run the real scripts against the real pages in a real DOM: 17 products render in all three skins, filters and search narrow correctly, the shortlist updates every badge and the WhatsApp and email links carry the list, all 25 map links in all three trials resolve to `google.com/maps/search`, district filters combine with search, the form rejects a bad mobile number and its success state stays honest about there being no server, Trial 03 ships AVIF with WebP behind it and declares its image dimensions, each trial uses only its own localStorage key, and the product data is byte-identical across all three. Trials 04–06 get a shared-contract block with two checks that catch design-port bugs specifically: **every class the rendered page uses must exist in that trial's stylesheet**, and every icon reference must resolve. Both found real bugs the moment they were written (a missing `[data-cat-chips]` container left the catalogue with no category filter at all, and several unstyled classes).
+185 checks that run the real scripts against the real pages in a real DOM: 17 products render in all three skins, filters and search narrow correctly, the shortlist updates every badge and the WhatsApp and email links carry the list, all 25 map links in all three trials resolve to `google.com/maps/search`, district filters combine with search, the form rejects a bad mobile number and its success state stays honest about there being no server, Trial 03 ships AVIF with WebP behind it and declares its image dimensions, each trial uses only its own localStorage key, and the product data is byte-identical across all three. Trials 04–06 get a shared-contract block with two checks that catch design-port bugs specifically: **every class the rendered page uses must exist in that trial's stylesheet**, and every icon reference must resolve. Both found real bugs the moment they were written (a missing `[data-cat-chips]` container left the catalogue with no category filter at all, and several unstyled classes).
+
+The language block runs on all seven trials: it switches to Telugu, checks that the nav, the button the catalogue *builds*, the result count and the shortlist panel are all in the reader's script (including text generated after a switch, which is what the DOM pass and its observer are for), switches back, and checks the choice was remembered. Trial 07 gets a mode block as well: the switch flips `data-mode`, updates `aria-pressed`, persists the choice, and both palettes are checked to define the same colour tokens — a missing token is how one mode ends up half-styled.
 
 ---
 
@@ -252,7 +287,21 @@ Trial 06 · Brush & Bloom
 | Hero painting, AVIF (WebP 153 KB, JPEG 268 KB behind it) | 148 KB | — |
 | **First view** | **≈321 KB** | **≈130 KB** |
 
-Six trials, no analytics, no tag manager, no cookie banner (nothing to consent to), no third-party requests of any kind, and no embedded Google Maps iframe — the map only opens when the visitor chooses to ask for directions.
+Trial 07 · Slate & Rail
+
+| Asset | Raw | Gzipped |
+|---|---|---|
+| HTML, largest page (sprite included) | 27.9 KB | 6.4 KB |
+| CSS, both palettes, entire site | 23.0 KB | 5.5 KB |
+| JS, five files (i18n.js is 46 KB of it) | 107.8 KB | 28.0 KB |
+| Latin type, 4 faces | 75.9 KB | — |
+| Indic type, 4 faces | 97.5 KB | downloaded only if the reader picks Telugu or Hindi |
+| Images | none | — |
+| **First view, English** | **≈235 KB** | **≈40 KB** |
+
+The runtime carries only this trial's copy: 160 hooked phrases plus the 35 keys its scripts look up, out of 297 in the table. Every trial ships its own slice — Trial 01's runtime is 14.5 KB, Trial 07's 46.5 KB, which is the price of this design having the most copy in three languages.
+
+Seven trials, no analytics, no tag manager, no cookie banner (nothing to consent to), no third-party requests of any kind, and no embedded Google Maps iframe — the map only opens when the visitor chooses to ask for directions.
 
 ---
 
@@ -264,7 +313,8 @@ Six trials, no analytics, no tag manager, no cookie banner (nothing to consent t
 - **Neither trial has a backend.** The contact forms validate properly, then say on screen that nothing was sent. Wiring them to a CRM, WhatsApp Business API or an email relay is an afternoon's work.
 - **Reviews are reproduced as written** on the current site, unattributed, with a note on the page that named and dated reviews would be better. Inventing testimonials was not an option.
 - **The paintings in Trial 06 and the key art in Trial 03 are AI-generated** stand-ins, and those are the two directions where bought-in artwork would change the most: pastel landscape and anime are both craft styles. Trial 01's photography is a third. Each of those is a line item worth quoting separately rather than hiding inside a build price.
-- **The glassmorphism trial's contrast numbers are measured, not asserted** (`_tools/contrast.py`), because that is the one visual direction in the set where taste and readability pull against each other.
+- **The glassmorphism trial's contrast numbers are measured, not asserted** (`_tools/contrast.py`), because that is the one visual direction in the set where taste and readability pull against each other. Trial 07 is measured twice over for the same reason (`_tools/contrast07.py`, both modes, 30 combinations).
+- **The Telugu and Hindi were written in those languages, not translated.** A literal translation of a terse English sentence reads like a telegram in Telugu, so the two blocks differ in shape — shorter, and using the words a shop in Tanuku would use. Where a phrase carries a number or a town name, the runtime patches it live ("In stock at Tanuku" becomes "స్టాక్ ఉన్నది: Tanuku").
 
 - **Photography in Trial 01 and the key art in Trial 03 are AI-generated** stand-ins. Trial 01's would be replaced by photographs of the real showrooms; Trial 03's by commissioned illustration, which is a genuine cost worth quoting separately — anime art is a craft style and the difference between generated stand-in art and a real illustrator's work is visible. Trial 02 uses no photography or raster art at all.
 - **No third-party logos or trademarks** are reproduced. Brand names appear as text only.
@@ -279,4 +329,6 @@ Six trials, no analytics, no tag manager, no cookie banner (nothing to consent t
 - **04 — Slab & Stencil** ✅ neo-brutalism (6 pages, catalogue)
 - **05 — Glass & Glow** ✅ glassmorphism (6 pages, catalogue, measured contrast pass)
 - **06 — Brush & Bloom** ✅ pastel, painterly (6 pages, catalogue, three paintings)
+- **07 — Slate & Rail** ✅ clean, professional, light/dark modes, table catalogue, structurally different (6 pages, catalogue)
+- **All seven** ✅ English, Telugu and Hindi, with the Telugu and Hindi written natively
 - **Next, if anyone wants more** ⏳ commerce-first with a real cart and payment gateway (every trial's shortlist already maps onto a cart item for item), or a map-first build where the district map is the homepage and each of the 23 towns gets its own page for local search

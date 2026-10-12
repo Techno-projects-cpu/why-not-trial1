@@ -28,6 +28,7 @@ Everything it writes is idempotent: running it twice changes nothing.
 import io
 import os
 import re
+from html import escape, unescape
 from html.parser import HTMLParser
 import shutil
 import sys
@@ -60,21 +61,32 @@ SWITCHER = '''<div class="langswitch" role="group" aria-label="Language / భా
 
 
 # --------------------------------------------------------------------- runtime
-def runtime_js():
-    """The i18n runtime, with only the te/hi strings baked in (English comes from
-    the page itself, so it is never duplicated)."""
+def runtime_js(used, keys):
+    """The i18n runtime, with only the strings this trial actually has. English
+    comes from the page itself (it is captured at boot), so it is never carried
+    twice — and a trial does not pay for the other six trials' copy."""
     import json
-    te = {k: v["te"] for k, v in i18n.LOCALISABLE.items()}
-    hi = {k: v["hi"] for k, v in i18n.LOCALISABLE.items()}
+    te, hi = {}, {}
+    for phrase in used:
+        entry = i18n.LOCALISABLE.get(phrase)
+        if entry:
+            te[phrase] = entry["te"]
+            hi[phrase] = entry["hi"]
+
     alias = {}
     for en, (key, vals) in i18n.JS_STRINGS.items():
+        if key not in keys and en not in keys:
+            continue
         te[key] = vals["te"]
         hi[key] = vals["hi"]
         # a phrase the scripts generate is stored under its short key, so the DOM
         # pass needs the English it will see on screen mapped to that key
         alias[normalise(en)] = key
-    for en in i18n.LOCALISABLE:
-        alias.setdefault(normalise(en), en)
+    for en, key in i18n.JS_LITERALS.items():
+        if key in keys:
+            alias.setdefault(normalise(en), key)
+    for phrase in used:
+        alias.setdefault(normalise(phrase), phrase)
 
     return """/* WHYNOT — the language switch.
    ---------------------------------------------------------------------------
@@ -260,10 +272,10 @@ window.WHYNOT_I18N = (function () {
 
 /* The scripts build markup later than this file runs, so give them a handle. */
 window.WHYNOT_T = function (key, fallback) { return window.WHYNOT_I18N.t(key, fallback); };
-""" % (json.dumps({"te": te, "hi": hi}, ensure_ascii=False, indent=2),
+""" % (json.dumps({"te": te, "hi": hi}, ensure_ascii=False, separators=(",", ":")),
        json.dumps([{ "re": p["re"], "te": p["te"], "hi": p["hi"] } for p in i18n.RUNTIME_PATTERNS],
-                  ensure_ascii=False, indent=2),
-       json.dumps(alias, ensure_ascii=False, indent=2))
+                  ensure_ascii=False, separators=(",", ":")),
+       json.dumps(alias, ensure_ascii=False, separators=(",", ":")))
 
 
 # ------------------------------------------------------------------------ fonts
@@ -450,6 +462,9 @@ def patch_attributes(html, name=""):
     by_text = {}
     for key, entry in i18n.LOCALISABLE.items():
         by_text.setdefault(normalise(entry["en"]), (key, entry.get("html", False)))
+        # the same phrase as the page would write it: &amp; for &, &#10003; for a tick
+        by_text.setdefault(normalise(escape(entry["en"], quote=False).replace("&#x27;", "'")),
+                           (key, entry.get("html", False)))
 
     walker = Walker(html).parse()
     inserts = []          # (offset, string)
@@ -460,7 +475,7 @@ def patch_attributes(html, name=""):
         inner = html[inner_start:inner_end]
         if len(inner) > 900 or "data-i18n" in html[start:inner_start]:
             continue
-        found = by_text.get(normalise(inner))
+        found = by_text.get(normalise(inner)) or by_text.get(normalise(unescape(inner)))
         if not found:
             continue
         key, needs_html = found
@@ -472,7 +487,10 @@ def patch_attributes(html, name=""):
         # happens to use a plain newline instead of a <br>
         carries_markup = needs_html or any("<" in v for v in i18n.LOCALISABLE[key].values() if isinstance(v, str))
         attr = "data-i18n-html" if (has_children or carries_markup) else "data-i18n"
-        inserts.append((start + 1 + len(tagname), ' %s="%s"' % (attr, key)))
+        # only the double quote needs escaping: the value is a phrase that may
+        # contain one (a quoted figure in a sentence), while <br> and & are both
+        # wanted verbatim — <br> to become markup again, & to match the key
+        inserts.append((start + 1 + len(tagname), ' %s="%s"' % (attr, key.replace('"', "&quot;"))))
         hooked += 1
 
     # placeholders on form fields, pinned to the end of the field's own tag
@@ -481,7 +499,7 @@ def patch_attributes(html, name=""):
         entry = next((k for k, e in i18n.LOCALISABLE.items() if normalise(e["en"]) == value), None)
         if not entry or "data-i18n-ph" in m.group(0):
             continue
-        inserts.append((m.end() - 1, ' data-i18n-ph="%s"' % entry))
+        inserts.append((m.end() - 1, ' data-i18n-ph="%s"' % entry.replace('"', "&quot;")))
         hooked += 1
 
     for offset, text in sorted(inserts, reverse=True):
@@ -663,13 +681,6 @@ def localise(root, report=print):
     chars = subset_fonts(root, name)
     install_fonts(root, chars, report)
 
-    js_dir = os.path.join(root, "assets", "js")
-    os.makedirs(js_dir, exist_ok=True)
-    with io.open(os.path.join(js_dir, "i18n.js"), "w", encoding="utf-8") as f:
-        f.write(runtime_js())
-    report("  wrote i18n.js (%d languages, %d phrases)" % (
-        len(i18n.LANGS), len(i18n.LOCALISABLE) + len(i18n.JS_STRINGS)))
-
     # pages
     total = 0
     for fn in sorted(os.listdir(root)):
@@ -688,7 +699,10 @@ def localise(root, report=print):
         report("  %-14s %3d phrases hooked + switcher" % (fn, hooked))
 
     # scripts
-    for fn, call in (("products.js", "window.WHYNOT_RERENDER = function () { renderGrid(); renderFeatured(); renderPanel(); };"),
+    js_dir = os.path.join(root, "assets", "js")
+    os.makedirs(js_dir, exist_ok=True)
+    for fn, call in (("main.js", None),
+                     ("products.js", "window.WHYNOT_RERENDER = function () { renderGrid(); renderFeatured(); renderPanel(); };"),
                      ("stores.js", "window.WHYNOT_RERENDER = function () { apply(); };"),
                      ("contact.js", "window.WHYNOT_RERENDER = function () { var s = document.querySelector('[data-form-status]'); if (s && s.textContent) { s.textContent = s.textContent; } };")):
         path = os.path.join(js_dir, fn)
@@ -696,7 +710,8 @@ def localise(root, report=print):
             continue
         text = io.open(path, encoding="utf-8").read()
         text = patch_js(text, report, fn)
-        text = ensure_rerender(text, call)
+        if call:
+            text = ensure_rerender(text, call)
         io.open(path, "w", encoding="utf-8").write(text)
 
     # stylesheet
@@ -712,12 +727,51 @@ def localise(root, report=print):
     else:
         report("  css: language block already present")
 
+    # what this trial actually contains: the phrases hooked on its pages, plus
+    # the ones its scripts build (those are in the table under their short keys)
+    used = set()
+    for fn in sorted(os.listdir(root)):
+        if not fn.endswith(".html"):
+            continue
+        html = io.open(os.path.join(root, fn), encoding="utf-8").read()
+        for m in re.finditer(r'data-i18n(?:-html|-ph)?="([^"]*)"', html):
+            used.add(unescape(m.group(1)))
+
+    # the keys the scripts look up by name (from their T() calls), so a trial
+    # ships its own copy and nothing else
+    keys = set()
+    code = ""
+    for fn in os.listdir(js_dir):
+        if not fn.endswith(".js") or fn == "i18n.js":
+            continue
+        code += io.open(os.path.join(js_dir, fn), encoding="utf-8").read()
+    keys.update(m.group(1) for m in re.finditer(r'T\("([A-Za-z0-9_]+)"', code))
+
+    # a phrase some scripts still build by hand (the patcher replaces what it can
+    # match, the rest is translated on screen) needs its entry too — otherwise the
+    # DOM pass has the English in front of it and nothing to put in its place
+    for english, key in i18n.JS_LITERALS.items():
+        if english in code:
+            keys.add(key)
+    for english, (key, _vals) in i18n.JS_STRINGS.items():
+        if english in code:
+            keys.add(key)
+    keys.discard("")
+
+    runtime = runtime_js(used, keys)
+    with io.open(os.path.join(js_dir, "i18n.js"), "w", encoding="utf-8") as f:
+        f.write(runtime)
+    report("  wrote i18n.js — %d languages, %d page phrases + %d script keys of %d, %.1f KB" % (
+        len(i18n.LANGS), len(used), len(keys), len(i18n.LOCALISABLE) + len(i18n.JS_STRINGS),
+        len(runtime) / 1024.0))
+
     report("  %d phrases hooked in this trial" % total)
 
 
 if __name__ == "__main__":
     args = sys.argv[1:] or ["trial-01-minimal", "trial-02-illustrated", "trial-03-anime",
-                            "trial-04-brutalist", "trial-05-glass", "trial-06-painting"]
+                            "trial-04-brutalist", "trial-05-glass", "trial-06-painting",
+                            "trial-07-slate"]
     for d in args:
         localise(os.path.join(REPO, d))
     print("\nDone.")

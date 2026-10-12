@@ -142,3 +142,75 @@ None of that needs a bigger team to fix. It needs fewer promises, one source of 
 - No Lighthouse / PageSpeed run was possible from this environment, so the performance section is based on what is in the markup (image counts, formats and URLs, third-party embeds, script dependencies) rather than field measurements. A tag like `srcset` or `loading` would not have survived the plain-text reading of those pages, so it is not claimed here either way. A real engagement starts by running those on the live site.
 - Server behaviour (response codes, caching headers, compression, redirects) could not be verified — `/robots.txt` and `/sitemap.xml` were observed not to return those files, but the HTTP status behind them was not tested.
 - No conversion data exists, so every "why it costs money" claim is reasoning from retail fundamentals, not measured revenue. The client's Analytics would settle it in an afternoon.
+
+---
+
+## 8. What the seven trials add on top of the audit
+
+The audit above is the fix-list. Each trial answers it in a different visual
+language, and since the redesigns shipped, four things were added that were not
+in the original site or the original brief. They are worth auditing in the same
+spirit — measured, not asserted.
+
+### 8.1 Three languages, written not translated
+
+Every trial now reads in English, Telugu and Hindi. The Telugu and Hindi were
+**written in those languages rather than translated from the English**, which
+changes the shape of the copy: a terse English sentence becomes three words in
+Telugu, and a paragraph becomes a sentence. Trial 07, the tersest English of the
+seven, has 297 phrases in the runtime table; each trial ships only the slice it
+uses (14.5 KB for Trial 01, 46.5 KB for Trial 07).
+
+Type is self-hosted for all three scripts, subset per trial to the characters
+actually used: Noto Sans Telugu 20.1/20.6 KB and Noto Sans Devanagari
+27.3/29.6 KB per weight, out of 34.9/36.6 and 49.2/52.7 KB. The Latin faces have
+no Indic glyphs, so each trial re-points its `--font-*` variables at those two
+families when the language changes, forces `letter-spacing: 0` (Latin tracking
+breaks Telugu), and re-weights display type to 700.
+
+Two engineering notes that came out of it, both of which were bugs first:
+
+- The scripts' own strings are matched as **whole JavaScript literals** by a
+  scanner that skips comments and regex literals. An earlier substring-based pass
+  matched phrases sitting inside longer literals, which produced nested lookups
+  and mangled markup — the scanner cannot make that mistake, and a HTML-integrity
+  check now fails the build if hooking changes anything but attributes.
+- Anything the scripts assemble at runtime is translated on screen by a DOM pass
+  with a `MutationObserver`, so text generated *after* a language was chosen
+  (a search result, a filtered showroom list, a shortlist row) still arrives in
+  the reader's script.
+
+### 8.2 Trial 07's two palettes, measured
+
+The seventh direction is the only one with a real light/dark mode, so it is the
+only one that needs measuring twice. `_tools/contrast07.py` reads the tokens out
+of the stylesheet and checks 30 combinations (15 per mode) — body text, secondary
+text, small labels and counts, the primary button, links, badges, the pressed
+chip, the toast and the focus ring. All 30 pass; the tightest is 4.64:1
+(`--ink-3` labels on the page background, against a 4.5:1 target) and the
+loosest is 18.75:1.
+
+The mode itself follows the OS until the reader chooses, is applied by an inline
+script before first paint (so there is no flash of the wrong palette), and is
+remembered in `localStorage`. The test suite asserts the switch flips
+`data-mode`, updates `aria-pressed`, persists the choice, and that both palettes
+define exactly the same colour tokens — a missing token is how one mode ends up
+half-styled.
+
+### 8.3 The form changed, not just the palette
+
+The first six trials are all header + hero + grid of cards. That is the criticism
+the seventh trial answers: a shop with 25 branches is an information problem, so
+Trial 07 renders the catalogue as a table of line items (item, category,
+specification, branches, list button), keeps the shortlist beside it as a working
+panel, and navigates from a left rail on desktop and a bottom tab bar on phones.
+No hero image, no marquee, no cards. Nothing about the content differs from the
+other six; the skeleton does.
+
+### 8.4 Everything still honest
+
+The catalogue is still a labelled sample with no invented prices, the form still
+says on screen that it has no server, the artwork that is AI-generated still says
+so on the page, the brand names are still text only, and none of it is affiliated
+with or deployed to WHYNOT Electronics. The one thing the redesigns never do is
+quote a price the company has not quoted.

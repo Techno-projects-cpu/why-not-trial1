@@ -358,3 +358,14 @@ LEFTOVER_WATCH = [
     "Ask about this", "Clear filters", "Copy address", "Directions", "Browse the catalogue",
     "Nothing matches that", "Email the list", "In stock at", "Your list is empty",
 ]
+
+# ---------------------------------------------------------------------------
+# Trial 07's own copy. Kept in its own file because this design's English is
+# terser, so its Telugu and Hindi are written differently again — merged in here
+# so every tool that reads the phrase table picks them up.
+from i18n07 import PHRASES as _T7_PHRASES, JS as _T7_JS, PATTERNS as _T7_PATTERNS
+
+LOCALISABLE.update(_T7_PHRASES)
+for _en, (_key, _vals) in _T7_JS.items():
+    JS_STRINGS[_en] = (_key, _vals)
+RUNTIME_PATTERNS = list(RUNTIME_PATTERNS) + list(_T7_PATTERNS)
