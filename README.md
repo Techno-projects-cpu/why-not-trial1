@@ -75,11 +75,11 @@ These three share a builder (`_tools/sections.py`) and therefore share structure
 | Type | Inter + IBM Plex Mono (figures, labels, counts) |
 | Colour | Two designed palettes: slate on white, and a true dark mode (not an inversion) |
 | Mode | **Light by default — white is the point** — with a switch to dark, remembered in `localStorage` and applied before first paint so there is no flash; the reader's OS setting is deliberately ignored |
-| Imagery | One AI stand-in photograph of a showroom floor (AVIF + WebP + JPEG, labelled on the page) plus a hand-drawn SVG map of the 25 branches |
-| Languages | English, Telugu, Hindi — 301 phrases hooked, 308 in the runtime table |
+| Imagery | One AI stand-in photograph of a showroom floor (AVIF + WebP + JPEG, labelled on the page), a hand-drawn SVG map of the 25 branches, and a three-step buying-flow diagram wired with SVG chevrons |
+| Languages | English, Telugu, Hindi — 308 phrases hooked, 311 in the runtime table |
 | Measured | `_tools/contrast07.py`: 30 combinations, both modes, 0 below target |
-| First view | ≈336 KB uncompressed — **≈42 KB gzipped** of text (34 KB HTML, 26 KB CSS, 107 KB JS of which 66 KB is the three-language runtime, 76 KB latin type) plus a 94 KB AVIF hero |
-| Whole directory | 789 KB in 23 files — one photograph in three formats, the rest CSS and SVG |
+| First view | ≈341 KB uncompressed — **≈43 KB gzipped** of text (35 KB HTML, 28 KB CSS, 108 KB JS of which 66 KB is the three-language runtime, 76 KB latin type) plus a 94 KB AVIF hero |
+| Whole directory | 794 KB in 23 files — one photograph in three formats, the rest CSS and SVG |
 
 **Why the form had to change:** the first six trials are all a header, a hero and a grid of cards. That is a good default and a bad habit — a shop with 25 branches is an information problem, so Trial 07 renders the catalogue as a list you scan (item, category, specification, branches, button) and keeps the shortlist beside it as a panel. Nothing about the content changed; the skeleton did.
 
@@ -299,15 +299,15 @@ Trial 07 · Slate & Rail
 
 | Asset | Raw | Gzipped |
 |---|---|---|
-| HTML, largest page (sprite included) | 33.7 KB | 8.0 KB |
-| CSS, both palettes, entire site | 25.7 KB | 6.0 KB |
-| JS, five files (i18n.js is 66 KB of it) | 106.7 KB | 27.9 KB |
+| HTML, largest page (sprite included) | 35.4 KB | 8.3 KB |
+| CSS, both palettes, entire site | 28.0 KB | 6.5 KB |
+| JS, five files (i18n.js is 66 KB of it) | 107.5 KB | 28.1 KB |
 | Latin type, 4 faces | 75.9 KB | — |
 | Indic type, 4 faces | 97.5 KB | downloaded only if the reader picks Telugu or Hindi |
 | Hero photograph (AVIF / WebP / JPEG) | 94.1 / 83.9 / 160.6 KB | already compressed |
-| **First view, English** | **≈336 KB** | **≈42 KB text, +94 KB AVIF** |
+| **First view, English** | **≈341 KB** | **≈43 KB text, +94 KB AVIF** |
 
-The runtime carries only this trial's copy: 166 hooked phrases plus the 35 keys its scripts look up, out of 308 in the table. Every trial ships its own slice — Trial 01's runtime is 18.3 KB on disk, Trial 07's 65.7 KB, which is the price of this design having the most copy in three languages.
+The runtime carries only this trial's copy: 170 hooked phrases plus the 35 keys its scripts look up, out of 311 in the table. Every trial ships its own slice — Trial 01's runtime is 18.3 KB on disk, Trial 07's 66.4 KB, which is the price of this design having the most copy in three languages.
 
 Seven trials, no analytics, no tag manager, no cookie banner (nothing to consent to), no third-party requests of any kind, and no embedded Google Maps iframe — the map only opens when the visitor chooses to ask for directions.
 

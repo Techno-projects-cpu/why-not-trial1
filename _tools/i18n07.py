@@ -160,6 +160,13 @@ PHRASES = {
     "Nothing matches that": dict(en="Nothing matches that", te="అలా ఏదీ దొరకలేదు", hi="ऐसा कुछ नहीं मिला"),
     "All 25 showrooms": dict(en="All 25 showrooms", te="25 షాపులూ", hi="सभी 25 दुकानें"),
     "Open 10 am to 9 pm": dict(en="Open 10 am to 9 pm", te="ఉదయం 10 నుంచి రాత్రి 9 వరకు", hi="सुबह 10 से रात 9 तक"),
+    "One helpline, a person answers":
+        dict(en="One helpline, a person answers",
+             te="ఒకే హెల్ప్‌లైన్ — మనిషే మాట్లాడతాడు",
+             hi="एक हेल्पलाइन — इंसान जवाब देता है"),
+    # the drawn map labels what the drawing is of
+    "Bay of Bengal": dict(en="Bay of Bengal", te="బంగాళాఖాతం", hi="बंगाल की खाड़ी"),
+    "Godavari": dict(en="Godavari", te="గోదావరి", hi="गोदावरी"),
     "the flagship": dict(en="the flagship", te="ప్రధాన షాపు", hi="मुख्य दुकान"),
     "20 brands": dict(en="20 brands", te="20 బ్రాండ్లు", hi="20 ब्रांड"),
     "open 10 to 9": dict(en="open 10 to 9", te="10 నుంచి 9 వరకు తెరిచి", hi="10 से 9 तक खुला"),

@@ -318,6 +318,11 @@ def map_svg():
         parts.append('<text class="map__dist" x="%d" y="%d" text-anchor="%s">%s</text>'
                      % (x, y, anchor, label))
 
+    # what the drawing is of: the bay on the water, the river on its stem
+    parts.append('<text class="map__water" x="690" y="648" text-anchor="middle">Bay of Bengal</text>')
+    parts.append('<text class="map__water map__water--river" x="112" y="398" '
+                 'transform="rotate(14 112 398)" text-anchor="start">Godavari</text>')
+
     # Visakhapatnam itself, for orientation: a grey marker, not a store
     vx, vy = _mx(83.32), _my(17.68)
     parts.append('<circle class="map__city" cx="%.1f" cy="%.1f" r="4"/>' % (vx, vy))
@@ -350,7 +355,25 @@ def index():
     strip = "".join('<div class="strip__cell"><p class="strip__v">%s</p><p class="strip__k">%s</p></div>'
                     % (v, k) for v, k in STRIP)
 
-    steps = "".join('<li><div><strong>%s</strong><p>%s</p></div></li>' % (t, d) for _, t, d in HOW)
+    # the buying flow, drawn as a diagram: an iconed node per step, wired
+    # together with an SVG chevron — the connectors are drawn, not typed, so no
+    # arrow character ever needs to exist in a font subset
+    step_icons = ["i-cart", "i-whatsapp", "i-call"]
+    flow_parts = []
+    for i, (_, title, desc) in enumerate(HOW):
+        if i:
+            flow_parts.append(
+                '<li class="flow__link" aria-hidden="true"><span class="flow__wire"></span>'
+                '<svg class="flow__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
+                'stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
+                '<path d="M9 5l7 7-7 7"/></svg></li>')
+        flow_parts.append(
+            '<li class="flow__node">'
+            '<span class="flow__art"><svg class="icon" aria-hidden="true"><use href="#%s"></use></svg></span>'
+            '<span class="flow__n">%s</span>'
+            '<strong>%s</strong><p>%s</p></li>'
+            % (step_icons[i % len(step_icons)], HOW[i][0], title, desc))
+    steps = "".join(flow_parts)
 
     hero_pic = icons.picture(
         "showroom",
@@ -371,6 +394,11 @@ def index():
             <a class="btn btn--primary" href="products.html">Browse the catalogue</a>
             <a class="btn" href="stores.html">Find your showroom</a>
           </div>
+          <ul class="hero__proof">
+            <li><svg class="icon" aria-hidden="true"><use href="#i-store"></use></svg><span>25 showrooms</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-clock"></use></svg><span>Open 10 am to 9 pm</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-call"></use></svg><span>One helpline, a person answers</span></li>
+          </ul>
         </div>
         <figure class="hero__fig">
           %s
@@ -397,7 +425,7 @@ def index():
         <div>
           <div class="panel">
             <div class="panel__head"><h2 class="display display--m">How buying works here</h2></div>
-            <div class="panel__body"><ol class="steps">%s</ol></div>
+            <div class="panel__body"><ol class="flow">%s</ol></div>
           </div>
           <div class="panel" style="margin-top:18px">
             <div class="panel__head"><h2 class="display display--m">Popular this week</h2>

@@ -158,8 +158,8 @@ Every trial now reads in English, Telugu and Hindi. The Telugu and Hindi were
 **written in those languages rather than translated from the English**, which
 changes the shape of the copy: a terse English sentence becomes three words in
 Telugu, and a paragraph becomes a sentence. Trial 07, the tersest English of the
-seven, has 308 phrases in the runtime table; each trial ships only the slice it
-uses (18.3 KB on disk for Trial 01, 65.7 KB for Trial 07 — Telugu and Hindi are
+seven, has 311 phrases in the runtime table; each trial ships only the slice it
+uses (18.3 KB on disk for Trial 01, 66.4 KB for Trial 07 — Telugu and Hindi are
 three bytes a character, so these are file sizes, not character counts).
 
 Type is self-hosted for all three scripts, subset per trial to the characters
@@ -207,8 +207,9 @@ Trial 07 renders the catalogue as a table of line items (item, category,
 specification, branches, list button), keeps the shortlist beside it as a working
 panel, and navigates from a left rail on desktop and a bottom tab bar on phones.
 The home page opens on the shop itself — copy beside one labelled stand-in
-photograph, then the facts, then a schematic SVG map of all 25 branches — and
-still no cards and no marquee. Nothing about the content differs from the other
+photograph, then the facts, a three-step buying-flow diagram wired with drawn
+SVG chevrons, then a schematic SVG map of all 25 branches — and still no cards
+and no marquee. Nothing about the content differs from the other
 six; the skeleton does.
 
 ### 8.4 Everything still honest

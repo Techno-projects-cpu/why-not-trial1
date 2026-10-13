@@ -438,6 +438,29 @@ console.log("\n— TRIAL 07 the photograph and the drawn map ——————�
   const cap = h.querySelector(".hero__fig figcaption");
   check(!!cap && /stand-in photograph/i.test(cap.textContent),
         "the photograph is labelled as a stand-in on the page");
+
+  // the buying flow is a diagram: iconed nodes wired with drawn SVG chevrons
+  const nodes = h.querySelectorAll(".flow__node");
+  check(nodes.length === 3, `the buying flow draws three steps (${nodes.length})`);
+  const links = h.querySelectorAll(".flow__link");
+  check(links.length === nodes.length - 1 && [...links].every((l) => l.querySelector("svg")),
+        "each step is wired to the next with an SVG connector");
+  check([...nodes].every((n) => n.querySelector("strong") && n.querySelector("p") &&
+        /\d\d/.test(n.querySelector(".flow__n").textContent)),
+        "each step is numbered, titled and explains itself");
+  check(h.querySelectorAll(".flow__art use").length === 3, "and each carries an icon from the sprite");
+
+  // the proof row under the hero: three facts, each with an icon
+  const proof = h.querySelectorAll(".hero__proof li");
+  check(proof.length === 3, `the hero carries three proof points (${proof.length})`);
+  check([...proof].every((li) => li.querySelector("svg") && li.querySelector("span")),
+        "each proof point is an icon plus text");
+
+  // the map names the water it draws
+  const sea = h.querySelector(".map__water");
+  check(!!sea && sea.textContent.trim() === "Bay of Bengal", "the map labels the bay");
+  const river = h.querySelector(".map__water--river");
+  check(!!river && river.textContent.trim() === "Godavari", "and names the river");
   home.window.close();
 }
 
