@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found — WHYNOT</title>
+<meta name="description" content="The page you were looking for is not here. Jump back to the showroom directory or call the helpline.">
+<meta name="theme-color" content="#faf8f4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0c0c0e" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="assets/img/logo-mark.svg" type="image/svg+xml">
+<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preload" href="assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/style.css">
+<script>
+  /* Runs before first paint: marks the document as scripted (so reveal-on-scroll
+     never hides content when JS is off) and applies the saved theme. */
+  (function () {
+    var el = document.documentElement;
+    el.classList.add("js");
+    try {
+      var saved = localStorage.getItem("whynot-theme");
+      if (saved) el.setAttribute("data-theme", saved);
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<a data-i18n="Skip to content" class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="brand" href="index.html" aria-label="WHYNOT — home">
+      <img class="brand__mark" src="assets/img/logo-mark.svg" alt="" width="30" height="30">
+      <span class="brand__text">
+        <span class="brand__name">Whynot</span>
+        <span class="brand__tag">We drive the change</span>
+      </span>
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      <a data-i18n="Home" href="index.html">Home</a>
+      <a data-i18n="Catalogue" href="products.html">Catalogue</a>
+      <a data-i18n="About us" href="about.html">About us</a>
+      <a data-i18n="Showrooms" href="stores.html">Showrooms</a>
+      <a data-i18n="Contact" href="contact.html">Contact</a>
+    </nav>
+
+    <div class="header-actions">
+      <div class="langswitch" role="group" aria-label="Language / భాష">
+        <button type="button" class="langswitch__btn" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" class="langswitch__btn" data-lang="te" aria-pressed="false">తె</button>
+        <button type="button" class="langswitch__btn" data-lang="hi" aria-pressed="false">हि</button>
+      </div>
+      <a class="call-link" href="tel:+918886222448">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.6 3.5 10 8l-1.6 2.3a12.4 12.4 0 0 0 5.3 5.3L16 14l4.5 2.4v3.1a1.3 1.3 0 0 1-1.5 1.3C10.4 19.9 4.1 13.6 3.2 5a1.3 1.3 0 0 1 1.3-1.5h3.1Z"/></svg>
+        88862 22448
+      </a>
+
+      <a class="icon-btn list-btn" href="products.html#my-list" aria-label="My list">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2.2l2.4 9.6h10L20 7H6"/><circle cx="9.4" cy="19" r="1.3"/><circle cx="16.6" cy="19" r="1.3"/></svg>
+        <span class="list-btn__count" data-list-count hidden>0</span>
+      </a>
+      <a class="icon-btn call-btn" href="tel:+918886222448" aria-label="Call the helpline">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.6 3.5 10 8l-1.6 2.3a12.4 12.4 0 0 0 5.3 5.3L16 14l4.5 2.4v3.1a1.3 1.3 0 0 1-1.5 1.3C10.4 19.9 4.1 13.6 3.2 5a1.3 1.3 0 0 1 1.3-1.5h3.1Z"/></svg>
+      </a>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Switch between light and dark theme">
+        <svg class="i-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.4A8.6 8.6 0 0 1 9.6 4 8.6 8.6 0 1 0 20 14.4Z"/></svg>
+        <svg class="i-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4"/></svg>
+      </button>
+
+      <a data-i18n="Find a showroom" class="btn btn--sm" href="stores.html">Find a showroom</a>
+
+      <button class="icon-btn burger" type="button" data-drawer-open aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" data-drawer data-open="false" aria-hidden="true">
+  <div class="wrap">
+    <div class="drawer__top">
+      <span class="brand">
+        <img class="brand__mark" src="assets/img/logo-mark.svg" alt="" width="30" height="30">
+        <span class="brand__text"><span class="brand__name">Whynot</span></span>
+      </span>
+      <button class="icon-btn icon-btn--outline" type="button" data-drawer-close aria-label="Close menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+    <nav class="drawer__nav" aria-label="Mobile">
+      <a data-i18n="Home" href="index.html">Home</a>
+      <a data-i18n="Catalogue" href="products.html">Catalogue</a>
+      <a data-i18n="About us" href="about.html">About us</a>
+      <a data-i18n="Showrooms" href="stores.html">Showrooms</a>
+      <a data-i18n="Contact" href="contact.html">Contact</a>
+    </nav>
+    <div class="drawer__foot">
+      <a class="btn btn--brand btn--block" href="tel:+918886222448">Call 88862 22448</a>
+      <a class="btn btn--ghost btn--block" href="products.html#my-list">My list (<span data-i18n="0 items" data-list-label>0 items</span>)</a>
+      <p>Open 10 am – 9 pm. Service desk at every showroom.</p>
+    </div>
+  </div>
+</div>
+
+<main id="main">
+  <section class="notfound">
+    <div class="wrap" style="display:grid;gap:20px;max-width:720px">
+      <p data-i18n="Error 404" class="eyebrow">Error 404</p>
+      <h1 class="notfound__code">This page isn't here.</h1>
+      <p class="lead">The link may be old, or we may have moved something. Nothing is lost — the showrooms are all where you left them.</p>
+      <div class="notfound__links">
+        <a class="btn btn--brand" href="index.html">Back to home</a>
+        <a data-i18n="All 25 showrooms" class="btn btn--ghost" href="stores.html">All 25 showrooms</a>
+        <a class="btn btn--ghost" href="contact.html">Contact us</a>
+      </div>
+      <p class="form__note">Looking for a product? Start from the <a class="link" href="index.html#categories">category list</a>, or call <a class="link" href="tel:+918886222448">88862 22448</a>.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <span class="lockup">
+          <span class="lockup__box">
+            <img src="assets/img/logo-mark.svg" alt="" width="22" height="22">
+            <span class="lockup__word">WHYNOT</span>
+          </span>
+          <span class="lockup__tagline">We drive the change</span>
+        </span>
+        <p class="prose" style="font-size:var(--step--1)">WHYNOT Electronics Pvt Ltd. Retailers of electronics and home appliances across the Godavari districts and Visakhapatnam since 1994.</p>
+        <p><a class="arrow-link" href="https://play.google.com/store/apps/details?id=in.absolin.whynotcust" target="_blank" rel="noopener noreferrer">Get the WHYNOT app
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M17 7H8M17 7v9"/></svg>
+        </a></p>
+      </div>
+
+      <div class="footer__col">
+        <h2 data-i18n="Shop">Shop</h2>
+        <ul>
+          <li><a data-i18n="Televisions" href="https://www.whynotindia.in/c/16/QLED" target="_blank" rel="noopener noreferrer">Televisions</a></li>
+          <li><a data-i18n="Refrigerators" href="https://www.whynotindia.in/c/5/REFRIGERATOR" target="_blank" rel="noopener noreferrer">Refrigerators</a></li>
+          <li><a data-i18n="Air conditioners" href="https://www.whynotindia.in/c/6/AIR-CONDITIONER" target="_blank" rel="noopener noreferrer">Air conditioners</a></li>
+          <li><a data-i18n="Washing machines" href="https://www.whynotindia.in/c/7/WASHING-MACHINE" target="_blank" rel="noopener noreferrer">Washing machines</a></li>
+          <li><a data-i18n="Mobiles" href="https://www.whynotindia.in/c/12/Mobiles" target="_blank" rel="noopener noreferrer">Mobiles</a></li>
+          <li><a href="index.html#categories">All 14 categories</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h2 data-i18n="Company">Company</h2>
+        <ul>
+          <li><a href="products.html">The catalogue</a></li>
+          <li><a href="about.html">About WHYNOT</a></li>
+          <li><a data-i18n="All 25 showrooms" href="stores.html">All 25 showrooms</a></li>
+          <li><a href="contact.html">Contact &amp; service</a></li>
+          <li><a href="https://www.whynotindia.in/b/4/SAMSUNG" target="_blank" rel="noopener noreferrer">Brand stores</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h2>Visit</h2>
+        <ul>
+          <li>RS No 24/1, Ground &amp; Cellar,<br>Sri Sowdha Towers, Undrajavaram Road,<br>Tanuku, Andhra Pradesh 534211</li>
+          <li><a href="tel:+918886222448">88862 22448</a></li>
+          <li><a href="mailto:whynot.rayudu@gmail.com">whynot.rayudu@gmail.com</a></li>
+          <li><a href="https://www.google.com/maps/search/?api=1&amp;query=WHYNOT%20Sri%20Sowdha%20Towers%20Undrajavaram%20Road%20Tanuku%20534211" target="_blank" rel="noopener noreferrer">Open in Maps <svg class="i-inline" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M17 7H8M17 7v9"/></svg></a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>© <span data-year>2026</span> WHYNOT Electronics Pvt Ltd · Sri Sowdha Towers, Undrajavaram Road, Tanuku 534211</p>
+      <p>Concept redesign — <strong>Trial 01 · “Paper &amp; Ink”</strong>. Not the live site. <a href="../index.html">All trials</a></p>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" data-toast role="status" aria-live="polite" data-open="false"></div>
+<script src="assets/js/i18n.js" defer></script>
+<script src="assets/js/main.js" defer></script>
+<script src="assets/js/products.js" defer></script>
+</body>
+</html>

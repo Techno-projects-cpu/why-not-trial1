@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WHYNOT redesign lab — seven redesign trials</title>
+<meta name="description" content="Independent redesign concepts for whynotindia.in: seven complete builds in different visual directions, each shown live in a desktop and phone preview.">
+<meta name="theme-color" content="#0c0c0e">
+<link rel="icon" href="trial-01-minimal/assets/img/logo-mark.svg" type="image/svg+xml">
+<style>
+  /* ---------------------------------------------------------------------
+     The lab page is deliberately self-contained: its own small stylesheet,
+     no dependency on either trial's CSS. The previews are real, scrollable
+     iframes of the built pages — what you see is the actual site, not a
+     screenshot.
+     --------------------------------------------------------------------- */
+  :root {
+    --ink: #0c0c0e;
+    --ink-2: #16161a;
+    --ink-3: #1e1e24;
+    --paper: #f4f2ee;
+    --paper-2: #ffffff;
+    --muted: #8c8c95;
+    --line: #26262d;
+    --blue: #4d4dff;
+    --yellow: #ffd43b;
+    --coral: #ff5a5f;
+    --lime: #a7e04a;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+  h1, h2, h3 { line-height: 1.05; letter-spacing: -.02em; text-wrap: balance; }
+  .wrap { width: 100%; max-width: 1280px; margin-inline: auto; padding-inline: clamp(18px, 4vw, 56px); }
+  :focus-visible { outline: 2px solid var(--yellow); outline-offset: 3px; border-radius: 3px; }
+
+  .top {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding-block: 20px; border-bottom: 1px solid var(--line); flex-wrap: wrap;
+  }
+  .brand { display: inline-flex; align-items: center; gap: 10px; }
+  .brand__mark {
+    width: 30px; height: 30px; border-radius: 8px; background: #0000ff;
+    display: grid; place-items: center; font-weight: 700; font-size: 15px; color: #fff;
+  }
+  .brand__name { font-weight: 600; letter-spacing: .16em; text-transform: uppercase; font-size: .9375rem; }
+  .top__note { font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+
+  .hero { padding-block: clamp(44px, 9vw, 112px) clamp(32px, 5vw, 56px); display: grid; gap: 20px; max-width: 900px; }
+  .kicker { font-family: var(--mono); font-size: .75rem; letter-spacing: .16em; text-transform: uppercase; color: var(--yellow); }
+  .hero h1 { font-size: clamp(2.25rem, 6.4vw, 4.5rem); font-weight: 500; }
+  .hero p { color: #b9b9c2; max-width: 62ch; font-size: 1.0625rem; }
+  .hero__actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    min-height: 46px; padding: 0 18px;
+    border: 1px solid var(--line); border-radius: 999px;
+    font-size: .875rem; font-weight: 500; text-decoration: none;
+    background: transparent; color: var(--paper); cursor: pointer;
+    transition: background-color .18s ease, border-color .18s ease, color .18s ease, transform .18s ease;
+  }
+  .btn:hover { transform: translateY(-1px); border-color: #4a4a55; }
+  .btn--primary { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+  .btn--primary:hover { background: #fff; }
+  .btn--yellow { background: var(--yellow); color: var(--ink); border-color: var(--yellow); }
+  .btn--sm { min-height: 38px; padding: 0 14px; font-size: .8125rem; }
+
+  /* ---- the brief ------------------------------------------------------ */
+  .brief { display: grid; gap: 16px; padding-block: clamp(28px, 5vw, 52px); border-top: 1px solid var(--line); }
+  @media (min-width: 900px) { .brief { grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 56px; align-items: start; } }
+  .brief h2 { font-size: clamp(1.5rem, 3vw, 2.125rem); font-weight: 500; }
+  .brief ol { display: grid; gap: 14px; counter-reset: brief; }
+  .brief li {
+    display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px;
+    font-size: .9375rem; color: #b9b9c2;
+    counter-increment: brief;
+  }
+  .brief li::before {
+    content: counter(brief, decimal-leading-zero);
+    font-family: var(--mono); font-size: .75rem; color: var(--yellow); padding-top: 3px;
+  }
+  .brief strong { color: var(--paper); font-weight: 500; }
+
+  /* ---- trials --------------------------------------------------------- */
+  .trials { display: grid; gap: clamp(28px, 5vw, 64px); padding-block: clamp(24px, 4vw, 48px) 0; }
+  .trial { border-top: 1px solid var(--line); padding-top: clamp(24px, 4vw, 44px); display: grid; gap: 22px; }
+  .trial__head { display: grid; gap: 12px; }
+  .trial__no {
+    font-family: var(--mono); font-size: .75rem; letter-spacing: .18em; text-transform: uppercase; color: var(--muted);
+  }
+  .trial h3 { font-size: clamp(1.625rem, 4vw, 2.75rem); font-weight: 500; }
+  .trial__sub { color: #b9b9c2; max-width: 68ch; font-size: 1rem; }
+  .trial__tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .trial__tags span {
+    font-size: .6875rem; letter-spacing: .1em; text-transform: uppercase;
+    border: 1px solid var(--line); border-radius: 999px; padding: 5px 11px; color: #a5a5af;
+  }
+  .trial--01 .trial__no { color: #9a9a9a; }
+  .trial--02 .trial__no { color: var(--yellow); }
+  .trial--03 .trial__no { color: var(--coral); }
+  .trial--04 .trial__no { color: var(--yellow); }
+  .trial--05 .trial__no { color: #67e8f9; }
+  .trial--06 .trial__no { color: #f0c9b4; }
+  .trial--7 .trial__no { color: #9a9aff; }
+  .trial--03 .trial__tags span { border-color: #3a3a44; }
+
+  .trial__actions { display: flex; flex-wrap: wrap; gap: 10px; }
+  .trial__specs { display: flex; flex-wrap: wrap; gap: 8px 26px; font-size: .8125rem; color: var(--muted); font-family: var(--mono); }
+
+  /* ---- preview frames ------------------------------------------------- */
+  .previews { display: grid; gap: 20px; align-items: start; }
+  @media (min-width: 720px) { .previews { grid-template-columns: minmax(0, 1fr) 240px; gap: 26px; } }
+
+  .preview { display: grid; gap: 10px; }
+  .preview__label {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    font-family: var(--mono); font-size: .6875rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+  }
+  .frame {
+    position: relative;
+    background: var(--paper-2);
+    border: 1px solid #33333c;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .9);
+  }
+  .frame__bar {
+    display: flex; align-items: center; gap: 6px;
+    padding: 9px 12px;
+    background: #1b1b21;
+    border-bottom: 1px solid #2c2c34;
+  }
+  .frame__dot { width: 9px; height: 9px; border-radius: 50%; background: #3a3a44; }
+  .frame__url {
+    margin-left: 8px; flex: 1;
+    font-family: var(--mono); font-size: .625rem; color: #7d7d87;
+    background: #101014; border: 1px solid #26262d; border-radius: 999px;
+    padding: 3px 10px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .frame__view { position: relative; overflow: hidden; background: #fff; }
+  .frame__view iframe {
+    position: absolute; top: 0; left: 0;
+    border: 0; transform-origin: 0 0;
+    width: 1280px; height: 900px;   /* JS replaces these with the scaled size */
+    background: #fff;
+  }
+  .preview--phone .frame { border-radius: 22px; padding: 7px; background: #17171c; }
+  .preview--phone .frame__view { border-radius: 16px; background: #fff; }
+  .preview--phone .frame__view iframe { width: 390px; height: 780px; }
+  .frame__hint {
+    position: absolute; inset: auto 0 0 0;
+    padding: 8px 12px; font-size: .6875rem; color: #fff;
+    background: linear-gradient(to top, rgba(12, 12, 14, .92), transparent);
+    text-align: center; pointer-events: none;
+  }
+  .preview--phone .frame__hint { font-size: .625rem; }
+  @media (max-width: 719px) {
+    .preview--desktop { display: none; }   /* mobile-first: show the phone view */
+    .previews { grid-template-columns: minmax(0, 1fr); }
+    .preview--phone { max-width: 320px; }
+  }
+
+  /* ---- reserved slot -------------------------------------------------- */
+  .trial--soon { opacity: .72; }
+  .soon {
+    border: 1px dashed #34343d; border-radius: 12px;
+    padding: 22px; display: grid; gap: 8px;
+    font-size: .875rem; color: #a5a5af;
+  }
+  .soon strong { color: var(--paper); font-weight: 500; }
+
+  .fail {
+    display: none;
+    padding: 22px; border: 1px dashed #34343d; border-radius: 12px;
+    font-size: .875rem; color: #a5a5af;
+  }
+
+  /* ---- footer --------------------------------------------------------- */
+  .foot {
+    margin-top: clamp(48px, 8vw, 96px);
+    border-top: 1px solid var(--line);
+    padding-block: clamp(28px, 5vw, 56px);
+    display: grid; gap: 12px;
+    font-size: .875rem; color: #8f8f99;
+  }
+  .foot strong { color: var(--paper); font-weight: 500; }
+  .foot a { color: #b9b9c2; }
+  .foot a:hover { color: var(--paper); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <span class="brand">
+      <span class="brand__mark" aria-hidden="true">W</span>
+      <span class="brand__name">Whynot</span>
+    </span>
+    <p class="top__note">Redesign lab · whynotindia.in · concept work</p>
+  </div>
+
+  <section class="hero">
+    <p class="kicker">Seven directions, one fix-list</p>
+    <h1>Seven ways to fix a 32-year-old business&rsquo;s website.</h1>
+    <p>WHYNOT Electronics runs 25 showrooms across the Godavari districts and has been trading since 1994. Their current site buries the phone number, breaks every map link and shows a shopping cart with nothing in it. These are seven complete redesigns of the same content &mdash; different visual language, identical job: make a customer trust them in five seconds, then get them to the nearest showroom or a catalog they can order from.</p>
+    <div class="hero__actions">
+      <a class="btn btn--primary" href="docs/AUDIT.md">Read the audit of the current site</a>
+      <a class="btn" href="#trials">Jump to the trials</a>
+      <a class="btn" href="https://www.whynotindia.in/" target="_blank" rel="noopener noreferrer">The live site &nearr;</a>
+    </div>
+  </section>
+
+  <section class="brief">
+    <div>
+      <p class="kicker">The brief</p>
+      <h2>Same five problems in all seven builds</h2>
+      <p style="color:#8f8f99;font-size:.875rem;margin-top:10px">Every trial carries the full fix-list. The difference is entirely in how they look and feel &mdash; which is the point of building more than one.</p>
+    </div>
+    <ol>
+      <li><span><strong>One true set of facts.</strong> The current site claims 23, 25 and 40 branches on three different pages. All seven trials say 25 showrooms in 23 towns, and say it once.</span></li>
+      <li><span><strong>A showroom directory that works.</strong> Search by town, district or pincode, with real Google Maps links. Every map link on the live site is broken.</span></li>
+      <li><span><strong>A phone number one tap away</strong>, on every page, with an honest open/closed state &mdash; the live contact page has no number at all.</span></li>
+      <li><span><strong>Products worth browsing.</strong> All seven trials ship a real catalogue with categories, search, town filters and a shortlist that travels to the counter by WhatsApp, phone or email.</span></li>
+      <li><span><strong>A page that loads in a village.</strong> No framework, no CDN, no analytics, no popup. Under 250 KB for the first view, readable before the fonts land.</span></li>
+    </ol>
+  </section>
+
+  <section class="trials" id="trials">
+
+    <!-- ================================================ TRIAL 01 ======== -->
+    <article class="trial trial--01">
+      <div class="trial__head">
+        <p class="trial__no">Trial 01</p>
+        <h3>Paper &amp; Ink — the quiet one</h3>
+        <p class="trial__sub">Editorial minimalism. Warm paper, hairline rules, real typography and a single brand blue doing all the shouting. Almost no chrome: the design gets out of the way so the addresses, the prices-on-request and the phone number can do the selling. It is the direction for a company that wants to look like it has nothing to prove.</p>
+        <div class="trial__tags">
+          <span>Minimal / editorial</span><span>Warm paper</span><span>Hairlines not cards</span>
+          <span>Dark mode</span><span>Accessible baseline</span><span>Mobile first</span>
+        </div>
+        <div class="trial__specs">
+          <span>6 pages</span><span>zero dependencies</span><span>165 KB first view</span>
+          <span>one 30 KB stylesheet</span><span>catalogue + shortlist</span>
+        </div>
+        <div class="trial__actions">
+          <a class="btn btn--primary" href="trial-01-minimal/index.html">Open Trial 01</a>
+          <a class="btn" href="trial-01-minimal/products.html">Catalogue</a>
+          <a class="btn" href="trial-01-minimal/stores.html">Showrooms</a>
+          <a class="btn" href="trial-01-minimal/contact.html">Contact</a>
+        </div>
+      </div>
+
+      <div class="previews">
+        <figure class="preview preview--desktop">
+          <div class="frame">
+            <div class="frame__bar">
+              <span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span>
+              <span class="frame__url">whynotindia.in — Paper &amp; Ink (desktop)</span>
+            </div>
+            <div class="frame__view" data-preview data-src="trial-01-minimal/index.html" data-w="1280" data-h="900" style="aspect-ratio:1280/900">
+              <iframe src="trial-01-minimal/index.html" title="Trial 01, live desktop preview" loading="lazy" tabindex="-1" scrolling="no"></iframe>
+              <span class="frame__hint">Live page, scaled down &mdash; open it to scroll</span>
+            </div>
+          </div>
+          <figcaption class="preview__label"><span>Desktop · 1280px</span><span>live iframe</span></figcaption>
+        </figure>
+
+        <figure class="preview preview--phone">
+          <div class="frame">
+            <div class="frame__view" data-preview data-src="trial-01-minimal/index.html" data-w="390" data-h="780" style="aspect-ratio:390/780">
+              <iframe src="trial-01-minimal/index.html" title="Trial 01, live phone preview" loading="lazy" tabindex="-1" scrolling="no"></iframe>
+            </div>
+          </div>
+          <figcaption class="preview__label"><span>Phone · 390px</span><span>live iframe</span></figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <!-- ================================================ TRIAL 02 ======== -->
+    <article class="trial trial--02">
+      <div class="trial__head">
+        <p class="trial__no">Trial 02</p>
+        <h3>Crayon &amp; Paper — the loud one</h3>
+        <p class="trial__sub">Hand-drawn and vibrant. Marker-pen doodles, sticker buttons with hard offset shadows, wobbly pen borders and a maths-exercise-book dot grid. Every icon is a hand-written SVG path rather than a stock glyph, and the copy talks like a shopkeeper instead of a brochure. This is the direction for a brand that wants to feel like the friendly expert in town rather than a showroom.</p>
+        <div class="trial__tags">
+          <span>Illustrated / hand-drawn</span><span>Vibrant</span><span>Marker + paper</span>
+          <span>Custom SVG doodles</span><span>Mobile first</span><span>WhatsApp-first buying</span>
+        </div>
+        <div class="trial__specs">
+          <span>6 pages</span><span>zero dependencies</span><span>37 hand-drawn icons</span>
+          <span>sticky phone action bar</span><span>catalogue + shortlist</span>
+        </div>
+        <div class="trial__actions">
+          <a class="btn btn--primary" href="trial-02-illustrated/index.html">Open Trial 02</a>
+          <a class="btn" href="trial-02-illustrated/products.html">Catalogue</a>
+          <a class="btn" href="trial-02-illustrated/stores.html">Showrooms</a>
+          <a class="btn" href="trial-02-illustrated/about.html">About</a>
+        </div>
+      </div>
+
+      <div class="previews">
+        <figure class="preview preview--desktop">
+          <div class="frame">
+            <div class="frame__bar">
+              <span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span>
+              <span class="frame__url">whynotindia.in — Crayon &amp; Paper (desktop)</span>
+            </div>
+            <div class="frame__view" data-preview data-src="trial-02-illustrated/index.html" data-w="1280" data-h="900" style="aspect-ratio:1280/900">
+              <iframe src="trial-02-illustrated/index.html" title="Trial 02, live desktop preview" loading="lazy" tabindex="-1" scrolling="no"></iframe>
+              <span class="frame__hint">Live page, scaled down &mdash; open it to scroll</span>
+            </div>
+          </div>
+          <figcaption class="preview__label"><span>Desktop · 1280px</span><span>live iframe</span></figcaption>
+        </figure>
+
+        <figure class="preview preview--phone">
+          <div class="frame">
+            <div class="frame__view" data-preview data-src="trial-02-illustrated/index.html" data-w="390" data-h="780" style="aspect-ratio:390/780">
+              <iframe src="trial-02-illustrated/index.html" title="Trial 02, live phone preview" loading="lazy" tabindex="-1" scrolling="no"></iframe>
+            </div>
+          </div>
+          <figcaption class="preview__label"><span>Phone · 390px</span><span>live iframe</span></figcaption>
+        </figure>
+      </div>
+    </article>
+
+
+    <!-- ================================================ TRIAL 03 ======== -->
+    <article class="trial trial--03">
+      <div class="trial__head">
+        <p class="trial__no">Trial 03</p>
+        <h3>Panel &amp; Ink — the anime one</h3>
+        <p class="trial__sub">Built like a manga page: ruled panels, hard ink borders, halftone screentones, speed lines and impact bursts, with cel-shaded key art. The discipline that keeps it from turning into a sticker album is that the page is a grid — energy is spent in exactly four places (hero, section titles, price tags, CTA) and everything else stays flat and readable. This is the direction for a brand that wants the energy of a festival-hoarding poster with the structure of a catalogue.</p>
+        <div class="trial__tags">
+          <span>Anime / manga panels</span><span>Screentone + halftone</span><span>Cel-shaded key art</span>
+          <span>AVIF + WebP</span><span>Mobile first</span><span>WhatsApp-first buying</span>
+        </div>
+        <div class="trial__specs">
+          <span>6 pages</span><span>40 crisp vector icons</span><span>50 KB of type, four faces</span>
+          <span>sticky phone action bar</span><span>catalogue + shortlist</span>
+        </div>
+        <div class="trial__actions">
+          <a class="btn btn--primary" href="trial-03-anime/index.html">Open Trial 03</a>
+          <a class="btn" href="trial-03-anime/products.html">Catalogue</a>
+          <a class="btn" href="trial-03-anime/stores.html">Showrooms</a>
+          <a class="btn" href="trial-03-anime/about.html">The story</a>
+        </div>
+      </div>
+
+      <div class="previews">
+        <figure class="preview preview--desktop">
+          <div class="frame">
+            <div class="frame__bar">
+              <span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span>
+              <span class="frame__url">whynotindia.in — Panel &amp; Ink (desktop)</span>
+            </div>
+            <div class="frame__view" data-preview data-src="trial-03-anime/index.html" data-w="1280" data-h="900" style="aspect-ratio:1280/900">
+              <iframe src="trial-03-anime/index.html" title="Trial 03, live desktop preview" loading="lazy" tabindex="-1" scrolling="no"></iframe>
+              <span class="frame__hint">Live page, scaled down &mdash; open it to scroll</span>
+            </div>
+          </div>
+          <figcaption class="preview__label"><span>Desktop · 1280px</span><span>live iframe</span></figcaption>
+        </figure>
+
+        <figure class="preview preview--phone">
+          <div class="frame">
+            <div class="frame__view" data-preview data-src="trial-03-anime/index.html" data-w="390" data-h="780" style="aspect-ratio:390/780">
+              <iframe src="trial-03-anime/index.html" title="Trial 03, live phone preview" loading="lazy" tabindex="-1" scrolling="no"></iframe>
+            </div>
+          </div>
+          <figcaption class="preview__label"><span>Phone · 390px</span><span>live iframe</span></figcaption>
+        </figure>
+      </div>
+
+      <div class="soon" style="opacity:1">
+        <strong>The honest caveat on this one:</strong>
+        <p>The two key visuals here are AI-generated stand-in art. Anime is a style where the craft shows — a commissioned illustrator would give this direction a real face, consistent character design and a house palette, which is exactly what a 25-showroom brand would want on hoardings. This trial proves the layout, the panel system and the catalogue work; the art is the part to buy in.</p>
+      </div>
+    </article>
+
+
+    <!-- ================================================ TRIAL 4 ======== -->
+    <article class="trial trial--4">
+      <div class="trial__head">
+        <p class="trial__no">Trial 4</p>
+        <h3>Slab &amp; Stencil — the neo-brutalist one</h3>
+        <p class="trial__sub">No gradients, no soft edges, no photographs. Thick black rules, flat blocks of electric colour, one hard offset shadow on every surface and type that behaves like signage. The hero is a poster of stacked blocks instead of a picture, and the town band is a wall of coloured slabs. It is the design that shouts the loudest and loads the smallest — there is not a single image in it.</p>
+        <div class="trial__tags"><span>Neo-brutalism</span><span>Thick rules, zero radius</span><span>Hard offset shadows</span><span>Electric palette</span><span>Block-art hero</span><span>No photography</span></div>
+        <div class="trial__specs"><span>6 pages</span><span>17 products</span><span>25 showrooms</span><span>60 KB of type</span><span>smallest trial: 316 KB</span></div>
+        <div class="trial__actions"><a class="btn btn--primary" href="trial-04-brutalist/index.html">Open Trial 04</a><a class="btn" href="trial-04-brutalist/products.html">Catalogue</a><a class="btn" href="trial-04-brutalist/stores.html">Showrooms</a><a class="btn" href="trial-04-brutalist/about.html">The story</a></div>
+      </div>
+
+      <div class="previews">
+        <figure class="preview preview--desktop">
+          <div class="frame">
+            <div class="frame__bar">
+              <span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span>
+              <span class="frame__url">whynotindia.in — Slab &amp; Stencil (desktop)</span>
+            </div>
+            <div class="frame__view" data-preview data-src="trial-04-brutalist/index.html" data-w="1280" data-h="900" style="aspect-ratio:1280/900">
+              <iframe src="trial-04-brutalist/index.html" title="Trial 4, live desktop preview" loading="lazy" tabindex="-1" scrolling="no"></iframe>
+              <span class="frame__hint">Live page, scaled down &mdash; open it to scroll</span>
+            </div>
+          </div>
+          <figcaption class="preview__label"><span>Desktop · 1280px</span><span>live iframe</span></figcaption>
+        </figure>
+
+        <figure class="preview preview--phone">
+          <div class="frame">
+            <div class="frame__view" data-preview data-src="trial-04-brutalist/index.html" data-w="390" data-h="780" style="aspect-ratio:390/780">
+              <iframe src="trial-04-brutalist/index.html" title="Trial 4, live phone preview" loading="lazy" tabindex="-1" scrolling="no"></iframe>
+            </div>
+          </div>
+          <figcaption class="preview__label"><span>Phone · 390px</span><span>live iframe</span></figcaption>
+        </figure>
+      </div>
+
+      <div class="soon" style="opacity:1">
+        <strong>Why it works for a 25-branch retailer:</strong>
+        <p>Brutalism reads as confidence and it is unmissable from across a street, which is roughly the job a shopfront does. The honest trade-off is warmth: this is the direction least likely to make anyone feel cosy, and the marquee strip is the only motion on the page for a reason.</p>
+      </div>
+    </article>
+
+    <!-- ================================================ TRIAL 5 ======== -->
+    <article class="trial trial--5">
+      <div class="trial__head">
+        <p class="trial__no">Trial 5</p>
+        <h3>Glass &amp; Glow — the glassmorphism one</h3>
+        <p class="trial__sub">Frosted sheets floating over a lit backdrop: a light study, a colour mesh, blurred orbs and a dark wash, with 22px of backdrop blur on every surface. Depth comes from light instead of borders. This is the most premium of the seven and the hardest to keep readable — which is why it ships with an actual measurement, not an opinion.</p>
+        <div class="trial__tags"><span>Glassmorphism</span><span>backdrop-filter frost</span><span>Gradient mesh</span><span>Measured WCAG contrast</span><span>@supports fallback</span><span>Zero images except the light study</span></div>
+        <div class="trial__specs"><span>6 pages</span><span>24/24 contrast checks pass</span><span>42 KB of type</span><span>frost fallback for old browsers</span></div>
+        <div class="trial__actions"><a class="btn btn--primary" href="trial-05-glass/index.html">Open Trial 05</a><a class="btn" href="trial-05-glass/products.html">Catalogue</a><a class="btn" href="trial-05-glass/stores.html">Showrooms</a><a class="btn" href="trial-05-glass/about.html">The story</a></div>
+      </div>
+
+      <div class="previews">
+        <figure class="preview preview--desktop">
+          <div class="frame">
+            <div class="frame__bar">
+              <span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span>
+              <span class="frame__url">whynotindia.in — Glass &amp; Glow (desktop)</span>
+            </div>
+            <div class="frame__view" data-preview data-src="trial-05-glass/index.html" data-w="1280" data-h="900" style="aspect-ratio:1280/900">
+              <iframe src="trial-05-glass/index.html" title="Trial 5, live desktop preview" loading="lazy" tabindex="-1" scrolling="no"></iframe>
+              <span class="frame__hint">Live page, scaled down &mdash; open it to scroll</span>
+            </div>
+          </div>
+          <figcaption class="preview__label"><span>Desktop · 1280px</span><span>live iframe</span></figcaption>
+        </figure>
+
+        <figure class="preview preview--phone">
+          <div class="frame">
+            <div class="frame__view" data-preview data-src="trial-05-glass/index.html" data-w="390" data-h="780" style="aspect-ratio:390/780">
+              <iframe src="trial-05-glass/index.html" title="Trial 5, live phone preview" loading="lazy" tabindex="-1" scrolling="no"></iframe>
+            </div>
+          </div>
+          <figcaption class="preview__label"><span>Phone · 390px</span><span>live iframe</span></figcaption>
+        </figure>
+      </div>
+
+      <div class="soon" style="opacity:1">
+        <strong>The contrast pass, because glass is where accessibility usually dies:</strong>
+        <p>The audit composites the real layer stack — backdrop, wash, sheet, text — and checks WCAG ratios against the worst-case backdrop, a nearly white bloom, not the average one. It failed on first run: faint labels at 3.60:1, body text on the lighter tiles at 4.09:1, and every translucent white chip putting white text on a near-white surface. All 24 combinations now pass, including 6.43:1 for body text in the worst case.</p>
+      </div>
+    </article>
+
+    <!-- ================================================ TRIAL 6 ======== -->
+    <article class="trial trial--6">
+      <div class="trial__head">
+        <p class="trial__no">Trial 6</p>
+        <h3>Brush &amp; Bloom — the painted one</h3>
+        <p class="trial__sub">Pastel and plein-air: a warm cream ground with a canvas grain, thin washes of blush, sage, sky and butter instead of opaque cards, and three impressionist landscapes sitting in soft frames with their edges feathered into the paper. Brush-stroke ribbons replace the hard rules between sections. If the other trials are graphics, this one is a painting.</p>
+        <div class="trial__tags"><span>Painterly pastel</span><span>Framed canvases</span><span>Feathered image edges</span><span>Canvas grain in CSS</span><span>Brush-stroke dividers</span><span>AVIF hero</span></div>
+        <div class="trial__specs"><span>6 pages</span><span>3 paintings × 3 formats</span><span>61 KB of type</span><span>Fraunces + Karla</span><span>calmest of the seven</span></div>
+        <div class="trial__actions"><a class="btn btn--primary" href="trial-06-painting/index.html">Open Trial 06</a><a class="btn" href="trial-06-painting/products.html">Catalogue</a><a class="btn" href="trial-06-painting/stores.html">Showrooms</a><a class="btn" href="trial-06-painting/about.html">The story</a></div>
+      </div>
+
+      <div class="previews">
+        <figure class="preview preview--desktop">
+          <div class="frame">
+            <div class="frame__bar">
+              <span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span>
+              <span class="frame__url">whynotindia.in — Brush &amp; Bloom (desktop)</span>
+            </div>
+            <div class="frame__view" data-preview data-src="trial-06-painting/index.html" data-w="1280" data-h="900" style="aspect-ratio:1280/900">
+              <iframe src="trial-06-painting/index.html" title="Trial 6, live desktop preview" loading="lazy" tabindex="-1" scrolling="no"></iframe>
+              <span class="frame__hint">Live page, scaled down &mdash; open it to scroll</span>
+            </div>
+          </div>
+          <figcaption class="preview__label"><span>Desktop · 1280px</span><span>live iframe</span></figcaption>
+        </figure>
+
+        <figure class="preview preview--phone">
+          <div class="frame">
+            <div class="frame__view" data-preview data-src="trial-06-painting/index.html" data-w="390" data-h="780" style="aspect-ratio:390/780">
+              <iframe src="trial-06-painting/index.html" title="Trial 6, live phone preview" loading="lazy" tabindex="-1" scrolling="no"></iframe>
+            </div>
+          </div>
+          <figcaption class="preview__label"><span>Phone · 390px</span><span>live iframe</span></figcaption>
+        </figure>
+      </div>
+
+      <div class="soon" style="opacity:1">
+        <strong>The caveat that matters most here:</strong>
+        <p>The three paintings are AI-generated stand-ins. Pastel landscape work is exactly the kind of craft where a commissioned illustrator would raise the ceiling most, and it is worth quoting separately rather than hidden. The design elements themselves — frames, washes, grain, dividers — are all plain CSS and SVG, so the layout stands up the moment real artwork arrives.</p>
+      </div>
+    </article>
+
+    <article class="trial trial--7">
+      <div class="trial__head">
+        <p class="trial__no">Trial 7</p>
+        <h3>Slate &amp; Rail — the professional one</h3>
+        <p class="trial__sub">The one that answers the brief most literally: clean, quiet, and built like a working document rather than a poster. A rail down the left on desktop becomes a tab bar on the phone; the catalogue is a <em>table you read down</em> — item, category, specification, which branches have it, list button — and the shortlist is a panel beside the list instead of a cart. The home page opens on the shop itself: copy beside one labelled stand-in photograph, a strip of real numbers, a three-step buying-flow diagram, then a schematic map of all 25 branches. Light and dark are two designed palettes, not an inverted one — the page opens white, and the switch is yours to make.</p>
+        <div class="trial__tags"><span>Left rail + tab bar</span><span>Table catalogue</span><span>Side panel shortlist</span><span>Light / dark modes</span><span>Inter + IBM Plex Mono</span><span>Both palettes measured</span></div>
+        <div class="trial__specs"><span>6 pages</span><span>Photo + SVG map + flow diagram</span><span>308 phrases in 3 languages</span><span>30 contrast checks, two modes</span><span>form: tables, not cards</span></div>
+        <div class="trial__actions"><a class="btn btn--primary" href="trial-07-slate/index.html">Open Trial 07</a><a class="btn" href="trial-07-slate/products.html">Catalogue</a><a class="btn" href="trial-07-slate/stores.html">Showrooms</a><a class="btn" href="trial-07-slate/about.html">The facts</a></div>
+      </div>
+
+      <div class="previews">
+        <figure class="preview preview--desktop">
+          <div class="frame">
+            <div class="frame__bar">
+              <span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span>
+              <span class="frame__url">whynotindia.in &mdash; Slate &amp; Rail (desktop)</span>
+            </div>
+            <div class="frame__view" data-preview data-src="trial-07-slate/index.html" data-w="1280" data-h="900" style="aspect-ratio:1280/900">
+              <iframe src="trial-07-slate/index.html" title="Trial 7, live desktop preview" loading="lazy" tabindex="-1" scrolling="no"></iframe>
+              <span class="frame__hint">Live page, scaled down &mdash; open it to scroll</span>
+            </div>
+          </div>
+          <figcaption class="preview__label"><span>Desktop &middot; 1280px</span><span>live iframe</span></figcaption>
+        </figure>
+
+        <figure class="preview preview--phone">
+          <div class="frame">
+            <div class="frame__view" data-preview data-src="trial-07-slate/index.html" data-w="390" data-h="780" style="aspect-ratio:390/780">
+              <iframe src="trial-07-slate/index.html" title="Trial 7, live phone preview" loading="lazy" tabindex="-1" scrolling="no"></iframe>
+            </div>
+          </div>
+          <figcaption class="preview__label"><span>Phone &middot; 390px</span><span>live iframe</span></figcaption>
+        </figure>
+      </div>
+
+      <div class="soon" style="opacity:1">
+        <strong>Where this direction earns its keep:</strong>
+        <p>A shop with 25 branches is really an information problem — which branch, which model, what price today. This is the trial that treats the catalogue as a stock list and the shortlist as a working note, so it scales to hundreds of lines without redesigning anything. It is also the only form here that would survive being planted inside an existing corporate site, because it reads as a document, not a campaign.</p>
+      </div>
+    </article>
+
+
+  </section>
+
+  <footer class="foot">
+    <p><strong>Concept work only.</strong> Not affiliated with, endorsed by or deployed to WHYNOT Electronics Pvt Ltd. Company facts, addresses, phone number and brand names are theirs, taken from their public website on 12 October 2026, and used here to show what a rebuild could look like.</p>
+    <p>Photography in Trials 01 and 07 is AI-generated stand-in imagery for photography that would be shot in the real showrooms; both say so on the page. Every illustration in Trial 02 is a hand-written SVG path in this repository. No third-party logos or trademarks are reproduced &mdash; brand names appear as text only.</p>
+    <p>Previews on this page are the actual built pages, loaded in scaled iframes. Seven trials, six pages each, 185 tests, no build step, no dependencies, no external requests. Every trial reads in English, Telugu and Hindi. <a href="docs/AUDIT.md">Audit</a> · <a href="README.md">README</a></p>
+  </footer>
+</div>
+
+<script>
+  /* Scale the live previews to fit their frames.
+     Each preview declares the viewport it is pretending to be (1280×900 for
+     desktop, 390×780 for the phone) and the iframe is scaled down to whatever
+     width the frame actually has, so the box is fluid without a re-layout of
+     the trial inside it. */
+  (function () {
+    "use strict";
+    var frames = Array.prototype.slice.call(document.querySelectorAll("[data-preview]"));
+    if (!frames.length) return;
+
+    function fit(frame) {
+      var view = frame;
+      var iframe = view.querySelector("iframe");
+      if (!iframe) return;
+
+      var w = parseFloat(view.getAttribute("data-w")) || 1280;
+      var h = parseFloat(view.getAttribute("data-h")) || 900;
+      var box = view.clientWidth;
+      if (!box) return;                       /* hidden (e.g. desktop frame on a phone) */
+
+      var scale = box / w;
+      iframe.style.width = w + "px";
+      iframe.style.height = h + "px";
+      iframe.style.transform = "scale(" + scale + ")";
+      view.style.height = Math.round(h * scale) + "px";
+      view.style.aspectRatio = "auto";
+
+      /* a phone frame is taller than it is wide: let it show the same width */
+      if (Math.abs(scale - 1) > 0.001) {
+        view.style.overflow = "hidden";
+      }
+    }
+
+    function fitAll() { frames.forEach(fit); }
+
+    fitAll();
+    window.addEventListener("load", fitAll);
+
+    var t;
+    window.addEventListener("resize", function () {
+      clearTimeout(t);
+      t = setTimeout(fitAll, 140);
+    });
+
+    /* If a preview cannot be shown (bad path, blocked), say so instead of
+       leaving an empty white box. */
+    frames.forEach(function (view) {
+      var iframe = view.querySelector("iframe");
+      if (!iframe) return;
+      iframe.addEventListener("error", function () {
+        var fail = document.createElement("p");
+        fail.className = "fail";
+        fail.style.display = "block";
+        fail.textContent = "This preview could not load. Open the trial with the button above.";
+        view.parentNode.appendChild(fail);
+      });
+    });
+  })();
+</script>
+</body>
+</html>

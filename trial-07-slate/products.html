@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en-IN" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Catalogue — WHYNOT redesign concept (Trial 07)</title>
+<meta name="description" content="17 appliances across 10 categories, with a shortlist that ends in a WhatsApp, call or email enquiry.">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0d12" media="(prefers-color-scheme: dark)">
+<link rel="stylesheet" href="assets/css/style.css">
+<script>
+  /* The page is light unless the reader has chosen dark before. Not the system
+     setting: this design opens white on purpose, and a saved choice is the only
+     thing allowed to make it dark. Applied before first paint, so no flash. */
+  (function () {
+    try {
+      var dark = localStorage.getItem("whynot-mode") === "dark";
+      document.documentElement.setAttribute("data-mode", dark ? "dark" : "light");
+    } catch (e) {}
+  })();
+</script>
+<script src="assets/js/i18n.js" defer></script>
+<script src="assets/js/main.js" defer></script>
+<script src="assets/js/products.js" defer></script>
+</head>
+<body>
+<a data-i18n="Skip to content" class="skip" href="#main">Skip to content</a>
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false">
+<symbol id="i-tv" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="12" width="52" height="34" rx="3"/>
+      <path d="M6 38h52"/>
+      <path d="M22 52h20M32 46v6"/>
+      <path d="M14 20h14"/>
+      <path d="M26 6 18 13M38 6l8 7"/></g></symbol>
+<symbol id="i-ac" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="10" width="52" height="20" rx="3"/>
+      <path d="M6 22h52"/>
+      <path d="M16 38v12M32 38v14M48 38v11"/>
+      <path d="M22 38c0 6 4 6 4 12M38 38c0 7 4 6 4 12"/>
+      <path d="M14 16h18"/></g></symbol>
+<symbol id="i-fridge" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="4" width="32" height="56" rx="4"/>
+      <path d="M16 24h32"/>
+      <path d="M42 12v6M42 30v8"/>
+      <path d="M10 60h44"/></g></symbol>
+<symbol id="i-washer" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><rect x="12" y="6" width="40" height="52" rx="4"/>
+      <path d="M12 18h40"/>
+      <circle cx="32" cy="39" r="12"/>
+      <path d="M24 39c0 4 3.6 7 8 7M40 39c0-4-3.6-7-8-7"/>
+      <path d="M42 12h4"/>
+      <path d="M8 58h48"/></g></symbol>
+<symbol id="i-mixer" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 8h20l-3 20H25z"/>
+      <path d="M18 46h28l-2 12H20z"/>
+      <path d="M25 28h29c0 6-4 10-10 10h-19"/>
+      <path d="M32 52v6M26 58h12"/>
+      <path d="M22 14h10"/></g></symbol>
+<symbol id="i-micro" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="14" width="56" height="34" rx="3"/>
+      <rect x="10" y="20" width="30" height="22" rx="2"/>
+      <path d="M48 22v2M48 30v2M48 38v2"/>
+      <path d="M16 26h14"/>
+      <path d="M32 54H12"/></g></symbol>
+<symbol id="i-grinder" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 30h36v14H14z"/>
+      <path d="M20 30c0-8 5-13 12-13s12 5 12 13"/>
+      <path d="M32 10v6"/>
+      <path d="M18 44c0 6-2 8-4 10M46 44c0 6 2 8 4 10"/>
+      <path d="M22 36h20"/></g></symbol>
+<symbol id="i-droplet" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 6c9 12 16 19 16 27a16 16 0 0 1-32 0c0-8 7-15 16-27Z"/>
+      <path d="M24 36c0 4 3 7 7 8"/>
+      <path d="M44 14l4-6M20 14l-4-6"/></g></symbol>
+<symbol id="i-geyser" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="18" width="36" height="30" rx="6"/>
+      <path d="M26 18V8h12v10"/>
+      <path d="M20 48v8M44 48v8"/>
+      <circle cx="32" cy="33" r="6"/>
+      <path d="M32 27v6l4 3"/></g></symbol>
+<symbol id="i-bulb" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 6a18 18 0 0 1 10 32.8V44H22v-5.2A18 18 0 0 1 32 6Z"/>
+      <path d="M23 50h18M26 56h12"/>
+      <path d="M32 34v10"/>
+      <path d="M14 12 8 6M50 12l6-6M6 30h-4M62 30h-4"/></g></symbol>
+<symbol id="i-speaker" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><rect x="18" y="6" width="28" height="52" rx="4"/>
+      <circle cx="32" cy="40" r="10"/>
+      <circle cx="32" cy="19" r="4"/>
+      <path d="M52 20c4 6 4 18 0 24M12 20c-4 6-4 18 0 24"/></g></symbol>
+<symbol id="i-vacuum" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="40" r="16"/>
+      <path d="M38 32 52 12"/>
+      <path d="M14 40h20M24 30v20"/>
+      <path d="M46 24l6-8 6 4-6 8z"/>
+      <path d="M8 56h32"/></g></symbol>
+<symbol id="i-phone" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><rect x="18" y="4" width="28" height="56" rx="5"/>
+      <path d="M18 14h28"/>
+      <path d="M28 52h8"/>
+      <path d="M40 8v4M40 20v12"/>
+      <rect x="24" y="20" width="16" height="22" rx="2"/></g></symbol>
+<symbol id="i-cart" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h8l7 28h32l6-22H12"/>
+      <circle cx="22" cy="50" r="5"/>
+      <circle cx="44" cy="50" r="5"/>
+      <path d="M24 22h22"/></g></symbol>
+<symbol id="i-call" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6c1.6 0 3 1 3.4 2.6l2 8c.4 1.6-.4 3-1.8 3.6l-4 1.8c3 7 8.4 12.4 15.4 15.4l1.8-4c.6-1.4 2-2.2 3.6-1.8l8 2c1.6.4 2.6 1.8 2.6 3.4v5.4c0 2-1.6 3.6-3.6 3.6C26 49 15 38 16.4 16.6 16.4 14.6 18 13 20 13z"/></g></symbol>
+<symbol id="i-whatsapp" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 52c-2-3.4-3.2-7.4-3.2-11.6C8.8 26 19.6 15 33 15s24 11 24 25.4S46.4 65.8 33 65.8c-4.4 0-8.6-1.2-12.2-3.4z" transform="translate(-1,-7)"/>
+      <path d="M25 25c.8-.6 1.8-.2 2.4.8l2.4 4.4c.6 1 0 2.2-1 3l-2 1.6c2 4.4 5.4 7.8 9.8 9.8l1.6-2c.8-1 2-1.6 3-1l4.4 2.4c1 .6 1.4 1.6.8 2.4l-1.6 2.4c-1 1.4-2.4 2.2-4 2-11-1.4-20-10.4-21.4-21.4-.2-1.6.6-3 2-4z" transform="translate(-1,-7)"/></g></symbol>
+<symbol id="i-pin" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 6c9.4 0 17 7.6 17 17 0 12-17 35-17 35S15 35 15 23c0-9.4 7.6-17 17-17Z"/>
+      <circle cx="32" cy="23" r="6.4"/>
+      <path d="M6 58h52"/></g></symbol>
+<symbol id="i-search" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="27" cy="27" r="19"/>
+      <path d="M41 41l16 16"/>
+      <path d="M18 22h18"/></g></symbol>
+<symbol id="i-sparkle" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 4c2.6 10 7 14.4 17 17-10 2.6-14.4 7-17 17-2.6-10-7-14.4-17-17 10-2.6 14.4-7 17-17Z"/>
+      <path d="M52 42c1.2 4.6 3.2 6.6 7.8 7.8-4.6 1.2-6.6 3.2-7.8 7.8-1.2-4.6-3.2-6.6-7.8-7.8 4.6-1.2 6.6-3.2 7.8-7.8Z"/>
+      <path d="M12 40c.8 3.2 2.2 4.6 5.4 5.4-3.2.8-4.6 2.2-5.4 5.4-.8-3.2-2.2-4.6-5.4-5.4 3.2-.8 4.6-2.2 5.4-5.4Z"/></g></symbol>
+<symbol id="i-star" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 4l8.4 18.6L60 25.4 44.8 39.4l4.6 21.2L32 50.2 14.6 60.6l4.6-21.2L4 25.4l19.6-2.8z"/></g></symbol>
+<symbol id="i-bolt" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M38 4 14 36h14l-4 24 26-34H36z"/></g></symbol>
+<symbol id="i-clock" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="26"/>
+      <path d="M32 14v18l14 8"/>
+      <path d="M32 6v-4M32 62v-4"/></g></symbol>
+<symbol id="i-check" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 34 24 50 56 12"/></g></symbol>
+<symbol id="i-menu" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16h52M6 32h52M6 48h52"/></g></symbol>
+<symbol id="i-close" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12l40 40M52 12 12 52"/></g></symbol>
+<symbol id="i-copy" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="34" height="44" rx="3"/>
+      <path d="M18 18h40v42H18z"/>
+      <path d="M26 34h24M26 44h16"/></g></symbol>
+<symbol id="i-shield" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 4c6.4 4 14.4 6.4 22 8 1.2 12-3.2 27.2-22 37.6C13.2 39.2 8.8 24 10 12c7.6-1.6 15.6-4 22-8Z"/>
+      <path d="M22 30l8 8 13-15"/></g></symbol>
+<symbol id="i-truck" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 14h34v30H2z"/>
+      <path d="M36 22h12l12 12v10H36z"/>
+      <circle cx="14" cy="50" r="6"/>
+      <circle cx="46" cy="50" r="6"/>
+      <path d="M8 22h14"/></g></symbol>
+<symbol id="i-wrench" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M46 6 34 18l-4 12-16 16a6 6 0 0 0 8 8l16-16 12-4L62 22l-8-2-2-8-6-6z" transform="scale(.94) translate(2,2)"/>
+      <circle cx="20" cy="50" r="3"/></g></symbol>
+<symbol id="i-people" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="22" cy="20" r="11"/>
+      <path d="M2 58c2-12 10-19 20-19s18 7 20 19"/>
+      <circle cx="47" cy="22" r="8"/>
+      <path d="M40 40c9-2 18 4 21 18"/></g></symbol>
+<symbol id="i-store" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 24 12 6h40l6 18z"/>
+      <path d="M6 24c0 4 4 7 9 7s9-3 9-7c0 4 3 7 8 7s8-3 8-7c0 4 4 7 9 7s9-3 9-7"/>
+      <path d="M12 32v26h40V32"/>
+      <path d="M26 58V42h12v16"/></g></symbol>
+<symbol id="i-tag" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 30 30 6h28v28L34 58z"/>
+      <circle cx="46" cy="18" r="5"/>
+      <path d="M20 26l18 18"/></g></symbol>
+<symbol id="i-box" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 20 32 6l26 14v24L32 58 6 44z"/>
+      <path d="M6 20l26 14 26-14M32 34v24"/>
+      <path d="M19 13l26 14"/></g></symbol>
+<symbol id="i-heart" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 56C16 46 6 38 6 26 6 16 14 10 22 10c4.4 0 8 2.4 10 6 2-3.6 5.6-6 10-6 8 0 16 6 16 16 0 12-10 20-26 30Z"/></g></symbol>
+<symbol id="i-sun" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="14"/>
+      <path d="M32 6v8M32 50v8M6 32h8M50 32h8M13 13l6 6M45 45l6 6M51 13l-6 6M19 45l-6 6"/></g></symbol>
+<symbol id="d-speed" viewBox="0 0 64 64" preserveAspectRatio="none"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><g stroke-width="2.4">
+        <path d="M32 32 8 4M32 32 24 2M32 32 44 2M32 32 62 6M32 32 64 20M32 32 62 34M32 32 60 50M32 32 46 62M32 32 32 64M32 32 18 62M32 32 4 48M32 32 0 34M32 32 4 18M32 32 20 6"/>
+      </g></g></symbol>
+<symbol id="d-burst" viewBox="0 0 64 64"><g fill="currentColor" stroke="currentColor" stroke-width="3" stroke-linejoin="miter"><path d="M32 2l6 12 8-9-1 14 12-5-6 12 14 0-11 9 12 8-14 0 6 12-12-5 1 14-8-9-6 12-6-12-8 9 1-14-12 5 6-12-14 0 12-8-11-9 14 0-6-12 12 5-1-14 8 9z"/></g></symbol>
+<symbol id="d-lines" viewBox="0 0 64 64" preserveAspectRatio="none"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><g stroke-width="2.6">
+        <path d="M2 10h40M2 20h52M2 30h30M2 40h46M2 50h34"/>
+      </g></g></symbol>
+<symbol id="d-arrow" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 32h44M36 18l16 14-16 14"/></g></symbol>
+<symbol id="i-moon" viewBox="0 0 64 64"><path d="M52 34.5A20.5 20.5 0 0 1 29.5 12 20.5 20.5 0 1 0 52 34.5Z"/></symbol>
+<symbol id="i-slate" viewBox="0 0 64 64"><rect x="10" y="12" width="44" height="40" rx="4"/><path d="M10 24h44M24 24v28"/></symbol>
+</svg>
+<aside class="rail" aria-label="Main">
+  <a class="rail__brand" href="index.html">
+    <span class="brand__mark" aria-hidden="true">W</span>
+    <span><span class="brand__name">WHYNOT</span>
+      <span data-i18n="Electronics · 1994" class="brand__sub">Electronics · 1994</span></span>
+  </a>
+  <nav class="rail__nav"><a data-i18n="Home" href="index.html">Home</a><a data-i18n="Catalogue" href="products.html" aria-current="page">Catalogue</a><a data-i18n="Showrooms" href="stores.html">Showrooms</a><a data-i18n="About" href="about.html">About</a><a data-i18n="Contact" href="contact.html">Contact</a></nav>
+  <div class="rail__pick">
+    <span><span data-i18n="My list" class="label">My list</span><br><strong data-list-count hidden>0</strong>
+      <span data-i18n="0 items" class="note" data-list-label>0 items</span></span>
+    <a data-i18n="Open" class="btn btn--sm" href="products.html#list">Open</a>
+  </div>
+  <div class="rail__foot">
+    <div class="langswitch" role="group" aria-label="Language / భాష">
+          <button type="button" class="langswitch__btn" data-lang="en" aria-pressed="true">EN</button>
+          <button type="button" class="langswitch__btn" data-lang="te" aria-pressed="false">తె</button>
+          <button type="button" class="langswitch__btn" data-lang="hi" aria-pressed="false">हि</button>
+        </div>
+    <button type="button" class="mode-toggle" data-mode-toggle aria-pressed="false">
+          <svg class="icon" aria-hidden="true"><use href="#i-sun"></use></svg>
+          <span data-i18n="Light" class="mode-toggle__light">Light</span>
+          <span data-i18n="Dark" class="mode-toggle__dark">Dark</span>
+          <span class="sr" data-mode-state>mode</span>
+        </button>
+    <p class="note">Helpline 88862 22448<br>whynot.rayudu@gmail.com</p>
+  </div>
+</aside>
+
+<div class="shell">
+  <header class="bar">
+    <a class="bar__brand" href="index.html">
+      <span class="brand__mark" aria-hidden="true">W</span>
+      <span><span class="brand__name">WHYNOT</span><span data-i18n="Electronics" class="brand__sub">Electronics</span></span>
+    </a>
+    <div class="langswitch" role="group" aria-label="Language / భాష">
+          <button type="button" class="langswitch__btn" data-lang="en" aria-pressed="true">EN</button>
+          <button type="button" class="langswitch__btn" data-lang="te" aria-pressed="false">తె</button>
+          <button type="button" class="langswitch__btn" data-lang="hi" aria-pressed="false">हि</button>
+        </div>
+    <button class="btn btn--sm" type="button" data-panel-open aria-controls="pick">
+      <svg class="icon" aria-hidden="true"><use href="#i-cart"></use></svg>
+      <span data-list-count hidden>0</span><span data-i18n="items in my list" class="sr">items in my list</span>
+    </button>
+  </header>
+  <main class="wrap" id="main">
+
+      <p data-i18n="Catalogue · 17 items · 10 categories" class="label">Catalogue · 17 items · 10 categories</p>
+      <h1 data-i18n="The catalogue, as a list." class="display display--xl">The catalogue, as a list.</h1>
+      <p data-i18n-html="Seventeen things people actually ask for, in the categories the showrooms stock. Add what you want to <strong>my list</strong>, send it in one tap, and a person from your nearest branch replies with today's price and stock. No card details, no account, nothing charged." class="lede">Seventeen things people actually ask for, in the categories
+         the showrooms stock. Add what you want to <strong>my list</strong>, send it
+         in one tap, and a person from your nearest branch replies with today's
+         price and stock. No card details, no account, nothing charged.</p>
+
+      <div class="panel" style="margin-top:18px">
+        <div class="panel__body">
+          <div class="filters">
+            <div class="filters__row">
+              <label class="field"><span data-i18n="Search the catalogue" class="sr">Search the catalogue</span>
+                <input class="input" id="q" type="search" data-product-search
+                       placeholder="Search: TV, fridge, 1.5 ton, mixer" autocomplete="off"
+                       data-i18n-ph="Search: TV, fridge, 1.5 ton, mixer"></label>
+              <label class="field"><span data-i18n="Town" class="sr">Town</span>
+                <select class="select" id="town" data-town-select><option data-i18n="All towns" value="all">All towns</option></select></label>
+            </div>
+            <div class="chips" data-cat-chips></div>
+          </div>
+          <p data-i18n="17 products" class="count" data-result-count aria-live="polite">17 products</p>
+        </div>
+      </div>
+
+      <div class="work" style="margin-top:18px">
+        <section class="panel panel--flush" aria-labelledby="list-heading">
+          <div class="panel__head"><h2 data-i18n="Line list" class="display display--m" id="list-heading">Line list</h2>
+            <span data-i18n="price on request" class="note">price on request</span></div>
+          <div class="rows__head" aria-hidden="true">
+            <span data-i18n="Item" class="label">Item</span><span data-i18n="Category" class="label">Category</span>
+            <span data-i18n="Specification" class="label">Specification</span><span data-i18n="Available at" class="label">Available at</span>
+            <span data-i18n="List" class="label">List</span>
+          </div>
+          <div class="rows" data-products></div>
+        </section>
+
+        <aside class="work__aside panel" id="pick" data-aside>
+          <div class="panel__head">
+            <h2 data-i18n="My list" class="display display--m">My list</h2>
+            <button data-i18n="Close" class="btn btn--sm btn--ghost" type="button" data-panel-close>Close</button>
+          </div>
+          <div class="panel__body" data-list-panel id="list"></div>
+        </aside>
+      </div>
+
+      <p data-i18n="This is a concept build with no server attached. Sending the list opens WhatsApp or your mail app with the items written out — nothing is submitted from this page." class="notice" style="margin-top:22px">This is a concept build with no server
+         attached. Sending the list opens WhatsApp or your mail app with the items
+         written out — nothing is submitted from this page.</p>
+
+  </main>
+  <footer class="wrap foot">
+    <div class="foot__grid">
+      <p><strong>WHYNOT Electronics Pvt Ltd</strong><br>RS No 24/1, Ground &amp; Cellar<br>Sri Sowdha Towers, Undrajavaram Road<br>Tanuku 534211, Andhra Pradesh</p>
+      <p>Helpline <a href="tel:+918886222448">88862 22448</a><br>
+         <a href="mailto:whynot.rayudu@gmail.com">whynot.rayudu@gmail.com</a> · open 10 am to 9 pm</p>
+      <p data-i18n="A redesign concept for whynotindia.in, built as portfolio work. Not affiliated with the company and not deployed anywhere. Artwork is AI-generated stand-in art, and the enquiry form has no server behind it." class="note">A redesign concept for whynotindia.in, built as portfolio work.
+         Not affiliated with the company and not deployed anywhere. Artwork is
+         AI-generated stand-in art, and the enquiry form has no server behind it.</p>
+      <p class="note">© <span data-year>2026</span> concept build.</p>
+    </div>
+  </footer>
+</div>
+
+<nav class="tabs" aria-label="Pages">
+<a data-i18n="Home" href="index.html">Home</a><a data-i18n="Catalogue" href="products.html" aria-current="page">Catalogue</a><a data-i18n="Showrooms" href="stores.html">Showrooms</a><a data-i18n="About" href="about.html">About</a><a data-i18n="Contact" href="contact.html">Contact</a></nav>
+<div class="toast" data-toast role="status" aria-live="polite"></div>
+</body>
+</html>
